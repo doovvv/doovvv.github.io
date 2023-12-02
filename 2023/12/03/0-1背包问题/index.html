@@ -20,16 +20,16 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="首先我们需要知道什么是0-1背包问题。即N件物品和最多能承受重量W的背包，第i件物品的重量为Weight[i]，价值为Value[i]。每件物品只能使用一次，求解将那些物品放入背包能使价值最大。这就是标准的0-1背包问题。 1.暴力解法暴力解法很容易想到，对于每个物品只有放进背包和不放进背包两种选择，因此只要使用回溯法搜索出每种情况就好，因此时间复杂度为O(2^N)，这是指数级别的时间复杂度，显">
+  <meta name="description" content="首先我们需要知道什么是0-1背包问题。即N件物品和最多能承受重量W的背包，第i件物品的重量为Weight[i]，价值为Value[i]。每件物品只能使用一次，求解将那些物品放入背包能使价值最大。这就是标准的0-1背包问题。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="0-1背包问题">
 <meta property="og:url" content="http://example.com/2023/12/03/0-1%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/index.html">
 <meta property="og:site_name" content="doovvv">
-<meta property="og:description" content="首先我们需要知道什么是0-1背包问题。即N件物品和最多能承受重量W的背包，第i件物品的重量为Weight[i]，价值为Value[i]。每件物品只能使用一次，求解将那些物品放入背包能使价值最大。这就是标准的0-1背包问题。 1.暴力解法暴力解法很容易想到，对于每个物品只有放进背包和不放进背包两种选择，因此只要使用回溯法搜索出每种情况就好，因此时间复杂度为O(2^N)，这是指数级别的时间复杂度，显">
+<meta property="og:description" content="首先我们需要知道什么是0-1背包问题。即N件物品和最多能承受重量W的背包，第i件物品的重量为Weight[i]，价值为Value[i]。每件物品只能使用一次，求解将那些物品放入背包能使价值最大。这就是标准的0-1背包问题。">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://cdn.nlark.com/yuque/0/2023/png/40391766/1698895734716-101fcda1-123a-4be9-b2be-603be0236731.png#averageHue=%23f9f9f8&clientId=u0b5a8315-b98a-4&from=paste&id=ub1be5f8c&originHeight=527&originWidth=736&originalType=url&ratio=1.25&rotation=0&showTitle=false&status=done&style=none&taskId=u7f3b1366-3939-4345-b2ad-3b165f28bc2&title=">
 <meta property="article:published_time" content="2023-12-02T18:02:03.697Z">
-<meta property="article:modified_time" content="2023-12-02T18:41:28.440Z">
+<meta property="article:modified_time" content="2023-12-02T18:50:15.172Z">
 <meta property="article:author" content="doovvv">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2023/png/40391766/1698895734716-101fcda1-123a-4be9-b2be-603be0236731.png#averageHue=%23f9f9f8&clientId=u0b5a8315-b98a-4&from=paste&id=ub1be5f8c&originHeight=527&originWidth=736&originalType=url&ratio=1.25&rotation=0&showTitle=false&status=done&style=none&taskId=u7f3b1366-3939-4345-b2ad-3b165f28bc2&title=">
@@ -181,7 +181,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2023-12-03 02:02:03 / Modified: 02:41:28" itemprop="dateCreated datePublished" datetime="2023-12-03T02:02:03+08:00">2023-12-03</time>
+              <time title="Created: 2023-12-03 02:02:03 / Modified: 02:50:15" itemprop="dateCreated datePublished" datetime="2023-12-03T02:02:03+08:00">2023-12-03</time>
             </span>
 
           
@@ -195,8 +195,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <span id="more"></span>
-<p>首先我们需要知道什么是0-1背包问题。<br>即N件物品和最多能承受重量W的背包，第i件物品的重量为Weight[i]，价值为Value[i]。每件物品只能使用一次，求解将那些物品放入背包能使价值最大。这就是标准的0-1背包问题。</p>
+        <p>首先我们需要知道什么是0-1背包问题。<br>即N件物品和最多能承受重量W的背包，第i件物品的重量为Weight[i]，价值为Value[i]。每件物品只能使用一次，求解将那些物品放入背包能使价值最大。这就是标准的0-1背包问题。</p>
+<span id="more"></span>
 <h2 id="1-暴力解法"><a href="#1-暴力解法" class="headerlink" title="1.暴力解法"></a>1.暴力解法</h2><p>暴力解法很容易想到，对于每个物品只有放进背包和不放进背包两种选择，因此只要使用回溯法搜索出每种情况就好，因此时间复杂度为O(2^N)，这是指数级别的时间复杂度，显然我们需要更好的算法来进行优化。</p>
 <h2 id="2-二维动态数组"><a href="#2-二维动态数组" class="headerlink" title="2.二维动态数组"></a>2.二维动态数组</h2><h3 id="2-1确定动态数组及其下标的含义"><a href="#2-1确定动态数组及其下标的含义" class="headerlink" title="2.1确定动态数组及其下标的含义"></a>2.1确定动态数组及其下标的含义</h3><p>dp[i][j]代表从[0,i]个物品中选取任意个物品，使得承受重量为j的背包价值最大。</p>
 <h3 id="2-2确定递推公式"><a href="#2-2确定递推公式" class="headerlink" title="2.2确定递推公式"></a>2.2确定递推公式</h3><p>首先确定一个方向，即从物品的方向进行推理，即我们要从第dp[i-1]递推到dp[i]。</p>
