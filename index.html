@@ -177,7 +177,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2023-12-03 02:02:03 / Modified: 02:09:05" itemprop="dateCreated datePublished" datetime="2023-12-03T02:02:03+08:00">2023-12-03</time>
+              <time title="Created: 2023-12-03 02:02:03 / Modified: 02:35:15" itemprop="dateCreated datePublished" datetime="2023-12-03T02:02:03+08:00">2023-12-03</time>
             </span>
 
           
@@ -191,7 +191,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>首先我们需要知道什么是0-1背包问题。<br>即N件物品和最多能承受重量W的背包，第i件物品的重量为Weight[i]，价值为Value[i]。每件物品只能使用一次，求解将那些物品放入背包能使价值最大。这就是标准的0-1背包问题。</p>
+          <!---more--->
+<p>首先我们需要知道什么是0-1背包问题。<br>即N件物品和最多能承受重量W的背包，第i件物品的重量为Weight[i]，价值为Value[i]。每件物品只能使用一次，求解将那些物品放入背包能使价值最大。这就是标准的0-1背包问题。</p>
 <h2 id="1-暴力解法"><a href="#1-暴力解法" class="headerlink" title="1.暴力解法"></a>1.暴力解法</h2><p>暴力解法很容易想到，对于每个物品只有放进背包和不放进背包两种选择，因此只要使用回溯法搜索出每种情况就好，因此时间复杂度为O(2^N)，这是指数级别的时间复杂度，显然我们需要更好的算法来进行优化。</p>
 <h2 id="2-二维动态数组"><a href="#2-二维动态数组" class="headerlink" title="2.二维动态数组"></a>2.二维动态数组</h2><h3 id="2-1确定动态数组及其下标的含义"><a href="#2-1确定动态数组及其下标的含义" class="headerlink" title="2.1确定动态数组及其下标的含义"></a>2.1确定动态数组及其下标的含义</h3><p>dp[i][j]代表从[0,i]个物品中选取任意个物品，使得承受重量为j的背包价值最大。</p>
 <h3 id="2-2确定递推公式"><a href="#2-2确定递推公式" class="headerlink" title="2.2确定递推公式"></a>2.2确定递推公式</h3><p>首先确定一个方向，即从物品的方向进行推理，即我们要从第dp[i-1]递推到dp[i]。</p>
