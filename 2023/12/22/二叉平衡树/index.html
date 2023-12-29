@@ -28,7 +28,7 @@
 <meta property="og:description" content="AVL Tree">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-12-22T06:36:45.000Z">
-<meta property="article:modified_time" content="2023-12-29T06:47:32.961Z">
+<meta property="article:modified_time" content="2023-12-29T06:49:00.172Z">
 <meta property="article:author" content="doovvv">
 <meta property="article:tag" content="data structure">
 <meta name="twitter:card" content="summary">
@@ -181,7 +181,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-12-29 14:47:32" itemprop="dateModified" datetime="2023-12-29T14:47:32+08:00">2023-12-29</time>
+                <time title="Modified: 2023-12-29 14:49:00" itemprop="dateModified" datetime="2023-12-29T14:49:00+08:00">2023-12-29</time>
               </span>
 
           
@@ -217,7 +217,7 @@
 </ul>
 <p>与普通的搜索二叉树的结构类似，代码如下：  </p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">class Node&#123;</span><br><span class="line">    public:</span><br><span class="line">    int data,height;</span><br><span class="line">    Node *left,*right;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p><strong>平衡因子</strong>：左子树深度减去右子树深度<br>代码如下：</p>
+<p><strong>平衡因子</strong>：左子树深度减去右子树深度,所以平衡二叉树要求每个节点的平衡因子绝对值小于等于1<br>代码如下：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">int getBanlanceFactor(Node* root)&#123;</span><br><span class="line">    return getHeight(root-&gt;left)-getHeight(root-&gt;right);</span><br><span class="line">&#125;</span><br><span class="line">~~~  </span><br><span class="line">## Function  </span><br><span class="line">### search：</span><br><span class="line">与普通的搜索二叉树相同，主要利用递归。  </span><br><span class="line">代码如下： </span><br></pre></td></tr></table></figure>
 <p>void search(Node* root,int v){<br>    if(root &#x3D;&#x3D; nullptr){<br>        return;<br>    }<br>    if(root-&gt;data &#x3D;&#x3D; v){<br>        std::cout&lt;&lt;”Found “&lt;&lt;v&lt;&lt;std::endl;<br>        return;<br>    }<br>    if(v<root->data){<br>        search(root-&gt;left,v);<br>    }<br>    else{<br>        search(root-&gt;right,v);<br>    }<br>}</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">### insert  </span><br><span class="line">与搜索二叉树不同的是，在插入了一个节点之后，二叉树的深度发生了变化，所以某些的节点的平衡因子发生变化，也就不是平衡二叉树了，此时就需要把二叉树进行一定的旋转以得到平衡二叉树。  </span><br><span class="line">让我们来看一些需要旋转的情况</span><br><span class="line">#### LL型旋转</span><br><span class="line">![](二叉平衡树/2023-12-29-14-36-45.png)</span><br><span class="line">如图所示，对于LL型二叉树，根节点的平衡因子为2，此时需要右旋。具体过程为：</span><br><span class="line">* 将x的左子树变为它原本左子树a的右子树</span><br><span class="line">* 将a的右子树变为x</span><br><span class="line">* 更新x和a的深度，并把a设置为根节点</span><br></pre></td></tr></table></figure>
