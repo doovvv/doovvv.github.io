@@ -290,7 +290,7 @@ mjx-container[display="true"] + br {
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2024-01-17 01:56:54" itemprop="dateModified" datetime="2024-01-17T01:56:54+08:00">2024-01-17</time>
+                <time title="Modified: 2024-01-17 01:59:20" itemprop="dateModified" datetime="2024-01-17T01:59:20+08:00">2024-01-17</time>
               </span>
 
           
@@ -318,47 +318,15 @@ mjx-container[display="true"] + br {
     <div class="post-body" itemprop="articleBody">
 
       
-          <span id="more"></span>
-<h2 id="Operating-system-Structure"><a href="#Operating-system-Structure" class="headerlink" title="Operating-system Structure"></a>Operating-system Structure</h2><p>两个接口：  </p>
-<ul>
-<li>users:  <ul>
-<li>CLI 通过终端向操作系统发布指令</li>
-<li>GUI 图形化</li>
-<li>Batch 批处理</li>
-</ul>
-</li>
-<li>apps:  <ul>
-<li>API -&gt; system call(OS level code)</li>
-<li>trap mechamism -&gt; dual mode(user mode &#x2F; kernel mode)</li>
-</ul>
-</li>
-</ul>
-<h2 id="Process-Concept"><a href="#Process-Concept" class="headerlink" title="Process Concept"></a>Process Concept</h2><p>进程的定义：  </p>
-<ul>
-<li><p>进程时一个程序的一次执行过程：  </p>
-<ul>
-<li>能完成具体的功能（一系列指令）</li>
-<li>是在某个数据集合上完成的（data，堆栈）</li>
-<li>执行过程是可并发的</li>
-</ul>
-</li>
-<li><p>进程是资源分配、保护和调度的基本单位</p>
-</li>
-<li><p>程序：被动的，一个包含指令的存在磁盘上的可执行文件</p>
-</li>
-<li><p>进程：活动的，当程序被加载进内存，就是进程（包含一个PC）</p>
-</li>
-</ul>
-<p>Process in Memory:<br>回忆在计组课程中写MIPS代码时，就区分了data区和text区<br><img src="/2024/01/15/Linux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/2024-01-16-16-11-53.png"><br>text区域存放指令（read only）<br>data区域直到程序结束才会回收  </p>
-<p>并发Concurrency：多个事件同时发生或存在（单核CPU）<br><img src="/2024/01/15/Linux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/2024-01-16-16-33-57.png"><br>并行：同时运行</p>
-<p>Process State：</p>
-<ul>
-<li>Running运行态：此时进程的代码在CPU上运行（单核CPU系统中只能有一个进程处于运行态）  </li>
-<li>Ready就绪态：进程具备运行条件，等待分配CPU</li>
-<li>Waiting等待态：进程在等待某些事件的发生（比如IO操作结束）</li>
-</ul>
-<p>进程切换：<br><img src="/2024/01/15/Linux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/2024-01-16-16-56-24.png"></p>
-
+          <h1 id="Operating-System"><a href="#Operating-System" class="headerlink" title="Operating System"></a>Operating System</h1>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/01/15/Linux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
