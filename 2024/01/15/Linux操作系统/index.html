@@ -27,14 +27,15 @@
 <meta property="og:site_name" content="doovvv">
 <meta property="og:description" content="Operating System">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2024/01/15/Linux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/2024-01-17-16-13-35.png">
 <meta property="og:image" content="http://example.com/2024/01/15/Linux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/2024-01-16-16-11-53.png">
 <meta property="og:image" content="http://example.com/2024/01/15/Linux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/2024-01-16-16-33-57.png">
 <meta property="og:image" content="http://example.com/2024/01/15/Linux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/2024-01-16-16-56-24.png">
 <meta property="article:published_time" content="2024-01-15T11:43:04.000Z">
-<meta property="article:modified_time" content="2024-01-16T17:59:20.738Z">
+<meta property="article:modified_time" content="2024-01-17T16:26:11.544Z">
 <meta property="article:author" content="doovvv">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2024/01/15/Linux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/2024-01-16-16-11-53.png">
+<meta name="twitter:image" content="http://example.com/2024/01/15/Linux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/2024-01-17-16-13-35.png">
 
 <link rel="canonical" href="http://example.com/2024/01/15/Linux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
 
@@ -184,7 +185,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2024-01-17 01:59:20" itemprop="dateModified" datetime="2024-01-17T01:59:20+08:00">2024-01-17</time>
+                <time title="Modified: 2024-01-18 00:26:11" itemprop="dateModified" datetime="2024-01-18T00:26:11+08:00">2024-01-18</time>
               </span>
 
           
@@ -222,11 +223,17 @@
 </ul>
 </li>
 <li>apps:  <ul>
-<li>API -&gt; system call(OS level code)</li>
+<li>API -&gt; system call(OS level code -&gt; kernel mode)</li>
 <li>trap mechamism -&gt; dual mode(user mode &#x2F; kernel mode)</li>
 </ul>
 </li>
 </ul>
+<p>dual mode（用一个硬件模式位来表示当前模式位）：  </p>
+<ul>
+<li>user mode：用户级的代码</li>
+<li>kernel mode：操作系统级的代码</li>
+</ul>
+<p>系统调用实现机制：<br><img src="/2024/01/15/Linux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/2024-01-17-16-13-35.png"></p>
 <h2 id="Process-Concept"><a href="#Process-Concept" class="headerlink" title="Process Concept"></a>Process Concept</h2><p>进程的定义：  </p>
 <ul>
 <li><p>进程时一个程序的一次执行过程：  </p>
@@ -251,8 +258,8 @@
 <li>Ready就绪态：进程具备运行条件，等待分配CPU</li>
 <li>Waiting等待态：进程在等待某些事件的发生（比如IO操作结束）</li>
 </ul>
-<p>进程切换：<br><img src="/2024/01/15/Linux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/2024-01-16-16-56-24.png"></p>
-
+<p>进程切换：<br><img src="/2024/01/15/Linux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/2024-01-16-16-56-24.png">  </p>
+<h2 id="Process-Scheduling"><a href="#Process-Scheduling" class="headerlink" title="Process Scheduling"></a>Process Scheduling</h2>
     </div>
 
     
@@ -330,7 +337,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Operating-System"><span class="nav-number">1.</span> <span class="nav-text">Operating System</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Operating-system-Structure"><span class="nav-number">1.1.</span> <span class="nav-text">Operating-system Structure</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Process-Concept"><span class="nav-number">1.2.</span> <span class="nav-text">Process Concept</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Operating-System"><span class="nav-number">1.</span> <span class="nav-text">Operating System</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Operating-system-Structure"><span class="nav-number">1.1.</span> <span class="nav-text">Operating-system Structure</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Process-Concept"><span class="nav-number">1.2.</span> <span class="nav-text">Process Concept</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Process-Scheduling"><span class="nav-number">1.3.</span> <span class="nav-text">Process Scheduling</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
