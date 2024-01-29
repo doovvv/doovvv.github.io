@@ -31,8 +31,10 @@
 <meta property="og:image" content="http://example.com/2024/01/15/Linux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/2024-01-16-16-11-53.png">
 <meta property="og:image" content="http://example.com/2024/01/15/Linux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/2024-01-16-16-33-57.png">
 <meta property="og:image" content="http://example.com/2024/01/15/Linux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/2024-01-16-16-56-24.png">
+<meta property="og:image" content="http://example.com/2024/01/15/Linux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/2024-01-19-13-19-11.png">
+<meta property="og:image" content="http://example.com/2024/01/15/Linux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/2024-01-23-16-00-10.png">
 <meta property="article:published_time" content="2024-01-15T11:43:04.000Z">
-<meta property="article:modified_time" content="2024-01-17T16:26:11.544Z">
+<meta property="article:modified_time" content="2024-01-29T10:19:01.732Z">
 <meta property="article:author" content="doovvv">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/2024/01/15/Linux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/2024-01-17-16-13-35.png">
@@ -185,7 +187,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2024-01-18 00:26:11" itemprop="dateModified" datetime="2024-01-18T00:26:11+08:00">2024-01-18</time>
+                <time title="Modified: 2024-01-29 18:19:01" itemprop="dateModified" datetime="2024-01-29T18:19:01+08:00">2024-01-29</time>
               </span>
 
           
@@ -259,7 +261,42 @@
 <li>Waiting等待态：进程在等待某些事件的发生（比如IO操作结束）</li>
 </ul>
 <p>进程切换：<br><img src="/2024/01/15/Linux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/2024-01-16-16-56-24.png">  </p>
-<h2 id="Process-Scheduling"><a href="#Process-Scheduling" class="headerlink" title="Process Scheduling"></a>Process Scheduling</h2>
+<h2 id="Process-Scheduling"><a href="#Process-Scheduling" class="headerlink" title="Process Scheduling"></a>Process Scheduling</h2><p> 中断技术<br> <img src="/2024/01/15/Linux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/2024-01-19-13-19-11.png"><br> 系统调用时中断的一个特例</p>
+<p>中断源：</p>
+<ul>
+<li>外中断：  <ul>
+<li>处理器之外的信号</li>
+<li>外部中断均是异步中断</li>
+</ul>
+</li>
+<li>内中断（异常Exception）：  <ul>
+<li>处理器内部的信号</li>
+<li>硬件异常：掉电，奇偶检验</li>
+<li>程序异常：越界，除0</li>
+<li>系统调用</li>
+</ul>
+</li>
+</ul>
+<p>特权指令：只能运行在内核模式下运行的指令<br>非特权指令：只能运行在用户模式下运行的指令</p>
+<p>模式切换：<br>中断时用户态向核心态转换的唯一途径。</p>
+<p>进程切换：</p>
+<ul>
+<li>切换时机：<ul>
+<li>主动进入等待状态</li>
+<li>被动进入就绪状态</li>
+</ul>
+</li>
+<li>切换过程<ul>
+<li>保存中断进程的上下文信息</li>
+<li>保存被中断进程的控制信息</li>
+<li>将被中断的进程加入相应的序列</li>
+<li>调度一个新的进程并恢复它的上下文信息</li>
+</ul>
+</li>
+</ul>
+<p>进程控制块（状态）PCB<br><img src="/2024/01/15/Linux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/2024-01-23-16-00-10.png"></p>
+<p>进程队列：只把PCB放入队列</p>
+
     </div>
 
     
@@ -277,7 +314,10 @@
     <a href="/2024/01/11/shell/" rel="prev" title="shell">
       <i class="fa fa-chevron-left"></i> shell
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2024/01/23/paper-report/" rel="next" title="paper report">
+      paper report <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -351,7 +391,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-count">9</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

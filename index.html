@@ -344,6 +344,158 @@ mjx-container[display="true"] + br {
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/01/23/paper-report/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="doovvv">
+      <meta itemprop="description" content="一切都没有意外，只是多了些波折">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="doovvv">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/01/23/paper-report/" class="post-title-link" itemprop="url">paper report</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2024-01-23 09:57:09" itemprop="dateCreated datePublished" datetime="2024-01-23T09:57:09+08:00">2024-01-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2024-01-29 18:18:59" itemprop="dateModified" datetime="2024-01-29T18:18:59+08:00">2024-01-29</time>
+              </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2024/01/23/paper-report/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2024/01/23/paper-report/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="MoE混合专家模型"><a href="#MoE混合专家模型" class="headerlink" title="MoE混合专家模型"></a>MoE混合专家模型</h1><p>什么是混合专家模型？<br>混合专家模型是一种基于Transformer架构的模型，所以需要先了解Transformer架构<br>下图详细的展示了transformer架构<br><img src="/2024/01/23/paper-report/2024-01-29-16-36-36.png"><br>混合专家模型主要由两个关键部分组成：  </p>
+<ul>
+<li>稀疏 MoE 层: 这些层代替了传统 Transformer 模型中的前馈网络 (FFN) 层。MoE 层包含若干“专家”(例如 8 个)，每个专家本身是一个独立的神经网络。在实际应用中，这些专家通常是前馈网络 (FFN)，但它们也可以是更复杂的网络结构，甚至可以是 MoE 层本身，从而形成层级式的 MoE 结构。</li>
+<li>门控网络或路由: 这个部分用于决定哪些令牌 (token) 被发送到哪个专家。例如，在下图中，“More”这个令牌可能被发送到第二个专家，而“Parameters”这个令牌被发送到第一个专家。有时，一个令牌甚至可以被发送到多个专家。令牌的路由方式是 MoE 使用中的一个关键点，因为路由器由学习的参数组成，并且与网络的其他部分一同进行预训练。<br><img src="/2024/01/23/paper-report/2024-01-29-16-52-05.png"></li>
+</ul>
+<h1 id="TUTEL-ADAPTIVE-MIXTURE-OF-EXPERTS-AT-SCALE"><a href="#TUTEL-ADAPTIVE-MIXTURE-OF-EXPERTS-AT-SCALE" class="headerlink" title="TUTEL: ADAPTIVE MIXTURE-OF-EXPERTS AT SCALE"></a>TUTEL: ADAPTIVE MIXTURE-OF-EXPERTS AT SCALE</h1><h2 id="abstract"><a href="#abstract" class="headerlink" title="abstract"></a>abstract</h2><p>Based on adaptive parallelism&#x2F;pipelining optimization-&gt; Flexible All-to-All, two-dimensional hierarchical (2DH) All-to-All, fast encode&#x2F;decode(contuibution)<br>training and inference</p>
+<h2 id="introduction"><a href="#introduction" class="headerlink" title="introduction"></a>introduction</h2><p>dynamic nature of MoE:This implies that the workload of experts is fundamentally uncertain </p>
+<h3 id="three-methods"><a href="#three-methods" class="headerlink" title="three methods"></a>three methods</h3><ul>
+<li>adjust paralleism at runtime:large redistribution overhead and GPU memeory  </li>
+<li>load balance loss:harm model arrcuacy </li>
+<li>Tutel: dynamically switches<br>the parallelism strategy at every iteration without any extra overhead of switching.</li>
+</ul>
+<h2 id="BACKGROUND-MOTIVATION"><a href="#BACKGROUND-MOTIVATION" class="headerlink" title="BACKGROUND &amp; MOTIVATION"></a>BACKGROUND &amp; MOTIVATION</h2><h3 id="Sparsely-gated-Mixture-of-Experts-MoE"><a href="#Sparsely-gated-Mixture-of-Experts-MoE" class="headerlink" title="Sparsely-gated Mixture-of-Experts (MoE)"></a>Sparsely-gated Mixture-of-Experts (MoE)</h3><p><img src="/2024/01/23/paper-report/2024-01-23-10-22-50.png"></p>
+<h3 id="Dynamic-Workload-of-MoE"><a href="#Dynamic-Workload-of-MoE" class="headerlink" title="Dynamic Workload of MoE"></a>Dynamic Workload of MoE</h3><p>f? set f to a static upper bound of capacity factor?</p>
+<h3 id="Static-Parallelism"><a href="#Static-Parallelism" class="headerlink" title="Static Parallelism"></a>Static Parallelism</h3><p>the best parallelism method depends on the workload and switching between different parallelism methods during runtime would incur a substantial overhead.<br><img src="/2024/01/23/paper-report/2024-01-23-11-03-51.png"></p>
+<h3 id="Static-Pipelining"><a href="#Static-Pipelining" class="headerlink" title="Static Pipelining"></a>Static Pipelining</h3><p>depending on different MoE settings and scales,the corresponding optimal pipelining strategy consists of various All-to-All algorithms (Linear or 2DH3) and pipelining degrees.</p>
+<h2 id="ADAPTIVE-MOE-WITH-TUTEL"><a href="#ADAPTIVE-MOE-WITH-TUTEL" class="headerlink" title="ADAPTIVE MOE WITH TUTEL"></a>ADAPTIVE MOE WITH TUTEL</h2><h3 id="Adaptive-Parallelism-Switching"><a href="#Adaptive-Parallelism-Switching" class="headerlink" title="Adaptive Parallelism Switching"></a>Adaptive Parallelism Switching</h3><p>DP<br>EP+DP+MP</p>
+<h3 id="DP"><a href="#DP" class="headerlink" title="DP"></a>DP</h3><p>a single all-reduce naturally consists of a reduce-scatter and an all-gather.</p>
+<h3 id="DP-EP-MP"><a href="#DP-EP-MP" class="headerlink" title="DP+EP+MP"></a>DP+EP+MP</h3><p><img src="/2024/01/23/paper-report/2024-01-23-13-21-23.png"></p>
+<h2 id="IMPLEMENTATION"><a href="#IMPLEMENTATION" class="headerlink" title="IMPLEMENTATION"></a>IMPLEMENTATION</h2><h3 id="Features"><a href="#Features" class="headerlink" title="Features"></a>Features</h3><ul>
+<li>Dynamic Top-ANY MoE Gating</li>
+<li>Dynamic Capacity Factor</li>
+</ul>
+<p>自我理解和总结：通过单一的适用于所有可能的最优策略数据布局，使得切换并行策略时不需要对数据进行迁移。通过数据划分，实现all2all通信和专家计算的重叠以此实现流水线。将各种参数的性能存在字典里，训练时查字典实现自适应性。</p>
+<h1 id="DeepSpeed-MoE-Advancing-Mixture-of-Experts-Inference-and-Training-to-Power-Next-Generation-AI-Scale"><a href="#DeepSpeed-MoE-Advancing-Mixture-of-Experts-Inference-and-Training-to-Power-Next-Generation-AI-Scale" class="headerlink" title="DeepSpeed-MoE: Advancing Mixture-of-Experts Inference and Training to Power Next-Generation AI Scale"></a>DeepSpeed-MoE: Advancing Mixture-of-Experts Inference and Training to Power Next-Generation AI Scale</h1><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>DeepSpeed-MoE:novel MoE architecture designs and model compression techniques,a highly optimized inference system.  </p>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>set of challenges:</p>
+<ul>
+<li>Limited Scope The scope of MoE based models in the NLP area is primarily limited to encoder-decoder models and sequence-to-sequence tasks</li>
+<li>Massive Memory Requirements: need significantly<br>more number of parameters</li>
+<li>Limited Inference Performance:On one hand, the larger parameter size requires more GPUs to fit.<br>On the other hand, as inference is often memory bandwidth bound</li>
+</ul>
+<p>three corresponding solutions:</p>
+<ul>
+<li>We expand the scope of MoE based models</li>
+<li>We improve parameter efficiency of MoE based models:PR-MoE MoS  </li>
+<li>We develop DeepSpeed-MoE inference system</li>
+</ul>
+<h2 id="PR-MoE-and-MoS-Reducing-the-Model-Size-and-Improving-Parameter-Efficiency"><a href="#PR-MoE-and-MoS-Reducing-the-Model-Size-and-Improving-Parameter-Efficiency" class="headerlink" title="PR-MoE and MoS: Reducing the Model Size and Improving Parameter Efficiency"></a>PR-MoE and MoS: Reducing the Model Size and Improving Parameter Efficiency</h2><ul>
+<li>现象1：Deeper layers benefit more from large number of experts.</li>
+<li>现象2：We find out that the generalization performance of these two (aka Top2-MoE and Residual-MoE) is on-par with each other.<br><img src="/2024/01/23/paper-report/2024-01-23-18-02-03.png"><br>-&gt;PR-MoE</li>
+</ul>
+<h3 id="MoS"><a href="#MoS" class="headerlink" title="MoS"></a>MoS</h3><p>什么是知识蒸馏？ </p>
+<h2 id="DeepSpeed-MoE-Inference"><a href="#DeepSpeed-MoE-Inference" class="headerlink" title="DeepSpeed-MoE Inference"></a>DeepSpeed-MoE Inference</h2><p>the MoE inference performance depends on two main factors: the overall model size and the overall achievable memory bandwidth.</p>
+<h3 id="Design-of-DeepSpeed-MoE-Inference-System"><a href="#Design-of-DeepSpeed-MoE-Inference-System" class="headerlink" title="Design of DeepSpeed-MoE Inference System"></a>Design of DeepSpeed-MoE Inference System</h3><h4 id="Expert-Tensor-and-Data-parallelism"><a href="#Expert-Tensor-and-Data-parallelism" class="headerlink" title="Expert, Tensor and Data parallelism"></a>Expert, Tensor and Data parallelism</h4><p><img src="/2024/01/23/paper-report/2024-01-24-11-01-41.png"></p>
+<h4 id="Hierarchical-All-to-all"><a href="#Hierarchical-All-to-all" class="headerlink" title="Hierarchical All-to-all"></a>Hierarchical All-to-all</h4><p><img src="/2024/01/23/paper-report/2024-01-24-11-04-02.png"></p>
+<h4 id="Parallelism-Coordinated-Communication"><a href="#Parallelism-Coordinated-Communication" class="headerlink" title="Parallelism Coordinated Communication"></a>Parallelism Coordinated Communication</h4><p><img src="/2024/01/23/paper-report/2024-01-24-11-23-53.png"></p>
+<h4 id="Kernel-Optimizations"><a href="#Kernel-Optimizations" class="headerlink" title="Kernel Optimizations"></a>Kernel Optimizations</h4><p>？？  </p>
+<p>理解和总结：模型的优化有PR-MoE和MoS，推理的优化：分布式切分，通信优化，kernel优化。</p>
+<h1 id="GShard-Scaling-Giant-Models-with-Conditional-Computation-and-Automatic-Sharding"><a href="#GShard-Scaling-Giant-Models-with-Conditional-Computation-and-Automatic-Sharding" class="headerlink" title="GShard: Scaling Giant Models with Conditional Computation and Automatic Sharding"></a>GShard: Scaling Giant Models with Conditional Computation and Automatic Sharding</h1><h2 id="Abstract-1"><a href="#Abstract-1" class="headerlink" title="Abstract"></a>Abstract</h2><p>GShard enabled us to scale up multilingual neural machine translation Transformer model with Sparsely-Gated Mixture-of-Experts beyond 600 billion parameters using automatic sharding</p>
+<h2 id="Introduction-1"><a href="#Introduction-1" class="headerlink" title="Introduction"></a>Introduction</h2><p>While the final model quality was found to have a power-law relationship with the amount of data, compute and model size [18, 3], the significant quality gains brought by larger models also come with various practical challenges.</p>
+<h3 id="Practical-Challenges-for-Scaling"><a href="#Practical-Challenges-for-Scaling" class="headerlink" title="Practical Challenges for Scaling"></a>Practical Challenges for Scaling</h3><ul>
+<li>Architecture-specific model parallelism support： users typically need to invest a lot of engineering work, for example, migrating the model code to special frameworks。</li>
+<li>Super-linear scaling of computation cost vs model size</li>
+<li>Infrastructure scalability for giant model representation：Such increase in the graph size would result in an infeasible amount of graph building and compilation time for massive-scale models.</li>
+</ul>
+<h3 id="Design-Principles-for-Efficient-Training-at-Scale"><a href="#Design-Principles-for-Efficient-Training-at-Scale" class="headerlink" title="Design Principles for Efficient Training at Scale"></a>Design Principles for Efficient Training at Scale</h3><ul>
+<li>Sub-linear Scaling：Scaling capacity of RNN-based machine translation and language models by adding Position-wise Sparsely Gated Mixture-of-Experts (MoE) layers [ 16] allowed to achieve state-of-the-art results with sublinear computation cost. </li>
+<li>Second, the model description should be separated from the partitioning implementation and optimization. </li>
+<li>he system infrastructure, including the computation representation and compilation, must scale with thousands of devices for parallel execution.</li>
+</ul>
+<h2 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h2><h3 id="Sparse-scaling-of-the-Transformer-architecture"><a href="#Sparse-scaling-of-the-Transformer-architecture" class="headerlink" title="Sparse scaling of the Transformer architecture"></a>Sparse scaling of the Transformer architecture</h3><p>we sparsely scale Transformer withconditional computation by replacing every other feed-forward layer with a Position-wise Mixture of Experts (MoE) layer [ 16] with a variant of top-2 gating in both the encoder and the decoder </p>
+<h3 id="Position-wise-Mixture-of-Experts-Layer"><a href="#Position-wise-Mixture-of-Experts-Layer" class="headerlink" title="Position-wise Mixture-of-Experts Layer"></a>Position-wise Mixture-of-Experts Layer</h3><p><img src="/2024/01/23/paper-report/2024-01-29-17-01-37.png"><br>xs is the input token to the MoE layer, wi and wo being the input and output projection matrices<br>for the feed-forward layer (an expert).<br>gating function must satisfy two goals:  </p>
+<ul>
+<li>Balanced load: better design of the gating function would distribute processing burden more evenly across all experts.</li>
+<li>Efficiency at scale:we need an efficient parallel implementation of the gating function to leverage many devices.</li>
+</ul>
+<p>echanisms in the gating function GATE(·) to meet the above requirements (details illustrated in Algorithm 1):</p>
+<ul>
+<li>Expert capacity: To ensure the load is balanced, we enforce that the number of tokens<br>processed by one expert is below some uniform threshold</li>
+<li>Local group dispatching GATE(·):in this way, we can ensure that expert capacity is still enforced and the overall load is balanced.</li>
+<li>Auxiliary loss:如果把token都分给一个人，loss就很高，分的越均匀（最好是彻底均分），loss越小</li>
+<li>Random routing: if the weight for the 2nd expert is very small, we can simply ignore the 2nd expert to<br>conserve the overall expert capacity.<br>具体过程：<br><img src="/2024/01/23/paper-report/2024-01-29-17-49-54.png"></li>
+</ul>
+<p>总结和理解：这篇论文把MoE结构放入Transformer模型中，通过限制专家容量，每个token分配的专家数量和一个额外的loss实现门控函数的负载均衡。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2024/01/15/Linux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -375,7 +527,7 @@ mjx-container[display="true"] + br {
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2024-01-18 00:26:11" itemprop="dateModified" datetime="2024-01-18T00:26:11+08:00">2024-01-18</time>
+                <time title="Modified: 2024-01-29 18:19:01" itemprop="dateModified" datetime="2024-01-29T18:19:01+08:00">2024-01-29</time>
               </span>
 
           
@@ -1001,7 +1153,7 @@ mjx-container[display="true"] + br {
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-count">9</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
