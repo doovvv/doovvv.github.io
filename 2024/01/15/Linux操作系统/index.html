@@ -20,12 +20,12 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="Operating System">
+  <meta name="description" content="Operating System Lecture Notes">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux操作系统">
 <meta property="og:url" content="http://example.com/2024/01/15/Linux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/index.html">
 <meta property="og:site_name" content="doovvv">
-<meta property="og:description" content="Operating System">
+<meta property="og:description" content="Operating System Lecture Notes">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/2024/01/15/Linux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/2024-01-17-16-13-35.png">
 <meta property="og:image" content="http://example.com/2024/01/15/Linux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/2024-01-16-16-11-53.png">
@@ -38,8 +38,11 @@
 <meta property="og:image" content="http://example.com/2024/01/15/Linux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/2024-02-01-16-53-15.png">
 <meta property="og:image" content="http://example.com/2024/01/15/Linux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/2024-02-01-16-55-28.png">
 <meta property="og:image" content="http://example.com/2024/01/15/Linux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/2024-02-05-11-51-53.png">
+<meta property="og:image" content="http://example.com/2024/01/15/Linux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/2024-02-15-00-50-46.png">
+<meta property="og:image" content="http://example.com/2024/01/15/Linux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/2024-02-12-20-36-44.png">
+<meta property="og:image" content="http://example.com/2024/01/15/Linux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/2024-02-15-00-26-42.png">
 <meta property="article:published_time" content="2024-01-15T11:43:04.000Z">
-<meta property="article:modified_time" content="2024-02-05T06:20:00.459Z">
+<meta property="article:modified_time" content="2024-02-14T17:00:02.859Z">
 <meta property="article:author" content="doovvv">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/2024/01/15/Linux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/2024-01-17-16-13-35.png">
@@ -192,7 +195,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2024-02-05 14:20:00" itemprop="dateModified" datetime="2024-02-05T14:20:00+08:00">2024-02-05</time>
+                <time title="Modified: 2024-02-15 01:00:02" itemprop="dateModified" datetime="2024-02-15T01:00:02+08:00">2024-02-15</time>
               </span>
 
           
@@ -220,8 +223,9 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="Operating-System"><a href="#Operating-System" class="headerlink" title="Operating System"></a>Operating System</h1><span id="more"></span>
-<h2 id="Operating-system-Structure"><a href="#Operating-system-Structure" class="headerlink" title="Operating-system Structure"></a>Operating-system Structure</h2><h3 id="两个接口："><a href="#两个接口：" class="headerlink" title="两个接口："></a>两个接口：</h3><ul>
+        <p>Operating System Lecture Notes</p>
+<span id="more"></span>
+<h1 id="Operating-system-Structure"><a href="#Operating-system-Structure" class="headerlink" title="Operating-system Structure"></a>Operating-system Structure</h1><h2 id="两个接口："><a href="#两个接口：" class="headerlink" title="两个接口："></a>两个接口：</h2><ul>
 <li>users:  <ul>
 <li>CLI 通过终端向操作系统发布指令</li>
 <li>GUI 图形化</li>
@@ -234,12 +238,12 @@
 </ul>
 </li>
 </ul>
-<h3 id="dual-mode（用一个硬件模式位来表示当前模式位）："><a href="#dual-mode（用一个硬件模式位来表示当前模式位）：" class="headerlink" title="dual mode（用一个硬件模式位来表示当前模式位）："></a>dual mode（用一个硬件模式位来表示当前模式位）：</h3><ul>
+<h2 id="dual-mode（用一个硬件模式位来表示当前模式位）："><a href="#dual-mode（用一个硬件模式位来表示当前模式位）：" class="headerlink" title="dual mode（用一个硬件模式位来表示当前模式位）："></a>dual mode（用一个硬件模式位来表示当前模式位）：</h2><ul>
 <li>user mode：用户级的代码</li>
 <li>kernel mode：操作系统级的代码</li>
 </ul>
-<h3 id="系统调用实现机制："><a href="#系统调用实现机制：" class="headerlink" title="系统调用实现机制："></a>系统调用实现机制：</h3><p><img src="/2024/01/15/Linux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/2024-01-17-16-13-35.png"></p>
-<h3 id="Process-Concept"><a href="#Process-Concept" class="headerlink" title="Process Concept"></a>Process Concept</h3><h3 id="进程的定义："><a href="#进程的定义：" class="headerlink" title="进程的定义："></a>进程的定义：</h3><ul>
+<h2 id="系统调用实现机制："><a href="#系统调用实现机制：" class="headerlink" title="系统调用实现机制："></a>系统调用实现机制：</h2><p><img src="/2024/01/15/Linux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/2024-01-17-16-13-35.png"></p>
+<h2 id="Process-Concept"><a href="#Process-Concept" class="headerlink" title="Process Concept"></a>Process Concept</h2><h2 id="进程的定义："><a href="#进程的定义：" class="headerlink" title="进程的定义："></a>进程的定义：</h2><ul>
 <li><p>进程时一个程序的一次执行过程：  </p>
 <ul>
 <li>能完成具体的功能（一系列指令）</li>
@@ -254,16 +258,16 @@
 <li><p>进程：活动的，当程序被加载进内存，就是进程（包含一个PC）</p>
 </li>
 </ul>
-<h3 id="Process-in-Memory"><a href="#Process-in-Memory" class="headerlink" title="Process in Memory:"></a>Process in Memory:</h3><p>回忆在计组课程中写MIPS代码时，就区分了data区和text区<br><img src="/2024/01/15/Linux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/2024-01-16-16-11-53.png"><br>text区域存放指令（read only）<br>data区域直到程序结束才会回收  </p>
-<h3 id="并发和并行："><a href="#并发和并行：" class="headerlink" title="并发和并行："></a>并发和并行：</h3><p>并发Concurrency：多个事件同时发生或存在（单核CPU）<br><img src="/2024/01/15/Linux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/2024-01-16-16-33-57.png"><br>并行：同时运行</p>
-<h3 id="Process-State："><a href="#Process-State：" class="headerlink" title="Process State："></a>Process State：</h3><ul>
+<h2 id="Process-in-Memory"><a href="#Process-in-Memory" class="headerlink" title="Process in Memory:"></a>Process in Memory:</h2><p>回忆在计组课程中写MIPS代码时，就区分了data区和text区<br><img src="/2024/01/15/Linux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/2024-01-16-16-11-53.png"><br>text区域存放指令（read only）<br>data区域直到程序结束才会回收  </p>
+<h2 id="并发和并行："><a href="#并发和并行：" class="headerlink" title="并发和并行："></a>并发和并行：</h2><p>并发Concurrency：多个事件同时发生或存在（单核CPU）<br><img src="/2024/01/15/Linux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/2024-01-16-16-33-57.png"><br>并行：同时运行</p>
+<h2 id="Process-State："><a href="#Process-State：" class="headerlink" title="Process State："></a>Process State：</h2><ul>
 <li>Running运行态：此时进程的代码在CPU上运行（单核CPU系统中只能有一个进程处于运行态）  </li>
 <li>Ready就绪态：进程具备运行条件，等待分配CPU</li>
 <li>Waiting等待态：进程在等待某些事件的发生（比如IO操作结束）</li>
 </ul>
-<h3 id="进程切换："><a href="#进程切换：" class="headerlink" title="进程切换："></a>进程切换：</h3><p><img src="/2024/01/15/Linux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/2024-01-16-16-56-24.png">  </p>
-<h2 id="Process-Scheduling"><a href="#Process-Scheduling" class="headerlink" title="Process Scheduling"></a>Process Scheduling</h2><h3 id="中断技术"><a href="#中断技术" class="headerlink" title="中断技术"></a>中断技术</h3><p> <img src="/2024/01/15/Linux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/2024-01-19-13-19-11.png"><br> 系统调用时中断的一个特例</p>
-<h3 id="中断源："><a href="#中断源：" class="headerlink" title="中断源："></a>中断源：</h3><ul>
+<h2 id="进程切换："><a href="#进程切换：" class="headerlink" title="进程切换："></a>进程切换：</h2><p><img src="/2024/01/15/Linux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/2024-01-16-16-56-24.png">  </p>
+<h1 id="Process-Scheduling"><a href="#Process-Scheduling" class="headerlink" title="Process Scheduling"></a>Process Scheduling</h1><h2 id="中断技术"><a href="#中断技术" class="headerlink" title="中断技术"></a>中断技术</h2><p> <img src="/2024/01/15/Linux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/2024-01-19-13-19-11.png"><br> 系统调用时中断的一个特例</p>
+<h2 id="中断源："><a href="#中断源：" class="headerlink" title="中断源："></a>中断源：</h2><ul>
 <li>外中断（中断Interrupt）：  <ul>
 <li>处理器之外的信号</li>
 <li>外部中断均是异步中断</li>
@@ -277,9 +281,9 @@
 </ul>
 </li>
 </ul>
-<h3 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h3><p>特权指令：只能运行在内核模式下运行的指令<br>非特权指令：只能运行在用户模式下运行的指令</p>
-<h3 id="模式切换："><a href="#模式切换：" class="headerlink" title="模式切换："></a>模式切换：</h3><p>中断时用户态向核心态转换的唯一途径。</p>
-<h3 id="进程切换：-1"><a href="#进程切换：-1" class="headerlink" title="进程切换："></a>进程切换：</h3><ul>
+<h2 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h2><p>特权指令：只能运行在内核模式下运行的指令<br>非特权指令：只能运行在用户模式下运行的指令</p>
+<h2 id="模式切换："><a href="#模式切换：" class="headerlink" title="模式切换："></a>模式切换：</h2><p>中断时用户态向核心态转换的唯一途径。</p>
+<h2 id="进程切换：-1"><a href="#进程切换：-1" class="headerlink" title="进程切换："></a>进程切换：</h2><ul>
 <li>切换时机：<ul>
 <li>主动进入等待状态</li>
 <li>被动进入就绪状态</li>
@@ -293,30 +297,30 @@
 </ul>
 </li>
 </ul>
-<h3 id="进程控制块（状态）PCB"><a href="#进程控制块（状态）PCB" class="headerlink" title="进程控制块（状态）PCB"></a>进程控制块（状态）PCB</h3><p>被中断的进程的状态数据存在PCB<br><img src="/2024/01/15/Linux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/2024-01-23-16-00-10.png"></p>
-<h3 id="进程队列："><a href="#进程队列：" class="headerlink" title="进程队列："></a>进程队列：</h3><p>只把PCB放入队列，而不是整个进程上下文  </p>
-<h2 id="Thread"><a href="#Thread" class="headerlink" title="Thread"></a>Thread</h2><h3 id="线程的定义："><a href="#线程的定义：" class="headerlink" title="线程的定义："></a>线程的定义：</h3><p>线程是CPU利用的基本单元，线程包含一个线程id，PC，寄存器，栈。它和其他属于统一进程的线程共享code，data和其他操作系统资源。<br><img src="/2024/01/15/Linux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/2024-02-01-11-40-43.png"></p>
-<h3 id="多线程模型："><a href="#多线程模型：" class="headerlink" title="多线程模型："></a>多线程模型：</h3><p>在多处理器系统当中，多核编程机制让应用程序可以让并发的线程分散到不同的处理器运行，以实现并行计算。</p>
+<h2 id="进程控制块（状态）PCB"><a href="#进程控制块（状态）PCB" class="headerlink" title="进程控制块（状态）PCB"></a>进程控制块（状态）PCB</h2><p>被中断的进程的状态数据存在PCB<br><img src="/2024/01/15/Linux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/2024-01-23-16-00-10.png"></p>
+<h2 id="进程队列："><a href="#进程队列：" class="headerlink" title="进程队列："></a>进程队列：</h2><p>只把PCB放入队列，而不是整个进程上下文  </p>
+<h1 id="Thread"><a href="#Thread" class="headerlink" title="Thread"></a>Thread</h1><h2 id="线程的定义："><a href="#线程的定义：" class="headerlink" title="线程的定义："></a>线程的定义：</h2><p>线程是CPU利用的基本单元，线程包含一个线程id，PC，寄存器，栈。它和其他属于统一进程的线程共享code，data和其他操作系统资源。<br><img src="/2024/01/15/Linux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/2024-02-01-11-40-43.png"></p>
+<h2 id="多线程模型："><a href="#多线程模型：" class="headerlink" title="多线程模型："></a>多线程模型：</h2><p>在多处理器系统当中，多核编程机制让应用程序可以让并发的线程分散到不同的处理器运行，以实现并行计算。</p>
 <ul>
 <li>用户线程ULT：ULT在user mode下运行，它的管理无需内核支持</li>
 <li>内核线程KLT：KLT在kernel mode下运行，由操作系统支持与管理</li>
 </ul>
 <p>M:1模型：<br><img src="/2024/01/15/Linux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/2024-02-01-16-52-41.png"><br>1：1模型（主流）：<br><img src="/2024/01/15/Linux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/2024-02-01-16-53-15.png"><br>M：M模型：<br><img src="/2024/01/15/Linux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/2024-02-01-16-55-28.png"></p>
 <p>线程库：为程序员提供创建和管理线程的API  </p>
-<h2 id="CPU-Scheduleing"><a href="#CPU-Scheduleing" class="headerlink" title="CPU Scheduleing"></a>CPU Scheduleing</h2><h3 id="CPU调度程序"><a href="#CPU调度程序" class="headerlink" title="CPU调度程序"></a>CPU调度程序</h3><p>当CPU空闲时，操作系统选择一个在就绪队列的进程执行  </p>
+<h1 id="CPU-Scheduleing"><a href="#CPU-Scheduleing" class="headerlink" title="CPU Scheduleing"></a>CPU Scheduleing</h1><h2 id="CPU调度程序"><a href="#CPU调度程序" class="headerlink" title="CPU调度程序"></a>CPU调度程序</h2><p>当CPU空闲时，操作系统选择一个在就绪队列的进程执行  </p>
 <p>抢占调度：</p>
 <ul>
 <li>非抢占调度：一旦进程得到CPU，就会一直用到终止或者等待状态（主动）</li>
 <li>抢占调度：除此之外，都是抢占调度</li>
 </ul>
-<h3 id="CPU调度准则"><a href="#CPU调度准则" class="headerlink" title="CPU调度准则"></a>CPU调度准则</h3><p>调度算法性能的衡量：<br><img src="/2024/01/15/Linux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/2024-02-05-11-51-53.png">  </p>
-<h3 id="调度算法"><a href="#调度算法" class="headerlink" title="调度算法"></a>调度算法</h3><p>先来先服务（FCFS）：  </p>
+<h2 id="CPU调度准则"><a href="#CPU调度准则" class="headerlink" title="CPU调度准则"></a>CPU调度准则</h2><p>调度算法性能的衡量：<br><img src="/2024/01/15/Linux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/2024-02-05-11-51-53.png">  </p>
+<h2 id="调度算法"><a href="#调度算法" class="headerlink" title="调度算法"></a>调度算法</h2><p>先来先服务（FCFS&#x2F;FIFO）：  </p>
 <ul>
 <li>非抢占式调度算法</li>
 <li>简单易行（+）</li>
 <li>如果短作业处于长作业的后面将导致周转时间变长（-）</li>
 </ul>
-<p>时间片轮转：</p>
+<p>时间片轮转(RR)：</p>
 <ul>
 <li>每个进程都可以得到相同的CPU时间，当时间片到达，进程被剥夺CPU并加入就绪队列的尾部</li>
 <li>抢占式调度算法</li>
@@ -347,7 +351,39 @@
 </ul>
 </li>
 </ul>
-<p><strong>没有最好最坏的策略，只有最合适的场景</strong></p>
+<blockquote>
+<p><strong>没有最好最坏的策略，只有最合适的场景</strong>  </p>
+</blockquote>
+<h1 id="Synchronization"><a href="#Synchronization" class="headerlink" title="Synchronization"></a>Synchronization</h1><h2 id="并发"><a href="#并发" class="headerlink" title="并发"></a>并发</h2><p>并发进程&#x2F;线程之间是交替进行的。  </p>
+<p>并发进程之间的关系：</p>
+<ul>
+<li>独立关系</li>
+<li>交互关系：并发进程执行过程中需要共享或交换数据<ul>
+<li>竞争 -&gt; 互斥锁</li>
+<li>协作 -&gt; 信号量<br><img src="/2024/01/15/Linux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/2024-02-15-00-50-46.png"></li>
+</ul>
+</li>
+</ul>
+<h2 id="异步引发的异常"><a href="#异步引发的异常" class="headerlink" title="异步引发的异常"></a>异步引发的异常</h2><p>会引发竞争条件：多个进程并发操作于同一个数据导致执行结果依赖于特定的执行顺序</p>
+<h2 id="同步"><a href="#同步" class="headerlink" title="同步"></a>同步</h2><p>进程同步是一种用于维护共享在交互进程的数据一致性的机制</p>
+<h1 id="Mutex-Locks"><a href="#Mutex-Locks" class="headerlink" title="Mutex Locks"></a>Mutex Locks</h1><h2 id="临界区问题"><a href="#临界区问题" class="headerlink" title="临界区问题"></a>临界区问题</h2><p>并发进程中改变公共数据区域的代码被称作临界区。临界区中不允许有两个进程同时执行。<br>临界区问题就是设计协议使得进程之间能过协作。</p>
+<h2 id="临界区管理规则"><a href="#临界区管理规则" class="headerlink" title="临界区管理规则"></a>临界区管理规则</h2><ul>
+<li>有空让进</li>
+<li>择一而入</li>
+<li>无空等待</li>
+<li>有限等待</li>
+<li>让权等待</li>
+</ul>
+<h2 id="软件解决临界区管理"><a href="#软件解决临界区管理" class="headerlink" title="软件解决临界区管理"></a>软件解决临界区管理</h2><p>两个进程的实现代码是不对称的，当进程数量超过两个时，编程变得复杂</p>
+<h2 id="互斥锁"><a href="#互斥锁" class="headerlink" title="互斥锁"></a>互斥锁</h2><p>锁的基本操作：<br><img src="/2024/01/15/Linux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/2024-02-12-20-36-44.png">  </p>
+<p>原子操作：<br>原子操作在运行时不能被操作</p>
+<p>锁的实现：<br>使用了原语test_and_set<br><img src="/2024/01/15/Linux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/2024-02-15-00-26-42.png">  </p>
+<p>忙式等待：<br>占用CPU执行空循环实现等待（自旋锁）</p>
+<ul>
+<li>浪费CPU周期（-）</li>
+<li>进程在等待时没有上下文切换（+）</li>
+</ul>
+<h1 id="Semaphores"><a href="#Semaphores" class="headerlink" title="Semaphores"></a>Semaphores</h1><p>信号量是一种比互斥锁更强大的同步工具。<br>信号量是一个整形变量，除了初始化之外，信号量只能被P和V两种原子操作access。<br><a target="_blank" rel="noopener" href="https://pdos.csail.mit.edu/6.828/2021/schedule.html"><strong>mit操作系统课程6.S081</strong></a><br><a target="_blank" rel="noopener" href="https://blog.miigon.net/posts/"><strong>6.S081 labs answer</strong></a><br><a target="_blank" rel="noopener" href="https://mit-public-courses-cn-translatio.gitbook.io/mit6-s081/"><strong>6.S081课程记录（中文）</strong></a></p>
 
     </div>
 
@@ -429,7 +465,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Operating-System"><span class="nav-number">1.</span> <span class="nav-text">Operating System</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Operating-system-Structure"><span class="nav-number">1.1.</span> <span class="nav-text">Operating-system Structure</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%A4%E4%B8%AA%E6%8E%A5%E5%8F%A3%EF%BC%9A"><span class="nav-number">1.1.1.</span> <span class="nav-text">两个接口：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dual-mode%EF%BC%88%E7%94%A8%E4%B8%80%E4%B8%AA%E7%A1%AC%E4%BB%B6%E6%A8%A1%E5%BC%8F%E4%BD%8D%E6%9D%A5%E8%A1%A8%E7%A4%BA%E5%BD%93%E5%89%8D%E6%A8%A1%E5%BC%8F%E4%BD%8D%EF%BC%89%EF%BC%9A"><span class="nav-number">1.1.2.</span> <span class="nav-text">dual mode（用一个硬件模式位来表示当前模式位）：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%AE%9E%E7%8E%B0%E6%9C%BA%E5%88%B6%EF%BC%9A"><span class="nav-number">1.1.3.</span> <span class="nav-text">系统调用实现机制：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Process-Concept"><span class="nav-number">1.1.4.</span> <span class="nav-text">Process Concept</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9B%E7%A8%8B%E7%9A%84%E5%AE%9A%E4%B9%89%EF%BC%9A"><span class="nav-number">1.1.5.</span> <span class="nav-text">进程的定义：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Process-in-Memory"><span class="nav-number">1.1.6.</span> <span class="nav-text">Process in Memory:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B9%B6%E5%8F%91%E5%92%8C%E5%B9%B6%E8%A1%8C%EF%BC%9A"><span class="nav-number">1.1.7.</span> <span class="nav-text">并发和并行：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Process-State%EF%BC%9A"><span class="nav-number">1.1.8.</span> <span class="nav-text">Process State：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9B%E7%A8%8B%E5%88%87%E6%8D%A2%EF%BC%9A"><span class="nav-number">1.1.9.</span> <span class="nav-text">进程切换：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Process-Scheduling"><span class="nav-number">1.2.</span> <span class="nav-text">Process Scheduling</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%AD%E6%96%AD%E6%8A%80%E6%9C%AF"><span class="nav-number">1.2.1.</span> <span class="nav-text">中断技术</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%AD%E6%96%AD%E6%BA%90%EF%BC%9A"><span class="nav-number">1.2.2.</span> <span class="nav-text">中断源：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%87%E4%BB%A4"><span class="nav-number">1.2.3.</span> <span class="nav-text">指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E5%BC%8F%E5%88%87%E6%8D%A2%EF%BC%9A"><span class="nav-number">1.2.4.</span> <span class="nav-text">模式切换：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9B%E7%A8%8B%E5%88%87%E6%8D%A2%EF%BC%9A-1"><span class="nav-number">1.2.5.</span> <span class="nav-text">进程切换：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9B%E7%A8%8B%E6%8E%A7%E5%88%B6%E5%9D%97%EF%BC%88%E7%8A%B6%E6%80%81%EF%BC%89PCB"><span class="nav-number">1.2.6.</span> <span class="nav-text">进程控制块（状态）PCB</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9B%E7%A8%8B%E9%98%9F%E5%88%97%EF%BC%9A"><span class="nav-number">1.2.7.</span> <span class="nav-text">进程队列：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Thread"><span class="nav-number">1.3.</span> <span class="nav-text">Thread</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%AE%9A%E4%B9%89%EF%BC%9A"><span class="nav-number">1.3.1.</span> <span class="nav-text">线程的定义：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B%EF%BC%9A"><span class="nav-number">1.3.2.</span> <span class="nav-text">多线程模型：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CPU-Scheduleing"><span class="nav-number">1.4.</span> <span class="nav-text">CPU Scheduleing</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CPU%E8%B0%83%E5%BA%A6%E7%A8%8B%E5%BA%8F"><span class="nav-number">1.4.1.</span> <span class="nav-text">CPU调度程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CPU%E8%B0%83%E5%BA%A6%E5%87%86%E5%88%99"><span class="nav-number">1.4.2.</span> <span class="nav-text">CPU调度准则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B0%83%E5%BA%A6%E7%AE%97%E6%B3%95"><span class="nav-number">1.4.3.</span> <span class="nav-text">调度算法</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Operating-system-Structure"><span class="nav-number">1.</span> <span class="nav-text">Operating-system Structure</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%A4%E4%B8%AA%E6%8E%A5%E5%8F%A3%EF%BC%9A"><span class="nav-number">1.1.</span> <span class="nav-text">两个接口：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dual-mode%EF%BC%88%E7%94%A8%E4%B8%80%E4%B8%AA%E7%A1%AC%E4%BB%B6%E6%A8%A1%E5%BC%8F%E4%BD%8D%E6%9D%A5%E8%A1%A8%E7%A4%BA%E5%BD%93%E5%89%8D%E6%A8%A1%E5%BC%8F%E4%BD%8D%EF%BC%89%EF%BC%9A"><span class="nav-number">1.2.</span> <span class="nav-text">dual mode（用一个硬件模式位来表示当前模式位）：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%AE%9E%E7%8E%B0%E6%9C%BA%E5%88%B6%EF%BC%9A"><span class="nav-number">1.3.</span> <span class="nav-text">系统调用实现机制：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Process-Concept"><span class="nav-number">1.4.</span> <span class="nav-text">Process Concept</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9B%E7%A8%8B%E7%9A%84%E5%AE%9A%E4%B9%89%EF%BC%9A"><span class="nav-number">1.5.</span> <span class="nav-text">进程的定义：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Process-in-Memory"><span class="nav-number">1.6.</span> <span class="nav-text">Process in Memory:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B9%B6%E5%8F%91%E5%92%8C%E5%B9%B6%E8%A1%8C%EF%BC%9A"><span class="nav-number">1.7.</span> <span class="nav-text">并发和并行：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Process-State%EF%BC%9A"><span class="nav-number">1.8.</span> <span class="nav-text">Process State：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9B%E7%A8%8B%E5%88%87%E6%8D%A2%EF%BC%9A"><span class="nav-number">1.9.</span> <span class="nav-text">进程切换：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Process-Scheduling"><span class="nav-number">2.</span> <span class="nav-text">Process Scheduling</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%AD%E6%96%AD%E6%8A%80%E6%9C%AF"><span class="nav-number">2.1.</span> <span class="nav-text">中断技术</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%AD%E6%96%AD%E6%BA%90%EF%BC%9A"><span class="nav-number">2.2.</span> <span class="nav-text">中断源：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8C%87%E4%BB%A4"><span class="nav-number">2.3.</span> <span class="nav-text">指令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E5%BC%8F%E5%88%87%E6%8D%A2%EF%BC%9A"><span class="nav-number">2.4.</span> <span class="nav-text">模式切换：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9B%E7%A8%8B%E5%88%87%E6%8D%A2%EF%BC%9A-1"><span class="nav-number">2.5.</span> <span class="nav-text">进程切换：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9B%E7%A8%8B%E6%8E%A7%E5%88%B6%E5%9D%97%EF%BC%88%E7%8A%B6%E6%80%81%EF%BC%89PCB"><span class="nav-number">2.6.</span> <span class="nav-text">进程控制块（状态）PCB</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9B%E7%A8%8B%E9%98%9F%E5%88%97%EF%BC%9A"><span class="nav-number">2.7.</span> <span class="nav-text">进程队列：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Thread"><span class="nav-number">3.</span> <span class="nav-text">Thread</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%AE%9A%E4%B9%89%EF%BC%9A"><span class="nav-number">3.1.</span> <span class="nav-text">线程的定义：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B%EF%BC%9A"><span class="nav-number">3.2.</span> <span class="nav-text">多线程模型：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CPU-Scheduleing"><span class="nav-number">4.</span> <span class="nav-text">CPU Scheduleing</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#CPU%E8%B0%83%E5%BA%A6%E7%A8%8B%E5%BA%8F"><span class="nav-number">4.1.</span> <span class="nav-text">CPU调度程序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CPU%E8%B0%83%E5%BA%A6%E5%87%86%E5%88%99"><span class="nav-number">4.2.</span> <span class="nav-text">CPU调度准则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B0%83%E5%BA%A6%E7%AE%97%E6%B3%95"><span class="nav-number">4.3.</span> <span class="nav-text">调度算法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Synchronization"><span class="nav-number">5.</span> <span class="nav-text">Synchronization</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B9%B6%E5%8F%91"><span class="nav-number">5.1.</span> <span class="nav-text">并发</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%82%E6%AD%A5%E5%BC%95%E5%8F%91%E7%9A%84%E5%BC%82%E5%B8%B8"><span class="nav-number">5.2.</span> <span class="nav-text">异步引发的异常</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%8C%E6%AD%A5"><span class="nav-number">5.3.</span> <span class="nav-text">同步</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Mutex-Locks"><span class="nav-number">6.</span> <span class="nav-text">Mutex Locks</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%B4%E7%95%8C%E5%8C%BA%E9%97%AE%E9%A2%98"><span class="nav-number">6.1.</span> <span class="nav-text">临界区问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%B4%E7%95%8C%E5%8C%BA%E7%AE%A1%E7%90%86%E8%A7%84%E5%88%99"><span class="nav-number">6.2.</span> <span class="nav-text">临界区管理规则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BD%AF%E4%BB%B6%E8%A7%A3%E5%86%B3%E4%B8%B4%E7%95%8C%E5%8C%BA%E7%AE%A1%E7%90%86"><span class="nav-number">6.3.</span> <span class="nav-text">软件解决临界区管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%92%E6%96%A5%E9%94%81"><span class="nav-number">6.4.</span> <span class="nav-text">互斥锁</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Semaphores"><span class="nav-number">7.</span> <span class="nav-text">Semaphores</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
