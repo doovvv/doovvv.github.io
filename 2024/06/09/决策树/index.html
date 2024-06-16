@@ -20,23 +20,22 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="AVL Tree">
+  <meta name="description" content="决策树概念决策树表示一个函数，该函数将属性值向量作为输入，并返回一个”决策“（单个输出值）  节点：用属性标记 边：用属性值标记 叶子：用决策标记  决策树的表示决策树表示属性值约束的合取的析取  任何的布尔函数都可以写成决策树，也可以通过真值表把表中的每一行对应决策树中的一条路径。 决策树的学习目的：是为了找到一颗最符合测试样例的决策树 思路：选择一个”最重要“的属性做为（子）树的根，从而不断的">
 <meta property="og:type" content="article">
-<meta property="og:title" content="二叉平衡树">
-<meta property="og:url" content="http://example.com/2023/12/22/%E4%BA%8C%E5%8F%89%E5%B9%B3%E8%A1%A1%E6%A0%91/index.html">
+<meta property="og:title" content="决策树">
+<meta property="og:url" content="http://example.com/2024/06/09/%E5%86%B3%E7%AD%96%E6%A0%91/index.html">
 <meta property="og:site_name" content="doovvv">
-<meta property="og:description" content="AVL Tree">
+<meta property="og:description" content="决策树概念决策树表示一个函数，该函数将属性值向量作为输入，并返回一个”决策“（单个输出值）  节点：用属性标记 边：用属性值标记 叶子：用决策标记  决策树的表示决策树表示属性值约束的合取的析取  任何的布尔函数都可以写成决策树，也可以通过真值表把表中的每一行对应决策树中的一条路径。 决策树的学习目的：是为了找到一颗最符合测试样例的决策树 思路：选择一个”最重要“的属性做为（子）树的根，从而不断的">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/2023/12/22/%E4%BA%8C%E5%8F%89%E5%B9%B3%E8%A1%A1%E6%A0%91/2023-12-29-14-36-45.png">
-<meta property="og:image" content="http://example.com/2023/12/22/%E4%BA%8C%E5%8F%89%E5%B9%B3%E8%A1%A1%E6%A0%91/2023-12-29-14-47-13.png">
-<meta property="article:published_time" content="2023-12-22T06:36:45.000Z">
-<meta property="article:modified_time" content="2024-01-16T18:07:45.353Z">
+<meta property="og:image" content="http://example.com/2024/06/09/%E5%86%B3%E7%AD%96%E6%A0%91/image-20240609212414729.png">
+<meta property="og:image" content="http://example.com/2024/06/09/%E5%86%B3%E7%AD%96%E6%A0%91/image-20240609213812491.png">
+<meta property="article:published_time" content="2024-06-09T13:19:00.000Z">
+<meta property="article:modified_time" content="2024-06-12T02:04:30.823Z">
 <meta property="article:author" content="doovvv">
-<meta property="article:tag" content="data structure">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2023/12/22/%E4%BA%8C%E5%8F%89%E5%B9%B3%E8%A1%A1%E6%A0%91/2023-12-29-14-36-45.png">
+<meta name="twitter:image" content="http://example.com/2024/06/09/%E5%86%B3%E7%AD%96%E6%A0%91/image-20240609212414729.png">
 
-<link rel="canonical" href="http://example.com/2023/12/22/%E4%BA%8C%E5%8F%89%E5%B9%B3%E8%A1%A1%E6%A0%91/">
+<link rel="canonical" href="http://example.com/2024/06/09/%E5%86%B3%E7%AD%96%E6%A0%91/">
 
 
 <script id="page-configurations">
@@ -49,7 +48,7 @@
   };
 </script>
 
-  <title>二叉平衡树 | doovvv</title>
+  <title>决策树 | doovvv</title>
   
 
 
@@ -154,7 +153,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/12/22/%E4%BA%8C%E5%8F%89%E5%B9%B3%E8%A1%A1%E6%A0%91/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/06/09/%E5%86%B3%E7%AD%96%E6%A0%91/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -167,7 +166,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          二叉平衡树
+          决策树
         </h1>
 
         <div class="post-meta">
@@ -177,14 +176,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2023-12-22 14:36:45" itemprop="dateCreated datePublished" datetime="2023-12-22T14:36:45+08:00">2023-12-22</time>
+              <time title="Created: 2024-06-09 21:19:00" itemprop="dateCreated datePublished" datetime="2024-06-09T21:19:00+08:00">2024-06-09</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2024-01-17 02:07:45" itemprop="dateModified" datetime="2024-01-17T02:07:45+08:00">2024-01-17</time>
+                <time title="Modified: 2024-06-12 10:04:30" itemprop="dateModified" datetime="2024-06-12T10:04:30+08:00">2024-06-12</time>
               </span>
 
           
@@ -196,8 +195,8 @@
       </span>
       <span class="post-meta-item-text">Valine: </span>
     
-    <a title="valine" href="/2023/12/22/%E4%BA%8C%E5%8F%89%E5%B9%B3%E8%A1%A1%E6%A0%91/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2023/12/22/%E4%BA%8C%E5%8F%89%E5%B9%B3%E8%A1%A1%E6%A0%91/" itemprop="commentCount"></span>
+    <a title="valine" href="/2024/06/09/%E5%86%B3%E7%AD%96%E6%A0%91/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2024/06/09/%E5%86%B3%E7%AD%96%E6%A0%91/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -212,33 +211,28 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="AVL-Tree"><a href="#AVL-Tree" class="headerlink" title="AVL Tree"></a>AVL Tree</h1><span id="more"></span>
-<h2 id="Definition"><a href="#Definition" class="headerlink" title="Definition"></a>Definition</h2><p>二叉平衡树为一颗空树，或者满足以下两个性质：  </p>
+        <h1 id="决策树概念"><a href="#决策树概念" class="headerlink" title="决策树概念"></a>决策树概念</h1><p>决策树表示一个函数，该函数将属性值向量作为输入，并返回一个”决策“（单个输出值）</p>
 <ul>
-<li>左子树和右子树的深度之差不大于1</li>
-<li>左子树和右子树都是平衡二叉树</li>
+<li>节点：用属性标记</li>
+<li>边：用属性值标记</li>
+<li>叶子：用决策标记</li>
 </ul>
-<p>与普通的搜索二叉树的结构类似，代码如下：  </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">class Node&#123;</span><br><span class="line">    public:</span><br><span class="line">    int data,height;</span><br><span class="line">    Node *left,*right;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p><strong>平衡因子</strong>：左子树深度减去右子树深度,所以平衡二叉树要求每个节点的平衡因子绝对值小于等于1<br>代码如下：  </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">int getBanlanceFactor(Node* root)&#123;</span><br><span class="line">    return getHeight(root-&gt;left)-getHeight(root-&gt;right);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="Function"><a href="#Function" class="headerlink" title="Function"></a>Function</h2><h3 id="search："><a href="#search：" class="headerlink" title="search："></a>search：</h3><p>与普通的搜索二叉树相同，主要利用递归。<br>代码如下： </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">void search(Node* root,int v)&#123;</span><br><span class="line">    if(root == nullptr)&#123;</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    if(root-&gt;data == v)&#123;</span><br><span class="line">        std::cout&lt;&lt;&quot;Found &quot;&lt;&lt;v&lt;&lt;std::endl;</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    if(v&lt;root-&gt;data)&#123;</span><br><span class="line">        search(root-&gt;left,v);</span><br><span class="line">    &#125;</span><br><span class="line">    else&#123;</span><br><span class="line">        search(root-&gt;right,v);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="insert"><a href="#insert" class="headerlink" title="insert"></a>insert</h3><p>与搜索二叉树不同的是，在插入了一个节点之后，二叉树的深度发生了变化，所以某些的节点的平衡因子发生变化，也就不是平衡二叉树了，此时就需要把二叉树进行一定的旋转以得到平衡二叉树。<br>让我们来看一些需要旋转的情况</p>
-<h4 id="LL型旋转"><a href="#LL型旋转" class="headerlink" title="LL型旋转"></a>LL型旋转</h4><p><img src="/2023/12/22/%E4%BA%8C%E5%8F%89%E5%B9%B3%E8%A1%A1%E6%A0%91/2023-12-29-14-36-45.png"><br>如图所示，对于LL型二叉树，根节点的平衡因子为2，此时需要右旋。具体过程为：</p>
-<ul>
-<li>将x的左子树变为它原本左子树a的右子树</li>
-<li>将a的右子树变为x</li>
-<li>更新x和a的深度，并把a设置为根节点  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">void rightRotation(Node*&amp; root)&#123;</span><br><span class="line">    Node* temp = root-&gt;left;</span><br><span class="line">    root-&gt;left = temp-&gt;right;</span><br><span class="line">    temp-&gt;right = root;</span><br><span class="line">    updateHeight(root);</span><br><span class="line">    updateHeight(temp);</span><br><span class="line">    root = temp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h4 id="RR型旋转"><a href="#RR型旋转" class="headerlink" title="RR型旋转"></a>RR型旋转</h4><p><img src="/2023/12/22/%E4%BA%8C%E5%8F%89%E5%B9%B3%E8%A1%A1%E6%A0%91/2023-12-29-14-47-13.png"><br>如图所示，对于LL型二叉树，根节点的平衡因子为-2，此时需要左旋。具体过程为：</p>
-<ul>
-<li>将x的左子树变为它原本左子树a的右子树</li>
-<li>将a的右子树变为x</li>
-<li>更新x和a的深度，并把a设置为根节点</li>
-</ul>
+<h1 id="决策树的表示"><a href="#决策树的表示" class="headerlink" title="决策树的表示"></a>决策树的表示</h1><p>决策树表示属性值约束的合取的析取</p>
+<p><img src="/2024/06/09/%E5%86%B3%E7%AD%96%E6%A0%91/image-20240609212414729.png" alt="image-20240609212414729"></p>
+<p>任何的布尔函数都可以写成决策树，也可以通过真值表把表中的每一行对应决策树中的一条路径。</p>
+<h1 id="决策树的学习"><a href="#决策树的学习" class="headerlink" title="决策树的学习"></a>决策树的学习</h1><p>目的：是为了找到一颗最符合测试样例的决策树</p>
+<p>思路：选择一个”最重要“的属性做为（子）树的根，从而不断的递归下去。</p>
+<p><img src="/2024/06/09/%E5%86%B3%E7%AD%96%E6%A0%91/image-20240609213812491.png" alt="image-20240609213812491"></p>
+<h2 id="信息增益"><a href="#信息增益" class="headerlink" title="信息增益"></a>信息增益</h2><p>如何选择一个最重要的属性？</p>
+<p>我们使用信息增益的概念，它是用信息论的基本概念-熵来定义的。</p>
+<p>熵是对随机变量不确定性的度量：一个只有一个值的随机随机变量没有不确定性，其熵被定义为0；抛一枚硬币具有”1 bit“的熵。</p>
+<p>我们定义以概率$P(V_k)$取值$V_k$的随机变量$V$的熵为：<br>$$<br>H(V) &#x3D; -\sum_k{P(V_k)log_2P(V_k)}<br>$$<br>所以以概率q为真的布尔变量的熵为：<br>$$<br>B(q) &#x3D; -(qlog_2q+(1-q)log_2(1-q))<br>$$<br>对于一个目标属性来说，我们可以把整个训练集当作一个布尔变量，假如这个训练集有p个正例，n个负例，那么该训练集的熵就为<br>$$<br>H(GOAL) &#x3D; B(\frac{p}{p+n})<br>$$<br>具有d个不同值的属性A可以将训练集E划分为$E_1,…,E_d$</p>
+<p>每个子集都有$p_k$个正例和$n_k$个负例，因此测试属性A之后剩余的熵为：<br>$$<br>Reminder(A) &#x3D; \sum_{k&#x3D;1}^{d}{\frac{p_k+n_k}{p+n}B(\frac{p_k}{p_k+n_k})}<br>$$<br>对A的测试属性的信息增益是熵的减少：<br>$$<br>Gain(A) &#x3D; B(\frac{p}{p+n})-Reminder(A)<br>$$<br>选择信息增益最大的属性</p>
+<h2 id="Gini指数"><a href="#Gini指数" class="headerlink" title="Gini指数"></a>Gini指数</h2><p>熵模型拥有大量耗时的对数运算，基尼指数在简化模型的同时还保留了熵模型的优点。</p>
+<p>基尼指数反映了从数据集中随机抽取两个样例，其类别标记不一致的概率</p>
+<p>如果一个数据集D包含来自n类的样本，那么它的Gini指数为：<br>$$<br>Gini(D) &#x3D; \sum_{i&#x3D;1}^np_i(1-p_i)<br>$$<br>其中$p_i$​是类i在D中的概率。</p>
+<p>很显然对于决策树来说只有两类”Yes“或”No“，所以：<br>$$<br>Gini(D) &#x3D; 2p(1-p)<br>$$<br>p为其中正例的比例</p>
+<p>假设属性A的取值将D划分为$D_1,…,Dm$<br>$$<br>Gini(D|A) &#x3D; \sum_{i&#x3D;1}^{m}\frac{D_i}{D}Gini(D_i)<br>$$<br>选择具有最小基尼指数的属性作为节点即可</p>
 
     </div>
 
@@ -247,9 +241,6 @@
     
 
       <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/data-structure/" rel="tag"># data structure</a>
-          </div>
 
         
 
@@ -257,13 +248,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2023/12/21/%E5%8D%95%E8%B0%83%E6%A0%88/" rel="prev" title="单调栈">
-      <i class="fa fa-chevron-left"></i> 单调栈
+    <a href="/2024/05/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="prev" title="计算机网络">
+      <i class="fa fa-chevron-left"></i> 计算机网络
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2024/01/07/%E4%BA%8C%E5%8F%89%E6%A0%91%E9%81%8D%E5%8E%86%E9%97%AE%E9%A2%98/" rel="next" title="二叉树遍历问题">
-      二叉树遍历问题 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -323,7 +311,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#AVL-Tree"><span class="nav-number">1.</span> <span class="nav-text">AVL Tree</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Definition"><span class="nav-number">1.1.</span> <span class="nav-text">Definition</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Function"><span class="nav-number">1.2.</span> <span class="nav-text">Function</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#search%EF%BC%9A"><span class="nav-number">1.2.1.</span> <span class="nav-text">search：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#insert"><span class="nav-number">1.2.2.</span> <span class="nav-text">insert</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#LL%E5%9E%8B%E6%97%8B%E8%BD%AC"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">LL型旋转</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#RR%E5%9E%8B%E6%97%8B%E8%BD%AC"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">RR型旋转</span></a></li></ol></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%86%B3%E7%AD%96%E6%A0%91%E6%A6%82%E5%BF%B5"><span class="nav-number">1.</span> <span class="nav-text">决策树概念</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%86%B3%E7%AD%96%E6%A0%91%E7%9A%84%E8%A1%A8%E7%A4%BA"><span class="nav-number">2.</span> <span class="nav-text">决策树的表示</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%86%B3%E7%AD%96%E6%A0%91%E7%9A%84%E5%AD%A6%E4%B9%A0"><span class="nav-number">3.</span> <span class="nav-text">决策树的学习</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%A1%E6%81%AF%E5%A2%9E%E7%9B%8A"><span class="nav-number">3.1.</span> <span class="nav-text">信息增益</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Gini%E6%8C%87%E6%95%B0"><span class="nav-number">3.2.</span> <span class="nav-text">Gini指数</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
