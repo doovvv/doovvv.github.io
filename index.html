@@ -264,7 +264,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2024-06-12 10:04:30" itemprop="dateModified" datetime="2024-06-12T10:04:30+08:00">2024-06-12</time>
+                <time title="Modified: 2024-06-16 19:22:34" itemprop="dateModified" datetime="2024-06-16T19:22:34+08:00">2024-06-16</time>
               </span>
 
           
@@ -293,28 +293,14 @@
 
       
           <h1 id="决策树概念"><a href="#决策树概念" class="headerlink" title="决策树概念"></a>决策树概念</h1><p>决策树表示一个函数，该函数将属性值向量作为输入，并返回一个”决策“（单个输出值）</p>
-<ul>
-<li>节点：用属性标记</li>
-<li>边：用属性值标记</li>
-<li>叶子：用决策标记</li>
-</ul>
-<h1 id="决策树的表示"><a href="#决策树的表示" class="headerlink" title="决策树的表示"></a>决策树的表示</h1><p>决策树表示属性值约束的合取的析取</p>
-<p><img src="/2024/06/09/%E5%86%B3%E7%AD%96%E6%A0%91/image-20240609212414729.png" alt="image-20240609212414729"></p>
-<p>任何的布尔函数都可以写成决策树，也可以通过真值表把表中的每一行对应决策树中的一条路径。</p>
-<h1 id="决策树的学习"><a href="#决策树的学习" class="headerlink" title="决策树的学习"></a>决策树的学习</h1><p>目的：是为了找到一颗最符合测试样例的决策树</p>
-<p>思路：选择一个”最重要“的属性做为（子）树的根，从而不断的递归下去。</p>
-<p><img src="/2024/06/09/%E5%86%B3%E7%AD%96%E6%A0%91/image-20240609213812491.png" alt="image-20240609213812491"></p>
-<h2 id="信息增益"><a href="#信息增益" class="headerlink" title="信息增益"></a>信息增益</h2><p>如何选择一个最重要的属性？</p>
-<p>我们使用信息增益的概念，它是用信息论的基本概念-熵来定义的。</p>
-<p>熵是对随机变量不确定性的度量：一个只有一个值的随机随机变量没有不确定性，其熵被定义为0；抛一枚硬币具有”1 bit“的熵。</p>
-<p>我们定义以概率$P(V_k)$取值$V_k$的随机变量$V$的熵为：<br>$$<br>H(V) &#x3D; -\sum_k{P(V_k)log_2P(V_k)}<br>$$<br>所以以概率q为真的布尔变量的熵为：<br>$$<br>B(q) &#x3D; -(qlog_2q+(1-q)log_2(1-q))<br>$$<br>对于一个目标属性来说，我们可以把整个训练集当作一个布尔变量，假如这个训练集有p个正例，n个负例，那么该训练集的熵就为<br>$$<br>H(GOAL) &#x3D; B(\frac{p}{p+n})<br>$$<br>具有d个不同值的属性A可以将训练集E划分为$E_1,…,E_d$</p>
-<p>每个子集都有$p_k$个正例和$n_k$个负例，因此测试属性A之后剩余的熵为：<br>$$<br>Reminder(A) &#x3D; \sum_{k&#x3D;1}^{d}{\frac{p_k+n_k}{p+n}B(\frac{p_k}{p_k+n_k})}<br>$$<br>对A的测试属性的信息增益是熵的减少：<br>$$<br>Gain(A) &#x3D; B(\frac{p}{p+n})-Reminder(A)<br>$$<br>选择信息增益最大的属性</p>
-<h2 id="Gini指数"><a href="#Gini指数" class="headerlink" title="Gini指数"></a>Gini指数</h2><p>熵模型拥有大量耗时的对数运算，基尼指数在简化模型的同时还保留了熵模型的优点。</p>
-<p>基尼指数反映了从数据集中随机抽取两个样例，其类别标记不一致的概率</p>
-<p>如果一个数据集D包含来自n类的样本，那么它的Gini指数为：<br>$$<br>Gini(D) &#x3D; \sum_{i&#x3D;1}^np_i(1-p_i)<br>$$<br>其中$p_i$​是类i在D中的概率。</p>
-<p>很显然对于决策树来说只有两类”Yes“或”No“，所以：<br>$$<br>Gini(D) &#x3D; 2p(1-p)<br>$$<br>p为其中正例的比例</p>
-<p>假设属性A的取值将D划分为$D_1,…,Dm$<br>$$<br>Gini(D|A) &#x3D; \sum_{i&#x3D;1}^{m}\frac{D_i}{D}Gini(D_i)<br>$$<br>选择具有最小基尼指数的属性作为节点即可</p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/06/09/%E5%86%B3%E7%AD%96%E6%A0%91/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -1181,6 +1167,8 @@
 
 
 
+
+  
 
   
 
