@@ -216,53 +216,47 @@
 <h2 id="Definition"><a href="#Definition" class="headerlink" title="Definition"></a>Definition</h2><p>何为单调栈？顾名思义，单调栈即满足单调性的栈结构。<br>单调栈被分为单调递增栈和单调递减栈：  </p>
 <ul>
 <li>单调递增栈：单调递增栈就是从栈底到栈顶数据是从小到大</li>
-<li>单调递减栈：单调递减栈就是从栈底到栈顶数据是从大到小</li>
-</ul>
-<h2 id="Establishing-process"><a href="#Establishing-process" class="headerlink" title="Establishing process"></a>Establishing process</h2><p>比如建立一个单调递减栈，对于每一个即将入栈的元素：  </p>
-<ul>
+<li>单调递减栈：单调递减栈就是从栈底到栈顶数据是从大到小<h2 id="Establishing-process"><a href="#Establishing-process" class="headerlink" title="Establishing process"></a>Establishing process</h2>比如建立一个单调递减栈，对于每一个即将入栈的元素：  </li>
 <li>检查栈是否为空，如果为空，则直接入栈</li>
 <li>如果不为空，检查栈顶元素是否大于（等于）即将入栈元素，如果是，则入栈</li>
-<li>如果不是，将栈顶元素出栈，然后重复整个整个过程。</li>
-</ul>
-<h2 id="Application"><a href="#Application" class="headerlink" title="Application"></a>Application</h2><ul>
-<li><p>例1：<br><img src="/2023/12/21/%E5%8D%95%E8%B0%83%E6%A0%88/2023-12-21-23-27-46.png"><br>本题寻找下一个更大元素的过程就可以使用单调递减栈结构。<br>对于某个元素，当他出栈时，即将入栈的那个元素就是他的下一个更大元素。<br>本体答案为：  </p>
+<li>如果不是，将栈顶元素出栈，然后重复整个整个过程。  <h2 id="Application"><a href="#Application" class="headerlink" title="Application"></a>Application</h2></li>
+<li><p>例1：<br><img src="/2023/12/21/%E5%8D%95%E8%B0%83%E6%A0%88/2023-12-21-23-27-46.png" alt><br>本题寻找下一个更大元素的过程就可以使用单调递减栈结构。<br>对于某个元素，当他出栈时，即将入栈的那个元素就是他的下一个更大元素。<br>本体答案为：  </p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123; </span><br><span class="line">public:</span><br><span class="line">    vector&lt;int&gt; nextGreaterElement(vector&lt;int&gt;&amp; nums1, vector&lt;int&gt;&amp; nums2) &#123;</span><br><span class="line">        map&lt;int,int&gt; ans;</span><br><span class="line">        stack&lt;int&gt; s;</span><br><span class="line">        nums2.push_back(INT_MAX); //to pop all entries</span><br><span class="line">        for(int i = 0;i&lt;nums2.size();i++)&#123;</span><br><span class="line">            if(s.empty() || s.top()&gt;=nums2[i])&#123;</span><br><span class="line">                s.push(nums2[i]);</span><br><span class="line">            &#125;</span><br><span class="line">            else&#123;</span><br><span class="line">                while(!s.empty() &amp;&amp; s.top()&lt;nums2[i])&#123;</span><br><span class="line">                    ans[s.top()] = nums2[i];</span><br><span class="line">                    s.pop();</span><br><span class="line">                &#125;</span><br><span class="line">                s.push(nums2[i]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        cout&lt;&lt;ans[2];</span><br><span class="line">        vector&lt;int&gt; re_ans(nums1.size(),-1);</span><br><span class="line">        for(int i = 0;i&lt;nums1.size();i++)&#123;</span><br><span class="line">            if(ans.find(nums1[i]) != ans.end())&#123;</span><br><span class="line">                </span><br><span class="line">                re_ans[i] = ans[nums1[i]] == INT_MAX?-1: ans[nums1[i]];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return re_ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>例二：<br><img src="/2023/12/21/%E5%8D%95%E8%B0%83%E6%A0%88/2024-02-02-12-51-12.png"><br>答案：</p>
-</li>
-</ul>
+<li><p>例二：<br><img src="/2023/12/21/%E5%8D%95%E8%B0%83%E6%A0%88/2024-02-02-12-51-12.png" alt><br>答案：</p>
 <pre><code>class Solution &#123;
 public:
-    int trap(vector&lt;int&gt;&amp; height) &#123;
-        if(height.size()&lt;= 2)&#123;
-            return 0;
-        &#125;
-        int count = 0;
-        stack&lt;int&gt; s;
-        for(int i = 0;i&lt;height.size();i++)&#123;
-            if(s.empty())&#123;
-                s.push(i);
-                continue;
-            &#125;
-            else if(height[i] &lt; height[s.top()])&#123;
-                s.push(i);
-                continue;
-            &#125;
-            while(!s.empty() &amp;&amp; height[i]&gt;= height[s.top()])&#123;
-                int j = s.top();
-                s.pop();
-                if(s.empty())&#123;
-                    break;
-                &#125;
-                int k =s.top();
-                count += (min(height[k],height[i])-height[j])*(i-k-1);
-            &#125;
-            s.push(i);   
-        &#125;
-        return count;
-    &#125;
+  int trap(vector&lt;int&gt;&amp; height) &#123;
+      if(height.size()&lt;= 2)&#123;
+          return 0;
+      &#125;
+      int count = 0;
+      stack&lt;int&gt; s;
+      for(int i = 0;i&lt;height.size();i++)&#123;
+          if(s.empty())&#123;
+              s.push(i);
+              continue;
+          &#125;
+          else if(height[i] &lt; height[s.top()])&#123;
+              s.push(i);
+              continue;
+          &#125;
+          while(!s.empty() &amp;&amp; height[i]&gt;= height[s.top()])&#123;
+              int j = s.top();
+              s.pop();
+              if(s.empty())&#123;
+                  break;
+              &#125;
+              int k =s.top();
+              count += (min(height[k],height[i])-height[j])*(i-k-1);
+          &#125;
+          s.push(i);   
+      &#125;
+      return count;
+  &#125;
 &#125;;
-</code></pre>
+</code></pre></li>
+</ul>
 
     </div>
 
@@ -361,12 +355,12 @@ public:
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-count">17</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>
@@ -466,7 +460,6 @@ public:
   if (typeof MathJax === 'undefined') {
     window.MathJax = {
       loader: {
-          load: ['[tex]/mhchem'],
         source: {
           '[tex]/amsCd': '[tex]/amscd',
           '[tex]/AMScd': '[tex]/amscd'
@@ -474,7 +467,6 @@ public:
       },
       tex: {
         inlineMath: {'[+]': [['$', '$']]},
-          packages: {'[+]': ['mhchem']},
         tags: 'ams'
       },
       options: {

@@ -213,7 +213,6 @@
       
         <h1 id="决策树概念"><a href="#决策树概念" class="headerlink" title="决策树概念"></a>决策树概念</h1><p>决策树表示一个函数，该函数将属性值向量作为输入，并返回一个”决策“（单个输出值）</p>
 <span id="more"></span>
-
 <ul>
 <li>节点：用属性标记</li>
 <li>边：用属性值标记</li>
@@ -228,13 +227,29 @@
 <h2 id="信息增益"><a href="#信息增益" class="headerlink" title="信息增益"></a>信息增益</h2><p>如何选择一个最重要的属性？</p>
 <p>我们使用信息增益的概念，它是用信息论的基本概念-熵来定义的。</p>
 <p>熵是对随机变量不确定性的度量：一个只有一个值的随机随机变量没有不确定性，其熵被定义为0；抛一枚硬币具有”1 bit“的熵。</p>
-<p>我们定义以概率$P(V_k)$取值$V_k$的随机变量$V$的熵为：<br>$$<br>H(V) &#x3D; -\sum_k{P(V_k)log_2P(V_k)}<br>$$<br>所以以概率q为真的布尔变量的熵为：<br>$$<br>B(q) &#x3D; -(qlog_2q+(1-q)log_2(1-q))<br>$$<br>对于一个目标属性来说，我们可以把整个训练集当作一个布尔变量，假如这个训练集有p个正例，n个负例，那么该训练集的熵就为<br>$$<br>H(GOAL) &#x3D; B(\frac{p}{p+n})<br>$$<br>具有d个不同值的属性A可以将训练集E划分为$E_1,…,E_d$</p>
-<p>每个子集都有$p_k$个正例和$n_k$个负例，因此测试属性A之后剩余的熵为：<br>$$<br>Reminder(A) &#x3D; \sum_{k&#x3D;1}^{d}{\frac{p_k+n_k}{p+n}B(\frac{p_k}{p_k+n_k})}<br>$$<br>对A的测试属性的信息增益是熵的减少：<br>$$<br>Gain(A) &#x3D; B(\frac{p}{p+n})-Reminder(A)<br>$$<br>选择信息增益最大的属性</p>
+<p>我们定义以概率$P(V_k)$取值$V_k$的随机变量$V$的熵为：</p>
+<script type="math/tex; mode=display">
+H(V) = -\sum_k{P(V_k)log_2P(V_k)}</script><p>所以以概率q为真的布尔变量的熵为：</p>
+<script type="math/tex; mode=display">
+B(q) = -(qlog_2q+(1-q)log_2(1-q))</script><p>对于一个目标属性来说，我们可以把整个训练集当作一个布尔变量，假如这个训练集有p个正例，n个负例，那么该训练集的熵就为</p>
+<script type="math/tex; mode=display">
+H(GOAL) = B(\frac{p}{p+n})</script><p>具有d个不同值的属性A可以将训练集E划分为$E_1,…,E_d$</p>
+<p>每个子集都有$p_k$个正例和$n_k$个负例，因此测试属性A之后剩余的熵为：</p>
+<script type="math/tex; mode=display">
+Reminder(A) = \sum_{k=1}^{d}{\frac{p_k+n_k}{p+n}B(\frac{p_k}{p_k+n_k})}</script><p>对A的测试属性的信息增益是熵的减少：</p>
+<script type="math/tex; mode=display">
+Gain(A) = B(\frac{p}{p+n})-Reminder(A)</script><p>选择信息增益最大的属性</p>
 <h2 id="Gini指数"><a href="#Gini指数" class="headerlink" title="Gini指数"></a>Gini指数</h2><p>熵模型拥有大量耗时的对数运算，基尼指数在简化模型的同时还保留了熵模型的优点。</p>
 <p>基尼指数反映了从数据集中随机抽取两个样例，其类别标记不一致的概率</p>
-<p>如果一个数据集D包含来自n类的样本，那么它的Gini指数为：<br>$$<br>Gini(D) &#x3D; \sum_{i&#x3D;1}^np_i(1-p_i)<br>$$<br>其中$p_i$​是类i在D中的概率。</p>
-<p>很显然对于决策树来说只有两类”Yes“或”No“，所以：<br>$$<br>Gini(D) &#x3D; 2p(1-p)<br>$$<br>p为其中正例的比例</p>
-<p>假设属性A的取值将D划分为$D_1,…,Dm$<br>$$<br>Gini(D|A) &#x3D; \sum_{i&#x3D;1}^{m}\frac{D_i}{D}Gini(D_i)<br>$$<br>选择具有最小基尼指数的属性作为节点即可</p>
+<p>如果一个数据集D包含来自n类的样本，那么它的Gini指数为：</p>
+<script type="math/tex; mode=display">
+Gini(D) = \sum_{i=1}^np_i(1-p_i)</script><p>其中$p_i$​是类i在D中的概率。</p>
+<p>很显然对于决策树来说只有两类”Yes“或”No“，所以：</p>
+<script type="math/tex; mode=display">
+Gini(D) = 2p(1-p)</script><p>p为其中正例的比例</p>
+<p>假设属性A的取值将D划分为$D_1,…,Dm$</p>
+<script type="math/tex; mode=display">
+Gini(D|A) = \sum_{i=1}^{m}\frac{D_i}{D}Gini(D_i)</script><p>选择具有最小基尼指数的属性作为节点即可</p>
 
     </div>
 
@@ -250,10 +265,13 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2024/05/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="prev" title="计算机网络">
-      <i class="fa fa-chevron-left"></i> 计算机网络
+    <a href="/2024/06/09/%E7%9B%B2%E7%9B%AE%E6%90%9C%E7%B4%A2/" rel="prev" title="盲目搜索">
+      <i class="fa fa-chevron-left"></i> 盲目搜索
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2024/06/19/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/" rel="next" title="归结推理">
+      归结推理 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -327,12 +345,12 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-count">17</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>
@@ -432,7 +450,6 @@
   if (typeof MathJax === 'undefined') {
     window.MathJax = {
       loader: {
-          load: ['[tex]/mhchem'],
         source: {
           '[tex]/amsCd': '[tex]/amscd',
           '[tex]/AMScd': '[tex]/amscd'
@@ -440,7 +457,6 @@
       },
       tex: {
         inlineMath: {'[+]': [['$', '$']]},
-          packages: {'[+]': ['mhchem']},
         tags: 'ams'
       },
       options: {
