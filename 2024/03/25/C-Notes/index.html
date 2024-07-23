@@ -27,10 +27,12 @@
 <meta property="og:site_name" content="doovvv">
 <meta property="og:description" content="some notes about cpp">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2024/03/25/C-Notes/Users/14595/AppData/Roaming/Typora/typora-user-images/image-20240709004856410.png">
 <meta property="article:published_time" content="2024-03-25T13:44:15.000Z">
-<meta property="article:modified_time" content="2024-05-13T08:52:39.123Z">
+<meta property="article:modified_time" content="2024-07-09T05:21:17.568Z">
 <meta property="article:author" content="doovvv">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2024/03/25/C-Notes/Users/14595/AppData/Roaming/Typora/typora-user-images/image-20240709004856410.png">
 
 <link rel="canonical" href="http://example.com/2024/03/25/C-Notes/">
 
@@ -180,7 +182,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2024-05-13 16:52:39" itemprop="dateModified" datetime="2024-05-13T16:52:39+08:00">2024-05-13</time>
+                <time title="Modified: 2024-07-09 13:21:17" itemprop="dateModified" datetime="2024-07-09T13:21:17+08:00">2024-07-09</time>
               </span>
 
           
@@ -208,11 +210,51 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>some notes about cpp<br><span id="more"></span></p>
-<h1 id="遍历map容器"><a href="#遍历map容器" class="headerlink" title="遍历map容器"></a>遍历map容器</h1><h2 id="c-98"><a href="#c-98" class="headerlink" title="c++98"></a>c++98</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">map&lt;string, int&gt;::iterator it;</span><br><span class="line">for (it = m2.begin(); it != m2.end(); it++) &#123;</span><br><span class="line">    string s = it-&gt;first;</span><br><span class="line">    printf(&quot;%s %d\n&quot;, s.data(), it-&gt;second);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="c-11"><a href="#c-11" class="headerlink" title="c++11"></a>c++11</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for(auto it : map1)&#123;</span><br><span class="line">	cout &lt;&lt; it.first &lt;&lt;&quot; &quot;&lt;&lt; it.second &lt;&lt;endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="c-17"><a href="#c-17" class="headerlink" title="c++17"></a>c++17</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for (auto&amp; [k, v] : map1) &#123;</span><br><span class="line">    std::cout &lt;&lt; k &lt;&lt; &quot; &quot; &lt;&lt; v &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="sort函数"><a href="#sort函数" class="headerlink" title="sort函数"></a>sort函数</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sort</span>(a.<span class="built_in">begin</span>(),a.<span class="built_in">end</span>(),std::<span class="built_in">greater</span>&lt;<span class="type">int</span>&gt;())</span><br></pre></td></tr></table></figure>
+        <p>some notes about cpp <span id="more"></span> # 遍历map容器 ## c++98 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">map&lt;string, int&gt;::iterator it;</span><br><span class="line">for (it = m2.begin(); it != m2.end(); it++) &#123;</span><br><span class="line">    string s = it-&gt;first;</span><br><span class="line">    printf(&quot;%s %d\n&quot;, s.data(), it-&gt;second);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+## c++11 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for(auto it : map1)&#123;</span><br><span class="line">	cout &lt;&lt; it.first &lt;&lt;&quot; &quot;&lt;&lt; it.second &lt;&lt;endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> ## c++17 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for (auto&amp; [k, v] : map1) &#123;</span><br><span class="line">    std::cout &lt;&lt; k &lt;&lt; &quot; &quot; &lt;&lt; v &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="sort函数">sort函数</h1>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sort</span>(a.<span class="built_in">begin</span>(),a.<span class="built_in">end</span>(),std::<span class="built_in">greater</span>&lt;<span class="type">int</span>&gt;())</span><br></pre></td></tr></table></figure>
+<h1 id="lambda匿名函数">Lambda（匿名函数）</h1>
+<p>c++11新特性</p>
+<h2 id="语法">语法：</h2>
+<figure>
+<img src="/2024/03/25/C-Notes/Users\14595\AppData\Roaming\Typora\typora-user-images\image-20240709004856410.png" alt="image-20240709004856410">
+<figcaption aria-hidden="true">image-20240709004856410</figcaption>
+</figure>
+<p>按照上图中的标号，具体解释如下：</p>
+<p><strong>标号1：</strong>指定捕获列表，所谓捕获，是把Lambda表达式之外定义的变量，捕获到Lambda表达式内部，这样Lambda内部可以直接引用这些变量，省去参数传递的过程。</p>
+<p>捕获分为两种方式：</p>
+<ul>
+<li>按值捕获，捕获到Lambda表达式内部的变量是副本，注意，按值捕获的变量默认是不能修改的，可以使用mutable关键字突破这个限制，见下文标号3.</li>
+<li>按引用捕获，捕获到Lambda表达式内部的变量是引用，修改变量会影响外部的同名变量</li>
+</ul>
+<p>捕获的举例如下：</p>
+<ul>
+<li>[]，空捕获列表，不捕获任何变量，此时引用外部变量则会提示编译错误</li>
+<li>[=]，默认按值捕获全部变量</li>
+<li>[&amp;]，默认按引用捕获全部变量</li>
+<li>[=,&amp;x,&amp;y]，默认按值捕获全部变量,但是变量x,变量y按引用捕获</li>
+<li>[&amp;,=x,=y]，默认按引用捕获全部变量,但是变量x，变量y按值捕获</li>
+<li>[&amp;,x,y]，效果同上,即变量名前面没有写=或者&amp;时，默认为按值捕获</li>
+<li>[=,x,y]，编译出错,变量x,变量y按值捕获，和默认按值捕获全部变量重复</li>
+<li>[x,y]，只按值捕获变量x和变量y</li>
+<li>[&amp;x,&amp;y]，只按引用捕获变量x和变量y</li>
+<li>[x,&amp;y]，只按值捕获变量x,按引用捕获变量y</li>
+<li>[=x,=y]，编译出错,应为[x,y]</li>
+<li>[this]，捕获this指针，然后在Lambda表达式内部就可以直接引用类成员了</li>
+</ul>
+<p><strong>标号2：</strong>函数参数</p>
+<p>用法和普通函数一样</p>
+<p><strong>标号3：</strong>mutable，用来突破不能修改按值捕获变量的限制</p>
+<p>如下代码，按值捕获了变量x，在Lambda表达式内部，是不能修改x的值的</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int x = 1;</span><br><span class="line">auto f=\[x\]()&#123;x++;&#125;;// 编译错误，不能修改x的值f();</span><br></pre></td></tr></table></figure>
+<p>为了突破上面的限制，添加mutable即可编译成功</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int x = 1;</span><br><span class="line">auto f=\[x\]()mutable&#123;x++;&#125;;// 编译成功f();</span><br></pre></td></tr></table></figure>
+<p>注意，即使Lambda表达式内部修改了x的值，但是依旧不影响Lambda表达式外部的x的值，两者是相互独立的。</p>
+<p><strong>标号4：</strong>throw关键字，和C++中throw用法保持一致</p>
+<p><strong>标号5：</strong>Lambda表达式返回值的类型</p>
+<p><strong>标号6：</strong>函数内容；注意函数最后面，需要添加一个;</p>
+<h2 id="lambda的实质">lambda的实质</h2>
 
     </div>
 
@@ -294,7 +336,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%81%8D%E5%8E%86map%E5%AE%B9%E5%99%A8"><span class="nav-number">1.</span> <span class="nav-text">遍历map容器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#c-98"><span class="nav-number">1.1.</span> <span class="nav-text">c++98</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#c-11"><span class="nav-number">1.2.</span> <span class="nav-text">c++11</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#c-17"><span class="nav-number">1.3.</span> <span class="nav-text">c++17</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#sort%E5%87%BD%E6%95%B0"><span class="nav-number">2.</span> <span class="nav-text">sort函数</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#sort%E5%87%BD%E6%95%B0"><span class="nav-number">1.</span> <span class="nav-text">sort函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#lambda%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0"><span class="nav-number">2.</span> <span class="nav-text">Lambda（匿名函数）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%AD%E6%B3%95"><span class="nav-number">2.1.</span> <span class="nav-text">语法：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lambda%E7%9A%84%E5%AE%9E%E8%B4%A8"><span class="nav-number">2.2.</span> <span class="nav-text">lambda的实质</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -308,7 +350,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-count">14</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

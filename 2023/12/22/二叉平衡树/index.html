@@ -212,28 +212,32 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="AVL-Tree"><a href="#AVL-Tree" class="headerlink" title="AVL Tree"></a>AVL Tree</h1><span id="more"></span>
-<h2 id="Definition"><a href="#Definition" class="headerlink" title="Definition"></a>Definition</h2><p>二叉平衡树为一颗空树，或者满足以下两个性质：  </p>
-<ul>
-<li>左子树和右子树的深度之差不大于1</li>
-<li>左子树和右子树都是平衡二叉树  </li>
-</ul>
-<p>与普通的搜索二叉树的结构类似，代码如下：<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">class Node&#123;</span><br><span class="line">    public:</span><br><span class="line">    int data,height;</span><br><span class="line">    Node *left,*right;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><br><strong>平衡因子</strong>：左子树深度减去右子树深度,所以平衡二叉树要求每个节点的平衡因子绝对值小于等于1<br>代码如下：<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">int getBanlanceFactor(Node* root)&#123;</span><br><span class="line">    return getHeight(root-&gt;left)-getHeight(root-&gt;right);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h2 id="Function"><a href="#Function" class="headerlink" title="Function"></a>Function</h2><h3 id="search："><a href="#search：" class="headerlink" title="search："></a>search：</h3><p>与普通的搜索二叉树相同，主要利用递归。<br>代码如下：<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">void search(Node* root,int v)&#123;</span><br><span class="line">    if(root == nullptr)&#123;</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    if(root-&gt;data == v)&#123;</span><br><span class="line">        std::cout&lt;&lt;&quot;Found &quot;&lt;&lt;v&lt;&lt;std::endl;</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    if(v&lt;root-&gt;data)&#123;</span><br><span class="line">        search(root-&gt;left,v);</span><br><span class="line">    &#125;</span><br><span class="line">    else&#123;</span><br><span class="line">        search(root-&gt;right,v);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="insert"><a href="#insert" class="headerlink" title="insert"></a>insert</h3><p>与搜索二叉树不同的是，在插入了一个节点之后，二叉树的深度发生了变化，所以某些的节点的平衡因子发生变化，也就不是平衡二叉树了，此时就需要把二叉树进行一定的旋转以得到平衡二叉树。<br>让我们来看一些需要旋转的情况</p>
-<h4 id="LL型旋转"><a href="#LL型旋转" class="headerlink" title="LL型旋转"></a>LL型旋转</h4><p><img src="/2023/12/22/%E4%BA%8C%E5%8F%89%E5%B9%B3%E8%A1%A1%E6%A0%91/2023-12-29-14-36-45.png" alt><br>如图所示，对于LL型二叉树，根节点的平衡因子为2，此时需要右旋。具体过程为：</p>
-<ul>
-<li>将x的左子树变为它原本左子树a的右子树</li>
-<li>将a的右子树变为x</li>
-<li>更新x和a的深度，并把a设置为根节点  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">void rightRotation(Node*&amp; root)&#123;</span><br><span class="line">    Node* temp = root-&gt;left;</span><br><span class="line">    root-&gt;left = temp-&gt;right;</span><br><span class="line">    temp-&gt;right = root;</span><br><span class="line">    updateHeight(root);</span><br><span class="line">    updateHeight(temp);</span><br><span class="line">    root = temp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h4 id="RR型旋转"><a href="#RR型旋转" class="headerlink" title="RR型旋转"></a>RR型旋转</h4><p><img src="/2023/12/22/%E4%BA%8C%E5%8F%89%E5%B9%B3%E8%A1%A1%E6%A0%91/2023-12-29-14-47-13.png" alt><br>如图所示，对于LL型二叉树，根节点的平衡因子为-2，此时需要左旋。具体过程为：</p>
-<ul>
-<li>将x的左子树变为它原本左子树a的右子树</li>
-<li>将a的右子树变为x</li>
-<li>更新x和a的深度，并把a设置为根节点</li>
-</ul>
+        <h1 id="avl-tree">AVL Tree</h1>
+<span id="more"></span>
+<h2 id="definition">Definition</h2>
+<p>二叉平衡树为一颗空树，或者满足以下两个性质：<br>
+* 左子树和右子树的深度之差不大于1 * 左子树和右子树都是平衡二叉树</p>
+<p>与普通的搜索二叉树的结构类似，代码如下：<br>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">class Node&#123;</span><br><span class="line">    public:</span><br><span class="line">    int data,height;</span><br><span class="line">    Node *left,*right;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<strong>平衡因子</strong>：左子树深度减去右子树深度,所以平衡二叉树要求每个节点的平衡因子绝对值小于等于1<br>
+代码如下：<br>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">int getBanlanceFactor(Node* root)&#123;</span><br><span class="line">    return getHeight(root-&gt;left)-getHeight(root-&gt;right);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="function">Function</h2>
+<h3 id="search">search：</h3>
+<p>与普通的搜索二叉树相同，主要利用递归。<br>
+代码如下： <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">void search(Node* root,int v)&#123;</span><br><span class="line">    if(root == nullptr)&#123;</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    if(root-&gt;data == v)&#123;</span><br><span class="line">        std::cout&lt;&lt;&quot;Found &quot;&lt;&lt;v&lt;&lt;std::endl;</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    if(v&lt;root-&gt;data)&#123;</span><br><span class="line">        search(root-&gt;left,v);</span><br><span class="line">    &#125;</span><br><span class="line">    else&#123;</span><br><span class="line">        search(root-&gt;right,v);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="insert">insert</h3>
+<p>与搜索二叉树不同的是，在插入了一个节点之后，二叉树的深度发生了变化，所以某些的节点的平衡因子发生变化，也就不是平衡二叉树了，此时就需要把二叉树进行一定的旋转以得到平衡二叉树。<br>
+让我们来看一些需要旋转的情况 #### LL型旋转 <img src="/2023/12/22/%E4%BA%8C%E5%8F%89%E5%B9%B3%E8%A1%A1%E6%A0%91/2023-12-29-14-36-45.png">
+如图所示，对于LL型二叉树，根节点的平衡因子为2，此时需要右旋。具体过程为：
+* 将x的左子树变为它原本左子树a的右子树 * 将a的右子树变为x *
+更新x和a的深度，并把a设置为根节点<br>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">void rightRotation(Node*&amp; root)&#123;</span><br><span class="line">    Node* temp = root-&gt;left;</span><br><span class="line">    root-&gt;left = temp-&gt;right;</span><br><span class="line">    temp-&gt;right = root;</span><br><span class="line">    updateHeight(root);</span><br><span class="line">    updateHeight(temp);</span><br><span class="line">    root = temp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="rr型旋转">RR型旋转</h4>
+<p><img src="/2023/12/22/%E4%BA%8C%E5%8F%89%E5%B9%B3%E8%A1%A1%E6%A0%91/2023-12-29-14-47-13.png"><br>
+如图所示，对于LL型二叉树，根节点的平衡因子为-2，此时需要左旋。具体过程为：
+* 将x的左子树变为它原本左子树a的右子树 * 将a的右子树变为x *
+更新x和a的深度，并把a设置为根节点</p>
 
     </div>
 
@@ -318,7 +322,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#AVL-Tree"><span class="nav-number">1.</span> <span class="nav-text">AVL Tree</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Definition"><span class="nav-number">1.1.</span> <span class="nav-text">Definition</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Function"><span class="nav-number">1.2.</span> <span class="nav-text">Function</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#search%EF%BC%9A"><span class="nav-number">1.2.1.</span> <span class="nav-text">search：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#insert"><span class="nav-number">1.2.2.</span> <span class="nav-text">insert</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#LL%E5%9E%8B%E6%97%8B%E8%BD%AC"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">LL型旋转</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#RR%E5%9E%8B%E6%97%8B%E8%BD%AC"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">RR型旋转</span></a></li></ol></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#avl-tree"><span class="nav-number">1.</span> <span class="nav-text">AVL Tree</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#definition"><span class="nav-number">1.1.</span> <span class="nav-text">Definition</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#function"><span class="nav-number">1.2.</span> <span class="nav-text">Function</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#search"><span class="nav-number">1.2.1.</span> <span class="nav-text">search：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#insert"><span class="nav-number">1.2.2.</span> <span class="nav-text">insert</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#rr%E5%9E%8B%E6%97%8B%E8%BD%AC"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">RR型旋转</span></a></li></ol></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -332,7 +336,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-count">14</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
