@@ -20,21 +20,19 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="some notes about cpp">
+  <meta name="description" content="自用算法模板">
 <meta property="og:type" content="article">
-<meta property="og:title" content="C++ Notes">
-<meta property="og:url" content="http://example.com/2024/03/25/C-Notes/index.html">
+<meta property="og:title" content="算法模板">
+<meta property="og:url" content="http://example.com/2024/07/28/%E7%AE%97%E6%B3%95%E6%A8%A1%E6%9D%BF/index.html">
 <meta property="og:site_name" content="doovvv">
-<meta property="og:description" content="some notes about cpp">
+<meta property="og:description" content="自用算法模板">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/2024/03/25/C-Notes/Users/14595/AppData/Roaming/Typora/typora-user-images/image-20240709004856410.png">
-<meta property="article:published_time" content="2024-03-25T13:44:15.000Z">
-<meta property="article:modified_time" content="2024-07-09T05:21:17.568Z">
+<meta property="article:published_time" content="2024-07-28T10:22:34.000Z">
+<meta property="article:modified_time" content="2024-07-28T10:24:10.310Z">
 <meta property="article:author" content="doovvv">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2024/03/25/C-Notes/Users/14595/AppData/Roaming/Typora/typora-user-images/image-20240709004856410.png">
 
-<link rel="canonical" href="http://example.com/2024/03/25/C-Notes/">
+<link rel="canonical" href="http://example.com/2024/07/28/%E7%AE%97%E6%B3%95%E6%A8%A1%E6%9D%BF/">
 
 
 <script id="page-configurations">
@@ -47,7 +45,7 @@
   };
 </script>
 
-  <title>C++ Notes | doovvv</title>
+  <title>算法模板 | doovvv</title>
   
 
 
@@ -152,7 +150,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/03/25/C-Notes/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/07/28/%E7%AE%97%E6%B3%95%E6%A8%A1%E6%9D%BF/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -165,7 +163,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          C++ Notes
+          算法模板
         </h1>
 
         <div class="post-meta">
@@ -174,16 +172,10 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
+              
 
-              <time title="Created: 2024-03-25 21:44:15" itemprop="dateCreated datePublished" datetime="2024-03-25T21:44:15+08:00">2024-03-25</time>
+              <time title="Created: 2024-07-28 18:22:34 / Modified: 18:24:10" itemprop="dateCreated datePublished" datetime="2024-07-28T18:22:34+08:00">2024-07-28</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2024-07-09 13:21:17" itemprop="dateModified" datetime="2024-07-09T13:21:17+08:00">2024-07-09</time>
-              </span>
 
           
   
@@ -194,8 +186,8 @@
       </span>
       <span class="post-meta-item-text">Valine: </span>
     
-    <a title="valine" href="/2024/03/25/C-Notes/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2024/03/25/C-Notes/" itemprop="commentCount"></span>
+    <a title="valine" href="/2024/07/28/%E7%AE%97%E6%B3%95%E6%A8%A1%E6%9D%BF/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2024/07/28/%E7%AE%97%E6%B3%95%E6%A8%A1%E6%9D%BF/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -210,51 +202,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>some notes about cpp <span id="more"></span> # 遍历map容器 ## c++98 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">map&lt;string, int&gt;::iterator it;</span><br><span class="line">for (it = m2.begin(); it != m2.end(); it++) &#123;</span><br><span class="line">    string s = it-&gt;first;</span><br><span class="line">    printf(&quot;%s %d\n&quot;, s.data(), it-&gt;second);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-## c++11 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for(auto it : map1)&#123;</span><br><span class="line">	cout &lt;&lt; it.first &lt;&lt;&quot; &quot;&lt;&lt; it.second &lt;&lt;endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> ## c++17 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for (auto&amp; [k, v] : map1) &#123;</span><br><span class="line">    std::cout &lt;&lt; k &lt;&lt; &quot; &quot; &lt;&lt; v &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h1 id="sort函数">sort函数</h1>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sort</span>(a.<span class="built_in">begin</span>(),a.<span class="built_in">end</span>(),std::<span class="built_in">greater</span>&lt;<span class="type">int</span>&gt;())</span><br></pre></td></tr></table></figure>
-<h1 id="lambda匿名函数">Lambda（匿名函数）</h1>
-<p>c++11新特性</p>
-<h2 id="语法">语法：</h2>
-<figure>
-<img src="/2024/03/25/C-Notes/Users\14595\AppData\Roaming\Typora\typora-user-images\image-20240709004856410.png" alt="image-20240709004856410">
-<figcaption aria-hidden="true">image-20240709004856410</figcaption>
-</figure>
-<p>按照上图中的标号，具体解释如下：</p>
-<p><strong>标号1：</strong>指定捕获列表，所谓捕获，是把Lambda表达式之外定义的变量，捕获到Lambda表达式内部，这样Lambda内部可以直接引用这些变量，省去参数传递的过程。</p>
-<p>捕获分为两种方式：</p>
-<ul>
-<li>按值捕获，捕获到Lambda表达式内部的变量是副本，注意，按值捕获的变量默认是不能修改的，可以使用mutable关键字突破这个限制，见下文标号3.</li>
-<li>按引用捕获，捕获到Lambda表达式内部的变量是引用，修改变量会影响外部的同名变量</li>
-</ul>
-<p>捕获的举例如下：</p>
-<ul>
-<li>[]，空捕获列表，不捕获任何变量，此时引用外部变量则会提示编译错误</li>
-<li>[=]，默认按值捕获全部变量</li>
-<li>[&amp;]，默认按引用捕获全部变量</li>
-<li>[=,&amp;x,&amp;y]，默认按值捕获全部变量,但是变量x,变量y按引用捕获</li>
-<li>[&amp;,=x,=y]，默认按引用捕获全部变量,但是变量x，变量y按值捕获</li>
-<li>[&amp;,x,y]，效果同上,即变量名前面没有写=或者&amp;时，默认为按值捕获</li>
-<li>[=,x,y]，编译出错,变量x,变量y按值捕获，和默认按值捕获全部变量重复</li>
-<li>[x,y]，只按值捕获变量x和变量y</li>
-<li>[&amp;x,&amp;y]，只按引用捕获变量x和变量y</li>
-<li>[x,&amp;y]，只按值捕获变量x,按引用捕获变量y</li>
-<li>[=x,=y]，编译出错,应为[x,y]</li>
-<li>[this]，捕获this指针，然后在Lambda表达式内部就可以直接引用类成员了</li>
-</ul>
-<p><strong>标号2：</strong>函数参数</p>
-<p>用法和普通函数一样</p>
-<p><strong>标号3：</strong>mutable，用来突破不能修改按值捕获变量的限制</p>
-<p>如下代码，按值捕获了变量x，在Lambda表达式内部，是不能修改x的值的</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int x = 1;</span><br><span class="line">auto f=\[x\]()&#123;x++;&#125;;// 编译错误，不能修改x的值f();</span><br></pre></td></tr></table></figure>
-<p>为了突破上面的限制，添加mutable即可编译成功</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int x = 1;</span><br><span class="line">auto f=\[x\]()mutable&#123;x++;&#125;;// 编译成功f();</span><br></pre></td></tr></table></figure>
-<p>注意，即使Lambda表达式内部修改了x的值，但是依旧不影响Lambda表达式外部的x的值，两者是相互独立的。</p>
-<p><strong>标号4：</strong>throw关键字，和C++中throw用法保持一致</p>
-<p><strong>标号5：</strong>Lambda表达式返回值的类型</p>
-<p><strong>标号6：</strong>函数内容；注意函数最后面，需要添加一个;</p>
-<h2 id="lambda的实质">lambda的实质</h2>
+        <p>自用算法模板</p>
+<span id="more"></span>
+<h1 id="其他">其他</h1>
+<h2 id="快读快写">快读快写</h2>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">int</span> <span class="title">read</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> x=<span class="number">0</span>,f=<span class="number">1</span>;</span><br><span class="line">    <span class="type">char</span> ch=<span class="built_in">getchar</span>();</span><br><span class="line">    <span class="keyword">while</span>(ch&lt;<span class="string">&#x27;0&#x27;</span>||ch&gt;<span class="string">&#x27;9&#x27;</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(ch==<span class="string">&#x27;-&#x27;</span>)</span><br><span class="line">            f=<span class="number">-1</span>;</span><br><span class="line">        ch=<span class="built_in">getchar</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(ch&gt;=<span class="string">&#x27;0&#x27;</span> &amp;&amp; ch&lt;=<span class="string">&#x27;9&#x27;</span>)</span><br><span class="line">        x=x*<span class="number">10</span>+ch-<span class="string">&#x27;0&#x27;</span>,ch=<span class="built_in">getchar</span>();</span><br><span class="line">    <span class="keyword">return</span> x*f;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">write</span><span class="params">(<span class="type">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(x&lt;<span class="number">0</span>)</span><br><span class="line">        <span class="built_in">putchar</span>(<span class="string">&#x27;-&#x27;</span>),x=-x;</span><br><span class="line">    <span class="keyword">if</span>(x&gt;<span class="number">9</span>)</span><br><span class="line">        <span class="built_in">write</span>(x/<span class="number">10</span>);</span><br><span class="line">    <span class="built_in">putchar</span>(x%<span class="number">10</span>+<span class="string">&#x27;0&#x27;</span>);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -270,13 +222,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2024/03/21/LeetCode%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/" rel="prev" title="算法刷题记录">
-      <i class="fa fa-chevron-left"></i> 算法刷题记录
+    <a href="/2024/06/22/Signals-and-Systems/" rel="prev" title="Signals and Systems">
+      <i class="fa fa-chevron-left"></i> Signals and Systems
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2024/04/30/writeup/" rel="next" title="C4terCTF 2024">
-      C4terCTF 2024 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -336,7 +285,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#sort%E5%87%BD%E6%95%B0"><span class="nav-number">1.</span> <span class="nav-text">sort函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#lambda%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0"><span class="nav-number">2.</span> <span class="nav-text">Lambda（匿名函数）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%AD%E6%B3%95"><span class="nav-number">2.1.</span> <span class="nav-text">语法：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lambda%E7%9A%84%E5%AE%9E%E8%B4%A8"><span class="nav-number">2.2.</span> <span class="nav-text">lambda的实质</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B6%E4%BB%96"><span class="nav-number">1.</span> <span class="nav-text">其他</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BF%AB%E8%AF%BB%E5%BF%AB%E5%86%99"><span class="nav-number">1.1.</span> <span class="nav-text">快读快写</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
