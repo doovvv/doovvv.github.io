@@ -28,7 +28,7 @@
 <meta property="og:description" content="分布式系统课程笔记">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-09-11T02:36:31.000Z">
-<meta property="article:modified_time" content="2024-09-11T12:21:52.354Z">
+<meta property="article:modified_time" content="2024-09-20T12:51:47.064Z">
 <meta property="article:author" content="doovvv">
 <meta property="article:tag" content="computer lecture">
 <meta name="twitter:card" content="summary">
@@ -173,10 +173,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2024-09-11 10:36:31 / Modified: 20:21:52" itemprop="dateCreated datePublished" datetime="2024-09-11T10:36:31+08:00">2024-09-11</time>
+              <time title="Created: 2024-09-11 10:36:31" itemprop="dateCreated datePublished" datetime="2024-09-11T10:36:31+08:00">2024-09-11</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2024-09-20 20:51:47" itemprop="dateModified" datetime="2024-09-20T20:51:47+08:00">2024-09-20</time>
+              </span>
 
           
   
@@ -205,21 +211,52 @@
       
         <p>分布式系统课程笔记</p>
 <span id="more"></span>
-<h1 id="分布式系统简介">分布式系统简介</h1>
-<h2 id="分布式系统定义">分布式系统定义</h2>
-<p>定义：分布式系统是若干独立自主计算机的集合（硬件），这些计算机对用户来说像是单个耦合系统（软件）</p>
+<h1 id="分布式系统简介"><a href="#分布式系统简介" class="headerlink" title="分布式系统简介"></a>分布式系统简介</h1><h2 id="分布式系统定义"><a href="#分布式系统定义" class="headerlink" title="分布式系统定义"></a>分布式系统定义</h2><p>定义：分布式系统是若干独立自主计算机的集合（硬件），这些计算机对用户来说像是单个耦合系统（软件）</p>
 <p>特性：</p>
 <ul>
 <li>自主性：计算节点硬件或者软件进程是独立的</li>
 <li>耦合性：节点之间相互协作</li>
 </ul>
-<p>​</p>
-<h2 id="分布式系统的设计目标">分布式系统的设计目标</h2>
-<p>资源可访问</p>
+<p>​    </p>
+<h2 id="分布式系统的设计目标"><a href="#分布式系统的设计目标" class="headerlink" title="分布式系统的设计目标"></a>分布式系统的设计目标</h2><p>资源可访问</p>
 <p>透明性：用户无法看到细节</p>
 <p>开放性：定义良好的接口</p>
 <p>可扩展性</p>
-
+<h1 id="体系结构"><a href="#体系结构" class="headerlink" title="体系结构"></a>体系结构</h1><h2 id="软件体系结构"><a href="#软件体系结构" class="headerlink" title="软件体系结构"></a>软件体系结构</h2><ul>
+<li>分层结构：主要用于客户端-服务器模型</li>
+<li><p>面向对象结构：主要用于分布式对象系统</p>
+</li>
+<li><p>基于事件的结构</p>
+</li>
+<li>共享数据空间结构</li>
+</ul>
+<h2 id="系统体系结构"><a href="#系统体系结构" class="headerlink" title="系统体系结构"></a>系统体系结构</h2><p>确定软件组件，这些组件交互以及它们部署位置就是软件体系结构的一个实例就是系统体系结构。</p>
+<h3 id="集中式体系结构"><a href="#集中式体系结构" class="headerlink" title="集中式体系结构"></a>集中式体系结构</h3><h4 id="应用分层"><a href="#应用分层" class="headerlink" title="应用分层"></a>应用分层</h4><p>传统的三层视图：</p>
+<ul>
+<li>用户接口层</li>
+<li>应用处理层</li>
+<li><p>数据层</p>
+<h3 id="非集中式体系结构"><a href="#非集中式体系结构" class="headerlink" title="非集中式体系结构"></a>非集中式体系结构</h3></li>
+<li><p>垂直分布：系统逻辑分层，不同层次分布在不同机器上</p>
+</li>
+<li>水平分布：客户端或服务器在物理上分成逻辑上相等的几个部分，每个部分相对独立，且分布在不同机器上</li>
+<li>点对点分布：水平分布，构成点对点的系统的进程完全相同（既是客户端又是服务器）</li>
+</ul>
+<h4 id="p2p"><a href="#p2p" class="headerlink" title="p2p"></a>p2p</h4><ul>
+<li>结构化p2p：将节点组织在一个特定结构的覆盖网络中，如环形结构</li>
+<li>非结构的p2p：每个节点维护一个动态随机的邻接表</li>
+</ul>
+<h1 id="分布式中的进程和虚拟化"><a href="#分布式中的进程和虚拟化" class="headerlink" title="分布式中的进程和虚拟化"></a>分布式中的进程和虚拟化</h1><h2 id="分布式线程"><a href="#分布式线程" class="headerlink" title="分布式线程"></a>分布式线程</h2><h3 id="在客户端使用多线程"><a href="#在客户端使用多线程" class="headerlink" title="在客户端使用多线程"></a>在客户端使用多线程</h3><ul>
+<li>多线程的Web客户端<ul>
+<li>隐藏了网络延迟</li>
+</ul>
+</li>
+</ul>
+<h3 id="多线程服务器"><a href="#多线程服务器" class="headerlink" title="多线程服务器"></a>多线程服务器</h3><ul>
+<li>提高性能：并行响应请求隐藏网络延迟</li>
+<li>更好的结构：代码数量较少，容易理解</li>
+</ul>
+<h2 id="虚拟化"><a href="#虚拟化" class="headerlink" title="虚拟化"></a>虚拟化</h2>
     </div>
 
     
@@ -303,7 +340,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">分布式系统简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F%E5%AE%9A%E4%B9%89"><span class="nav-number">1.1.</span> <span class="nav-text">分布式系统定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F%E7%9A%84%E8%AE%BE%E8%AE%A1%E7%9B%AE%E6%A0%87"><span class="nav-number">1.2.</span> <span class="nav-text">分布式系统的设计目标</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">分布式系统简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F%E5%AE%9A%E4%B9%89"><span class="nav-number">1.1.</span> <span class="nav-text">分布式系统定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F%E7%9A%84%E8%AE%BE%E8%AE%A1%E7%9B%AE%E6%A0%87"><span class="nav-number">1.2.</span> <span class="nav-text">分布式系统的设计目标</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84"><span class="nav-number">2.</span> <span class="nav-text">体系结构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BD%AF%E4%BB%B6%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84"><span class="nav-number">2.1.</span> <span class="nav-text">软件体系结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84"><span class="nav-number">2.2.</span> <span class="nav-text">系统体系结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9B%86%E4%B8%AD%E5%BC%8F%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84"><span class="nav-number">2.2.1.</span> <span class="nav-text">集中式体系结构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BA%94%E7%94%A8%E5%88%86%E5%B1%82"><span class="nav-number">2.2.1.1.</span> <span class="nav-text">应用分层</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%9E%E9%9B%86%E4%B8%AD%E5%BC%8F%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84"><span class="nav-number">2.2.2.</span> <span class="nav-text">非集中式体系结构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#p2p"><span class="nav-number">2.2.2.1.</span> <span class="nav-text">p2p</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%AD%E7%9A%84%E8%BF%9B%E7%A8%8B%E5%92%8C%E8%99%9A%E6%8B%9F%E5%8C%96"><span class="nav-number">3.</span> <span class="nav-text">分布式中的进程和虚拟化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E7%BA%BF%E7%A8%8B"><span class="nav-number">3.1.</span> <span class="nav-text">分布式线程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%BD%BF%E7%94%A8%E5%A4%9A%E7%BA%BF%E7%A8%8B"><span class="nav-number">3.1.1.</span> <span class="nav-text">在客户端使用多线程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-number">3.1.2.</span> <span class="nav-text">多线程服务器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%99%9A%E6%8B%9F%E5%8C%96"><span class="nav-number">3.2.</span> <span class="nav-text">虚拟化</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -317,7 +354,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-count">18</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
