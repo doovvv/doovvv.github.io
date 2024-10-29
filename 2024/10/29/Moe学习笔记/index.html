@@ -29,15 +29,16 @@
 <meta property="og:site_name" content="doovvv">
 <meta property="og:description" content="Moe learning notes">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://pic1.zhimg.com/v2-ec9107c17d7532b6a53be30fd84dbffc_r.jpg">
 <meta property="og:image" content="http://example.com/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241029130547599.png">
 <meta property="og:image" content="http://example.com/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241029153236841.png">
 <meta property="og:image" content="http://example.com/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241029154018575.png">
 <meta property="og:image" content="http://example.com/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241029155033543.png">
 <meta property="article:published_time" content="2024-10-29T04:25:49.000Z">
-<meta property="article:modified_time" content="2024-10-29T08:13:26.381Z">
+<meta property="article:modified_time" content="2024-10-29T08:51:01.688Z">
 <meta property="article:author" content="doovvv">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241029130547599.png">
+<meta name="twitter:image" content="https://pic1.zhimg.com/v2-ec9107c17d7532b6a53be30fd84dbffc_r.jpg">
 
 <link rel="canonical" href="http://example.com/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
 
@@ -187,7 +188,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2024-10-29 12:25:49 / Modified: 16:13:26" itemprop="dateCreated datePublished" datetime="2024-10-29T12:25:49+08:00">2024-10-29</time>
+              <time title="Created: 2024-10-29 12:25:49 / Modified: 16:51:01" itemprop="dateCreated datePublished" datetime="2024-10-29T12:25:49+08:00">2024-10-29</time>
             </span>
 
           
@@ -218,6 +219,20 @@
         <p>Moe learning notes</p>
 <span id="more"></span>
 <h1 id="前置知识">前置知识</h1>
+<h2 id="知识蒸馏kd">知识蒸馏KD</h2>
+<p>知识蒸馏就是把一个大的教师模型的知识萃取出来，把他浓缩到一个小的学生模型</p>
+<figure>
+<img src="https://pic1.zhimg.com/v2-ec9107c17d7532b6a53be30fd84dbffc_r.jpg" alt="img">
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
+<h3 id="离线蒸馏">离线蒸馏</h3>
+<p>离线蒸馏方式即为传统的知识蒸馏，如上图（a）。用户需要在已知数据集上面提前训练好一个teacher模型，然后在对student模型进行训练的时候，利用所获取的teacher模型进行监督训练来达到蒸馏的目的，而且这个teacher的训练精度要比student模型精度要高，差值越大，蒸馏效果也就越明显。一般来讲，teacher的模型参数在蒸馏训练的过程中保持不变，达到训练student模型的目的。蒸馏的损失函数distillation
+loss计算teacher和student之前输出预测值的差别，和student的loss加在一起作为整个训练loss，来进行梯度更新，最终得到一个更高性能和精度的student模型。</p>
+<h3 id="半监督蒸馏">半监督蒸馏</h3>
+<p>半监督方式的蒸馏利用了teacher模型的预测信息作为标签，来对student网络进行监督学习，如上图（b）。那么不同于传统离线蒸馏的方式，在对student模型训练之前，先输入部分的未标记的数据，利用teacher网络输出标签作为监督信息再输入到student网络中，来完成蒸馏过程，这样就可以使用更少标注量的数据集，达到提升模型精度的目的。</p>
+<h3 id="自监督蒸馏">自监督蒸馏</h3>
+<p>自监督蒸馏相比于传统的离线蒸馏的方式是不需要提前训练一个teacher网络模型，而是student网络本身的训练完成一个蒸馏过程，如上图（c）。具体实现方式
+有多种，例如先开始训练student模型，在整个训练过程的最后几个epoch的时候，利用前面训练的student作为监督模型，在剩下的epoch中，对模型进行蒸馏。这样做的好处是不需要提前训练好teacher模型，就可以变训练边蒸馏，节省整个蒸馏过程的训练时间。</p>
 <h2 id="speculative-decoding">Speculative Decoding</h2>
 <h4 id="动机">动机</h4>
 <p>大型语言模型（LLM）的推理通常需要使用自回归采样。它们的推理过程相当缓慢，需要逐个token地进行串行解码。因此，大型模型的推理过程往往受制于访存速度，生成每个标记都需要将所有参数从存储单元传输到计算单元，因此内存访问带宽成为严重的瓶颈。</p>
@@ -230,7 +245,7 @@
 <li>使用大、小模型logits结果做比对，如果发现某个token小模型生成的不好，重新采样这个token。重复步骤1。</li>
 <li>如果小模型生成结果都满意，则用大模型采样下一个token。重复步骤1。</li>
 </ol>
-<p>第2步，将γ个tokens和前缀拼成一起作为大模型输入，和自回归相比，尽管计算量一样，但是γ个tokens可以同时参与计算，<strong>计算访存比显著提升</strong>。
+<p>第2步，将γ个tokens和前缀拼成一起作为大模型输入，和自回归相比，尽管计算量一样，但是γ个tokens可以同时参与计算，<strong>计算访存比显著提升</strong>。<br>
 # 论文</p>
 <h2 id="sida">SIDA</h2>
 <h4 id="介绍">介绍</h4>
@@ -260,6 +275,7 @@ layer只有一小部分专家被激活。但是却占用了大量的gpu memory</
 <h4 id="sida-1">SIDA</h4>
 <p>由interfence thread和hash build
 thread（预测句子需要卸载的expert）组成，并行进行，并且预测比推理要快，所以不会带来延迟</p>
+<hr>
 
     </div>
 
@@ -355,7 +371,7 @@ thread（预测句子需要卸载的expert）组成，并行进行，并且预�
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86"><span class="nav-number">1.</span> <span class="nav-text">前置知识</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#speculative-decoding"><span class="nav-number">1.1.</span> <span class="nav-text">Speculative Decoding</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8A%A8%E6%9C%BA"><span class="nav-number">1.1.0.1.</span> <span class="nav-text">动机</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%87%E7%A8%8B"><span class="nav-number">1.1.0.2.</span> <span class="nav-text">过程</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sida"><span class="nav-number">1.2.</span> <span class="nav-text">SIDA</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.2.0.1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%83%8C%E6%99%AF%E5%92%8C%E5%8A%A8%E6%9C%BA"><span class="nav-number">1.2.0.2.</span> <span class="nav-text">背景和动机</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#sida-1"><span class="nav-number">1.2.0.3.</span> <span class="nav-text">SIDA</span></a></li></ol></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86"><span class="nav-number">1.</span> <span class="nav-text">前置知识</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9F%A5%E8%AF%86%E8%92%B8%E9%A6%8Fkd"><span class="nav-number">1.1.</span> <span class="nav-text">知识蒸馏KD</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A6%BB%E7%BA%BF%E8%92%B8%E9%A6%8F"><span class="nav-number">1.1.1.</span> <span class="nav-text">离线蒸馏</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%8A%E7%9B%91%E7%9D%A3%E8%92%B8%E9%A6%8F"><span class="nav-number">1.1.2.</span> <span class="nav-text">半监督蒸馏</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E7%9B%91%E7%9D%A3%E8%92%B8%E9%A6%8F"><span class="nav-number">1.1.3.</span> <span class="nav-text">自监督蒸馏</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#speculative-decoding"><span class="nav-number">1.2.</span> <span class="nav-text">Speculative Decoding</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8A%A8%E6%9C%BA"><span class="nav-number">1.2.0.1.</span> <span class="nav-text">动机</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%87%E7%A8%8B"><span class="nav-number">1.2.0.2.</span> <span class="nav-text">过程</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sida"><span class="nav-number">1.3.</span> <span class="nav-text">SIDA</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.3.0.1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%83%8C%E6%99%AF%E5%92%8C%E5%8A%A8%E6%9C%BA"><span class="nav-number">1.3.0.2.</span> <span class="nav-text">背景和动机</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#sida-1"><span class="nav-number">1.3.0.3.</span> <span class="nav-text">SIDA</span></a></li></ol></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
