@@ -31,6 +31,10 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://pic3.zhimg.com/v2-0a586723aa7eb9e4cdbd38d564ef0320_r.jpg">
 <meta property="og:image" content="https://pic1.zhimg.com/v2-ec9107c17d7532b6a53be30fd84dbffc_r.jpg">
+<meta property="og:image" content="http://example.com/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241103190659629.png">
+<meta property="og:image" content="http://example.com/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241103191252385.png">
+<meta property="og:image" content="http://example.com/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241103192353986.png">
+<meta property="og:image" content="http://example.com/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241103192651213.png">
 <meta property="og:image" content="http://example.com/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241029130547599.png">
 <meta property="og:image" content="http://example.com/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241029153236841.png">
 <meta property="og:image" content="http://example.com/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241029154018575.png">
@@ -38,8 +42,9 @@
 <meta property="og:image" content="http://example.com/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241031002920772.png">
 <meta property="og:image" content="http://example.com/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241030202520650.png">
 <meta property="og:image" content="http://example.com/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241030203251366.png">
+<meta property="og:image" content="http://example.com/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241031143829214.png">
 <meta property="article:published_time" content="2024-10-29T04:25:49.000Z">
-<meta property="article:modified_time" content="2024-10-30T16:29:23.539Z">
+<meta property="article:modified_time" content="2024-11-03T11:41:52.379Z">
 <meta property="article:author" content="doovvv">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://pic3.zhimg.com/v2-0a586723aa7eb9e4cdbd38d564ef0320_r.jpg">
@@ -198,7 +203,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2024-10-31 00:29:23" itemprop="dateModified" datetime="2024-10-31T00:29:23+08:00">2024-10-31</time>
+                <time title="Modified: 2024-11-03 19:41:52" itemprop="dateModified" datetime="2024-11-03T19:41:52+08:00">2024-11-03</time>
               </span>
 
           
@@ -270,8 +275,56 @@ loss计算teacher和student之前输出预测值的差别，和student的loss加
 <li>使用大、小模型logits结果做比对，如果发现某个token小模型生成的不好，重新采样这个token。重复步骤1。</li>
 <li>如果小模型生成结果都满意，则用大模型采样下一个token。重复步骤1。</li>
 </ol>
-<p>第2步，将γ个tokens和前缀拼成一起作为大模型输入，和自回归相比，尽管计算量一样，但是γ个tokens可以同时参与计算，<strong>计算访存比显著提升</strong>。<br>
-# 论文</p>
+<p>第2步，将γ个tokens和前缀拼成一起作为大模型输入，和自回归相比，尽管计算量一样，但是γ个tokens可以同时参与计算，<strong>计算访存比显著提升</strong>。</p>
+<h1 id="模型">模型</h1>
+<h2 id="mistral">mistral</h2>
+<ol type="1">
+<li><p>该模型采用了分组查询注意力(GQA)，GQA显著加快了推理速度，还减少了解码期间的内存需求，允许更高的批处理大小，从而提高吞吐量</p>
+<figure>
+<img src="/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241103190659629.png" alt="image-20241103190659629">
+<figcaption aria-hidden="true">image-20241103190659629</figcaption>
+</figure>
+<ul>
+<li>MHA：kv缓存高</li>
+<li>MQA：只使用一个键值头，虽大大加快了解码器推断的速度，但MQA可能导致质量下降</li>
+<li>MQA：它通过折中(多于一个且少于查询头的数量，比如4个)键值头的数量，使得经过强化训练的GQA以与MQA相当的速度达到接近多头注意力的质量，即速度快
+质量高</li>
+</ul></li>
+<li><p>滑动窗口注意力：原始attention的操作次数与序列长度成平方关系。于是采用滑动窗口注意力，每个token只计算它前面的window
+size个token。如下图所示</p>
+<figure>
+<img src="/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241103191252385.png" alt="image-20241103191252385">
+<figcaption aria-hidden="true">image-20241103191252385</figcaption>
+</figure>
+<ul>
+<li>每个token最多可以关注来自上一层的W个token(上图中，W =
+3)。请注意，滑动窗口之外的token仍然影响下一个单词预测</li>
+<li>在每个注意力层，信息可以向前移动W个token。因此，在k层注意力之后，信息最多可以向前移动k个×W个token（所以滑动窗口外的token仍然有影响）</li>
+</ul></li>
+<li><p>滚动缓冲区：适配于滑动窗口注意力</p>
+<ul>
+<li>缓存的大小是固定的W，时间步长i的键和值存储在缓存的位置i mod
+W中。因此，当位置i大于W时，缓存中过去的值就会被覆盖，缓存的大小就会停止增加。</li>
+</ul></li>
+<li><p>预填充与分块：利用prompt提前缓存k，v</p>
+<ul>
+<li>如果prompt非常大，可以把它分成更小的块，用每个块预填充缓存。为此，可以选择窗口大小作为分块大小。因此，对于每个块，需要计算缓存和块上的注意力</li>
+</ul>
+<ol type="1">
+<li><figure>
+<img src="/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241103192353986.png" alt="image-20241103192353986">
+<figcaption aria-hidden="true">image-20241103192353986</figcaption>
+</figure></li>
+</ol></li>
+</ol>
+<h2 id="mixtral-8x7b">mixtral 8x7B</h2>
+<p>decoder only的moe模型</p>
+<p>每层结构如下：</p>
+<figure>
+<img src="/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241103192651213.png" alt="image-20241103192651213">
+<figcaption aria-hidden="true">image-20241103192651213</figcaption>
+</figure>
+<h1 id="论文">论文</h1>
 <h2 id="sida">SIDA</h2>
 <h3 id="介绍">介绍</h3>
 <p>如下图transformer中的moe架构，在推理中每个moe
@@ -326,6 +379,27 @@ embedding的存在，每个token的专家的激活不仅与当前token有关系�
 <h3 id="design-of-the-hash-function">Design of the hash function</h3>
 <p>不是很清楚细节</p>
 <p>两层LSTM，再加一层全连接用来压缩维度，再加一个注意力层，之后用SparseMax激活，SparseMax能为多个位置分配0概率（区别于Softmax）</p>
+<h2 id="decoder-only-or-encoder-decoder">Decoder-Only or
+Encoder-Decoder?</h2>
+<h3 id="introduction">introduction</h3>
+<p>下图展示了decoder-only与encoder-decoder架构的区别</p>
+<figure>
+<img src="/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241031143829214.png" alt="image-20241031143829214">
+<figcaption aria-hidden="true">image-20241031143829214</figcaption>
+</figure>
+<p><strong>decoder-only Language Model (LM)</strong>: GPT2 ( Radford et
+al., 2019), GPT3 ( Brown et al., 2020), InstructGPT/ChatGPT ( Ouyang et
+al., 2022), Palm ( Chowdhery et al., 2022), OPT ( Zhang et al., 2022),
+Bloom ( Scao et al., 2022), Galactica ( Taylor et al., 2022), Llama (
+Touvron et al., 2023))</p>
+<p>decoder-only有许多优势：</p>
+<ul>
+<li>模型大小显著下降</li>
+<li>可以预训练未标记的文本数据（？）
+<ul>
+<li>参数共享，layer-wise coordination（？）</li>
+</ul></li>
+</ul>
 <hr>
 
     </div>
@@ -422,7 +496,8 @@ embedding的存在，每个token的专家的激活不仅与当前token有关系�
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86"><span class="nav-number">1.</span> <span class="nav-text">前置知识</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#sparse-attention"><span class="nav-number">1.1.</span> <span class="nav-text">Sparse Attention</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A8%80%E7%96%8F%E6%B3%A8%E6%84%8F%E5%8A%9B%E7%9A%84%E5%88%86%E7%B1%BB"><span class="nav-number">1.1.1.</span> <span class="nav-text">稀疏注意力的分类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E4%BD%8D%E7%BD%AE%E7%9A%84%E7%A8%80%E7%96%8F%E6%B3%A8%E6%84%8F%E5%8A%9B"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">基于位置的稀疏注意力</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9F%A5%E8%AF%86%E8%92%B8%E9%A6%8Fkd"><span class="nav-number">1.2.</span> <span class="nav-text">知识蒸馏KD</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A6%BB%E7%BA%BF%E8%92%B8%E9%A6%8F"><span class="nav-number">1.2.1.</span> <span class="nav-text">离线蒸馏</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%8A%E7%9B%91%E7%9D%A3%E8%92%B8%E9%A6%8F"><span class="nav-number">1.2.2.</span> <span class="nav-text">半监督蒸馏</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E7%9B%91%E7%9D%A3%E8%92%B8%E9%A6%8F"><span class="nav-number">1.2.3.</span> <span class="nav-text">自监督蒸馏</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#speculative-decoding"><span class="nav-number">1.3.</span> <span class="nav-text">Speculative Decoding</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8A%A8%E6%9C%BA"><span class="nav-number">1.3.0.1.</span> <span class="nav-text">动机</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%87%E7%A8%8B"><span class="nav-number">1.3.0.2.</span> <span class="nav-text">过程</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sida"><span class="nav-number">1.4.</span> <span class="nav-text">SIDA</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.4.1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%83%8C%E6%99%AF%E5%92%8C%E5%8A%A8%E6%9C%BA"><span class="nav-number">1.4.2.</span> <span class="nav-text">背景和动机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sida-1"><span class="nav-number">1.4.3.</span> <span class="nav-text">SIDA</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lstm-with-sparse-attention"><span class="nav-number">1.4.4.</span> <span class="nav-text">LSTM with sparse attention</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#design-of-the-hash-function"><span class="nav-number">1.4.5.</span> <span class="nav-text">Design of the hash function</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86"><span class="nav-number">1.</span> <span class="nav-text">前置知识</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#sparse-attention"><span class="nav-number">1.1.</span> <span class="nav-text">Sparse Attention</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A8%80%E7%96%8F%E6%B3%A8%E6%84%8F%E5%8A%9B%E7%9A%84%E5%88%86%E7%B1%BB"><span class="nav-number">1.1.1.</span> <span class="nav-text">稀疏注意力的分类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E4%BD%8D%E7%BD%AE%E7%9A%84%E7%A8%80%E7%96%8F%E6%B3%A8%E6%84%8F%E5%8A%9B"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">基于位置的稀疏注意力</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9F%A5%E8%AF%86%E8%92%B8%E9%A6%8Fkd"><span class="nav-number">1.2.</span> <span class="nav-text">知识蒸馏KD</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A6%BB%E7%BA%BF%E8%92%B8%E9%A6%8F"><span class="nav-number">1.2.1.</span> <span class="nav-text">离线蒸馏</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%8A%E7%9B%91%E7%9D%A3%E8%92%B8%E9%A6%8F"><span class="nav-number">1.2.2.</span> <span class="nav-text">半监督蒸馏</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E7%9B%91%E7%9D%A3%E8%92%B8%E9%A6%8F"><span class="nav-number">1.2.3.</span> <span class="nav-text">自监督蒸馏</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#speculative-decoding"><span class="nav-number">1.3.</span> <span class="nav-text">Speculative Decoding</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8A%A8%E6%9C%BA"><span class="nav-number">1.3.0.1.</span> <span class="nav-text">动机</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%87%E7%A8%8B"><span class="nav-number">1.3.0.2.</span> <span class="nav-text">过程</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B"><span class="nav-number">2.</span> <span class="nav-text">模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#mistral"><span class="nav-number">2.1.</span> <span class="nav-text">mistral</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mixtral-8x7b"><span class="nav-number">2.2.</span> <span class="nav-text">mixtral 8x7B</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%BA%E6%96%87"><span class="nav-number">3.</span> <span class="nav-text">论文</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#sida"><span class="nav-number">3.1.</span> <span class="nav-text">SIDA</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%8B%E7%BB%8D"><span class="nav-number">3.1.1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%83%8C%E6%99%AF%E5%92%8C%E5%8A%A8%E6%9C%BA"><span class="nav-number">3.1.2.</span> <span class="nav-text">背景和动机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sida-1"><span class="nav-number">3.1.3.</span> <span class="nav-text">SIDA</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lstm-with-sparse-attention"><span class="nav-number">3.1.4.</span> <span class="nav-text">LSTM with sparse attention</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#design-of-the-hash-function"><span class="nav-number">3.1.5.</span> <span class="nav-text">Design of the hash function</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#decoder-only-or-encoder-decoder"><span class="nav-number">3.2.</span> <span class="nav-text">Decoder-Only or
+Encoder-Decoder?</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#introduction"><span class="nav-number">3.2.1.</span> <span class="nav-text">introduction</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
