@@ -31,6 +31,9 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://pic3.zhimg.com/v2-0a586723aa7eb9e4cdbd38d564ef0320_r.jpg">
 <meta property="og:image" content="https://pic1.zhimg.com/v2-ec9107c17d7532b6a53be30fd84dbffc_r.jpg">
+<meta property="og:image" content="http://example.com/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241111174509779.png">
+<meta property="og:image" content="http://example.com/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241111181233743.png">
+<meta property="og:image" content="http://example.com/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241112151831454.png">
 <meta property="og:image" content="http://example.com/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241103190659629.png">
 <meta property="og:image" content="http://example.com/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241103191252385.png">
 <meta property="og:image" content="http://example.com/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241103192353986.png">
@@ -43,8 +46,16 @@
 <meta property="og:image" content="http://example.com/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241030202520650.png">
 <meta property="og:image" content="http://example.com/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241030203251366.png">
 <meta property="og:image" content="http://example.com/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241031143829214.png">
+<meta property="og:image" content="http://example.com/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241112173314358.png">
+<meta property="og:image" content="http://example.com/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241121165620816.png">
+<meta property="og:image" content="http://example.com/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241121170755511.png">
+<meta property="og:image" content="http://example.com/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241124193230757.png">
+<meta property="og:image" content="http://example.com/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241124201034907.png">
+<meta property="og:image" content="http://example.com/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241124202445804.png">
+<meta property="og:image" content="http://example.com/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241124203618732.png">
+<meta property="og:image" content="http://example.com/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241124205641419.png">
 <meta property="article:published_time" content="2024-10-29T04:25:49.000Z">
-<meta property="article:modified_time" content="2024-11-03T11:41:52.379Z">
+<meta property="article:modified_time" content="2024-12-02T00:07:14.837Z">
 <meta property="article:author" content="doovvv">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://pic3.zhimg.com/v2-0a586723aa7eb9e4cdbd38d564ef0320_r.jpg">
@@ -203,7 +214,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2024-11-03 19:41:52" itemprop="dateModified" datetime="2024-11-03T19:41:52+08:00">2024-11-03</time>
+                <time title="Modified: 2024-12-02 08:07:14" itemprop="dateModified" datetime="2024-12-02T08:07:14+08:00">2024-12-02</time>
               </span>
 
           
@@ -234,6 +245,14 @@
         <p>Moe learning notes</p>
 <span id="more"></span>
 <h1 id="前置知识">前置知识</h1>
+<h2 id="激活函数">激活函数</h2>
+<p>使用激活函数能够给神经元引入非线性因素，使得神经网络可以任意逼近任何非线性函数，使深层神经网络表达能力更加强大，这样神经网络就可以应用到众多的非线性模型中。</p>
+<h2 id="normalization">Normalization</h2>
+<p>就是把输入数据X，在输送给神经元之前先对其进行平移和伸缩变换，将X的分布规范化成在固定区间范围的标准分布。</p>
+<p>Normalization
+的作用很明显，把数据拉回标准正态分布，因为神经网络的Block大部分都是矩阵运算，一个向量经过矩阵运算后值会越来越大，为了网络的稳定性，我们需要及时把值拉回正态分布。</p>
+<h3 id="bn-vs-ln">BN vs LN</h3>
+<p>BatchNorm是对一个batch-size样本内的每个特征做归一化，LayerNorm是对每个样本的所有特征做归一化。</p>
 <h2 id="sparse-attention">Sparse Attention</h2>
 <p>稀疏注意力机制的核心思想是<strong>在自注意力计算中引入稀疏性</strong>，即不是让序列中的每个位置都与其他所有位置进行注意力计算，而是<strong>仅选择部分位置进行计算</strong>。这种选择可以基于不同的策略，例如<strong>固定的模式</strong>（如局部窗口）、<strong>基于内容的选择</strong>（如与当前位置最相关的其他位置），或者是<strong>通过学习得到的模式</strong>。通过这种方式，稀疏注意力机制减少了计算量和内存占用，使得模型能够更高效地处理长序列。</p>
 <h3 id="稀疏注意力的分类">稀疏注意力的分类</h3>
@@ -277,6 +296,30 @@ loss计算teacher和student之前输出预测值的差别，和student的loss加
 </ol>
 <p>第2步，将γ个tokens和前缀拼成一起作为大模型输入，和自回归相比，尽管计算量一样，但是γ个tokens可以同时参与计算，<strong>计算访存比显著提升</strong>。</p>
 <h1 id="模型">模型</h1>
+<h2 id="llama1">llama1</h2>
+<h3 id="pre-normalization"><strong>Pre-normalization</strong></h3>
+<p>为了提高训练的稳定性，对每个transformer层的输入进行归一化，而不是输出进行归一化。</p>
+<p>使用RMS norm归一化函数，公式如下：</p>
+<figure>
+<img src="/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241111174509779.png" alt="image-20241111174509779">
+<figcaption aria-hidden="true">image-20241111174509779</figcaption>
+</figure>
+<p>RMS Norm 的作者认为这种模式在简化了Layer Norm
+的计算（平移并不会影响分布，所以去除平移），可以在减少约 7%∼64%
+的计算时间</p>
+<h3 id="silu激活函数">Silu激活函数</h3>
+<figure>
+<img src="/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241111181233743.png" alt="image-20241111181233743">
+<figcaption aria-hidden="true">image-20241111181233743</figcaption>
+</figure>
+<h3 id="旋转编码">旋转编码</h3>
+<p>外推性：RoPE的旋转编码方式没有明确的最大长度限制，因此可以在推理阶段支持更长的输入文本。相比之下，传统的正弦位置编码通常需要在训练时设置最大长度，超出这一长度的输入就可能无法编码。</p>
+<figure>
+<img src="/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241112151831454.png" alt="image-20241112151831454">
+<figcaption aria-hidden="true">image-20241112151831454</figcaption>
+</figure>
+<h2 id="llama2">llama2</h2>
+<p>用来GQA和mistral的相同</p>
 <h2 id="mistral">mistral</h2>
 <ol type="1">
 <li><p>该模型采用了分组查询注意力(GQA)，GQA显著加快了推理速度，还减少了解码期间的内存需求，允许更高的批处理大小，从而提高吞吐量</p>
@@ -400,7 +443,116 @@ Touvron et al., 2023))</p>
 <li>参数共享，layer-wise coordination（？）</li>
 </ul></li>
 </ul>
-<hr>
+<h2 id="cachegen">cachegen</h2>
+<p>这篇论文主要是说通过压缩KV
+cache，从而减少长文本的prefill阶段的网络延迟。</p>
+<p>其中有这样一个insight：<strong>Token-wise locality</strong></p>
+<ul>
+<li>是什么：在同一层，相邻的符元具有更相似的 K/V
+张量值，而相距较远的符元则具有更不相同的 K/V 张量值。</li>
+<li>验证：从下图可以看出来每一对连续token的同一层的KV
+tensor的差值(delta)是更集中在0部分。说明连续token的K/V值相近。<img src="/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241112173314358.png" alt="image-20241112173314358"></li>
+<li>解释：作者的解释是说Transformer的子注意力机制使得每一个token的KV
+tensor基于先前token的KV
+tensor(感觉缺乏说服力，self-attention没有体现出连续性)</li>
+<li>作者使用这个现象进行编码的压缩。</li>
+</ul>
+<h2 id="hobbit">Hobbit</h2>
+<h3 id="introduction-1">introduction</h3>
+<p>现有的expert-offloading存在的一些问题：</p>
+<ul>
+<li>不够灵活和过于激进：
+<ul>
+<li>edgemoe的专家卸载根据特定的数据集分析来确定最佳位宽，这会导致在不同环境中的灵活性不足，并可能影响准确性。</li>
+<li>AdapMoE 在发生cache miss的时候直接跳过专家，会导致准确性下降</li>
+</ul></li>
+<li>prefetch带来的收益有限：expert-loading的成本远大于专家计算的成本</li>
+<li>expert
+cache的管理不够有效：LFU，LRU虽然高于随机替换策略，但是未能考虑不同模型的独特特征。</li>
+</ul>
+<h3 id="motivation">motivation</h3>
+<ul>
+<li><p><strong>Expert loading dominates inference
+cost</strong>：专家加载的延迟占了推理过程中的大部分延迟，如下图。<img src="/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241121165620816.png" alt="image-20241121165620816"></p></li>
+<li><p><strong>Mixed precision expert preserves model
+accuracy.</strong>：采用动态门控的expert
+skip方式会导致模型性能的明显下降，但是对一些不太重要的expert进行低精度替换，模型的性能下降很少，但是可以大大加快推理速度。例如，用
+int4 版本替换 float16 专家可以在加载过程中实现高达 4 倍的速度提升。</p>
+<figure>
+<img src="/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241121170755511.png" alt="image-20241121170755511">
+<figcaption aria-hidden="true">image-20241121170755511</figcaption>
+</figure></li>
+</ul>
+<h3 id="hobbit-system">HOBBIT System</h3>
+<h4 id="token-level-dynamic-expert-loading"><strong>Token-level Dynamic
+Expert Loading</strong>：</h4>
+<p>可以用|G(x)E(x)|来表示专家的重要性，但是在未load专家的时候不能得到E(X)，于是用|G(x)|代替。作者做实验验证了两者具有很强的相关性。</p>
+<p><strong>Expert loader design.</strong>：</p>
+<p>作者用下面这个公式计算得分，得分越高则重要性越低：</p>
+<figure>
+<img src="/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241124193230757.png" alt="image-20241124193230757">
+<figcaption aria-hidden="true">image-20241124193230757</figcaption>
+</figure>
+<p>作者设置了两个阈值T1，T2，若得分小于T1，则取高精度expert，若得分小于T2，大于T1则取低精度expert，否则跳过。</p>
+<h4 id="layer-level-adaptive-expert-prefetching">Layer-level Adaptive
+Expert Prefetching</h4>
+<p><strong>Similarity between layers</strong>：</p>
+<p>由于LLM中的残差结构，连续层之间具有很强的相似性。作者做实验验证了层之间的余弦相似度。因此可以用当前层的激活来预测后续层的输入，实验验证发现top-1expert的预测精度很高，对于下一层的准确度为96%。</p>
+<p>将所有门控的权重堆叠在一起实现</p>
+<p>prefetch不同精度的expert，这可以减少由cache
+miss带来的损失，如下图：</p>
+<figure>
+<img src="/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241124201034907.png" alt="image-20241124201034907">
+<figcaption aria-hidden="true">image-20241124201034907</figcaption>
+</figure>
+<h4 id="sequence-level-multidimensional-expert-caching">Sequence-level
+Multidimensional Expert Caching</h4>
+<p>LRU：在mixtral8x7b中，当前token的top-1专家在下一个token的处理过程中也被用到的概率非常高。</p>
+<p>LFU：不同专家对不同序列的偏好有所不同</p>
+<p>FLD：相近层的专家更有可能被使用</p>
+<p>由于作者使用的是混合精度的expert，因此不能用单纯的缓存命中率来评估替换策略，因为不同精度的专家会产生不同的惩罚。如果专家未命中，则加载其高精度版本的成本为
+C，而低精度版本的成本为 Bl/Bh*⁢C，其中 Bl 和 Bh
+分别是低精度版本和高精度版本的位宽。</p>
+<p>作者还提出了LHU：与LFU相似，但是LHU考虑的是高精度expert。一个expert被命中的次数多，但是可能都是命中低精度expert。</p>
+<p>利用上述四种策略的优势，我们通过为每种策略分配权重并将其相加来确定每个专家的最终优先级。
+如下：</p>
+<figure>
+<img src="/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241124202445804.png" alt="image-20241124202445804">
+<figcaption aria-hidden="true">image-20241124202445804</figcaption>
+</figure>
+<p>四个权重是用户设置的超参数，通过最小化校准数据集上的混合精度专家缓存未命中惩罚来确定合适的数值。</p>
+<p>缓存管理器为高精度专家和低精度专家维护单独的缓存，如下图所示：</p>
+<figure>
+<img src="/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241124203618732.png" alt="image-20241124203618732">
+<figcaption aria-hidden="true">image-20241124203618732</figcaption>
+</figure>
+<h3 id="system-implementation">System Implementation</h3>
+<p>GPU上有部分专家权重和所有的非专家权重，CPU上有所有的专家权重</p>
+<p>作者实现了两种实现方式：</p>
+<ul>
+<li><p>以GPU为中心：当专家不在GPU中时，通过scheduler
+thread去CPU中复制专家权重</p></li>
+<li><p>CPU-GPU协同：当专家不在GPU时，把input发送到CPU，由CPU计算完成后再发送计算结果回来</p>
+<p>如下图：</p></li>
+</ul>
+<figure>
+<img src="/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241124205641419.png" alt="image-20241124205641419">
+<figcaption aria-hidden="true">image-20241124205641419</figcaption>
+</figure>
+<h2 id="hexa-moe">HEXA-moe</h2>
+<h3 id="introduction-2">introduction</h3>
+<p>moe框架与密集模型有一些不同之处：</p>
+<ul>
+<li>Moe的规模更大，同一层中的不同专家需要放到不同的设备上进行分布式计算，即专家并行。</li>
+<li>许校准每个专家的工作量来使用GeMM</li>
+<li>每个token可以激活任意一个或者多个专家，因此在进入专家之前和之后都需要一次all-to-all通信。</li>
+</ul>
+<p>这会导致一些问题：</p>
+<ul>
+<li>调度和组合操作会导致token的padding和丢弃，导致冗余计算和性能损失</li>
+<li>专家并行依赖all-to-all通信，需要同步，产生大量延迟</li>
+<li>专家并行主要部署在同构设备上，成本较高。然而由于moe层的动态负载，要实现异构设备的部署也很难。</li>
+</ul>
 
     </div>
 
@@ -496,8 +648,11 @@ Touvron et al., 2023))</p>
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86"><span class="nav-number">1.</span> <span class="nav-text">前置知识</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#sparse-attention"><span class="nav-number">1.1.</span> <span class="nav-text">Sparse Attention</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A8%80%E7%96%8F%E6%B3%A8%E6%84%8F%E5%8A%9B%E7%9A%84%E5%88%86%E7%B1%BB"><span class="nav-number">1.1.1.</span> <span class="nav-text">稀疏注意力的分类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E4%BD%8D%E7%BD%AE%E7%9A%84%E7%A8%80%E7%96%8F%E6%B3%A8%E6%84%8F%E5%8A%9B"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">基于位置的稀疏注意力</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9F%A5%E8%AF%86%E8%92%B8%E9%A6%8Fkd"><span class="nav-number">1.2.</span> <span class="nav-text">知识蒸馏KD</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A6%BB%E7%BA%BF%E8%92%B8%E9%A6%8F"><span class="nav-number">1.2.1.</span> <span class="nav-text">离线蒸馏</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%8A%E7%9B%91%E7%9D%A3%E8%92%B8%E9%A6%8F"><span class="nav-number">1.2.2.</span> <span class="nav-text">半监督蒸馏</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E7%9B%91%E7%9D%A3%E8%92%B8%E9%A6%8F"><span class="nav-number">1.2.3.</span> <span class="nav-text">自监督蒸馏</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#speculative-decoding"><span class="nav-number">1.3.</span> <span class="nav-text">Speculative Decoding</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8A%A8%E6%9C%BA"><span class="nav-number">1.3.0.1.</span> <span class="nav-text">动机</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%87%E7%A8%8B"><span class="nav-number">1.3.0.2.</span> <span class="nav-text">过程</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B"><span class="nav-number">2.</span> <span class="nav-text">模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#mistral"><span class="nav-number">2.1.</span> <span class="nav-text">mistral</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mixtral-8x7b"><span class="nav-number">2.2.</span> <span class="nav-text">mixtral 8x7B</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%BA%E6%96%87"><span class="nav-number">3.</span> <span class="nav-text">论文</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#sida"><span class="nav-number">3.1.</span> <span class="nav-text">SIDA</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%8B%E7%BB%8D"><span class="nav-number">3.1.1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%83%8C%E6%99%AF%E5%92%8C%E5%8A%A8%E6%9C%BA"><span class="nav-number">3.1.2.</span> <span class="nav-text">背景和动机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sida-1"><span class="nav-number">3.1.3.</span> <span class="nav-text">SIDA</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lstm-with-sparse-attention"><span class="nav-number">3.1.4.</span> <span class="nav-text">LSTM with sparse attention</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#design-of-the-hash-function"><span class="nav-number">3.1.5.</span> <span class="nav-text">Design of the hash function</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#decoder-only-or-encoder-decoder"><span class="nav-number">3.2.</span> <span class="nav-text">Decoder-Only or
-Encoder-Decoder?</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#introduction"><span class="nav-number">3.2.1.</span> <span class="nav-text">introduction</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86"><span class="nav-number">1.</span> <span class="nav-text">前置知识</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0"><span class="nav-number">1.1.</span> <span class="nav-text">激活函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#normalization"><span class="nav-number">1.2.</span> <span class="nav-text">Normalization</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#bn-vs-ln"><span class="nav-number">1.2.1.</span> <span class="nav-text">BN vs LN</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sparse-attention"><span class="nav-number">1.3.</span> <span class="nav-text">Sparse Attention</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A8%80%E7%96%8F%E6%B3%A8%E6%84%8F%E5%8A%9B%E7%9A%84%E5%88%86%E7%B1%BB"><span class="nav-number">1.3.1.</span> <span class="nav-text">稀疏注意力的分类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E4%BD%8D%E7%BD%AE%E7%9A%84%E7%A8%80%E7%96%8F%E6%B3%A8%E6%84%8F%E5%8A%9B"><span class="nav-number">1.3.1.1.</span> <span class="nav-text">基于位置的稀疏注意力</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9F%A5%E8%AF%86%E8%92%B8%E9%A6%8Fkd"><span class="nav-number">1.4.</span> <span class="nav-text">知识蒸馏KD</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A6%BB%E7%BA%BF%E8%92%B8%E9%A6%8F"><span class="nav-number">1.4.1.</span> <span class="nav-text">离线蒸馏</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%8A%E7%9B%91%E7%9D%A3%E8%92%B8%E9%A6%8F"><span class="nav-number">1.4.2.</span> <span class="nav-text">半监督蒸馏</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E7%9B%91%E7%9D%A3%E8%92%B8%E9%A6%8F"><span class="nav-number">1.4.3.</span> <span class="nav-text">自监督蒸馏</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#speculative-decoding"><span class="nav-number">1.5.</span> <span class="nav-text">Speculative Decoding</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8A%A8%E6%9C%BA"><span class="nav-number">1.5.0.1.</span> <span class="nav-text">动机</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%87%E7%A8%8B"><span class="nav-number">1.5.0.2.</span> <span class="nav-text">过程</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B"><span class="nav-number">2.</span> <span class="nav-text">模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#llama1"><span class="nav-number">2.1.</span> <span class="nav-text">llama1</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#pre-normalization"><span class="nav-number">2.1.1.</span> <span class="nav-text">Pre-normalization</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#silu%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0"><span class="nav-number">2.1.2.</span> <span class="nav-text">Silu激活函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%8B%E8%BD%AC%E7%BC%96%E7%A0%81"><span class="nav-number">2.1.3.</span> <span class="nav-text">旋转编码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#llama2"><span class="nav-number">2.2.</span> <span class="nav-text">llama2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mistral"><span class="nav-number">2.3.</span> <span class="nav-text">mistral</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mixtral-8x7b"><span class="nav-number">2.4.</span> <span class="nav-text">mixtral 8x7B</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%BA%E6%96%87"><span class="nav-number">3.</span> <span class="nav-text">论文</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#sida"><span class="nav-number">3.1.</span> <span class="nav-text">SIDA</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%8B%E7%BB%8D"><span class="nav-number">3.1.1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%83%8C%E6%99%AF%E5%92%8C%E5%8A%A8%E6%9C%BA"><span class="nav-number">3.1.2.</span> <span class="nav-text">背景和动机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sida-1"><span class="nav-number">3.1.3.</span> <span class="nav-text">SIDA</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lstm-with-sparse-attention"><span class="nav-number">3.1.4.</span> <span class="nav-text">LSTM with sparse attention</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#design-of-the-hash-function"><span class="nav-number">3.1.5.</span> <span class="nav-text">Design of the hash function</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#decoder-only-or-encoder-decoder"><span class="nav-number">3.2.</span> <span class="nav-text">Decoder-Only or
+Encoder-Decoder?</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#introduction"><span class="nav-number">3.2.1.</span> <span class="nav-text">introduction</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cachegen"><span class="nav-number">3.3.</span> <span class="nav-text">cachegen</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hobbit"><span class="nav-number">3.4.</span> <span class="nav-text">Hobbit</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#introduction-1"><span class="nav-number">3.4.1.</span> <span class="nav-text">introduction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#motivation"><span class="nav-number">3.4.2.</span> <span class="nav-text">motivation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hobbit-system"><span class="nav-number">3.4.3.</span> <span class="nav-text">HOBBIT System</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#token-level-dynamic-expert-loading"><span class="nav-number">3.4.3.1.</span> <span class="nav-text">Token-level Dynamic
+Expert Loading：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#layer-level-adaptive-expert-prefetching"><span class="nav-number">3.4.3.2.</span> <span class="nav-text">Layer-level Adaptive
+Expert Prefetching</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#sequence-level-multidimensional-expert-caching"><span class="nav-number">3.4.3.3.</span> <span class="nav-text">Sequence-level
+Multidimensional Expert Caching</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#system-implementation"><span class="nav-number">3.4.4.</span> <span class="nav-text">System Implementation</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hexa-moe"><span class="nav-number">3.5.</span> <span class="nav-text">HEXA-moe</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#introduction-2"><span class="nav-number">3.5.1.</span> <span class="nav-text">introduction</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
