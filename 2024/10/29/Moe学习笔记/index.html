@@ -55,7 +55,7 @@
 <meta property="og:image" content="http://example.com/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241124203618732.png">
 <meta property="og:image" content="http://example.com/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241124205641419.png">
 <meta property="article:published_time" content="2024-10-29T04:25:49.000Z">
-<meta property="article:modified_time" content="2024-12-02T00:07:14.837Z">
+<meta property="article:modified_time" content="2024-12-16T06:25:27.034Z">
 <meta property="article:author" content="doovvv">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://pic3.zhimg.com/v2-0a586723aa7eb9e4cdbd38d564ef0320_r.jpg">
@@ -214,7 +214,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2024-12-02 08:07:14" itemprop="dateModified" datetime="2024-12-02T08:07:14+08:00">2024-12-02</time>
+                <time title="Modified: 2024-12-16 14:25:27" itemprop="dateModified" datetime="2024-12-16T14:25:27+08:00">2024-12-16</time>
               </span>
 
           
@@ -553,6 +553,7 @@ thread去CPU中复制专家权重</p></li>
 <li>专家并行依赖all-to-all通信，需要同步，产生大量延迟</li>
 <li>专家并行主要部署在同构设备上，成本较高。然而由于moe层的动态负载，要实现异构设备的部署也很难。</li>
 </ul>
+<h1 id="specinfer">SpecInfer</h1>
 
     </div>
 
@@ -588,7 +589,10 @@ thread去CPU中复制专家权重</p></li>
     <a href="/2024/09/26/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/" rel="prev" title="算法设计与分析">
       <i class="fa fa-chevron-left"></i> 算法设计与分析
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2025/01/02/machine-learning-review/" rel="next" title="machine learning review">
+      machine learning review <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -652,7 +656,7 @@ thread去CPU中复制专家权重</p></li>
 Encoder-Decoder?</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#introduction"><span class="nav-number">3.2.1.</span> <span class="nav-text">introduction</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cachegen"><span class="nav-number">3.3.</span> <span class="nav-text">cachegen</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hobbit"><span class="nav-number">3.4.</span> <span class="nav-text">Hobbit</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#introduction-1"><span class="nav-number">3.4.1.</span> <span class="nav-text">introduction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#motivation"><span class="nav-number">3.4.2.</span> <span class="nav-text">motivation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hobbit-system"><span class="nav-number">3.4.3.</span> <span class="nav-text">HOBBIT System</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#token-level-dynamic-expert-loading"><span class="nav-number">3.4.3.1.</span> <span class="nav-text">Token-level Dynamic
 Expert Loading：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#layer-level-adaptive-expert-prefetching"><span class="nav-number">3.4.3.2.</span> <span class="nav-text">Layer-level Adaptive
 Expert Prefetching</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#sequence-level-multidimensional-expert-caching"><span class="nav-number">3.4.3.3.</span> <span class="nav-text">Sequence-level
-Multidimensional Expert Caching</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#system-implementation"><span class="nav-number">3.4.4.</span> <span class="nav-text">System Implementation</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hexa-moe"><span class="nav-number">3.5.</span> <span class="nav-text">HEXA-moe</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#introduction-2"><span class="nav-number">3.5.1.</span> <span class="nav-text">introduction</span></a></li></ol></li></ol></li></ol></div>
+Multidimensional Expert Caching</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#system-implementation"><span class="nav-number">3.4.4.</span> <span class="nav-text">System Implementation</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hexa-moe"><span class="nav-number">3.5.</span> <span class="nav-text">HEXA-moe</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#introduction-2"><span class="nav-number">3.5.1.</span> <span class="nav-text">introduction</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#specinfer"><span class="nav-number">4.</span> <span class="nav-text">SpecInfer</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -668,7 +672,7 @@ Multidimensional Expert Caching</span></a></li></ol></li><li class="nav-item nav
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-count">20</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -711,7 +715,7 @@ Multidimensional Expert Caching</span></a></li></ol></li><li class="nav-item nav
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2024</span>
+  <span itemprop="copyrightYear">2025</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
