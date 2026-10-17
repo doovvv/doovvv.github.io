@@ -1,5 +1,17 @@
 (() => {
   'use strict';
+  function selectProfileSection(sections, threshold, atBottom) {
+    if (!sections.length) return null;
+    if (atBottom) return sections[sections.length - 1].id;
+    let current = sections[0].id;
+    for (const section of sections) {
+      if (section.top <= threshold) current = section.id;
+      else break;
+    }
+    return current;
+  }
+  if (typeof module === 'object' && module.exports) module.exports = { selectProfileSection };
+  if (typeof document === 'undefined') return;
   const $ = (selector, root = document) => root.querySelector(selector);
   const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
   const root = document.documentElement;
@@ -241,6 +253,20 @@
     if (image.complete && image.naturalWidth === 0) showFallback();
   });
 
+  const profileLinks = $$('.profile-nav a[href^="#"]');
+  const profileSections = $$('.profile-main > .profile-section[id]');
+  function updateProfileNavigation() {
+    if (!profileSections.length) return;
+    const threshold = window.innerWidth <= 800 ? 190 : 175;
+    const atBottom = Math.ceil(window.scrollY + window.innerHeight) >= document.documentElement.scrollHeight - 4;
+    const current = selectProfileSection(profileSections.map(section => ({ id: section.id, top: section.getBoundingClientRect().top })), threshold, atBottom);
+    profileLinks.forEach(anchor => {
+      const active = anchor.hash === '#' + current;
+      anchor.classList.toggle('is-active', active);
+      if (active) anchor.setAttribute('aria-current', 'location');
+      else anchor.removeAttribute('aria-current');
+    });
+  }
   const body = $('.reading-article .post-body');
   const headings = body ? $$('h1[id],h2[id],h3[id],h4[id],h5[id],h6[id]', body) : [];
   const tocLinks = $$('.reading-sidebar .post-toc a');
@@ -248,6 +274,7 @@
   function updateScroll() {
     pendingScroll = false;
     $('.back-top')?.classList.toggle('is-visible', window.scrollY > 600);
+    updateProfileNavigation();
     if (!body) return;
     const start = body.getBoundingClientRect().top + window.scrollY - 120;
     const distance = Math.max(1, body.scrollHeight - window.innerHeight + 160);

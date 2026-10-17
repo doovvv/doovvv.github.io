@@ -158,8 +158,9 @@ def layout(title, description, url, content, active='home', kind='page', extra='
         title_key = 'page.electives'
     title_text = message(title_key) if title_key else title + ' | doovvv'
     title_marker = f' data-i18n="{title_key}"' if title_key else ''
-    description_text = description if kind == 'post' else message('page.description')
-    description_marker = '' if kind == 'post' else ' data-i18n-content="page.description"'
+    description_key = 'profile.meta' if kind == 'about' else 'page.description'
+    description_text = description if kind == 'post' else message(description_key)
+    description_marker = '' if kind == 'post' else f' data-i18n-content="{description_key}"'
     return f'''<!doctype html>
 <html lang="en" data-language="en" data-theme="light"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="light dark"><meta name="theme-color" content="#ffffff">
 <title{title_marker}>{escape(title_text)}</title><meta name="description" content="{escape(description_text, quote=True)}"{description_marker}><link rel="canonical" href="{canonical}"><meta property="og:title" content="{escape(title_text, quote=True)}"{f' data-i18n-content="{title_key}"' if title_key else ''}><meta property="og:description" content="{escape(description_text, quote=True)}"{description_marker}><meta property="og:type" content="{'article' if kind == 'post' else 'website'}"><meta property="og:url" content="{canonical}"><meta property="og:image" content="{SITE['url']}/assets/social-card.jpg"><meta property="og:image:type" content="image/jpeg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
@@ -276,7 +277,47 @@ def post_page(post):
 
 
 def about():
-    return page_heading('about.behind', 'about.title', 'about.intro') + f'''<div class="page-container about-page"><div class="about-portrait"><span>d.</span><div class="eyebrow">{ui('about.progress')}</div></div><div class="about-copy"><div class="eyebrow">{ui('about.corner')}</div><h2>{ui('about.heading')}</h2><p>{ui('about.details')}</p><p>{ui('about.quote')}</p><a class="button button-primary" href="https://github.com/doovvv" target="_blank" rel="noopener noreferrer">{icon('github')} GitHub {icon('up-right')}</a><div class="about-stats"><div><strong>{len(SITE['posts'])}</strong>{ui('about.notes')}</div><div><strong>{len(SITE['tag_names']):02d}</strong>{ui('about.tags')}</div><div><strong>2023</strong>{ui('about.since')}</div></div></div></div>'''
+    sections = [('overview', '01'), ('experience', '02'), ('education', '03'), ('skills', '04'), ('writing', '05')]
+    menu = ''.join(f'<a href="#{name}" class="profile-nav-link{" is-active" if i == 0 else ""}"{" aria-current=location" if i == 0 else ""}><span class="profile-nav-number" aria-hidden="true">{number}</span>{ui("profile.nav." + name)}</a>' for i, (name, number) in enumerate(sections))
+    result = f'''<div class="profile-shell"><aside class="profile-rail"><a class="profile-identity" href="#overview"><span class="profile-monogram" aria-hidden="true">d.</span><span><strong>doovvv</strong><small>{ui('profile.rail.label')}</small></span></a><nav class="profile-nav" {ui_attr('aria-label', 'profile.nav.label')}>{menu}</nav><a class="profile-rail-link" href="https://github.com/doovvv" target="_blank" rel="noopener noreferrer">{icon('github')} GitHub {icon('up-right')}</a></aside>
+    <div class="profile-main"><section class="profile-section profile-overview" id="overview" aria-labelledby="profile-name"><div class="profile-hero"><div class="profile-intro"><p class="eyebrow">{ui('profile.eyebrow')}</p><h1 id="profile-name">{ui('profile.name.first')}<strong>{ui('profile.name.last')}</strong></h1><div class="profile-name-note">{ui('profile.name.note')}</div><p class="profile-role">{ui('profile.role')}</p><p class="profile-bio">{ui('profile.bio')}</p><div class="profile-actions"><a class="button button-primary" href="#experience">{ui('profile.explore')} {icon('down')}</a><a class="profile-social" href="https://github.com/doovvv" target="_blank" rel="noopener noreferrer">{icon('github')} GitHub {icon('up-right')}</a></div></div><div class="profile-portrait"><img src="/assets/images/avatar.gif" {ui_attr('alt','hero.avatar')} width="940" height="940"><span class="profile-portrait-caption">doovvv / {ui('profile.portrait')}</span></div></div>
+    <div class="profile-impact" {ui_attr('aria-label','profile.impact.label')}><div><strong>80%<span>↓</span></strong><p>{ui('profile.impact.tokens')}</p></div><div><strong>16s <span>→</span> 8s</strong><p>{ui('profile.impact.latency')}</p></div><div><strong>5<span>+</span></strong><p>{ui('profile.impact.fixes')}</p></div></div></section>'''
+
+    def heading(number, name, description):
+        return f'<div class="profile-section-heading"><p class="eyebrow">{number} / {ui("profile.nav." + name)}</p><h2 id="profile-' + name + '-title">' + ui('profile.' + name + '.title') + '</h2><p>' + ui(description) + '</p></div>'
+
+    result += '<section class="profile-section" id="experience" aria-labelledby="profile-experience-title">' + heading('02', 'experience', 'profile.experience.intro') + '<div class="profile-timeline">'
+    for key, mark in [('tencent', 'T'), ('bytedance', 'B')]:
+        prefix = 'profile.' + key
+        bullets = ''.join('<li>' + ui(prefix + '.point' + str(i)) + '</li>' for i in range(1, 4))
+        tags = {'tencent': ['Python', 'LangGraph', 'MCP', 'RAG', 'SSE'], 'bytedance': ['Flink CDC', 'MySQL', 'StarRocks', 'CI/CD']}[key]
+        chips = ''.join('<span>' + escape(tag) + '</span>' for tag in tags)
+        result += f'<article class="profile-job"><div class="profile-company-mark {key}" aria-hidden="true">{mark}</div><div class="profile-job-main"><div class="profile-job-header"><div><h3>{ui(prefix + ".company")}</h3><p class="profile-job-role">{ui(prefix + ".role")}</p></div><span class="profile-period">{ui(prefix + ".period")}</span></div><p class="profile-job-context">{ui(prefix + ".team")}</p><ul class="profile-job-points">{bullets}</ul><div class="profile-tech">{chips}</div>'
+        if key == 'tencent':
+            result += '<div class="profile-recognition">' + icon('up-right') + ui('profile.tencent.award') + '</div>'
+        result += '</div></article>'
+    result += '</div></section>'
+
+    result += '<section class="profile-section" id="education" aria-labelledby="profile-education-title">' + heading('03', 'education', 'profile.education.intro') + '<div class="profile-education-grid">'
+    for key, initials in [('nju', 'NJU'), ('sysu', 'SYSU')]:
+        prefix = 'profile.' + key
+        result += f'<article class="profile-school"><div class="profile-school-top"><span class="profile-school-mark">{initials}</span><span class="profile-period">{ui(prefix + ".period")}</span></div><h3>{ui(prefix + ".name")}</h3><p class="profile-degree">{ui(prefix + ".degree")}</p><p class="profile-school-detail">{ui(prefix + ".school")}</p><span class="profile-school-note">{ui(prefix + ".note")}</span></article>'
+    result += '</div></section>'
+
+    result += '<section class="profile-section" id="skills" aria-labelledby="profile-skills-title">' + heading('04', 'skills', 'profile.skills.intro') + '<div class="profile-skills-grid">'
+    groups = [('languages', 'code', ['Go', 'Python', 'SQL']), ('ai', 'grid', ['LangGraph', 'LangChain', 'MCP', 'RAG']), ('data', 'archive', ['MySQL', 'Redis', 'Kafka', 'Flink CDC', 'StarRocks']), ('engineering', 'book', ['Git', 'Linux', 'Docker', 'RPC', 'CI/CD'])]
+    for key, symbol, items in groups:
+        prefix = 'profile.skills.' + key
+        result += '<article class="profile-skill"><div class="profile-skill-title">' + icon(symbol) + '<h3>' + ui(prefix + '.title') + '</h3></div><p>' + ui(prefix + '.description') + '</p><div class="profile-tech">' + ''.join('<span>' + escape(item) + '</span>' for item in items) + '</div></article>'
+    result += '</div></section>'
+
+    result += '<section class="profile-section profile-writing" id="writing" aria-labelledby="profile-writing-title">' + heading('05', 'writing', 'profile.writing.intro') + '<div class="profile-note-list">'
+    for i, key in enumerate(['machine-learning', '分布式', '算法模板'], 1):
+        post = next((p for p in SITE['posts'] if key in unquote(p['url'])), None)
+        if post:
+            result += f'<a href="{post["url"]}" class="profile-note"><span class="profile-note-index">0{i}</span><div><span class="profile-note-topic">{topic_label(post)}</span><h3>{escape(post["title"])}</h3></div>{icon("up-right")}</a>'
+    result += '</div><a href="/archives/" class="text-link">' + ui('profile.writing.all') + ' ' + icon('arrow') + '</a></section></div></div>'
+    return result
 
 
 def write_covers():

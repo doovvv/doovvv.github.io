@@ -42,6 +42,7 @@ python tools/blog.py preview
 python tools/build.py
 python -m unittest discover -s tests -v
 node --test tests/i18n.test.cjs
+node --test tests/profile-nav.test.cjs
 node --check assets/site.js
 node --check assets/i18n.js
 ```
@@ -77,6 +78,8 @@ Markdown 新文章推荐直接放在文章文件夹的 `images/` 中，用 `![�
 评论沿用原站的 Valine 后端及路径，点击“展开评论”后才加载，不会迁移或新建评论数据库。评论服务的可用性取决于原来的后端。
 
 ## 素材
+
+About 页面参考 [jaredddddd/resume-home](https://jaredddddd.github.io/resume-home/) 的左侧目录与分段履历结构。教育、实习、技能和成果文案集中在 `content/ui.json` 的 `profile.*` 字段；模板为 `tools/build.py` 的 `about()`，样式为 `assets/profile.css`。个人档案保持中英切换，不包含联系电话、邮箱或完整简历文件。
 
 视觉参考：[LinMoQC/Memory-Blog](https://github.com/LinMoQC/Memory-Blog) 的首页构图、[nuonuo-888/devportfolio](https://github.com/nuonuo-888/devportfolio) 的文章区风格。当前布局和样式在现有静态生成器中重新实现，无需安装参考项目的框架依赖。
 
