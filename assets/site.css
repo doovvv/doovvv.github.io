@@ -78,8 +78,7 @@ button:focus:not(:focus-visible) { outline:none; }
 
 /* Memory-Blog composition, using this blog's own landscape and avatar. */
 .hero { position:relative;isolation:isolate;overflow:hidden;min-height:650px;height:calc(100svh - 80px);max-height:1100px;background:#bcd7e1;color:#102834;font-family:var(--sans); }
-.hero-background { position:absolute;inset:0;z-index:-2;width:100%;height:100%;object-fit:cover;object-position:center 55%;filter:saturate(.65) brightness(1.1); }
-.hero-shade { position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,#c5dfe8f0 0%,#c5dfe8bd 42%,#bfd8e14f 100%),linear-gradient(0deg,#bfd7e28c,#c5dfe833); }
+.hero-background { position:absolute;inset:0;z-index:-2;width:100%;height:100%;object-fit:cover;object-position:center 55%; }
 .hero-inner { width:calc(100% - 128px);max-width:1160px;height:100%;margin:auto;display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:90px;align-items:center;padding-block:20px 100px; }
 .hero-intro { min-width:0; }
 .hero-greeting { font-size:60px;line-height:1.1;font-weight:700;letter-spacing:-1.5px;margin:0 0 18px;color:#102834; }
@@ -95,13 +94,6 @@ button:focus:not(:focus-visible) { outline:none; }
 .hero-bottom { position:absolute;bottom:28px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:10px;width:max-content;max-width:calc(100% - 48px);text-align:center;color:#344f5d;font-size:12px;font-weight:500;line-height:1.6; }
 .hero-bottom>.icon { width:32px;height:32px;opacity:.7;stroke-width:2; }
 .hero-bottom:hover { color:#274f9e; }
-[data-theme=dark] .hero { background:#18313e;color:#e6f2f8; }
-[data-theme=dark] .hero-background { filter:saturate(.55) brightness(.65); }
-[data-theme=dark] .hero-shade { background:linear-gradient(90deg,#142d3ce8,#142d3ca8 55%,#142d3c50); }
-[data-theme=dark] .hero-greeting,[data-theme=dark] .hero h1,[data-theme=dark] .hero-subtitle,[data-theme=dark] .hero-bottom { color:#e6f2f8; }
-[data-theme=dark] .hero-name { color:#acc6ff; }
-[data-theme=dark] .hero-socials a { color:#e6f2f8;border-color:#dce9f533;background:#dce9f51a; }
-[data-theme=dark] .hero-portrait { border-color:#dce9f5; }
 
 /* Section proportions and pale cards echo the reference's project layout. */
 .home-content { padding-top:100px; }

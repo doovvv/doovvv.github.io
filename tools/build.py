@@ -5,6 +5,7 @@ from collections import defaultdict
 from datetime import datetime
 from html import escape
 from html.parser import HTMLParser
+import hashlib
 import json
 from pathlib import Path
 import re
@@ -195,7 +196,9 @@ def pagination(page):
 
 
 def hero():
-    return f'''<section class="hero" aria-labelledby="hero-title"><img class="hero-background" src="/assets/images/mountain-day.jpg" alt="" width="2200" height="1468" fetchpriority="high"><div class="hero-shade" aria-hidden="true"></div>
+    background = ROOT / 'assets/images/mountain-day.jpg'
+    version = '?v=' + hashlib.sha256(background.read_bytes()).hexdigest()[:12] if background.is_file() else ''
+    return f'''<section class="hero" aria-labelledby="hero-title"><img class="hero-background" src="/assets/images/mountain-day.jpg{version}" alt="" width="2200" height="1468" fetchpriority="high">
     <div class="hero-inner"><div class="hero-intro"><p class="hero-greeting">{ui('hero.greeting')}</p><h1 id="hero-title">{ui('hero.im')} <strong class="hero-name">doovvv</strong></h1><p class="hero-subtitle">{ui('hero.subtitle')}</p>
     <div class="hero-socials"><a href="https://github.com/doovvv" target="_blank" rel="noopener noreferrer" {ui_attr('aria-label', 'social.github')}>{icon('github')}</a><a href="/archives/" {ui_attr('aria-label', 'social.notes')}>{icon('book')}</a><a href="/about/" {ui_attr('aria-label', 'social.about')}>{icon('code')}</a></div></div>
     <a class="hero-portrait" href="/about/" {ui_attr('aria-label', 'social.about')}><img src="/assets/images/avatar.gif" {ui_attr('alt', 'hero.avatar')} width="940" height="940"></a></div>
