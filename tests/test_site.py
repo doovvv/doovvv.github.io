@@ -4,9 +4,11 @@ from html.parser import HTMLParser
 from pathlib import Path
 import unittest
 from urllib.parse import unquote, urlparse
+from tools.content import load_site
 
 ROOT = Path(__file__).resolve().parents[1]
-DATA = json.loads((ROOT / 'content/site.json').read_text(encoding='utf8'))
+LEGACY = json.loads((ROOT / 'content/site.json').read_text(encoding='utf8'))
+DATA = load_site(ROOT)
 
 
 class Links(HTMLParser):
@@ -58,8 +60,8 @@ class SiteTests(unittest.TestCase):
                 self.assertIn('id="site-nav"', output)
 
     def test_every_article_preserves_its_complete_published_body(self):
-        self.assertEqual(len(DATA['posts']), 20)
-        for post in DATA['posts']:
+        self.assertEqual(len(LEGACY['posts']), 20)
+        for post in LEGACY['posts']:
             with self.subTest(article=post['title']):
                 self.assertIn(post['body'], (ROOT / post['file']).read_text(encoding='utf8'))
 

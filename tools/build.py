@@ -8,7 +8,15 @@ from html.parser import HTMLParser
 import json
 from pathlib import Path
 import re
+import shutil
 from urllib.parse import quote, unquote, urljoin, urlsplit, urlunsplit
+
+try:
+    from .content import load_site
+    from .locking import workflow_lock
+except ImportError:
+    from content import load_site
+    from locking import workflow_lock
 
 ROOT = Path(__file__).resolve().parents[1]
 SITE = json.loads((ROOT / 'content/site.json').read_text(encoding='utf8'))
@@ -139,7 +147,7 @@ def footer():
 def search_dialog():
     return f'''<dialog id="search-dialog" class="search-dialog" aria-labelledby="search-title"><div class="search-heading"><h2 id="search-title">{ui('search.title')}</h2><button class="icon-button search-close" {ui_attr('aria-label', 'search.close')}>{icon('close')}</button></div>
     <form class="search-form" role="search"><label class="sr-only" for="search-input">{ui('search.label')}</label>{icon('search')}<input id="search-input" type="search" {ui_attr('placeholder', 'search.placeholder')} autocomplete="off"><kbd>ESC</kbd></form>
-    <div id="search-status" class="search-status" role="status" aria-live="polite" data-i18n="search.initial" data-i18n-params='{{"count":20}}'>{message('search.initial', count=20)}</div><div id="search-results" class="search-results"></div></dialog>'''
+    <div id="search-status" class="search-status" role="status" aria-live="polite" data-i18n="search.initial" data-i18n-params='{{"count":{len(SITE['posts'])}}}'>{message('search.initial', count=len(SITE['posts']))}</div><div id="search-results" class="search-results"></div></dialog>'''
 
 
 def layout(title, description, url, content, active='home', kind='page', extra=''):
@@ -194,7 +202,7 @@ def hero():
 
 
 def featured():
-    selected = [next(p for p in SITE['posts'] if key in p['slug']) for key in ['machine-learning', '分布式', '算法模板']]
+    selected = [next((p for p in SITE['posts'] if key in p['url']), SITE['posts'][0]) for key in ['machine-learning', '分布式', '算法模板']]
     slides = []
     for i, post in enumerate(selected):
         cover = article_cover(post)
@@ -211,7 +219,7 @@ def home(page):
     body += '<div class="page-container home-content" id="notes">'
     if is_root:
         body += featured()
-    body += f'''<section class="notes-section"><div class="section-heading"><div><div class="eyebrow">{ui('notes.eyebrow')}<span class="small-count">20</span></div><h2>{ui('notes.title')}<span class="heading-dot">.</span></h2><span class="section-rule"></span></div><a class="text-link" href="/archives/">{ui('notes.archive')} {icon('up-right')}</a></div>
+    body += f'''<section class="notes-section"><div class="section-heading"><div><div class="eyebrow">{ui('notes.eyebrow')}<span class="small-count">{len(SITE['posts'])}</span></div><h2>{ui('notes.title')}<span class="heading-dot">.</span></h2><span class="section-rule"></span></div><a class="text-link" href="/archives/">{ui('notes.archive')} {icon('up-right')}</a></div>
     <div class="notes-toolbar"><span>{icon('grid')}{ui('notes.tagline')}</span><span class="toolbar-order">{ui('notes.order')} {icon('down')}</span></div><div class="article-grid" id="article-grid">'''
     body += ''.join(card(post_for(url), i) for i, url in enumerate(page['posts'])) + '</div>' + pagination(page) + '</section>'
     body += f'''<section class="about-strip"><div class="section-label"><div class="eyebrow">{ui('about.eyebrow')}</div><h2>{ui('about.here')}</h2><span class="section-rule"></span></div><div><h3>{ui('about.quote')}</h3><p>{ui('about.description')}</p><div class="topic-chips">{ui('interest.cs')}{ui('interest.algorithms')}{ui('interest.systems')}</div><a class="text-link" href="/about/">{ui('about.meet')} {icon('up-right')}</a></div></section></div>'''
@@ -229,7 +237,7 @@ def archive(page):
     result = page_heading('archive.eyebrow', 'archive.period' if period else 'archive.title', 'archive.description', title_params={'period': period} if period else None)
     years = sorted({p['date'][:4] for p in SITE['posts']}, reverse=True)
     filters = '<a href="/archives/">' + ui('archive.all') + '</a>' + ''.join(f'<a href="/archives/{year}/">{year}</a>' for year in years)
-    result += f'<div class="page-container archive-layout"><aside class="archive-summary"><span class="big-number">20<span>{ui("archive.count")}</span></span><p>{ui("archive.since")}</p><nav class="year-filters" {ui_attr("aria-label", "archive.years")}>{filters}</nav><div class="archive-note">{ui("archive.note")}</div></aside><div class="timeline">'
+    result += f'<div class="page-container archive-layout"><aside class="archive-summary"><span class="big-number">{len(SITE["posts"])}<span>{ui("archive.count")}</span></span><p>{ui("archive.since")}</p><nav class="year-filters" {ui_attr("aria-label", "archive.years")}>{filters}</nav><div class="archive-note">{ui("archive.note")}</div></aside><div class="timeline">'
     year = None
     for url in page['posts']:
         post = post_for(url)
@@ -268,7 +276,7 @@ def post_page(post):
 
 
 def about():
-    return page_heading('about.behind', 'about.title', 'about.intro') + f'''<div class="page-container about-page"><div class="about-portrait"><span>d.</span><div class="eyebrow">{ui('about.progress')}</div></div><div class="about-copy"><div class="eyebrow">{ui('about.corner')}</div><h2>{ui('about.heading')}</h2><p>{ui('about.details')}</p><p>{ui('about.quote')}</p><a class="button button-primary" href="https://github.com/doovvv" target="_blank" rel="noopener noreferrer">{icon('github')} GitHub {icon('up-right')}</a><div class="about-stats"><div><strong>20</strong>{ui('about.notes')}</div><div><strong>06</strong>{ui('about.tags')}</div><div><strong>2023</strong>{ui('about.since')}</div></div></div></div>'''
+    return page_heading('about.behind', 'about.title', 'about.intro') + f'''<div class="page-container about-page"><div class="about-portrait"><span>d.</span><div class="eyebrow">{ui('about.progress')}</div></div><div class="about-copy"><div class="eyebrow">{ui('about.corner')}</div><h2>{ui('about.heading')}</h2><p>{ui('about.details')}</p><p>{ui('about.quote')}</p><a class="button button-primary" href="https://github.com/doovvv" target="_blank" rel="noopener noreferrer">{icon('github')} GitHub {icon('up-right')}</a><div class="about-stats"><div><strong>{len(SITE['posts'])}</strong>{ui('about.notes')}</div><div><strong>{len(SITE['tag_names']):02d}</strong>{ui('about.tags')}</div><div><strong>2023</strong>{ui('about.since')}</div></div></div></div>'''
 
 
 def write_covers():
@@ -288,7 +296,7 @@ def write_covers():
         (directory / f'{key}.svg').write_text(source, encoding='utf8')
 
 
-def main():
+def _write_site():
     for page in SITE['pages']:
         kind = page['kind']
         extra = ''
@@ -319,7 +327,62 @@ def main():
     write_covers()
     (ROOT / 'assets/ui-messages.js').write_text('window.BLOG_UI_MESSAGES=' + json.dumps(MESSAGES, ensure_ascii=False, separators=(',', ':')) + ';\n', encoding='utf8')
     (ROOT / '.nojekyll').touch()
-    print(f'Built {len(SITE["pages"]) + 1} pages, 20 searchable articles, and 7 cover illustrations.')
+    print(f'Built {len(SITE["pages"]) + 1} pages, {len(SITE["posts"])} searchable articles, and 7 cover illustrations.')
+
+
+def _build_site(root=ROOT, include_drafts=False):
+    global ROOT, SITE, POSTS, MESSAGES
+    previous = ROOT, SITE, POSTS, MESSAGES
+    try:
+        ROOT = Path(root).resolve()
+        SITE = load_site(ROOT, include_drafts=include_drafts)
+        POSTS = {unquote(p['url']): p for p in SITE['posts']}
+        MESSAGES = json.loads((ROOT / 'content/ui.json').read_text(encoding='utf8'))
+        manifest = ROOT / 'content/generated-files.json'
+        old_files = set(json.loads(manifest.read_text(encoding='utf8'))) if manifest.exists() else set()
+        files = {p['file'] for p in SITE['pages']} | {'about/index.html', 'assets/search.json', 'assets/ui-messages.js', 'assets/favicon.svg', '.nojekyll'}
+        files |= {'assets/covers/' + name + '.svg' for name in ['intelligence', 'systems', 'algorithms', 'graphics', 'code', 'security', 'notes']}
+        files |= set(SITE['_assets'])
+        # An image generated for A may still be explicitly used by public B
+        # after A is withdrawn. Retain ownership until the final reference ends.
+        files |= set(SITE['_public_assets']) & old_files
+        def output_path(name):
+            target = (ROOT / name).resolve()
+            if not target.is_relative_to(ROOT) or target == ROOT or Path(name).parts[0] in ('content', 'tools', 'tests', '.git'):
+                raise ValueError('Invalid generated output path: ' + name)
+            return target
+        for name in files | old_files:
+            output_path(name)
+        for name, source in SITE['_assets'].items():
+            target = output_path(name)
+            target.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(source, target)
+        (ROOT / 'assets').mkdir(exist_ok=True)
+        _write_site()
+        for name in old_files - files:
+            target = output_path(name)
+            if target.is_file():
+                target.unlink()
+        manifest.write_text(json.dumps(sorted(files), ensure_ascii=False, indent=2) + '\n', encoding='utf8')
+        return SITE
+    finally:
+        ROOT, SITE, POSTS, MESSAGES = previous
+
+
+def build_site(root=ROOT, include_drafts=False):
+    with workflow_lock(root):
+        return _build_site(root, include_drafts=include_drafts)
+
+
+def main():
+    import argparse
+    parser = argparse.ArgumentParser(description='Generate blog pages from recovered and Markdown articles.')
+    parser.add_argument('--drafts', action='store_true', help='Include drafts in local preview only')
+    args = parser.parse_args()
+    try:
+        build_site(include_drafts=args.drafts)
+    except (ValueError, OSError) as error:
+        parser.exit(1, str(error) + '\n')
 
 
 if __name__ == '__main__':

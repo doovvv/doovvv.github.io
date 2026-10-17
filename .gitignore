@@ -2,3 +2,7 @@ __pycache__/
 *.pyc
 .logs/
 .qa/
+.backups/
+.blog-build.lock
+# New article drafts stay local. The publisher explicitly backs up public sources.
+content/posts/

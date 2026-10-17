@@ -68,6 +68,7 @@
   const input = $('#search-input');
   const results = $('#search-results');
   const status = $('#search-status');
+  const articleCount = Number(JSON.parse(status?.getAttribute('data-i18n-params') || '{}').count) || 0;
   let searchData;
   let searchPromise;
   let searchTimer;
@@ -103,7 +104,7 @@
     const version = ++searchVersion;
     const query = input.value.trim();
     results.replaceChildren();
-    if (!query) { setText(status, 'search.initial', { count: 20 }); return; }
+    if (!query) { setText(status, 'search.initial', { count: articleCount }); return; }
     setText(status, 'search.loading');
     try {
       const data = await loadSearch();
@@ -177,6 +178,14 @@
   });
 
   // Preserve the old article markup and enhance only presentation controls.
+  $$('.markdown-body pre').forEach(pre => {
+    const figure = document.createElement('figure');
+    figure.className = 'highlight';
+    const language = $('code', pre)?.className.match(/language-([\w+-]+)/)?.[1];
+    if (language) figure.classList.add(language);
+    pre.replaceWith(figure);
+    figure.append(pre);
+  });
   $$('.post-body figure.highlight').forEach(figure => {
     const pre = $('.code pre', figure) || $('pre', figure);
     if (!pre) return;
@@ -264,7 +273,7 @@
   $('.back-top')?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' }));
   updateScroll();
 
-  if (body && $$('.math', body).some(node => /\\\(|\\\[|\$/.test(node.textContent))) {
+  if (body && $$('.math, .arithmatex', body).some(node => /\\\(|\\\[|\$/.test(node.textContent))) {
     window.MathJax = {
       tex: { inlineMath: [['\\(', '\\)'], ['$', '$']], displayMath: [['\\[', '\\]'], ['$$', '$$']], processEscapes: true },
       svg: { fontCache: 'local' }
