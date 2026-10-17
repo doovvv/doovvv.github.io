@@ -30,7 +30,6 @@ class AboutTests(unittest.TestCase):
             self.assertIn(name, html)
         for year in ['2025', '2026', '2029']:
             self.assertIn(year, html)
-        self.assertIn('expected', html.lower())
 
     def test_profile_directory_links_to_existing_sections(self):
         parsed = ProfileMarkup()
@@ -42,7 +41,7 @@ class AboutTests(unittest.TestCase):
             self.assertIn('#' + section, parsed.links)
         self.assertTrue({url[1:] for url in parsed.links if url.startswith('#')}.issubset(parsed.ids))
 
-    def test_selected_impact_and_recognition_are_grounded_in_resume(self):
+    def test_internship_details_and_recognition_are_grounded_in_resume(self):
         html = re.sub(r'<[^>]+>', '', build.about())
         for fact in ['80%', '16s', '8s', '5+', 'AI Technology Application Award']:
             self.assertIn(fact, html)

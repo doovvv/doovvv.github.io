@@ -38,12 +38,6 @@
 .profile-portrait:before { content:"";position:absolute;width:calc(100% + 30px);aspect-ratio:1;border:1px solid var(--line);border-radius:50%;left:-15px;top:-5px;z-index:-1; }
 .profile-portrait img { width:220px;aspect-ratio:1;border-radius:50%;object-fit:cover;border:7px solid var(--bg);box-shadow:0 16px 40px #0f172a14; }
 .profile-portrait-caption { display:block;font-family:var(--mono);font-size:8px;letter-spacing:.8px;color:var(--muted);margin-top:23px; }
-.profile-impact { display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border:1px solid var(--line);border-radius:12px;background:var(--surface);margin-top:38px;padding:24px 0; }
-.profile-impact>div { padding:0 25px; }
-.profile-impact>div+div { border-left:1px solid var(--line); }
-.profile-impact strong { font-family:var(--profile-heading);font-size:42px;line-height:1.2;color:var(--text);font-weight:700;white-space:nowrap; }
-.profile-impact strong>span { color:var(--accent);font-size:30px; }
-.profile-impact p { font-size:12px;line-height:1.8;color:var(--muted);margin:9px 0 0; }
 .profile-section-heading { margin-bottom:34px; }
 .profile-section-heading>.eyebrow { font-size:11px;letter-spacing:1.2px;text-transform:uppercase;margin:0 0 10px; }
 .profile-section h2 { font-family:var(--profile-heading);font-size:56px;line-height:1.2;font-weight:700;text-transform:uppercase;margin:0 0 14px; }
@@ -72,7 +66,6 @@
 .profile-school h3 { font-family:var(--profile-heading);font-size:30px;line-height:1.25;text-transform:uppercase;margin:0 0 13px; }
 .profile-degree { color:var(--text);font-size:15px;font-weight:600;line-height:1.7;margin:0 0 9px; }
 .profile-school-detail { color:var(--muted);font-size:14px;line-height:1.8;margin:0; }
-.profile-school-note { display:block;margin-top:24px;padding-top:16px;border-top:1px solid var(--line);color:var(--accent);font-size:13px;line-height:1.7; }
 .profile-skills-grid { display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px; }
 .profile-skill { padding:23px;border:1px solid var(--line);border-radius:12px;background:var(--surface); }
 .profile-skill-title { display:flex;align-items:center;gap:10px; }
@@ -113,10 +106,6 @@
   .profile-hero h1 { font-size:96px; }
   .profile-bio { font-size:16px; }
   .profile-role { font-size:16px; }
-  .profile-impact>div { padding-inline:18px; }
-  .profile-impact strong { font-size:36px; }
-  .profile-impact strong>span { font-size:25px; }
-  .profile-impact p { font-size:11px; }
   .profile-job-header { flex-direction:column;gap:5px; }
   .profile-school { padding:21px; }
 }
@@ -134,7 +123,6 @@
   .profile-hero h1 { font-size:100px; }
   .profile-role { font-size:16px; }
   .profile-bio { font-size:16px; }
-  .profile-impact { margin-top:35px; }
   .profile-job-header { flex-direction:row;gap:12px; }
   .profile-job { gap:15px; }
   .profile-section h2 { font-size:48px; }
@@ -154,11 +142,6 @@
   .profile-portrait-caption { font-size:9px;margin:0; }
   .profile-actions { gap:20px; }
   .profile-actions .button { font-size:12px; }
-  .profile-impact { grid-template-columns:1fr;padding:0 18px;margin-top:26px; }
-  .profile-impact>div { display:flex;align-items:center;justify-content:space-between;gap:20px;padding:16px 0; }
-  .profile-impact>div+div { border-left:0;border-top:1px solid var(--line); }
-  .profile-impact strong { font-size:38px; }
-  .profile-impact p { text-align:right;margin:0;font-size:11px; }
   .profile-section-heading>p:last-child { font-size:15px; }
   .profile-section h2 { font-size:42px; }
   .profile-job { grid-template-columns:42px minmax(0,1fr);gap:13px; }
