@@ -12,12 +12,32 @@ from urllib.parse import quote, unquote, urljoin, urlsplit, urlunsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 SITE = json.loads((ROOT / 'content/site.json').read_text(encoding='utf8'))
+MESSAGES = json.loads((ROOT / 'content/ui.json').read_text(encoding='utf8'))
 POSTS = {unquote(p['url']): p for p in SITE['posts']}
+
+
+def message(key, **params):
+    return MESSAGES[key]['en'].format(**params)
+
+
+def ui(key, **params):
+    values = escape(json.dumps(params, ensure_ascii=False), quote=True)
+    return f'<span data-i18n="{key}" data-i18n-params="{values}">{escape(message(key, **params))}</span>'
+
+
+def ui_attr(attribute, key, **params):
+    values = escape(json.dumps(params, ensure_ascii=False), quote=True)
+    return f'{attribute}="{escape(message(key, **params), quote=True)}" data-i18n-{attribute}="{key}" data-i18n-{attribute}-params="{values}"'
+
+
+def topic_label(post):
+    return ui('topic.' + topic(post)[1])
 
 ICONS = {
     'arrow': '<path d="M5 12h14m-6-6 6 6-6 6"/>',
     'up-right': '<path d="M7 17 17 7M7 7h10v10"/>',
     'down': '<path d="M12 4v16m-6-6 6 6 6-6"/>',
+    'chevrons-down': '<path d="m6 5 6 6 6-6M6 13l6 6 6-6"/>',
     'search': '<circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 4.5 4.5"/>',
     'sun': '<circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/>',
     'moon': '<path d="M20.2 14A8.5 8.5 0 0 1 10 3.8 8.5 8.5 0 1 0 20.2 14Z"/>',
@@ -97,38 +117,46 @@ def article_cover(post):
 
 
 def navigation(active):
-    links = [('/', '首页', 'home'), ('/archives/', '归档', 'archive'), ('/tags/', '标签', 'tags'), ('/2023/12/05/%E8%B5%84%E6%BA%90%E9%93%BE%E6%8E%A5/', '资源', 'resource'), ('/about/', '关于', 'about')]
-    nav = ''.join(f'<a href="{url}" class="nav-link{" is-active" if key == active else ""}"{chr(32) + "aria-current=page" if key == active else ""}>{label}</a>' for url, label, key in links)
-    return f'''<a class="skip-link" href="#main-content">跳到主要内容</a>
+    links = [('/', 'nav.home', 'home'), ('/archives/', 'nav.archive', 'archive'), ('/tags/', 'nav.tags', 'tags'), ('/2023/12/05/%E8%B5%84%E6%BA%90%E9%93%BE%E6%8E%A5/', 'nav.resources', 'resource'), ('/about/', 'nav.about', 'about')]
+    nav = ''.join(f'<a href="{url}" class="nav-link{" is-active" if key == active else ""}"{chr(32) + "aria-current=page" if key == active else ""}>{ui(label)}</a>' for url, label, key in links)
+    return f'''<a class="skip-link" href="#main-content">{ui('nav.skip')}</a>
     <header class="site-header"><div class="header-inner">
-    <a class="brand" href="/" aria-label="doovvv 首页"><span class="brand-symbol" aria-hidden="true">&lt;/&gt;</span><span>doovvv<span class="brand-dot">_</span></span></a>
-    <nav id="site-nav" class="site-nav" aria-label="主导航">{nav}</nav>
-    <div class="header-actions"><button class="icon-button search-toggle" aria-label="搜索文章" title="搜索文章（Ctrl K）">{icon('search')}</button>
-    <span class="header-divider"></span><button class="icon-button theme-toggle" aria-label="切换为浅色模式" title="切换主题">{icon('sun', 'sun-icon')}{icon('moon', 'moon-icon')}</button>
+    <a class="brand" href="/" {ui_attr('aria-label', 'nav.brand')}><span class="brand-symbol" aria-hidden="true">&lt;/&gt;</span><span>doovvv<span class="brand-dot">_</span></span></a>
+    <nav id="site-nav" class="site-nav" {ui_attr('aria-label', 'nav.label')}>{nav}</nav>
+    <div class="header-actions"><button class="icon-button search-toggle" {ui_attr('aria-label', 'search.open')} {ui_attr('title', 'search.hint')}>{icon('search')}</button>
+    <button class="language-toggle" type="button" aria-label="Switch to Chinese" title="Switch to Chinese">中文</button>
+    <span class="header-divider"></span><button class="icon-button theme-toggle" {ui_attr('aria-label', 'theme.dark')} {ui_attr('title', 'theme.dark')}>{icon('sun', 'sun-icon')}{icon('moon', 'moon-icon')}</button>
     <a class="github-link icon-button" href="https://github.com/doovvv" target="_blank" rel="noopener noreferrer" aria-label="GitHub">{icon('github')}</a>
-    <button class="icon-button menu-toggle" aria-label="打开导航菜单" aria-expanded="false" aria-controls="site-nav">{icon('menu')}</button></div></div></header>'''
+    <button class="icon-button menu-toggle" {ui_attr('aria-label', 'menu.open')} aria-expanded="false" aria-controls="site-nav">{icon('menu')}</button></div></div></header>'''
 
 
 def footer():
     return f'''<footer class="site-footer"><div class="footer-main"><a class="brand" href="/">doovvv<span class="brand-dot">.</span></a>
-    <p>记录思考，保持好奇。</p><a href="https://github.com/doovvv" target="_blank" rel="noopener noreferrer">在 GitHub 找到我 {icon('up-right')}</a></div>
-    <div class="footer-bottom"><span>© {datetime.now().year} doovvv · Personal notes & explorations</span><a href="#top">回到顶部 ↑</a></div></footer>'''
+    <p>{ui('footer.tagline')}</p><a href="https://github.com/doovvv" target="_blank" rel="noopener noreferrer">{ui('footer.github')} {icon('up-right')}</a></div>
+    <div class="footer-bottom">{ui('footer.copyright', year=datetime.now().year)}<a href="#top">{ui('footer.top')}</a></div></footer>'''
 
 
 def search_dialog():
-    return f'''<dialog id="search-dialog" class="search-dialog" aria-labelledby="search-title"><div class="search-heading"><h2 id="search-title">搜索笔记</h2><button class="icon-button search-close" aria-label="关闭搜索">{icon('close')}</button></div>
-    <form class="search-form" role="search"><label class="sr-only" for="search-input">搜索标题或正文</label>{icon('search')}<input id="search-input" type="search" placeholder="搜索标题、关键词或正文…" autocomplete="off"><kbd>ESC</kbd></form>
-    <div id="search-status" class="search-status" role="status" aria-live="polite">在 20 篇笔记中，寻找一个想法。</div><div id="search-results" class="search-results"></div></dialog>'''
+    return f'''<dialog id="search-dialog" class="search-dialog" aria-labelledby="search-title"><div class="search-heading"><h2 id="search-title">{ui('search.title')}</h2><button class="icon-button search-close" {ui_attr('aria-label', 'search.close')}>{icon('close')}</button></div>
+    <form class="search-form" role="search"><label class="sr-only" for="search-input">{ui('search.label')}</label>{icon('search')}<input id="search-input" type="search" {ui_attr('placeholder', 'search.placeholder')} autocomplete="off"><kbd>ESC</kbd></form>
+    <div id="search-status" class="search-status" role="status" aria-live="polite" data-i18n="search.initial" data-i18n-params='{{"count":20}}'>{message('search.initial', count=20)}</div><div id="search-results" class="search-results"></div></dialog>'''
 
 
 def layout(title, description, url, content, active='home', kind='page', extra=''):
     canonical = SITE['url'] + quote(unquote(url), safe='/')
     extra = '<script>window.BLOG_IMAGE_ALIASES=' + json.dumps(SITE.get('image_aliases', {}), ensure_ascii=True) + ';</script>' + extra
+    title_key = {'home':'page.home', 'archive':'page.archive', 'tags':'page.tags', 'about':'page.about', 'resource':'page.resources'}.get(kind)
+    if kind == 'tag' and '选修' in unquote(url):
+        title_key = 'page.electives'
+    title_text = message(title_key) if title_key else title + ' | doovvv'
+    title_marker = f' data-i18n="{title_key}"' if title_key else ''
+    description_text = description if kind == 'post' else message('page.description')
+    description_marker = '' if kind == 'post' else ' data-i18n-content="page.description"'
     return f'''<!doctype html>
-<html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="light dark"><meta name="theme-color" content="#ffffff">
-<title>{escape(title)} | doovvv</title><meta name="description" content="{escape(description, quote=True)}"><link rel="canonical" href="{canonical}"><meta property="og:title" content="{escape(title, quote=True)}"><meta property="og:description" content="{escape(description, quote=True)}"><meta property="og:type" content="{'article' if kind == 'post' else 'website'}"><meta property="og:url" content="{canonical}"><meta property="og:image" content="{SITE['url']}/assets/social-card.jpg"><meta property="og:image:type" content="image/jpeg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
-<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg"><link rel="preload" href="/assets/fonts/ibm-plex-mono-bold.ttf" as="font" type="font/ttf" crossorigin><script>try{{const t=localStorage.getItem('doovvv-theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}}catch(e){{}}</script><link rel="stylesheet" href="/assets/site.css"><script src="/assets/site.js" defer></script>{extra}</head>
-<body class="page-{kind}" id="top">{navigation(active)}<main id="main-content">{content}</main>{footer()}{search_dialog()}<button class="back-top icon-button" aria-label="返回顶部">{icon('arrow')}</button></body></html>'''
+<html lang="en" data-language="en" data-theme="light"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="light dark"><meta name="theme-color" content="#ffffff">
+<title{title_marker}>{escape(title_text)}</title><meta name="description" content="{escape(description_text, quote=True)}"{description_marker}><link rel="canonical" href="{canonical}"><meta property="og:title" content="{escape(title_text, quote=True)}"{f' data-i18n-content="{title_key}"' if title_key else ''}><meta property="og:description" content="{escape(description_text, quote=True)}"{description_marker}><meta property="og:type" content="{'article' if kind == 'post' else 'website'}"><meta property="og:url" content="{canonical}"><meta property="og:image" content="{SITE['url']}/assets/social-card.jpg"><meta property="og:image:type" content="image/jpeg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg"><link rel="preload" href="/assets/fonts/ibm-plex-mono-bold.ttf" as="font" type="font/ttf" crossorigin><script>try{{const t=localStorage.getItem('doovvv-theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t;const l=localStorage.getItem('doovvv-language');if(l==='en'||l==='zh-CN'){{document.documentElement.lang=l;document.documentElement.dataset.language=l}}}}catch(e){{}}</script><link rel="stylesheet" href="/assets/site.css"><script src="/assets/ui-messages.js" defer></script><script src="/assets/i18n.js" defer></script><script src="/assets/site.js" defer></script>{extra}</head>
+<body class="page-{kind}" id="top">{navigation(active)}<main id="main-content">{content}</main>{footer()}{search_dialog()}<button class="back-top icon-button" {ui_attr('aria-label', 'back.top')}>{icon('arrow')}</button></body></html>'''
 
 
 def card(post, index):
@@ -136,9 +164,10 @@ def card(post, index):
     cover = article_cover(post)
     cover_class = ' article-cover' if cover['article_image'] else ''
     cover_kind = 'article' if cover['article_image'] else 'default'
-    return f'''<article class="article-card"><a class="card-cover cover-{category}{cover_class}" data-cover-kind="{cover_kind}" href="{post['url']}" aria-label="阅读 {escape(post['title'], quote=True)}"><img src="{escape(cover['src'], quote=True)}" data-cover-fallback="{cover['fallback']}" alt="" loading="lazy" width="720" height="420"><span class="cover-category">{escape(label)}</span><span class="cover-open">{icon('up-right')}</span></a>
-    <div class="card-content"><div class="card-meta"><span>{escape(label)}</span><time datetime="{post['date'][:10]}">{post['date'][:10].replace('-', '.')}</time></div>
-    <h3><a href="{post['url']}">{escape(post['title'])}</a></h3><p>{escape(post['excerpt'])}</p><div class="card-bottom"><span>{icon('clock')}{post['minutes']} 分钟阅读</span><a href="{post['url']}" aria-label="阅读 {escape(post['title'], quote=True)}">阅读笔记 {icon('arrow')}</a></div></div></article>'''
+    read_label = ui_attr('aria-label', 'cover.read', title=post['title'])
+    return f'''<article class="article-card"><a class="card-cover cover-{category}{cover_class}" data-cover-kind="{cover_kind}" href="{post['url']}" {read_label}><img src="{escape(cover['src'], quote=True)}" data-cover-fallback="{cover['fallback']}" alt="" loading="lazy" width="720" height="420"><span class="cover-category">{topic_label(post)}</span><span class="cover-open">{icon('up-right')}</span></a>
+    <div class="card-content"><div class="card-meta">{topic_label(post)}<time datetime="{post['date'][:10]}">{post['date'][:10].replace('-', '.')}</time></div>
+    <h3><a href="{post['url']}">{escape(post['title'])}</a></h3><p lang="zh-CN">{escape(post['excerpt'])}</p><div class="card-bottom"><span>{icon('clock')}{ui('note.minutes', count=post['minutes'])}</span><a href="{post['url']}" {read_label}>{ui('note.read')} {icon('arrow')}</a></div></div></article>'''
 
 
 def pagination(page):
@@ -147,19 +176,21 @@ def pagination(page):
     parts = []
     for item in page['pagination']:
         label = item['label']
+        displayed = ui('pagination.next') if label == '下一页' else ui('pagination.previous') if label == '上一页' else escape(label)
         if item['href']:
-            parts.append(f'<a href="{item["href"]}" aria-label="第 {escape(label)} 页">{escape(label)}</a>')
+            accessible = ui_attr('aria-label', 'pagination.next' if label == '下一页' else 'pagination.previous') if label in ('下一页', '上一页') else ui_attr('aria-label', 'pagination.page', page=label)
+            parts.append(f'<a href="{item["href"]}" {accessible}>{displayed}</a>')
         else:
-            parts.append(f'<span class="{"current" if item["current"] else "gap"}" {"aria-current=page" if item["current"] else ""}>{escape(label)}</span>')
-    return '<nav class="pagination" aria-label="文章分页">' + ''.join(parts) + '</nav>'
+            parts.append(f'<span class="{"current" if item["current"] else "gap"}" {"aria-current=page" if item["current"] else ""}>{displayed}</span>')
+    return '<nav class="pagination" ' + ui_attr('aria-label', 'pagination.label') + '>' + ''.join(parts) + '</nav>'
 
 
 def hero():
-    symbols = ''.join(f'<span>{escape(s)}</span>' for s in ['</>', '{}', '=>', '[]', '<>', '()', '::', '==', '++', ';', '/**/', '{ }'])
-    return f'''<section class="hero" aria-labelledby="hero-title"><div class="hero-grid" aria-hidden="true"></div><div class="code-symbols" aria-hidden="true">{symbols}</div>
-    <div class="hero-inner"><p class="hero-greeting">Hello.</p><h1 id="hero-title">I'm <span>doovvv.</span></h1>
-    <p class="hero-subtitle">代码、系统与学习笔记</p><p class="hero-description">保持好奇，让每一次思考留下痕迹。</p><div class="hero-actions"><a class="button button-primary" href="#notes">探索笔记 {icon('arrow')}</a><a class="text-link" href="/about/">关于我 {icon('up-right')}</a></div></div>
-    <div class="hero-bottom"><div class="hero-socials"><a href="https://github.com/doovvv" target="_blank" rel="noopener noreferrer" aria-label="在 GitHub 找到 doovvv">{icon('github')}</a><a href="/archives/" aria-label="浏览所有笔记">{icon('book')}</a><span>PERSONAL NOTEBOOK</span></div><a class="scroll-cue" href="#notes">SCROLL TO EXPLORE {icon('down')}</a></div></section>'''
+    return f'''<section class="hero" aria-labelledby="hero-title"><img class="hero-background" src="/assets/images/mountain-day.jpg" alt="" width="2200" height="1468" fetchpriority="high"><div class="hero-shade" aria-hidden="true"></div>
+    <div class="hero-inner"><div class="hero-intro"><p class="hero-greeting">{ui('hero.greeting')}</p><h1 id="hero-title">{ui('hero.im')} <strong class="hero-name">doovvv</strong></h1><p class="hero-subtitle">{ui('hero.subtitle')}</p>
+    <div class="hero-socials"><a href="https://github.com/doovvv" target="_blank" rel="noopener noreferrer" {ui_attr('aria-label', 'social.github')}>{icon('github')}</a><a href="/archives/" {ui_attr('aria-label', 'social.notes')}>{icon('book')}</a><a href="/about/" {ui_attr('aria-label', 'social.about')}>{icon('code')}</a></div></div>
+    <a class="hero-portrait" href="/about/" {ui_attr('aria-label', 'social.about')}><img src="/assets/images/avatar.gif" {ui_attr('alt', 'hero.avatar')} width="940" height="940"></a></div>
+    <a class="hero-bottom" href="#notes" {ui_attr('aria-label', 'hero.scroll')}>{ui('hero.caption')}{icon('chevrons-down')}</a></section>'''
 
 
 def featured():
@@ -169,75 +200,75 @@ def featured():
         cover = article_cover(post)
         cover_class = ' article-cover' if cover['article_image'] else ''
         cover_kind = 'article' if cover['article_image'] else 'default'
-        slides.append(f'''<article class="featured-slide" {'hidden' if i else ''} data-slide="{i}"><a class="featured-image{cover_class}" data-cover-kind="{cover_kind}" href="{post['url']}" aria-label="阅读 {escape(post['title'], quote=True)}" tabindex="{'-1' if i else '0'}"><img src="{escape(cover['src'], quote=True)}" data-cover-fallback="{cover['fallback']}" alt="" loading="lazy" width="1100" height="800"></a><div class="featured-content"><div class="eyebrow">SELECTED NOTE <span class="slide-number">0{i+1} / 03</span></div><span class="featured-category">{topic(post)[0]}</span><h3><a href="{post['url']}">{escape(post['title'])}</a></h3><p>{escape(post['excerpt'])}</p><a class="text-link" href="{post['url']}">继续阅读 {icon('up-right')}</a></div></article>''')
-    controls = ''.join(f'<button class="slide-dot{" active" if i == 0 else ""}" aria-label="查看精选文章 {i+1}" aria-pressed="{"true" if i == 0 else "false"}" data-slide-to="{i}"><span>0{i+1}</span></button>' for i in range(3))
-    return '<section class="featured-section" aria-labelledby="featured-title"><div class="section-label"><p class="eyebrow">01 / SELECTED</p><h2 id="featured-title">精选笔记</h2><span class="section-rule"></span><p>值得回看的思考，<br>也许是新的起点。</p></div><div class="featured">' + ''.join(slides) + '<div class="featured-controls">' + controls + '</div></div></section>'
+        slides.append(f'''<article class="featured-slide" {'hidden' if i else ''} data-slide="{i}"><a class="featured-image{cover_class}" data-cover-kind="{cover_kind}" href="{post['url']}" {ui_attr('aria-label', 'cover.read', title=post['title'])} tabindex="{'-1' if i else '0'}"><img src="{escape(cover['src'], quote=True)}" data-cover-fallback="{cover['fallback']}" alt="" loading="lazy" width="1100" height="800"></a><div class="featured-content"><div class="eyebrow">{ui('featured.note')}<span class="slide-number">0{i+1} / 03</span></div><span class="featured-category">{topic_label(post)}</span><h3><a href="{post['url']}">{escape(post['title'])}</a></h3><p lang="zh-CN">{escape(post['excerpt'])}</p><a class="text-link" href="{post['url']}">{ui('note.continue')} {icon('up-right')}</a></div></article>''')
+    controls = ''.join(f'<button class="slide-dot{" active" if i == 0 else ""}" {ui_attr("aria-label", "featured.select", count=i+1)} aria-pressed="{"true" if i == 0 else "false"}" data-slide-to="{i}"><span>0{i+1}</span></button>' for i in range(3))
+    return '<section class="featured-section" aria-labelledby="featured-title"><div class="section-label"><p class="eyebrow">' + ui('featured.eyebrow') + '</p><h2 id="featured-title">' + ui('featured.title') + '</h2><span class="section-rule"></span><p>' + ui('featured.description') + '</p></div><div class="featured">' + ''.join(slides) + '<div class="featured-controls">' + controls + '</div></div></section>'
 
 
 def home(page):
     is_root = page['file'] == 'index.html'
-    body = hero() if is_root else page_heading('THE NOTEBOOK', '继续探索', '想法慢慢积累，线索在这里延伸。')
+    body = hero() if is_root else page_heading('notes.notebook', 'notes.moreTitle', 'notes.moreDescription')
     body += '<div class="page-container home-content" id="notes">'
     if is_root:
         body += featured()
-    body += f'''<section class="notes-section"><div class="section-heading"><div><div class="eyebrow">02 / THE NOTEBOOK <span class="small-count">20</span></div><h2>最新笔记<span class="heading-dot">.</span></h2><span class="section-rule"></span></div><a class="text-link" href="/archives/">查看归档 {icon('up-right')}</a></div>
-    <div class="notes-toolbar"><span>{icon('grid')} 持续学习，认真记录。</span><span class="toolbar-order">按发布时间排序 {icon('down')}</span></div><div class="article-grid" id="article-grid">'''
+    body += f'''<section class="notes-section"><div class="section-heading"><div><div class="eyebrow">{ui('notes.eyebrow')}<span class="small-count">20</span></div><h2>{ui('notes.title')}<span class="heading-dot">.</span></h2><span class="section-rule"></span></div><a class="text-link" href="/archives/">{ui('notes.archive')} {icon('up-right')}</a></div>
+    <div class="notes-toolbar"><span>{icon('grid')}{ui('notes.tagline')}</span><span class="toolbar-order">{ui('notes.order')} {icon('down')}</span></div><div class="article-grid" id="article-grid">'''
     body += ''.join(card(post_for(url), i) for i, url in enumerate(page['posts'])) + '</div>' + pagination(page) + '</section>'
-    body += f'''<section class="about-strip"><div class="section-label"><div class="eyebrow">03 / ABOUT ME</div><h2>关于这里</h2><span class="section-rule"></span></div><div><h3>一切都没有意外，<br>只是多了些波折。</h3><p>这里是 doovvv 的个人博客。记录学习中的问题、实践里的发现，也给暂时没有答案的思考留一个位置。</p><div class="topic-chips"><span>Computer Science</span><span>Algorithms</span><span>AI & Systems</span></div><a class="text-link" href="/about/">认识一下 {icon('up-right')}</a></div></section></div>'''
+    body += f'''<section class="about-strip"><div class="section-label"><div class="eyebrow">{ui('about.eyebrow')}</div><h2>{ui('about.here')}</h2><span class="section-rule"></span></div><div><h3>{ui('about.quote')}</h3><p>{ui('about.description')}</p><div class="topic-chips">{ui('interest.cs')}{ui('interest.algorithms')}{ui('interest.systems')}</div><a class="text-link" href="/about/">{ui('about.meet')} {icon('up-right')}</a></div></section></div>'''
     return body
 
 
-def page_heading(eyebrow, title, description):
-    return f'<section class="page-heading page-container"><div class="eyebrow">{eyebrow}</div><h1>{escape(title)}<span class="heading-dot">.</span></h1><span class="section-rule"></span><p>{escape(description)}</p></section>'
+def page_heading(eyebrow, title, description, title_params=None, description_params=None, raw_title=None):
+    heading = escape(raw_title) if raw_title is not None else ui(title, **(title_params or {}))
+    return f'<section class="page-heading page-container"><div class="eyebrow">{ui(eyebrow)}</div><h1>{heading}<span class="heading-dot">.</span></h1><span class="section-rule"></span><p>{ui(description, **(description_params or {}))}</p></section>'
 
 
 def archive(page):
     parts = page['file'].split('/')
     period = ' / '.join(p for p in parts[1:] if p.isdigit() and len(p) in (2, 4))
-    title = f'{period} 的笔记' if period else '时间归档'
-    result = page_heading('THE ARCHIVE', title, '把零散的思考，放进时间的坐标里。')
+    result = page_heading('archive.eyebrow', 'archive.period' if period else 'archive.title', 'archive.description', title_params={'period': period} if period else None)
     years = sorted({p['date'][:4] for p in SITE['posts']}, reverse=True)
-    filters = '<a href="/archives/">全部</a>' + ''.join(f'<a href="/archives/{year}/">{year}</a>' for year in years)
-    result += f'<div class="page-container archive-layout"><aside class="archive-summary"><span class="big-number">20<span>篇</span></span><p>从 2023 年开始的记录</p><nav class="year-filters" aria-label="按年份浏览">{filters}</nav><div class="archive-note">Keep learning.<br>Keep a record.</div></aside><div class="timeline">'
+    filters = '<a href="/archives/">' + ui('archive.all') + '</a>' + ''.join(f'<a href="/archives/{year}/">{year}</a>' for year in years)
+    result += f'<div class="page-container archive-layout"><aside class="archive-summary"><span class="big-number">20<span>{ui("archive.count")}</span></span><p>{ui("archive.since")}</p><nav class="year-filters" {ui_attr("aria-label", "archive.years")}>{filters}</nav><div class="archive-note">{ui("archive.note")}</div></aside><div class="timeline">'
     year = None
     for url in page['posts']:
         post = post_for(url)
         if post['date'][:4] != year:
             year = post['date'][:4]
-            result += f'<h2 class="timeline-year">{year}<span>YEAR</span></h2>'
-        result += f'<a class="timeline-entry" href="{post["url"]}"><time datetime="{post["date"][:10]}">{post["date"][5:10].replace("-", ".")}</time><div><span>{topic(post)[0]}</span><h3>{escape(post["title"])}</h3></div>{icon("up-right")}</a>'
+            result += f'<h2 class="timeline-year">{year}<span>{ui("archive.year")}</span></h2>'
+        result += f'<a class="timeline-entry" href="{post["url"]}"><time datetime="{post["date"][:10]}">{post["date"][5:10].replace("-", ".")}</time><div>{topic_label(post)}<h3>{escape(post["title"])}</h3></div>{icon("up-right")}</a>'
     return result + pagination(page) + '</div></div>'
 
 
 def tag_page(page):
     if page['kind'] == 'tags':
-        result = page_heading('THE INDEX', '标签索引', '从一个关键词，找到相连的思考。') + '<div class="page-container tag-grid">'
+        result = page_heading('tags.index', 'tags.title', 'tags.description') + '<div class="page-container tag-grid">'
         for i, (url, name) in enumerate(SITE['tag_names'].items()):
             count = sum(any(unquote(t['url']) == url for t in p['tags']) for p in SITE['posts'])
-            result += f'<a class="tag-card" href="{quote(url, safe="/")}"><span class="tag-number">0{i+1}</span>{icon("tag")}<h2>{escape(name)}</h2><div><span>{count:02d} 篇笔记</span>{icon("up-right")}</div></a>'
+            label = ui('tags.electives') if name == '选修' else escape(name)
+            result += f'<a class="tag-card" href="{quote(url, safe="/")}"><span class="tag-number">0{i+1}</span>{icon("tag")}<h2>{label}</h2><div>{ui("tags.count", count=f"{count:02d}")}{icon("up-right")}</div></a>'
         return result + '</div>'
     name = SITE['tag_names'].get(unquote(page['url']), page['url'].split('/')[-2])
-    result = page_heading('TAG / ' + name.upper(), name, f'关于这个主题的 {len(page["posts"])} 篇记录。')
-    return result + '<div class="page-container"><a class="back-link" href="/tags/">← 所有标签</a><div class="article-grid" id="article-grid">' + ''.join(card(post_for(url), i) for i, url in enumerate(page['posts'])) + '</div></div>'
+    result = page_heading('tags.index', 'tags.electives' if name == '选修' else None, 'tags.topicDescription', raw_title=None if name == '选修' else name, description_params={'count':len(page['posts'])})
+    return result + '<div class="page-container"><a class="back-link" href="/tags/">' + ui('tags.all') + '</a><div class="article-grid" id="article-grid">' + ''.join(card(post_for(url), i) for i, url in enumerate(page['posts'])) + '</div></div>'
 
 
 def post_page(post):
-    label = topic(post)[0]
     date = post['date'][:10].replace('-', '.')
-    tags = ''.join(f'<a href="{t["url"]}">#{escape(t["name"])}</a>' for t in post['tags'])
-    toc = post['toc'] or '<p class="toc-empty">本文没有章节目录。</p>'
-    result = f'''<section class="article-heading page-container"><a class="back-link" href="/archives/">← 返回笔记</a><div class="eyebrow">{escape(label)} / NOTEBOOK</div><h1>{escape(post['title'])}</h1><div class="article-meta"><a href="/about/" class="author-meta"><span class="author-initial">d.</span>doovvv</a><span class="meta-divider"></span><time datetime="{post['date'][:10]}">{date}</time><span>{icon('clock')}{post['minutes']} 分钟阅读</span></div><div class="article-tags">{tags}</div></section>
-    <div class="reading-layout page-container"><article class="reading-article" aria-label="文章正文">{post['body']}<div class="article-end"><span>END OF NOTE</span><i></i>{icon('code')}</div><div class="article-license"><span>最后更新 {post['updated'][:10]}</span><span>本文内容采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-NC-SA 4.0</a> 许可</span></div>'''
-    result += '<nav class="article-neighbors" aria-label="相邻文章">'
-    for direction, title in [('prev', '上一篇'), ('next', '下一篇')]:
+    tags = ''.join(f'<a href="{t["url"]}">#{ui("tags.electives") if t["name"] == "选修" else escape(t["name"])}</a>' for t in post['tags'])
+    toc = post['toc'] or '<p class="toc-empty">' + ui('article.tocEmpty') + '</p>'
+    result = f'''<section class="article-heading page-container"><a class="back-link" href="/archives/">{ui('article.back')}</a><div class="eyebrow">{topic_label(post)} / {ui('notes.notebook')}</div><h1 lang="zh-CN">{escape(post['title'])}</h1><div class="article-meta"><a href="/about/" class="author-meta"><span class="author-initial">d.</span>doovvv</a><span class="meta-divider"></span><time datetime="{post['date'][:10]}">{date}</time><span>{icon('clock')}{ui('note.minutes', count=post['minutes'])}</span></div><div class="article-tags">{tags}</div></section>
+    <div class="reading-layout page-container"><article class="reading-article" {ui_attr('aria-label', 'article.body')}><div class="article-original" lang="zh-CN">{post['body']}</div><div class="article-end">{ui('article.end')}<i></i>{icon('code')}</div><div class="article-license">{ui('article.updated', date=post['updated'][:10])}<span>{ui('article.licenseBefore')} <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-NC-SA 4.0</a> {ui('article.licenseAfter')}</span></div>'''
+    result += '<nav class="article-neighbors" ' + ui_attr('aria-label', 'article.neighbors') + '>'
+    for direction, title in [('prev', 'article.previous'), ('next', 'article.next')]:
         neighbor = post[direction]
-        result += f'<a href="{neighbor["url"]}"><span>{title}</span><strong>{escape(neighbor["title"])}</strong>{icon("arrow")}</a>' if neighbor else '<span></span>'
-    result += f'''</nav><section class="comments-section" aria-labelledby="comments-heading"><div class="section-heading"><h2 id="comments-heading">交流与讨论<span class="heading-dot">.</span></h2></div><button class="button button-outline load-comments">展开评论 {icon('arrow')}</button><p class="comment-status" role="status"></p><div id="valine-comments"></div></section></article><aside class="reading-sidebar"><div class="toc-heading"><span>ON THIS PAGE</span>{icon('book')}</div>{toc}<div class="reading-progress"><div><span>阅读进度</span><span id="reading-percent">0%</span></div><div class="progress-track"><span id="reading-progress-bar"></span></div></div></aside></div>'''
+        result += f'<a href="{neighbor["url"]}">{ui(title)}<strong>{escape(neighbor["title"])}</strong>{icon("arrow")}</a>' if neighbor else '<span></span>'
+    result += f'''</nav><section class="comments-section" aria-labelledby="comments-heading"><div class="section-heading"><h2 id="comments-heading">{ui('article.comments')}<span class="heading-dot">.</span></h2></div><button class="button button-outline load-comments">{ui('article.loadComments')} {icon('arrow')}</button><p class="comment-status" role="status"></p><div id="valine-comments"></div></section></article><aside class="reading-sidebar"><div class="toc-heading">{ui('article.toc')}{icon('book')}</div><div lang="zh-CN">{toc}</div><div class="reading-progress"><div>{ui('article.progress')}<span id="reading-percent">0%</span></div><div class="progress-track"><span id="reading-progress-bar"></span></div></div></aside></div>'''
     return result
 
 
 def about():
-    return page_heading('BEHIND THE NOTES', '你好，我是 doovvv', '一个用代码探索问题，用文字整理思考的人。') + f'''<div class="page-container about-page"><div class="about-portrait"><span>d.</span><div class="eyebrow">ALWAYS A WORK IN PROGRESS</div></div><div class="about-copy"><div class="eyebrow">MY LITTLE CORNER OF THE INTERNET</div><h2>保持好奇，<br>让思考留下痕迹。</h2><p>这里收集了我在计算机科学、算法、人工智能和系统学习中的笔记。它们不总是完整的答案，更像是理解一个问题时留下的路标。</p><p>一切都没有意外，只是多了些波折。</p><a class="button button-primary" href="https://github.com/doovvv" target="_blank" rel="noopener noreferrer">{icon('github')} GitHub {icon('up-right')}</a><div class="about-stats"><div><strong>20</strong><span>篇学习笔记</span></div><div><strong>06</strong><span>个原有标签</span></div><div><strong>2023</strong><span>开始记录</span></div></div></div></div>'''
+    return page_heading('about.behind', 'about.title', 'about.intro') + f'''<div class="page-container about-page"><div class="about-portrait"><span>d.</span><div class="eyebrow">{ui('about.progress')}</div></div><div class="about-copy"><div class="eyebrow">{ui('about.corner')}</div><h2>{ui('about.heading')}</h2><p>{ui('about.details')}</p><p>{ui('about.quote')}</p><a class="button button-primary" href="https://github.com/doovvv" target="_blank" rel="noopener noreferrer">{icon('github')} GitHub {icon('up-right')}</a><div class="about-stats"><div><strong>20</strong>{ui('about.notes')}</div><div><strong>06</strong>{ui('about.tags')}</div><div><strong>2023</strong>{ui('about.since')}</div></div></div></div>'''
 
 
 def write_covers():
@@ -273,7 +304,7 @@ def main():
         elif kind in ['tag', 'tags']:
             body, title, description = tag_page(page), '标签索引' if kind == 'tags' else SITE['tag_names'].get(unquote(page['url']), '标签'), '按主题探索 doovvv 的笔记'
         else:
-            body = page_heading('RESOURCES', '资源与链接', '常用工具与参考资料。') + '<div class="page-container reading-article">' + page.get('body', '') + '</div>'
+            body = page_heading('resources.eyebrow', 'resources.title', 'resources.description') + '<div class="page-container reading-article">' + page.get('body', '') + '</div>'
             title, description = '资源与链接', SITE['description']
         active = 'tags' if kind == 'tag' else kind
         output = ROOT / page['file']
@@ -286,6 +317,7 @@ def main():
     (ROOT / 'assets/search.json').write_text(json.dumps(search, ensure_ascii=False, separators=(',', ':')), encoding='utf8')
     (ROOT / 'assets/favicon.svg').write_text('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="12" fill="#1d4ed8"/><text x="13" y="47" fill="#f1f4f6" font-size="46" font-family="Arial" font-weight="bold">d<tspan fill="#bfdbfe">.</tspan></text></svg>', encoding='utf8')
     write_covers()
+    (ROOT / 'assets/ui-messages.js').write_text('window.BLOG_UI_MESSAGES=' + json.dumps(MESSAGES, ensure_ascii=False, separators=(',', ':')) + ';\n', encoding='utf8')
     (ROOT / '.nojekyll').touch()
     print(f'Built {len(SITE["pages"]) + 1} pages, 20 searchable articles, and 7 cover illustrations.')
 

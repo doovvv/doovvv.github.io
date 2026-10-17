@@ -1,6 +1,8 @@
 # doovvv · Personal Notes
 
-采用 [devportfolio](https://github.com/nuonuo-888/devportfolio) 的白底、皇家蓝、等宽字体与网格背景风格。首页使用开发者介绍，精选和关于区采用左侧标题、右侧内容的布局；同时保留文章封面、全文搜索和原有博客路径。默认浅色，也支持切换深色模式。
+首页参考 [Memory-Blog](https://github.com/LinMoQC/Memory-Blog) 的全屏背景、左侧自我介绍、右侧圆形头像布局，搭配已有山景照片和博客头像。顶部导航保持现有外观；文章列表沿用白底、皇家蓝与等宽字体。默认英文、浅色，可切换中文或深色模式。
+
+中英切换覆盖导航、页面说明、分类、搜索、阅读控件和评论界面，浏览器会记住语言选择。文章标题、摘要、正文和目录保留原文。
 
 ## 本地预览
 
@@ -15,6 +17,8 @@ python -m http.server 8001 --bind 127.0.0.1
 ## 内容与构建
 
 - `content/site.json`：20 篇已恢复文章的正文、标题、标签、日期，以及旧站页面路径。正文是发布后 HTML 的原样快照。
+- `content/ui.json`：英文和中文界面文案；新增界面文字应同时补齐两种语言。
+- `assets/i18n.js`：界面翻译、语言记忆与评论表单语言同步；`assets/ui-messages.js` 由构建生成。
 - `tools/build.py`：使用 Python 标准库生成页面、搜索索引与文章封面，无需安装构建依赖。
 - `assets/site.css`：视觉样式与手机适配；颜色集中在文件开头的 CSS 变量中。
 - `assets/fonts/`：本地 IBM Plex Mono 字体和 SIL Open Font License。
@@ -28,7 +32,9 @@ python -m http.server 8001 --bind 127.0.0.1
 ```powershell
 python tools/build.py
 python -m unittest discover -s tests -v
+node --test tests/i18n.test.cjs
 node --check assets/site.js
+node --check assets/i18n.js
 ```
 
 构建会更新原有 46 条公开页面路径，并生成一页“关于”。`lib/pace/README.html` 是旧依赖中的说明文件，保持原样。已有文章的图片和 PDF 路径继续使用。
@@ -59,7 +65,7 @@ node --check assets/site.js
 
 ## 素材
 
-视觉参考：[nuonuo-888/devportfolio](https://github.com/nuonuo-888/devportfolio)。当前布局和样式在现有静态生成器中重新实现，无需安装参考项目的框架依赖。
+视觉参考：[LinMoQC/Memory-Blog](https://github.com/LinMoQC/Memory-Blog) 的首页构图、[nuonuo-888/devportfolio](https://github.com/nuonuo-888/devportfolio) 的文章区风格。当前布局和样式在现有静态生成器中重新实现，无需安装参考项目的框架依赖。
 
 此前使用的摄影素材来自 Unsplash，保留在本地素材目录中：
 

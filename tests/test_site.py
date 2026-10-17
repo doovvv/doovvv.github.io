@@ -54,7 +54,7 @@ class SiteTests(unittest.TestCase):
                 output = (ROOT / page['file']).read_text(encoding='utf8')
                 self.assertIn('/assets/site.css', output)
                 self.assertIn('/assets/site.js', output)
-                self.assertIn('lang="zh-CN"', output)
+                self.assertIn('lang="en"', output)
                 self.assertIn('id="site-nav"', output)
 
     def test_every_article_preserves_its_complete_published_body(self):

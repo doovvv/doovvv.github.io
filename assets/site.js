@@ -3,13 +3,19 @@
   const $ = (selector, root = document) => root.querySelector(selector);
   const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
   const root = document.documentElement;
+  const { t, setText, getLanguage, syncComments } = window.BlogI18n;
+  let commentInstance;
+  function localizedAttribute(element, attribute, key) {
+    element?.setAttribute('data-i18n-' + attribute, key);
+    element?.setAttribute(attribute, t(key));
+  }
 
   // Theme changes are local to the reader and survive navigation.
   const themeButton = $('.theme-toggle');
   function syncTheme() {
     const dark = root.dataset.theme !== 'light';
-    themeButton?.setAttribute('aria-label', dark ? '切换为浅色模式' : '切换为深色模式');
-    themeButton?.setAttribute('title', dark ? '切换为浅色模式' : '切换为深色模式');
+    localizedAttribute(themeButton, 'aria-label', dark ? 'theme.light' : 'theme.dark');
+    localizedAttribute(themeButton, 'title', dark ? 'theme.light' : 'theme.dark');
     $('meta[name="theme-color"]')?.setAttribute('content', dark ? '#111827' : '#ffffff');
   }
   themeButton?.addEventListener('click', () => {
@@ -21,15 +27,18 @@
 
   const menu = $('#site-nav');
   const menuButton = $('.menu-toggle');
+  function syncMenuButton() {
+    localizedAttribute(menuButton, 'aria-label', menu?.classList.contains('is-open') ? 'menu.close' : 'menu.open');
+  }
   function closeMenu() {
     menu?.classList.remove('is-open');
     menuButton?.setAttribute('aria-expanded', 'false');
-    menuButton?.setAttribute('aria-label', '打开导航菜单');
+    syncMenuButton();
   }
   menuButton?.addEventListener('click', () => {
     const open = menu.classList.toggle('is-open');
     menuButton.setAttribute('aria-expanded', String(open));
-    menuButton.setAttribute('aria-label', open ? '关闭导航菜单' : '打开导航菜单');
+    syncMenuButton();
   });
   menu?.addEventListener('click', event => { if (event.target.closest('a')) closeMenu(); });
   document.addEventListener('click', event => {
@@ -94,8 +103,8 @@
     const version = ++searchVersion;
     const query = input.value.trim();
     results.replaceChildren();
-    if (!query) { status.textContent = '在 20 篇笔记中，寻找一个想法。'; return; }
-    status.textContent = '正在查找…';
+    if (!query) { setText(status, 'search.initial', { count: 20 }); return; }
+    setText(status, 'search.loading');
     try {
       const data = await loadSearch();
       if (version !== searchVersion) return;
@@ -103,7 +112,7 @@
       const found = data.filter(post => terms.every(term => post.normalizedTitle.includes(term) || post.normalizedText.includes(term)))
         .map(post => ({ post, score: terms.reduce((sum, term) => sum + (post.normalizedTitle.includes(term) ? 100 : 1), 0) }))
         .sort((a, b) => b.score - a.score || b.post.date.localeCompare(a.post.date));
-      status.textContent = found.length ? `找到 ${found.length} 篇相关笔记` : '暂时没有找到相关内容，换个关键词试试。';
+      setText(status, found.length ? 'search.found' : 'search.empty', { count: found.length });
       found.forEach(({ post }) => {
         const anchor = document.createElement('a');
         anchor.className = 'search-result';
@@ -121,7 +130,7 @@
         results.append(anchor);
       });
     } catch (_) {
-      if (version === searchVersion) status.textContent = '搜索暂时无法加载，请稍后重新输入关键词。';
+      if (version === searchVersion) setText(status, 'search.error');
     }
   }
 
@@ -160,6 +169,13 @@
     }
   });
 
+  document.addEventListener('blog:language-change', () => {
+    syncTheme();
+    syncMenuButton();
+    syncComments(commentInstance, $('#valine-comments'));
+    if (dialog?.open) runSearch();
+  });
+
   // Preserve the old article markup and enhance only presentation controls.
   $$('.post-body figure.highlight').forEach(figure => {
     const pre = $('.code pre', figure) || $('pre', figure);
@@ -169,16 +185,16 @@
     label.textContent = [...figure.classList].find(name => name !== 'highlight')?.toUpperCase() || 'CODE';
     const button = document.createElement('button');
     button.className = 'code-copy';
-    button.textContent = '复制代码';
-    button.setAttribute('aria-label', '复制此代码块');
+    setText(button, 'code.copy');
+    localizedAttribute(button, 'aria-label', 'code.copyAria');
     button.addEventListener('click', async () => {
       const copy = pre.cloneNode(true);
       $$('br', copy).forEach(br => br.replaceWith('\n'));
       try {
         await navigator.clipboard.writeText(copy.textContent);
-        button.textContent = '已复制';
-      } catch (_) { button.textContent = '复制未成功'; }
-      setTimeout(() => { button.textContent = '复制代码'; }, 1800);
+        setText(button, 'code.copied');
+      } catch (_) { setText(button, 'code.copyError'); }
+      setTimeout(() => { setText(button, 'code.copy'); }, 1800);
     });
     figure.append(label, button);
   });
@@ -207,16 +223,16 @@
       if (!image.isConnected) return;
       const fallback = document.createElement('span');
       fallback.className = 'missing-image';
-      fallback.textContent = '原图片暂缺';
+      setText(fallback, 'image.missing');
       fallback.setAttribute('role', 'img');
-      fallback.setAttribute('aria-label', '此图片未能从原网站恢复');
+      localizedAttribute(fallback, 'aria-label', 'image.missingAria');
       image.replaceWith(fallback);
     };
     image.addEventListener('error', showFallback, { once: true });
     if (image.complete && image.naturalWidth === 0) showFallback();
   });
 
-  const body = $('.reading-article > .post-body');
+  const body = $('.reading-article .post-body');
   const headings = body ? $$('h1[id],h2[id],h3[id],h4[id],h5[id],h6[id]', body) : [];
   const tocLinks = $$('.reading-sidebar .post-toc a');
   let pendingScroll = false;
@@ -263,19 +279,21 @@
   commentButton?.addEventListener('click', () => {
     const status = $('.comment-status');
     const config = window.BLOG_COMMENTS;
-    if (!config?.appId) { status.textContent = '评论暂时无法加载。'; return; }
+    if (!config?.appId) { setText(status, 'comments.unavailable'); return; }
     commentButton.disabled = true;
-    status.textContent = '正在加载评论…';
+    setText(status, 'comments.loading');
     const script = document.createElement('script');
     script.src = '/assets/vendor/valine.min.js';
     script.onload = () => {
       try {
-        new window.Valine({ ...config, el: '#valine-comments', path: location.pathname, placeholder: '留下你的想法…', avatar: 'mm', meta: ['nick', 'mail', 'link'], pageSize: 10, visitor: false, lang: 'zh-cn', recordIP: false });
+        commentInstance = new window.Valine({ ...config, el: '#valine-comments', path: location.pathname, placeholder: t('comments.placeholder'), avatar: 'mm', meta: ['nick', 'mail', 'link'], pageSize: 10, visitor: false, lang: getLanguage() === 'en' ? 'en' : 'zh-cn', recordIP: false });
+        syncComments(commentInstance, $('#valine-comments'));
         commentButton.hidden = true;
+        status.removeAttribute('data-i18n');
         status.textContent = '';
-      } catch (_) { status.textContent = '评论服务暂时不可用，请稍后再试。'; commentButton.disabled = false; }
+      } catch (_) { setText(status, 'comments.error'); commentButton.disabled = false; }
     };
-    script.onerror = () => { status.textContent = '评论暂时无法加载，请稍后再试。'; commentButton.disabled = false; script.remove(); };
+    script.onerror = () => { setText(status, 'comments.loadError'); commentButton.disabled = false; script.remove(); };
     document.head.append(script);
   });
 })();
