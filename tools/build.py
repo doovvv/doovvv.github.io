@@ -287,24 +287,29 @@ def about():
         return f'<div class="profile-section-heading"><p class="eyebrow">{number} / {ui("profile.nav." + name)}</p><h2 id="profile-' + name + '-title">' + ui('profile.' + name + '.title') + '</h2><p>' + ui(description) + '</p></div>'
 
     result += '<section class="profile-section" id="experience" aria-labelledby="profile-experience-title">' + heading('02', 'experience', 'profile.experience.intro') + '<div class="profile-timeline">'
-    for key, mark in [('tencent', 'T'), ('bytedance', 'B')]:
+    for key in ['tencent', 'bytedance']:
         prefix = 'profile.' + key
         bullets = ''.join('<li>' + ui(prefix + '.point' + str(i)) + '</li>' for i in range(1, 4))
         tags = {'tencent': ['Python', 'LangGraph', 'MCP', 'RAG', 'SSE'], 'bytedance': ['Flink CDC', 'MySQL', 'StarRocks', 'CI/CD']}[key]
         chips = ''.join('<span>' + escape(tag) + '</span>' for tag in tags)
-        result += f'<article class="profile-job"><div class="profile-company-mark {key}" aria-hidden="true">{mark}</div><div class="profile-job-main"><div class="profile-job-header"><div><h3>{ui(prefix + ".company")}</h3><p class="profile-job-role">{ui(prefix + ".role")}</p></div><span class="profile-period">{ui(prefix + ".period")}</span></div><p class="profile-job-context">{ui(prefix + ".team")}</p><ul class="profile-job-points">{bullets}</ul><div class="profile-tech">{chips}</div>'
+        extension = 'png' if key == 'tencent' else 'svg'
+        result += f'<article class="profile-job"><div class="profile-company-mark {key}" aria-hidden="true"><img src="/assets/brands/{key}.{extension}" alt="" width="44" height="44" loading="lazy"></div><div class="profile-job-main"><div class="profile-job-header"><div><h3>{ui(prefix + ".company")}</h3><p class="profile-job-role">{ui(prefix + ".role")}</p></div><span class="profile-period">{ui(prefix + ".period")}</span></div><p class="profile-job-context">{ui(prefix + ".team")}</p><ul class="profile-job-points">{bullets}</ul><div class="profile-tech">{chips}</div>'
         if key == 'tencent':
             result += '<div class="profile-recognition">' + icon('up-right') + ui('profile.tencent.award') + '</div>'
         result += '</div></article>'
     result += '</div></section>'
 
     result += '<section class="profile-section" id="education" aria-labelledby="profile-education-title">' + heading('03', 'education', 'profile.education.intro') + '<div class="profile-education-grid">'
-    for key, initials in [('nju', 'NJU'), ('sysu', 'SYSU')]:
+    for key in ['nju', 'sysu']:
         prefix = 'profile.' + key
-        result += f'<article class="profile-school"><div class="profile-school-top"><span class="profile-school-mark">{initials}</span><span class="profile-period">{ui(prefix + ".period")}</span></div><h3>{ui(prefix + ".name")}</h3><p class="profile-degree">{ui(prefix + ".degree")}</p><p class="profile-school-detail">{ui(prefix + ".school")}</p><span class="profile-school-note">{ui(prefix + ".note")}</span></article>'
+        extension = 'svg' if key == 'nju' else 'png'
+        result += f'<article class="profile-school"><div class="profile-school-top"><span class="profile-school-mark" aria-hidden="true"><img src="/assets/brands/{key}.{extension}" alt="" width="80" height="80" loading="lazy"></span><span class="profile-period">{ui(prefix + ".period")}</span></div><h3>{ui(prefix + ".name")}</h3><p class="profile-degree">{ui(prefix + ".degree")}</p><p class="profile-school-detail">{ui(prefix + ".school")}</p><span class="profile-school-note">{ui(prefix + ".note")}</span></article>'
     result += '</div></section>'
 
-    result += '<section class="profile-section" id="skills" aria-labelledby="profile-skills-title">' + heading('04', 'skills', 'profile.skills.intro') + '<div class="profile-skills-grid">'
+    result += '<section class="profile-section" id="skills" aria-labelledby="profile-skills-title">' + heading('04', 'skills', 'profile.skills.intro') + '<div class="profile-tool-list">'
+    for symbol, label in [('go', 'Go'), ('python', 'Python'), ('mysql', 'MySQL'), ('redis', 'Redis'), ('apachekafka', 'Kafka'), ('git', 'Git'), ('linux', 'Linux'), ('docker', 'Docker')]:
+        result += f'<figure class="profile-tool"><img src="/assets/brands/{symbol}.svg" alt="" width="48" height="48" loading="lazy"><figcaption>{label}</figcaption></figure>'
+    result += '</div><div class="profile-skills-grid">'
     groups = [('languages', 'code', ['Go', 'Python', 'SQL']), ('ai', 'grid', ['LangGraph', 'LangChain', 'MCP', 'RAG']), ('data', 'archive', ['MySQL', 'Redis', 'Kafka', 'Flink CDC', 'StarRocks']), ('engineering', 'book', ['Git', 'Linux', 'Docker', 'RPC', 'CI/CD'])]
     for key, symbol, items in groups:
         prefix = 'profile.skills.' + key
