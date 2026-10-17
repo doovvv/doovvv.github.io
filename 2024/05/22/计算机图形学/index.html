@@ -1,257 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 7.0.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/icons8-%E6%BA%90%E4%BB%A3%E7%A0%81-32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/icons8-%E6%BA%90%E4%BB%A3%E7%A0%81-16.png">
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
-
-<link rel="stylesheet" href="/css/main.css">
-
-
-<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
-  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
-  <script src="/lib/pace/pace.min.js"></script>
-
-<script id="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
-  </script>
-
-  <meta name="description" content="计算机图形学笔记">
-<meta property="og:type" content="article">
-<meta property="og:title" content="计算机图形学">
-<meta property="og:url" content="http://example.com/2024/05/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/index.html">
-<meta property="og:site_name" content="doovvv">
-<meta property="og:description" content="计算机图形学笔记">
-<meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/2024/05/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/image-20241018113045942.png">
-<meta property="og:image" content="http://example.com/2024/05/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/image-20241018113239125.png">
-<meta property="og:image" content="http://example.com/2024/05/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/image-20241025101319192.png">
-<meta property="og:image" content="http://example.com/2024/05/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/image-20241025101842106.png">
-<meta property="og:image" content="http://example.com/2024/05/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/image-20241101101941186.png">
-<meta property="og:image" content="http://example.com/2024/05/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/image-20241101102314762.png">
-<meta property="og:image" content="http://example.com/2024/05/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/image-20241101102911369.png">
-<meta property="og:image" content="http://example.com/2024/05/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/image-20241101111227195.png">
-<meta property="og:image" content="http://example.com/2024/05/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/image-20241101111436952.png">
-<meta property="og:image" content="http://example.com/2024/05/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/image-20241101114559520.png">
-<meta property="og:image" content="http://example.com/2024/05/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/image-20241108101730828.png">
-<meta property="og:image" content="http://example.com/2024/05/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/image-20241108102525721.png">
-<meta property="og:image" content="http://example.com/2024/05/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/image-20241108102634135.png">
-<meta property="og:image" content="http://example.com/2024/05/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/image-20241108105027685.png">
-<meta property="og:image" content="http://example.com/2024/05/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/image-20241108105239328.png">
-<meta property="og:image" content="http://example.com/2024/05/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/image-20241108105334991.png">
-<meta property="og:image" content="http://example.com/2024/05/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/image-20241128212751679.png">
-<meta property="og:image" content="http://example.com/2024/05/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/image-20241128214835075.png">
-<meta property="og:image" content="http://example.com/2024/05/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/image-20241128215027657.png">
-<meta property="og:image" content="http://example.com/2024/05/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/image-20241128220429603.png">
-<meta property="og:image" content="http://example.com/2024/05/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/image-20241128220735520.png">
-<meta property="og:image" content="http://example.com/2024/05/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/image-20241128221053241.png">
-<meta property="og:image" content="http://example.com/2024/05/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/image-20241129102535481.png">
-<meta property="og:image" content="http://example.com/2024/05/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/image-20241129104550995.png">
-<meta property="article:published_time" content="2024-05-22T12:22:44.000Z">
-<meta property="article:modified_time" content="2024-11-29T07:51:08.963Z">
-<meta property="article:author" content="doovvv">
-<meta property="article:tag" content="选修">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2024/05/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/image-20241018113045942.png">
-
-<link rel="canonical" href="http://example.com/2024/05/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/">
-
-
-<script id="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome : false,
-    isPost : true,
-    lang   : 'en'
-  };
-</script>
-
-  <title>计算机图形学 | doovvv</title>
-  
-
-
-
-
-
-
-  <noscript>
-  <style>
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
-  </style>
-</noscript>
-
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
-
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="Toggle navigation bar">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
-    </div>
-  </div>
-
-  <div class="site-meta">
-
-    <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">doovvv</h1>
-      <span class="logo-line-after"><i></i></span>
-    </a>
-  </div>
-
-  <div class="site-nav-right">
-    <div class="toggle popup-trigger">
-    </div>
-  </div>
-</div>
-
-
-
-
-<nav class="site-nav">
-  <ul id="menu" class="main-menu menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
-
-  </li>
-        <li class="menu-item menu-item-tags">
-
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
-
-  </li>
-  </ul>
-</nav>
-
-
-
-
-</div>
-    </header>
-
-    
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
-  <div class="reading-progress-bar"></div>
-
-
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
-
-          <div class="content post posts-expand">
-            
-
-    
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://cdn.z.wiki/autoupload/20241024/zc0p/940X940/avatar.gif">
-      <meta itemprop="name" content="doovvv">
-      <meta itemprop="description" content="一切都没有意外，只是多了些波折">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="doovvv">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          计算机图形学
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2024-05-22 20:22:44" itemprop="dateCreated datePublished" datetime="2024-05-22T20:22:44+08:00">2024-05-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2024-11-29 15:51:08" itemprop="dateModified" datetime="2024-11-29T15:51:08+08:00">2024-11-29</time>
-              </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine: </span>
-    
-    <a title="valine" href="/2024/05/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2024/05/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-        <p>计算机图形学笔记</p>
+<!doctype html>
+<html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="light dark"><meta name="theme-color" content="#ffffff">
+<title>计算机图形学 | doovvv</title><meta name="description" content="采样：在时域上是乘积，在频域上就是卷积。如果采样太稀疏了，频率的重复就会重叠"><link rel="canonical" href="https://doovvv.cn/2024/05/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/"><meta property="og:title" content="计算机图形学"><meta property="og:description" content="采样：在时域上是乘积，在频域上就是卷积。如果采样太稀疏了，频率的重复就会重叠"><meta property="og:type" content="article"><meta property="og:url" content="https://doovvv.cn/2024/05/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/"><meta property="og:image" content="https://doovvv.cn/assets/social-card.jpg"><meta property="og:image:type" content="image/jpeg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg"><link rel="preload" href="/assets/fonts/ibm-plex-mono-bold.ttf" as="font" type="font/ttf" crossorigin><script>try{const t=localStorage.getItem('doovvv-theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){}</script><link rel="stylesheet" href="/assets/site.css"><script src="/assets/site.js" defer></script><script>window.BLOG_IMAGE_ALIASES={"image-20240609212414729.png": "/assets/images/recovered-decision-tree-1.png", "image-20240609213812491.png": "/assets/images/recovered-decision-tree-2.png", "https://pic3.zhimg.com/v2-0a586723aa7eb9e4cdbd38d564ef0320_r.jpg": "/assets/images/article-reference-1.jpg", "https://pic1.zhimg.com/v2-ec9107c17d7532b6a53be30fd84dbffc_r.jpg": "/assets/images/article-reference-2.jpg"};</script><script>window.BLOG_COMMENTS={"appId": "IeEMujBge2kAmKaLJDalYGMx-gzGzoHsz", "appKey": "ZJGbpaRGRbziJ12K4CO5IvuI", "serverURLs": "https://ieemujbg.lc-cn-n1-shared.com"};</script></head>
+<body class="page-post" id="top"><a class="skip-link" href="#main-content">跳到主要内容</a>
+    <header class="site-header"><div class="header-inner">
+    <a class="brand" href="/" aria-label="doovvv 首页"><span class="brand-symbol" aria-hidden="true">&lt;/&gt;</span><span>doovvv<span class="brand-dot">_</span></span></a>
+    <nav id="site-nav" class="site-nav" aria-label="主导航"><a href="/" class="nav-link">首页</a><a href="/archives/" class="nav-link">归档</a><a href="/tags/" class="nav-link">标签</a><a href="/2023/12/05/%E8%B5%84%E6%BA%90%E9%93%BE%E6%8E%A5/" class="nav-link">资源</a><a href="/about/" class="nav-link">关于</a></nav>
+    <div class="header-actions"><button class="icon-button search-toggle" aria-label="搜索文章" title="搜索文章（Ctrl K）"><svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 4.5 4.5"/></svg></button>
+    <span class="header-divider"></span><button class="icon-button theme-toggle" aria-label="切换为浅色模式" title="切换主题"><svg class="icon sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg><svg class="icon moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.2 14A8.5 8.5 0 0 1 10 3.8 8.5 8.5 0 1 0 20.2 14Z"/></svg></button>
+    <a class="github-link icon-button" href="https://github.com/doovvv" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-4.3 1.3-4.3-2.3-6-2.8M15 22v-3.5c0-1 .1-1.5-.5-2 3.3-.4 6.7-1.6 6.7-7.4a5.6 5.6 0 0 0-1.5-3.9A5.3 5.3 0 0 0 19.5 1S18.3.6 15 2.5a13.4 13.4 0 0 0-6 0C5.7.6 4.5 1 4.5 1a5.3 5.3 0 0 0-.2 4.2 5.6 5.6 0 0 0-1.5 3.9c0 5.8 3.4 7 6.7 7.4-.5.5-.6 1.2-.5 2V22"/></svg></a>
+    <button class="icon-button menu-toggle" aria-label="打开导航菜单" aria-expanded="false" aria-controls="site-nav"><svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button></div></div></header><main id="main-content"><section class="article-heading page-container"><a class="back-link" href="/archives/">← 返回笔记</a><div class="eyebrow">计算机图形学 / NOTEBOOK</div><h1>计算机图形学</h1><div class="article-meta"><a href="/about/" class="author-meta"><span class="author-initial">d.</span>doovvv</a><span class="meta-divider"></span><time datetime="2024-05-22">2024.05.22</time><span><svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3.5 2"/></svg>4 分钟阅读</span></div><div class="article-tags"><a href="/tags/%E9%80%89%E4%BF%AE/">#选修</a></div></section>
+    <div class="reading-layout page-container"><article class="reading-article" aria-label="文章正文"><div class="post-body" itemprop="articleBody">
+<p>计算机图形学笔记</p>
 <span id="more"></span>
 <h1 id="变换">变换</h1>
 <h2 id="透视投影矩阵">透视投影矩阵</h2>
 <figure>
-<img src="/2024/05/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/image-20241018113045942.png" alt="image-20241018113045942">
+<img alt="image-20241018113045942" src="/2024/05/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/image-20241018113045942.png"/>
 <figcaption aria-hidden="true">image-20241018113045942</figcaption>
 </figure>
 <figure>
-<img src="/2024/05/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/image-20241018113239125.png" alt="image-20241018113239125">
+<img alt="image-20241018113239125" src="/2024/05/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/image-20241018113239125.png"/>
 <figcaption aria-hidden="true">image-20241018113239125</figcaption>
 </figure>
 <h1 id="光栅化">光栅化</h1>
@@ -260,18 +29,18 @@
 <li>像素（x,y）</li>
 </ul>
 <figure>
-<img src="/2024/05/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/image-20241025101319192.png" alt="image-20241025101319192">
+<img alt="image-20241025101319192" src="/2024/05/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/image-20241025101319192.png"/>
 <figcaption aria-hidden="true">image-20241025101319192</figcaption>
 </figure>
 <p>转换到屏幕空间（先不管z轴）</p>
-<p><img src="/2024/05/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/image-20241025101842106.png"></p>
+<p><img src="/2024/05/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/image-20241025101842106.png"/></p>
 <h2 id="抗锯齿反走样">抗锯齿（反走样）</h2>
 <p>采样会产生一系列问题，比如说锯齿，摩尔纹</p>
 <p>这些问题产生的本质原因都是因为：信号变化太快，而采样无法跟上</p>
 <p>走样：同一组采样，但是他的信号函数可以完全不一样</p>
 <p>采样：在时域上是乘积，在频域上就是卷积。如果采样太稀疏了，频率的重复就会重叠</p>
 <figure>
-<img src="/2024/05/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/image-20241101101941186.png" alt="image-20241101101941186">
+<img alt="image-20241101101941186" src="/2024/05/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/image-20241101101941186.png"/>
 <figcaption aria-hidden="true">image-20241101101941186</figcaption>
 </figure>
 <p>解决走样问题：</p>
@@ -281,7 +50,7 @@
 <ul>
 <li>先模糊（低通滤波）（用滤波器进行卷积），由下图可以看出频域上不再重叠</li>
 <li><figure>
-<img src="/2024/05/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/image-20241101102314762.png" alt="image-20241101102314762">
+<img alt="image-20241101102314762" src="/2024/05/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/image-20241101102314762.png"/>
 <figcaption aria-hidden="true">image-20241101102314762</figcaption>
 </figure></li>
 </ul></li>
@@ -291,18 +60,18 @@
 <li>把一个像素分成更多的小的点，来近似一个像素的平均</li>
 </ul>
 <figure>
-<img src="/2024/05/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/image-20241101102911369.png" alt="image-20241101102911369">
+<img alt="image-20241101102911369" src="/2024/05/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/image-20241101102911369.png"/>
 <figcaption aria-hidden="true">image-20241101102911369</figcaption>
 </figure>
 <h2 id="z-buffer">Z-buffer</h2>
 <p>图像生成的过程中，同时会生成一个表示深度的图像</p>
 <figure>
-<img src="/2024/05/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/image-20241101111227195.png" alt="image-20241101111227195">
+<img alt="image-20241101111227195" src="/2024/05/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/image-20241101111227195.png"/>
 <figcaption aria-hidden="true">image-20241101111227195</figcaption>
 </figure>
 <p>算法如下：</p>
 <figure>
-<img src="/2024/05/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/image-20241101111436952.png" alt="image-20241101111436952">
+<img alt="image-20241101111436952" src="/2024/05/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/image-20241101111436952.png"/>
 <figcaption aria-hidden="true">image-20241101111436952</figcaption>
 </figure>
 <h1 id="着色">着色</h1>
@@ -311,41 +80,41 @@
 <ul>
 <li>漫反射：光线会被均匀的发射到各个方向上去</li>
 <li><figure>
-<img src="/2024/05/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/image-20241101114559520.png" alt="image-20241101114559520">
+<img alt="image-20241101114559520" src="/2024/05/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/image-20241101114559520.png"/>
 <figcaption aria-hidden="true">image-20241101114559520</figcaption>
 </figure></li>
 <li>着色点接收到的光照能力与光线方向和法线的余弦成正比</li>
 </ul>
 <figure>
-<img src="/2024/05/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/image-20241108101730828.png" alt="image-20241108101730828">
+<img alt="image-20241108101730828" src="/2024/05/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/image-20241108101730828.png"/>
 <figcaption aria-hidden="true">image-20241108101730828</figcaption>
 </figure>
 <ul>
 <li>点光源的光的强度随距离的平方成反比</li>
 </ul>
 <figure>
-<img src="/2024/05/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/image-20241108102525721.png" alt="image-20241108102525721">
+<img alt="image-20241108102525721" src="/2024/05/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/image-20241108102525721.png"/>
 <figcaption aria-hidden="true">image-20241108102525721</figcaption>
 </figure>
 <p>因此可以得到漫反射的光的计算公式如下：<span class="math inline">\(K_d\)</span>是漫反射系数，表示物体吸收多少能量。<span class="math inline">\(n,l\)</span>都是方向向量即单位向量</p>
 <figure>
-<img src="/2024/05/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/image-20241108102634135.png" alt="image-20241108102634135">
+<img alt="image-20241108102634135" src="/2024/05/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/image-20241108102634135.png"/>
 <figcaption aria-hidden="true">image-20241108102634135</figcaption>
 </figure>
 <h2 id="镜面反射">镜面反射</h2>
 <figure>
-<img src="/2024/05/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/image-20241108105027685.png" alt="image-20241108105027685">
+<img alt="image-20241108105027685" src="/2024/05/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/image-20241108105027685.png"/>
 <figcaption aria-hidden="true">image-20241108105027685</figcaption>
 </figure>
 <h2 id="环境光照像">环境光照像</h2>
 <p>和入射光线以及观测方向都没关系</p>
 <figure>
-<img src="/2024/05/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/image-20241108105239328.png" alt="image-20241108105239328">
+<img alt="image-20241108105239328" src="/2024/05/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/image-20241108105239328.png"/>
 <figcaption aria-hidden="true">image-20241108105239328</figcaption>
 </figure>
 <h2 id="blinn-phong反射模型">Blinn Phong反射模型</h2>
 <figure>
-<img src="/2024/05/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/image-20241108105334991.png" alt="image-20241108105334991">
+<img alt="image-20241108105334991" src="/2024/05/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/image-20241108105334991.png"/>
 <figcaption aria-hidden="true">image-20241108105334991</figcaption>
 </figure>
 <h2 id="纹理映射">纹理映射</h2>
@@ -360,36 +129,36 @@
 <ul>
 <li>任何一个三角形内部的一个点的坐标都可以用三角形顶点的线性组合来表示，如下图：</li>
 <li><figure>
-<img src="/2024/05/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/image-20241128212751679.png" alt="image-20241128212751679">
+<img alt="image-20241128212751679" src="/2024/05/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/image-20241128212751679.png"/>
 <figcaption aria-hidden="true">image-20241128212751679</figcaption>
 </figure></li>
 </ul>
 <p>那么重心坐标为：</p>
 <figure>
-<img src="/2024/05/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/image-20241128214835075.png" alt="image-20241128214835075">
+<img alt="image-20241128214835075" src="/2024/05/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/image-20241128214835075.png"/>
 <figcaption aria-hidden="true">image-20241128214835075</figcaption>
 </figure>
 <p>可以简化得</p>
 <figure>
-<img src="/2024/05/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/image-20241128215027657.png" alt="image-20241128215027657">
+<img alt="image-20241128215027657" src="/2024/05/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/image-20241128215027657.png"/>
 <figcaption aria-hidden="true">image-20241128215027657</figcaption>
 </figure>
 <p>注意：现在三维空间中做插值，再投影到屏幕空间上。</p>
 <h2 id="纹理放大">纹理放大</h2>
 <p>纹理太小了，很大像素被映射到一个texel上</p>
 <figure>
-<img src="/2024/05/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/image-20241128220429603.png" alt="image-20241128220429603">
+<img alt="image-20241128220429603" src="/2024/05/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/image-20241128220429603.png"/>
 <figcaption aria-hidden="true">image-20241128220429603</figcaption>
 </figure>
 <p>双线性插值：</p>
 <p>一个像素被映射到纹理坐标上，并不是整数，这样就需要一个插值，否则就是选择一个最近点进行近似，就像上图坐标的图的情况。</p>
 <figure>
-<img src="/2024/05/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/image-20241128220735520.png" alt="image-20241128220735520">
+<img alt="image-20241128220735520" src="/2024/05/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/image-20241128220735520.png"/>
 <figcaption aria-hidden="true">image-20241128220735520</figcaption>
 </figure>
 <p>按照如下的方法进行插值：</p>
 <figure>
-<img src="/2024/05/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/image-20241128221053241.png" alt="image-20241128221053241">
+<img alt="image-20241128221053241" src="/2024/05/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/image-20241128221053241.png"/>
 <figcaption aria-hidden="true">image-20241128221053241</figcaption>
 </figure>
 <p>如果纹理过大，会产生锯齿（一个像素包含了一大块纹理）</p>
@@ -397,7 +166,7 @@
 <ul>
 <li><p>mipmap：允许得到纹理一个范围内的平均值，如下所示，可以提前得到平均值</p>
 <figure>
-<img src="/2024/05/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/image-20241129102535481.png" alt="image-20241129102535481">
+<img alt="image-20241129102535481" src="/2024/05/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/image-20241129102535481.png"/>
 <figcaption aria-hidden="true">image-20241129102535481</figcaption>
 </figure></li>
 </ul>
@@ -406,7 +175,7 @@
 <p>如果我们需要level 1.8的则需要再做插值</p>
 <p>mipmap存在一些问题，比如映射在纹理空间上不是正方形，如下图</p>
 <figure>
-<img src="/2024/05/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/image-20241129104550995.png" alt="image-20241129104550995">
+<img alt="image-20241129104550995" src="/2024/05/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/image-20241129104550995.png"/>
 <figcaption aria-hidden="true">image-20241129104550995</figcaption>
 </figure>
 <p>可以用各项异性过滤（矩形）解决一点，还有ewa过滤（圆形）</p>
@@ -416,309 +185,8 @@
 <p>凹凸贴图：不改变几何结构，而是贴一张图表现凹凸的结构</p>
 <p>用于记录之前已经进行过的计算</p>
 <p>10节：38分</p>
-
-    </div>
-
-    
-    
-    
-        
-
-<div>
-<ul class="post-copyright">
-  <li class="post-copyright-author">
-    <strong>Post author:  </strong>doovvv
-  </li>
-  <li class="post-copyright-link">
-    <strong>Post link: </strong>
-    <a href="http://example.com/2024/05/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/" title="计算机图形学">http://example.com/2024/05/22/计算机图形学/</a>
-  </li>
-  <li class="post-copyright-license">
-    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
-  </li>
-</ul>
-</div>
-
-
-      <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/%E9%80%89%E4%BF%AE/" rel="tag"># 选修</a>
-          </div>
-
-        
-
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/2024/04/30/writeup/" rel="prev" title="C4terCTF 2024">
-      <i class="fa fa-chevron-left"></i> C4terCTF 2024
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/2024/05/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="next" title="计算机网络">
-      计算机网络 <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
-      </footer>
-    
-  </article>
-  
-  
-  
-
-
-
-          </div>
-          
-    <div class="comments" id="valine-comments"></div>
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
-</script>
-
-        </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          Table of Contents
-        </li>
-        <li class="sidebar-nav-overview">
-          Overview
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%98%E6%8D%A2"><span class="nav-number">1.</span> <span class="nav-text">变换</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%8F%E8%A7%86%E6%8A%95%E5%BD%B1%E7%9F%A9%E9%98%B5"><span class="nav-number">1.1.</span> <span class="nav-text">透视投影矩阵</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%89%E6%A0%85%E5%8C%96"><span class="nav-number">2.</span> <span class="nav-text">光栅化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8A%97%E9%94%AF%E9%BD%BF%E5%8F%8D%E8%B5%B0%E6%A0%B7"><span class="nav-number">2.1.</span> <span class="nav-text">抗锯齿（反走样）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#z-buffer"><span class="nav-number">2.2.</span> <span class="nav-text">Z-buffer</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%9D%80%E8%89%B2"><span class="nav-number">3.</span> <span class="nav-text">着色</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%BC%AB%E5%8F%8D%E5%B0%84"><span class="nav-number">3.1.</span> <span class="nav-text">漫反射</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%95%9C%E9%9D%A2%E5%8F%8D%E5%B0%84"><span class="nav-number">3.2.</span> <span class="nav-text">镜面反射</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E5%85%89%E7%85%A7%E5%83%8F"><span class="nav-number">3.3.</span> <span class="nav-text">环境光照像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#blinn-phong%E5%8F%8D%E5%B0%84%E6%A8%A1%E5%9E%8B"><span class="nav-number">3.4.</span> <span class="nav-text">Blinn Phong反射模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%B9%E7%90%86%E6%98%A0%E5%B0%84"><span class="nav-number">3.5.</span> <span class="nav-text">纹理映射</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E5%BF%83%E5%9D%90%E6%A0%87"><span class="nav-number">3.6.</span> <span class="nav-text">重心坐标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%B9%E7%90%86%E6%94%BE%E5%A4%A7"><span class="nav-number">3.7.</span> <span class="nav-text">纹理放大</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%B9%E7%90%86%E5%BA%94%E7%94%A8"><span class="nav-number">3.8.</span> <span class="nav-text">纹理应用</span></a></li></ol></li></ol></div>
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="doovvv"
-      src="https://cdn.z.wiki/autoupload/20241024/zc0p/940X940/avatar.gif">
-  <p class="site-author-name" itemprop="name">doovvv</p>
-  <div class="site-description" itemprop="description">一切都没有意外，只是多了些波折</div>
-</div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">20</span>
-          <span class="site-state-item-name">posts</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">6</span>
-        <span class="site-state-item-name">tags</span>
-      </div>
-  </nav>
-</div>
-  <div class="links-of-author motion-element">
-      <span class="links-of-author-item">
-        <a href="https://github.com/doovvv" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;doovvv" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="/zhangch523@mail2.sysu.edu.cn" title="E-Mail → zhangch523@mail2.sysu.edu.cn"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
-      </span>
-  </div>
-  <div class="cc-license motion-element" itemprop="license">
-    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
-  </div>
-
-
-
-      </div>
-
-    </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
-
-
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-        
-
-<div class="copyright">
-  
-  &copy; 
-  <span itemprop="copyrightYear">2025</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">doovvv</span>
-</div>
-  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
-  </div>
-
-        
-
-
-
-
-
-
-
-
-      </div>
-    </footer>
-  </div>
-
-  
-  <script src="/lib/anime.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
-
-<script src="/js/utils.js"></script>
-
-<script src="/js/motion.js"></script>
-
-
-<script src="/js/schemes/muse.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-  
-      
-
-<script>
-  if (typeof MathJax === 'undefined') {
-    window.MathJax = {
-      loader: {
-        source: {
-          '[tex]/amsCd': '[tex]/amscd',
-          '[tex]/AMScd': '[tex]/amscd'
-        }
-      },
-      tex: {
-        inlineMath: {'[+]': [['$', '$']]},
-        tags: 'ams'
-      },
-      options: {
-        renderActions: {
-          findScript: [10, doc => {
-            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
-              const display = !!node.type.match(/; *mode=display/);
-              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
-              const text = document.createTextNode('');
-              node.parentNode.replaceChild(text, node);
-              math.start = {node: text, delim: '', n: 0};
-              math.end = {node: text, delim: '', n: 0};
-              doc.math.push(math);
-            });
-          }, '', false],
-          insertedScript: [200, () => {
-            document.querySelectorAll('mjx-container').forEach(node => {
-              let target = node.parentNode;
-              if (target.nodeName.toLowerCase() === 'li') {
-                target.parentNode.classList.add('has-jax');
-              }
-            });
-          }, '', false]
-        }
-      }
-    };
-    (function () {
-      var script = document.createElement('script');
-      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
-      script.defer = true;
-      document.head.appendChild(script);
-    })();
-  } else {
-    MathJax.startup.document.state(0);
-    MathJax.texReset();
-    MathJax.typeset();
-  }
-</script>
-
-    
-
-  
-
-
-<script>
-NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
-  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
-    var GUEST = ['nick', 'mail', 'link'];
-    var guest = 'nick,mail,link';
-    guest = guest.split(',').filter(item => {
-      return GUEST.includes(item);
-    });
-    new Valine({
-      el         : '#valine-comments',
-      verify     : false,
-      notify     : false,
-      appId      : 'IeEMujBge2kAmKaLJDalYGMx-gzGzoHsz',
-      appKey     : 'ZJGbpaRGRbziJ12K4CO5IvuI',
-      placeholder: "Just go go",
-      avatar     : 'mm',
-      meta       : guest,
-      pageSize   : '10' || 10,
-      visitor    : false,
-      lang       : '' || 'zh-cn',
-      path       : location.pathname,
-      recordIP   : false,
-      serverURLs : 'https://ieemujbg.lc-cn-n1-shared.com'
-    });
-  }, window.Valine);
-});
-</script>
-
-</body>
-</html>
+</div><div class="article-end"><span>END OF NOTE</span><i></i><svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 7-5 5 5 5m8-10 5 5-5 5M14 4l-4 16"/></svg></div><div class="article-license"><span>最后更新 2024-11-29</span><span>本文内容采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-NC-SA 4.0</a> 许可</span></div><nav class="article-neighbors" aria-label="相邻文章"><a href="/2024/04/30/writeup/"><span>上一篇</span><strong>C4terCTF 2024</strong><svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a><a href="/2024/05/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"><span>下一篇</span><strong>计算机网络</strong><svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a></nav><section class="comments-section" aria-labelledby="comments-heading"><div class="section-heading"><h2 id="comments-heading">交流与讨论<span class="heading-dot">.</span></h2></div><button class="button button-outline load-comments">展开评论 <svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></button><p class="comment-status" role="status"></p><div id="valine-comments"></div></section></article><aside class="reading-sidebar"><div class="toc-heading"><span>ON THIS PAGE</span><svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5c-3-2-7-2-10 0v15c3-2 7-2 10 0 3-2 7-2 10 0V5c-3-2-7-2-10 0Zm0 0v15"/></svg></div><div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%98%E6%8D%A2"><span class="nav-number">1.</span> <span class="nav-text">变换</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%8F%E8%A7%86%E6%8A%95%E5%BD%B1%E7%9F%A9%E9%98%B5"><span class="nav-number">1.1.</span> <span class="nav-text">透视投影矩阵</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%89%E6%A0%85%E5%8C%96"><span class="nav-number">2.</span> <span class="nav-text">光栅化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8A%97%E9%94%AF%E9%BD%BF%E5%8F%8D%E8%B5%B0%E6%A0%B7"><span class="nav-number">2.1.</span> <span class="nav-text">抗锯齿（反走样）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#z-buffer"><span class="nav-number">2.2.</span> <span class="nav-text">Z-buffer</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%9D%80%E8%89%B2"><span class="nav-number">3.</span> <span class="nav-text">着色</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%BC%AB%E5%8F%8D%E5%B0%84"><span class="nav-number">3.1.</span> <span class="nav-text">漫反射</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%95%9C%E9%9D%A2%E5%8F%8D%E5%B0%84"><span class="nav-number">3.2.</span> <span class="nav-text">镜面反射</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E5%85%89%E7%85%A7%E5%83%8F"><span class="nav-number">3.3.</span> <span class="nav-text">环境光照像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#blinn-phong%E5%8F%8D%E5%B0%84%E6%A8%A1%E5%9E%8B"><span class="nav-number">3.4.</span> <span class="nav-text">Blinn Phong反射模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%B9%E7%90%86%E6%98%A0%E5%B0%84"><span class="nav-number">3.5.</span> <span class="nav-text">纹理映射</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E5%BF%83%E5%9D%90%E6%A0%87"><span class="nav-number">3.6.</span> <span class="nav-text">重心坐标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%B9%E7%90%86%E6%94%BE%E5%A4%A7"><span class="nav-number">3.7.</span> <span class="nav-text">纹理放大</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%B9%E7%90%86%E5%BA%94%E7%94%A8"><span class="nav-number">3.8.</span> <span class="nav-text">纹理应用</span></a></li></ol></li></ol></div><div class="reading-progress"><div><span>阅读进度</span><span id="reading-percent">0%</span></div><div class="progress-track"><span id="reading-progress-bar"></span></div></div></aside></div></main><footer class="site-footer"><div class="footer-main"><a class="brand" href="/">doovvv<span class="brand-dot">.</span></a>
+    <p>记录思考，保持好奇。</p><a href="https://github.com/doovvv" target="_blank" rel="noopener noreferrer">在 GitHub 找到我 <svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg></a></div>
+    <div class="footer-bottom"><span>© 2026 doovvv · Personal notes & explorations</span><a href="#top">回到顶部 ↑</a></div></footer><dialog id="search-dialog" class="search-dialog" aria-labelledby="search-title"><div class="search-heading"><h2 id="search-title">搜索笔记</h2><button class="icon-button search-close" aria-label="关闭搜索"><svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 6 12 12M6 18 18 6"/></svg></button></div>
+    <form class="search-form" role="search"><label class="sr-only" for="search-input">搜索标题或正文</label><svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 4.5 4.5"/></svg><input id="search-input" type="search" placeholder="搜索标题、关键词或正文…" autocomplete="off"><kbd>ESC</kbd></form>
+    <div id="search-status" class="search-status" role="status" aria-live="polite">在 20 篇笔记中，寻找一个想法。</div><div id="search-results" class="search-results"></div></dialog><button class="back-top icon-button" aria-label="返回顶部"><svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></button></body></html>

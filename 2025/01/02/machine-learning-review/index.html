@@ -1,271 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 7.0.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/icons8-%E6%BA%90%E4%BB%A3%E7%A0%81-32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/icons8-%E6%BA%90%E4%BB%A3%E7%A0%81-16.png">
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
-
-<link rel="stylesheet" href="/css/main.css">
-
-
-<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
-  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
-  <script src="/lib/pace/pace.min.js"></script>
-
-<script id="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
-  </script>
-
-  <meta name="description" content="machine learning review">
-<meta property="og:type" content="article">
-<meta property="og:title" content="machine learning review">
-<meta property="og:url" content="http://example.com/2025/01/02/machine-learning-review/index.html">
-<meta property="og:site_name" content="doovvv">
-<meta property="og:description" content="machine learning review">
-<meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/2025/01/02/machine-learning-review/image-20250102224818608.png">
-<meta property="og:image" content="http://example.com/2025/01/02/machine-learning-review/image-20250102224828224.png">
-<meta property="og:image" content="http://example.com/2025/01/02/machine-learning-review/image-20250102225112877.png">
-<meta property="og:image" content="http://example.com/2025/01/02/machine-learning-review/image-20250102230112139.png">
-<meta property="og:image" content="http://example.com/2025/01/02/machine-learning-review/image-20250103001037662.png">
-<meta property="og:image" content="http://example.com/2025/01/02/machine-learning-review/image-20250103001309582.png">
-<meta property="og:image" content="http://example.com/2025/01/02/machine-learning-review/image-20250103002657026.png">
-<meta property="og:image" content="http://example.com/2025/01/02/machine-learning-review/image-20250103003013271.png">
-<meta property="og:image" content="http://example.com/2025/01/02/machine-learning-review/image-20250103003140813.png">
-<meta property="og:image" content="http://example.com/2025/01/02/machine-learning-review/image-20250103011320790.png">
-<meta property="og:image" content="http://example.com/2025/01/02/machine-learning-review/image-20250103011406779.png">
-<meta property="og:image" content="http://example.com/2025/01/02/machine-learning-review/image-20250103125250322.png">
-<meta property="og:image" content="http://example.com/2025/01/02/machine-learning-review/image-20250103125606602.png">
-<meta property="og:image" content="http://example.com/2025/01/02/machine-learning-review/image-20250103125713822.png">
-<meta property="og:image" content="http://example.com/2025/01/02/machine-learning-review/image-20250103130528533.png">
-<meta property="og:image" content="http://example.com/2025/01/02/machine-learning-review/image-20250103131110948.png">
-<meta property="og:image" content="http://example.com/2025/01/02/machine-learning-review/image-20250103131420505.png">
-<meta property="og:image" content="http://example.com/2025/01/02/machine-learning-review/image-20250104190026944.png">
-<meta property="og:image" content="http://example.com/2025/01/02/machine-learning-review/image-20250104190138862.png">
-<meta property="og:image" content="http://example.com/2025/01/02/machine-learning-review/image-20250104192601860.png">
-<meta property="og:image" content="http://example.com/2025/01/02/machine-learning-review/image-20250104192650860.png">
-<meta property="og:image" content="http://example.com/2025/01/02/machine-learning-review/image-20250104191859879.png">
-<meta property="og:image" content="http://example.com/2025/01/02/machine-learning-review/image-20250104192244462.png">
-<meta property="og:image" content="http://example.com/2025/01/02/machine-learning-review/image-20250104192920421.png">
-<meta property="og:image" content="http://example.com/2025/01/02/machine-learning-review/image-20250104193244790.png">
-<meta property="og:image" content="http://example.com/2025/01/02/machine-learning-review/image-20250104193559778.png">
-<meta property="og:image" content="http://example.com/2025/01/02/machine-learning-review/image-20250104205409701.png">
-<meta property="og:image" content="http://example.com/2025/01/02/machine-learning-review/image-20250104205504285.png">
-<meta property="og:image" content="http://example.com/2025/01/02/machine-learning-review/image-20250104205700866.png">
-<meta property="og:image" content="http://example.com/2025/01/02/machine-learning-review/image-20250104210011838.png">
-<meta property="og:image" content="http://example.com/2025/01/02/machine-learning-review/image-20250104210136050.png">
-<meta property="og:image" content="http://example.com/2025/01/02/machine-learning-review/image-20250104210406174.png">
-<meta property="og:image" content="http://example.com/2025/01/02/machine-learning-review/image-20250104210559474.png">
-<meta property="og:image" content="http://example.com/2025/01/02/machine-learning-review/image-20250104212910874.png">
-<meta property="og:image" content="http://example.com/2025/01/02/machine-learning-review/image-20250104212950728.png">
-<meta property="og:image" content="http://example.com/2025/01/02/machine-learning-review/image-20250104213311271.png">
-<meta property="og:image" content="http://example.com/2025/01/02/machine-learning-review/image-20250104213340375.png">
-<meta property="og:image" content="http://example.com/2025/01/02/machine-learning-review/image-20250104215005746.png">
-<meta property="og:image" content="http://example.com/2025/01/02/machine-learning-review/image-20250104215208038.png">
-<meta property="og:image" content="http://example.com/2025/01/02/machine-learning-review/image-20250104215348316.png">
-<meta property="og:image" content="http://example.com/2025/01/02/machine-learning-review/image-20250104215441280.png">
-<meta property="og:image" content="http://example.com/2025/01/02/machine-learning-review/image-20250104215522647.png">
-<meta property="og:image" content="http://example.com/2025/01/02/machine-learning-review/image-20250104215625253.png">
-<meta property="og:image" content="http://example.com/2025/01/02/machine-learning-review/image-20250104215724331.png">
-<meta property="og:image" content="http://example.com/2025/01/02/machine-learning-review/image-20250104215907680.png">
-<meta property="og:image" content="http://example.com/2025/01/02/machine-learning-review/image-20250104221050947.png">
-<meta property="og:image" content="http://example.com/2025/01/02/machine-learning-review/image-20250104220440845.png">
-<meta property="og:image" content="http://example.com/2025/01/02/machine-learning-review/image-20250104221233591.png">
-<meta property="article:published_time" content="2025-01-02T13:58:39.000Z">
-<meta property="article:modified_time" content="2025-01-05T03:48:51.620Z">
-<meta property="article:author" content="doovvv">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2025/01/02/machine-learning-review/image-20250102224818608.png">
-
-<link rel="canonical" href="http://example.com/2025/01/02/machine-learning-review/">
-
-
-<script id="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome : false,
-    isPost : true,
-    lang   : 'en'
-  };
-</script>
-
-  <title>machine learning review | doovvv</title>
-  
-
-
-
-
-
-
-  <noscript>
-  <style>
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
-  </style>
-</noscript>
-
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
-
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="Toggle navigation bar">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
-    </div>
-  </div>
-
-  <div class="site-meta">
-
-    <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">doovvv</h1>
-      <span class="logo-line-after"><i></i></span>
-    </a>
-  </div>
-
-  <div class="site-nav-right">
-    <div class="toggle popup-trigger">
-    </div>
-  </div>
-</div>
-
-
-
-
-<nav class="site-nav">
-  <ul id="menu" class="main-menu menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
-
-  </li>
-        <li class="menu-item menu-item-tags">
-
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
-
-  </li>
-  </ul>
-</nav>
-
-
-
-
-</div>
-    </header>
-
-    
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
-  <div class="reading-progress-bar"></div>
-
-
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
-
-          <div class="content post posts-expand">
-            
-
-    
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2025/01/02/machine-learning-review/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://cdn.z.wiki/autoupload/20241024/zc0p/940X940/avatar.gif">
-      <meta itemprop="name" content="doovvv">
-      <meta itemprop="description" content="一切都没有意外，只是多了些波折">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="doovvv">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          machine learning review
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2025-01-02 21:58:39" itemprop="dateCreated datePublished" datetime="2025-01-02T21:58:39+08:00">2025-01-02</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-01-05 11:48:51" itemprop="dateModified" datetime="2025-01-05T11:48:51+08:00">2025-01-05</time>
-              </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine: </span>
-    
-    <a title="valine" href="/2025/01/02/machine-learning-review/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2025/01/02/machine-learning-review/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-        <p>machine learning review</p>
+<!doctype html>
+<html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="light dark"><meta name="theme-color" content="#ffffff">
+<title>machine learning review | doovvv</title><meta name="description" content="从线性回归与逻辑回归，到支持向量机，整理机器学习的核心概念与推导。"><link rel="canonical" href="https://doovvv.cn/2025/01/02/machine-learning-review/"><meta property="og:title" content="machine learning review"><meta property="og:description" content="从线性回归与逻辑回归，到支持向量机，整理机器学习的核心概念与推导。"><meta property="og:type" content="article"><meta property="og:url" content="https://doovvv.cn/2025/01/02/machine-learning-review/"><meta property="og:image" content="https://doovvv.cn/assets/social-card.jpg"><meta property="og:image:type" content="image/jpeg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg"><link rel="preload" href="/assets/fonts/ibm-plex-mono-bold.ttf" as="font" type="font/ttf" crossorigin><script>try{const t=localStorage.getItem('doovvv-theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){}</script><link rel="stylesheet" href="/assets/site.css"><script src="/assets/site.js" defer></script><script>window.BLOG_IMAGE_ALIASES={"image-20240609212414729.png": "/assets/images/recovered-decision-tree-1.png", "image-20240609213812491.png": "/assets/images/recovered-decision-tree-2.png", "https://pic3.zhimg.com/v2-0a586723aa7eb9e4cdbd38d564ef0320_r.jpg": "/assets/images/article-reference-1.jpg", "https://pic1.zhimg.com/v2-ec9107c17d7532b6a53be30fd84dbffc_r.jpg": "/assets/images/article-reference-2.jpg"};</script><script>window.BLOG_COMMENTS={"appId": "IeEMujBge2kAmKaLJDalYGMx-gzGzoHsz", "appKey": "ZJGbpaRGRbziJ12K4CO5IvuI", "serverURLs": "https://ieemujbg.lc-cn-n1-shared.com"};</script></head>
+<body class="page-post" id="top"><a class="skip-link" href="#main-content">跳到主要内容</a>
+    <header class="site-header"><div class="header-inner">
+    <a class="brand" href="/" aria-label="doovvv 首页"><span class="brand-symbol" aria-hidden="true">&lt;/&gt;</span><span>doovvv<span class="brand-dot">_</span></span></a>
+    <nav id="site-nav" class="site-nav" aria-label="主导航"><a href="/" class="nav-link">首页</a><a href="/archives/" class="nav-link">归档</a><a href="/tags/" class="nav-link">标签</a><a href="/2023/12/05/%E8%B5%84%E6%BA%90%E9%93%BE%E6%8E%A5/" class="nav-link">资源</a><a href="/about/" class="nav-link">关于</a></nav>
+    <div class="header-actions"><button class="icon-button search-toggle" aria-label="搜索文章" title="搜索文章（Ctrl K）"><svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 4.5 4.5"/></svg></button>
+    <span class="header-divider"></span><button class="icon-button theme-toggle" aria-label="切换为浅色模式" title="切换主题"><svg class="icon sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg><svg class="icon moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.2 14A8.5 8.5 0 0 1 10 3.8 8.5 8.5 0 1 0 20.2 14Z"/></svg></button>
+    <a class="github-link icon-button" href="https://github.com/doovvv" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-4.3 1.3-4.3-2.3-6-2.8M15 22v-3.5c0-1 .1-1.5-.5-2 3.3-.4 6.7-1.6 6.7-7.4a5.6 5.6 0 0 0-1.5-3.9A5.3 5.3 0 0 0 19.5 1S18.3.6 15 2.5a13.4 13.4 0 0 0-6 0C5.7.6 4.5 1 4.5 1a5.3 5.3 0 0 0-.2 4.2 5.6 5.6 0 0 0-1.5 3.9c0 5.8 3.4 7 6.7 7.4-.5.5-.6 1.2-.5 2V22"/></svg></a>
+    <button class="icon-button menu-toggle" aria-label="打开导航菜单" aria-expanded="false" aria-controls="site-nav"><svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button></div></div></header><main id="main-content"><section class="article-heading page-container"><a class="back-link" href="/archives/">← 返回笔记</a><div class="eyebrow">人工智能 / NOTEBOOK</div><h1>machine learning review</h1><div class="article-meta"><a href="/about/" class="author-meta"><span class="author-initial">d.</span>doovvv</a><span class="meta-divider"></span><time datetime="2025-01-02">2025.01.02</time><span><svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3.5 2"/></svg>8 分钟阅读</span></div><div class="article-tags"></div></section>
+    <div class="reading-layout page-container"><article class="reading-article" aria-label="文章正文"><div class="post-body" itemprop="articleBody">
+<p>machine learning review</p>
 <span id="more"></span>
 <h1 id="linear-regression">Linear regression</h1>
 <h2 id="introduction">Introduction</h2>
@@ -277,16 +23,16 @@
 <p>线性回归：就是限制这个函数只能为线性的形式</p>
 <p>代价/损失函数：</p>
 <figure>
-<img src="/2025/01/02/machine-learning-review/image-20250102224818608.png" alt="image-20250102224818608">
+<img alt="image-20250102224818608" src="/2025/01/02/machine-learning-review/image-20250102224818608.png"/>
 <figcaption aria-hidden="true">image-20250102224818608</figcaption>
 </figure>
 <p>或者</p>
 <figure>
-<img src="/2025/01/02/machine-learning-review/image-20250102224828224.png" alt="image-20250102224828224">
+<img alt="image-20250102224828224" src="/2025/01/02/machine-learning-review/image-20250102224828224.png"/>
 <figcaption aria-hidden="true">image-20250102224828224</figcaption>
 </figure>
 <p>close-form的解决方法并不总是存在，或者代价太高，因此产生了梯度下降法。</p>
-<p>梯度下降：<img src="/2025/01/02/machine-learning-review/image-20250102225112877.png" alt="image-20250102225112877"></p>
+<p>梯度下降：<img alt="image-20250102225112877" src="/2025/01/02/machine-learning-review/image-20250102225112877.png"/></p>
 <p>学习率的设置：</p>
 <ul>
 <li>如果学习率太小：收敛的速度会很慢</li>
@@ -303,7 +49,7 @@
 </ul>
 <p>随机梯度是平均梯度的无偏估计：</p>
 <figure>
-<img src="/2025/01/02/machine-learning-review/image-20250102230112139.png" alt="image-20250102230112139">
+<img alt="image-20250102230112139" src="/2025/01/02/machine-learning-review/image-20250102230112139.png"/>
 <figcaption aria-hidden="true">image-20250102230112139</figcaption>
 </figure>
 <h2 id="其他的优化方法">其他的优化方法</h2>
@@ -331,12 +77,12 @@
 <p>在分类任务中，目标变量的值应该在0-1之间，线性回归的输出值与分类任务不兼容</p>
 <p>可以通过Sigmod函数将线性回归转换为逻辑回归，如下：</p>
 <figure>
-<img src="/2025/01/02/machine-learning-review/image-20250103001037662.png" alt="image-20250103001037662">
+<img alt="image-20250103001037662" src="/2025/01/02/machine-learning-review/image-20250103001037662.png"/>
 <figcaption aria-hidden="true">image-20250103001037662</figcaption>
 </figure>
 <p><em>cross-entropy loss</em>交叉熵损失：</p>
 <figure>
-<img src="/2025/01/02/machine-learning-review/image-20250103001309582.png" alt="image-20250103001309582">
+<img alt="image-20250103001309582" src="/2025/01/02/machine-learning-review/image-20250103001309582.png"/>
 <figcaption aria-hidden="true">image-20250103001309582</figcaption>
 </figure>
 <blockquote>
@@ -348,26 +94,26 @@
 <li>one-to-all：为每种类别都训练一个分类器，如下：</li>
 </ul>
 <figure>
-<img src="/2025/01/02/machine-learning-review/image-20250103002657026.png" alt="image-20250103002657026">
+<img alt="image-20250103002657026" src="/2025/01/02/machine-learning-review/image-20250103002657026.png"/>
 <figcaption aria-hidden="true">image-20250103002657026</figcaption>
 </figure>
 <ul>
 <li>softmax函数：数据x被分类到第i个类别的概率为：</li>
 </ul>
-<p>​ <img src="/2025/01/02/machine-learning-review/image-20250103003013271.png" alt="image-20250103003013271"></p>
+<p>​ <img alt="image-20250103003013271" src="/2025/01/02/machine-learning-review/image-20250103003013271.png"/></p>
 <p>对于二分类的softmax分类来说等同于参数为w1-w2的逻辑回归，原因如下：</p>
 <figure>
-<img src="/2025/01/02/machine-learning-review/image-20250103003140813.png" alt="image-20250103003140813">
+<img alt="image-20250103003140813" src="/2025/01/02/machine-learning-review/image-20250103003140813.png"/>
 <figcaption aria-hidden="true">image-20250103003140813</figcaption>
 </figure>
 <p>对于K分类来说，y标签是one-hot vector，损失函数如下：</p>
 <figure>
-<img src="/2025/01/02/machine-learning-review/image-20250103011320790.png" alt="image-20250103011320790">
+<img alt="image-20250103011320790" src="/2025/01/02/machine-learning-review/image-20250103011320790.png"/>
 <figcaption aria-hidden="true">image-20250103011320790</figcaption>
 </figure>
 <p>然后梯度下降：</p>
 <figure>
-<img src="/2025/01/02/machine-learning-review/image-20250103011406779.png" alt="image-20250103011406779">
+<img alt="image-20250103011406779" src="/2025/01/02/machine-learning-review/image-20250103011406779.png"/>
 <figcaption aria-hidden="true">image-20250103011406779</figcaption>
 </figure>
 <h1 id="从概率角度看回归和分类">从概率角度看回归和分类</h1>
@@ -375,24 +121,24 @@
 <p>从概率的角度来看，给定<span class="math inline">\(x\)</span>来预测输出<span class="math inline">\(y\)</span>，我们只需要对条件概率<span class="math inline">\(p(y|x)\)</span>进行建模。</p>
 <p>根据上面的这个条件概率，输出可以被预测为下面这两种形式：</p>
 <figure>
-<img src="/2025/01/02/machine-learning-review/image-20250103125250322.png" alt="image-20250103125250322">
+<img alt="image-20250103125250322" src="/2025/01/02/machine-learning-review/image-20250103125250322.png"/>
 <figcaption aria-hidden="true">image-20250103125250322</figcaption>
 </figure>
 <h2 id="回归上的数学概率">回归上的数学概率</h2>
 <p>单变量高斯分布：</p>
 <figure>
-<img src="/2025/01/02/machine-learning-review/image-20250103125606602.png" alt="image-20250103125606602">
+<img alt="image-20250103125606602" src="/2025/01/02/machine-learning-review/image-20250103125606602.png"/>
 <figcaption aria-hidden="true">image-20250103125606602</figcaption>
 </figure>
 <p>多变量高斯分布：</p>
 <figure>
-<img src="/2025/01/02/machine-learning-review/image-20250103125713822.png" alt="image-20250103125713822">
+<img alt="image-20250103125713822" src="/2025/01/02/machine-learning-review/image-20250103125713822.png"/>
 <figcaption aria-hidden="true">image-20250103125713822</figcaption>
 </figure>
 <p>假设条件概率分布是正态分布，我们做一次预测，就是使用了条件概率分布的均值</p>
 <p>模型训练的目的就是找到一个参数w，使得对数概率达到最大，如下所示，我们可以看到要最大似然函数就是要最小损失函数：</p>
 <figure>
-<img src="/2025/01/02/machine-learning-review/image-20250103130528533.png" alt="image-20250103130528533">
+<img alt="image-20250103130528533" src="/2025/01/02/machine-learning-review/image-20250103130528533.png"/>
 <figcaption aria-hidden="true">image-20250103130528533</figcaption>
 </figure>
 <p>总结：</p>
@@ -403,12 +149,12 @@
 <h2 id="分类上的数学概率">分类上的数学概率</h2>
 <p>为了实现二分类，条件概率假设为伯努利分布：</p>
 <figure>
-<img src="/2025/01/02/machine-learning-review/image-20250103131110948.png" alt="image-20250103131110948">
+<img alt="image-20250103131110948" src="/2025/01/02/machine-learning-review/image-20250103131110948.png"/>
 <figcaption aria-hidden="true">image-20250103131110948</figcaption>
 </figure>
 <p>训练的目标就是最大化对数似然函数，可以发现最大化对数似然函数就是在最小化交叉熵：</p>
 <figure>
-<img src="/2025/01/02/machine-learning-review/image-20250103131420505.png" alt="image-20250103131420505">
+<img alt="image-20250103131420505" src="/2025/01/02/machine-learning-review/image-20250103131420505.png"/>
 <figcaption aria-hidden="true">image-20250103131420505</figcaption>
 </figure>
 <p>总结：</p>
@@ -436,12 +182,12 @@ vector）。</p>
 <li>用基函数对线性模型进行非线性化</li>
 </ul>
 <figure>
-<img src="/2025/01/02/machine-learning-review/image-20250104190026944.png" alt="image-20250104190026944">
+<img alt="image-20250104190026944" src="/2025/01/02/machine-learning-review/image-20250104190026944.png"/>
 <figcaption aria-hidden="true">image-20250104190026944</figcaption>
 </figure>
 <p>基函数模型：</p>
 <figure>
-<img src="/2025/01/02/machine-learning-review/image-20250104190138862.png" alt="image-20250104190138862">
+<img alt="image-20250104190138862" src="/2025/01/02/machine-learning-review/image-20250104190138862.png"/>
 <figcaption aria-hidden="true">image-20250104190138862</figcaption>
 </figure>
 <blockquote>
@@ -452,12 +198,12 @@ vector）。</p>
 <p>通常来说，模型的复杂度取决于参数的数量，参数越多，模型越复杂。</p>
 <p>赤池信息标准：</p>
 <figure>
-<img src="/2025/01/02/machine-learning-review/image-20250104192601860.png" alt="image-20250104192601860">
+<img alt="image-20250104192601860" src="/2025/01/02/machine-learning-review/image-20250104192601860.png"/>
 <figcaption aria-hidden="true">image-20250104192601860</figcaption>
 </figure>
 <p>贝叶斯信息标准：</p>
 <figure>
-<img src="/2025/01/02/machine-learning-review/image-20250104192650860.png" alt="image-20250104192650860">
+<img alt="image-20250104192650860" src="/2025/01/02/machine-learning-review/image-20250104192650860.png"/>
 <figcaption aria-hidden="true">image-20250104192650860</figcaption>
 </figure>
 <blockquote>
@@ -466,7 +212,7 @@ vector）。</p>
 <p>为了让模型表现良好，我们应该平衡模型的复杂性和表示能力</p>
 <p>如何验证误差随着模型的复杂度增加而减少，它表明模型欠拟合，否则，它表明模型<strong>过拟合</strong></p>
 <figure>
-<img src="/2025/01/02/machine-learning-review/image-20250104191859879.png" alt="image-20250104191859879">
+<img alt="image-20250104191859879" src="/2025/01/02/machine-learning-review/image-20250104191859879.png"/>
 <figcaption aria-hidden="true">image-20250104191859879</figcaption>
 </figure>
 <p>如果训练数据给太多给验证集，则没有足够的数据样本用于训练</p>
@@ -478,12 +224,12 @@ cross-validation</strong>（K折交叉验证）：</p>
 <li>重复K次，每一次都使用了一个不同的子集用以验证</li>
 </ul>
 <figure>
-<img src="/2025/01/02/machine-learning-review/image-20250104192244462.png" alt="image-20250104192244462">
+<img alt="image-20250104192244462" src="/2025/01/02/machine-learning-review/image-20250104192244462.png"/>
 <figcaption aria-hidden="true">image-20250104192244462</figcaption>
 </figure>
 <p><strong><span class="math inline">\(L_2\)</span>正则</strong>：</p>
 <figure>
-<img src="/2025/01/02/machine-learning-review/image-20250104192920421.png" alt="image-20250104192920421">
+<img alt="image-20250104192920421" src="/2025/01/02/machine-learning-review/image-20250104192920421.png"/>
 <figcaption aria-hidden="true">image-20250104192920421</figcaption>
 </figure>
 <ul>
@@ -492,12 +238,12 @@ cross-validation</strong>（K折交叉验证）：</p>
 </ul>
 <p><strong><span class="math inline">\(L_1\)</span>正则</strong>：</p>
 <figure>
-<img src="/2025/01/02/machine-learning-review/image-20250104193244790.png" alt="image-20250104193244790">
+<img alt="image-20250104193244790" src="/2025/01/02/machine-learning-review/image-20250104193244790.png"/>
 <figcaption aria-hidden="true">image-20250104193244790</figcaption>
 </figure>
 <p>L1正则同样更喜欢值更小的模型参数，但是L1经常导致w的稀疏解，即参数中很多值为0</p>
 <figure>
-<img src="/2025/01/02/machine-learning-review/image-20250104193559778.png" alt="image-20250104193559778">
+<img alt="image-20250104193559778" src="/2025/01/02/machine-learning-review/image-20250104193559778.png"/>
 <figcaption aria-hidden="true">image-20250104193559778</figcaption>
 </figure>
 <h1 id="支持向量机">支持向量机</h1>
@@ -505,38 +251,38 @@ cross-validation</strong>（K折交叉验证）：</p>
 <p>在线性分类器中，决策边界总是一个超平面，它的目标就是找到一个超平面能够分隔开所有的样本</p>
 <p>比如逻辑回归，通过最小化交叉熵来找到决策边界超平面：</p>
 <figure>
-<img src="/2025/01/02/machine-learning-review/image-20250104205409701.png" alt="image-20250104205409701">
+<img alt="image-20250104205409701" src="/2025/01/02/machine-learning-review/image-20250104205409701.png"/>
 <figcaption aria-hidden="true">image-20250104205409701</figcaption>
 </figure>
 <p>并且具有以下性质：</p>
 <figure>
-<img src="/2025/01/02/machine-learning-review/image-20250104205504285.png" alt="image-20250104205504285">
+<img alt="image-20250104205504285" src="/2025/01/02/machine-learning-review/image-20250104205504285.png"/>
 <figcaption aria-hidden="true">image-20250104205504285</figcaption>
 </figure>
 <p>对于不同的损失函数，我们可以得到不同的超平面，比如说下图：</p>
 <figure>
-<img src="/2025/01/02/machine-learning-review/image-20250104205700866.png" alt="image-20250104205700866">
+<img alt="image-20250104205700866" src="/2025/01/02/machine-learning-review/image-20250104205700866.png"/>
 <figcaption aria-hidden="true">image-20250104205700866</figcaption>
 </figure>
 <p>但是这些超平面都是在训练集上进行评估的，但是我们需要的是在测试集上较好的性能，那怎么评估一个超平面的好坏呢，一个简单的直觉就是，<strong>最大化边界</strong>。</p>
 <h2 id="线性最大化边界分类器">线性最大化边界分类器</h2>
 <figure>
-<img src="/2025/01/02/machine-learning-review/image-20250104210011838.png" alt="image-20250104210011838">
+<img alt="image-20250104210011838" src="/2025/01/02/machine-learning-review/image-20250104210011838.png"/>
 <figcaption aria-hidden="true">image-20250104210011838</figcaption>
 </figure>
 <p>如上图所示，边界越大，那么在没有看见的数据集（测试集）上它能够正确分类的概率就越大。</p>
 <h3 id="怎么表示边界">怎么表示边界？</h3>
 <figure>
-<img src="/2025/01/02/machine-learning-review/image-20250104210136050.png" alt="image-20250104210136050">
+<img alt="image-20250104210136050" src="/2025/01/02/machine-learning-review/image-20250104210136050.png"/>
 <figcaption aria-hidden="true">image-20250104210136050</figcaption>
 </figure>
 <figure>
-<img src="/2025/01/02/machine-learning-review/image-20250104210406174.png" alt="image-20250104210406174">
+<img alt="image-20250104210406174" src="/2025/01/02/machine-learning-review/image-20250104210406174.png"/>
 <figcaption aria-hidden="true">image-20250104210406174</figcaption>
 </figure>
 <p>边界就是所有点与超平面的最小距离，因此最大边界分类器的目标就是找到最优的w和b，使得边界最大，即：</p>
 <figure>
-<img src="/2025/01/02/machine-learning-review/image-20250104210559474.png" alt="image-20250104210559474">
+<img alt="image-20250104210559474" src="/2025/01/02/machine-learning-review/image-20250104210559474.png"/>
 <figcaption aria-hidden="true">image-20250104210559474</figcaption>
 </figure>
 <h3 id="转换后的目标函数">转换后的目标函数</h3>
@@ -544,381 +290,86 @@ cross-validation</strong>（K折交叉验证）：</p>
 <p>basic idea:优化一个与原始问题共享最优值的目标函数</p>
 </blockquote>
 <figure>
-<img src="/2025/01/02/machine-learning-review/image-20250104212910874.png" alt="image-20250104212910874">
+<img alt="image-20250104212910874" src="/2025/01/02/machine-learning-review/image-20250104212910874.png"/>
 <figcaption aria-hidden="true">image-20250104212910874</figcaption>
 </figure>
 <p>如此的话我们可以得到一个具有相同最优值得目标函数，这是一个带约束得目标函数：</p>
 <figure>
-<img src="/2025/01/02/machine-learning-review/image-20250104212950728.png" alt="image-20250104212950728">
+<img alt="image-20250104212950728" src="/2025/01/02/machine-learning-review/image-20250104212950728.png"/>
 <figcaption aria-hidden="true">image-20250104212950728</figcaption>
 </figure>
 <p>因为至少有一个等于符号成立，目标函数可以化简为：</p>
 <figure>
-<img src="/2025/01/02/machine-learning-review/image-20250104213311271.png" alt="image-20250104213311271">
+<img alt="image-20250104213311271" src="/2025/01/02/machine-learning-review/image-20250104213311271.png"/>
 <figcaption aria-hidden="true">image-20250104213311271</figcaption>
 </figure>
 <p>进一步转换：</p>
 <figure>
-<img src="/2025/01/02/machine-learning-review/image-20250104213340375.png" alt="image-20250104213340375">
+<img alt="image-20250104213340375" src="/2025/01/02/machine-learning-review/image-20250104213340375.png"/>
 <figcaption aria-hidden="true">image-20250104213340375</figcaption>
 </figure>
 <p>因此最大边界超平面就能通过以下优化函数找到：</p>
 <figure>
-<img src="/2025/01/02/machine-learning-review/image-20250104215005746.png" alt="image-20250104215005746">
+<img alt="image-20250104215005746" src="/2025/01/02/machine-learning-review/image-20250104215005746.png"/>
 <figcaption aria-hidden="true">image-20250104215005746</figcaption>
 </figure>
 <p>这是一个二次型优化问题，可以通过数值方法求解：</p>
 <figure>
-<img src="/2025/01/02/machine-learning-review/image-20250104215208038.png" alt="image-20250104215208038">
+<img alt="image-20250104215208038" src="/2025/01/02/machine-learning-review/image-20250104215208038.png"/>
 <figcaption aria-hidden="true">image-20250104215208038</figcaption>
 </figure>
 <h3 id="等效的对偶公式">等效的对偶公式</h3>
 <p>每一个凸优化问题都有相应的对偶公式</p>
 <p>原始优化问题的拉格朗日函数：</p>
 <figure>
-<img src="/2025/01/02/machine-learning-review/image-20250104215348316.png" alt="image-20250104215348316">
+<img alt="image-20250104215348316" src="/2025/01/02/machine-learning-review/image-20250104215348316.png"/>
 <figcaption aria-hidden="true">image-20250104215348316</figcaption>
 </figure>
 <p>求解该拉格朗日函数：</p>
 <figure>
-<img src="/2025/01/02/machine-learning-review/image-20250104215441280.png" alt="image-20250104215441280">
+<img alt="image-20250104215441280" src="/2025/01/02/machine-learning-review/image-20250104215441280.png"/>
 <figcaption aria-hidden="true">image-20250104215441280</figcaption>
 </figure>
 <p>因此，对偶的优化变成：</p>
 <figure>
-<img src="/2025/01/02/machine-learning-review/image-20250104215522647.png" alt="image-20250104215522647">
+<img alt="image-20250104215522647" src="/2025/01/02/machine-learning-review/image-20250104215522647.png"/>
 <figcaption aria-hidden="true">image-20250104215522647</figcaption>
 </figure>
 <p>w，b，a之间的关系：</p>
 <figure>
-<img src="/2025/01/02/machine-learning-review/image-20250104215625253.png" alt="image-20250104215625253">
+<img alt="image-20250104215625253" src="/2025/01/02/machine-learning-review/image-20250104215625253.png"/>
 <figcaption aria-hidden="true">image-20250104215625253</figcaption>
 </figure>
 <p>至此我们得到了原始分类器的对偶版本：</p>
 <figure>
-<img src="/2025/01/02/machine-learning-review/image-20250104215724331.png" alt="image-20250104215724331">
+<img alt="image-20250104215724331" src="/2025/01/02/machine-learning-review/image-20250104215724331.png"/>
 <figcaption aria-hidden="true">image-20250104215724331</figcaption>
 </figure>
 <p>如何理解对偶最大边界分类器：</p>
 <figure>
-<img src="/2025/01/02/machine-learning-review/image-20250104215907680.png" alt="image-20250104215907680">
+<img alt="image-20250104215907680" src="/2025/01/02/machine-learning-review/image-20250104215907680.png"/>
 <figcaption aria-hidden="true">image-20250104215907680</figcaption>
 </figure>
 <h3 id="an的稀疏性">an的稀疏性</h3>
 <p>测试的复杂度貌似更高</p>
 <figure>
-<img src="/2025/01/02/machine-learning-review/image-20250104221050947.png" alt="image-20250104221050947">
+<img alt="image-20250104221050947" src="/2025/01/02/machine-learning-review/image-20250104221050947.png"/>
 <figcaption aria-hidden="true">image-20250104221050947</figcaption>
 </figure>
 <p>支持向量：在边界上的那些样本被称作</p>
 <p>不等式的约束条件使用拉格朗日法需要满足KKT条件，即是下图红色部分，可以推出大部分an都是0</p>
 <figure>
-<img src="/2025/01/02/machine-learning-review/image-20250104220440845.png" alt="image-20250104220440845">
+<img alt="image-20250104220440845" src="/2025/01/02/machine-learning-review/image-20250104220440845.png"/>
 <figcaption aria-hidden="true">image-20250104220440845</figcaption>
 </figure>
 <p>因此测试的函数可以化简为：</p>
 <figure>
-<img src="/2025/01/02/machine-learning-review/image-20250104221233591.png" alt="image-20250104221233591">
+<img alt="image-20250104221233591" src="/2025/01/02/machine-learning-review/image-20250104221233591.png"/>
 <figcaption aria-hidden="true">image-20250104221233591</figcaption>
 </figure>
-
-    </div>
-
-    
-    
-    
-        
-
-<div>
-<ul class="post-copyright">
-  <li class="post-copyright-author">
-    <strong>Post author:  </strong>doovvv
-  </li>
-  <li class="post-copyright-link">
-    <strong>Post link: </strong>
-    <a href="http://example.com/2025/01/02/machine-learning-review/" title="machine learning review">http://example.com/2025/01/02/machine-learning-review/</a>
-  </li>
-  <li class="post-copyright-license">
-    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
-  </li>
-</ul>
-</div>
-
-
-      <footer class="post-footer">
-
-        
-
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="prev" title="Moe学习笔记">
-      <i class="fa fa-chevron-left"></i> Moe学习笔记
-    </a></div>
-      <div class="post-nav-item"></div>
-    </div>
-      </footer>
-    
-  </article>
-  
-  
-  
-
-
-
-          </div>
-          
-    <div class="comments" id="valine-comments"></div>
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
-</script>
-
-        </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          Table of Contents
-        </li>
-        <li class="sidebar-nav-overview">
-          Overview
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#linear-regression"><span class="nav-number">1.</span> <span class="nav-text">Linear regression</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#introduction"><span class="nav-number">1.1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E7%9A%84%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95"><span class="nav-number">1.2.</span> <span class="nav-text">其他的优化方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#logistic-regression"><span class="nav-number">2.</span> <span class="nav-text">Logistic regression</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E5%88%86%E7%B1%BBcase"><span class="nav-number">2.1.</span> <span class="nav-text">多分类case</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%8E%E6%A6%82%E7%8E%87%E8%A7%92%E5%BA%A6%E7%9C%8B%E5%9B%9E%E5%BD%92%E5%92%8C%E5%88%86%E7%B1%BB"><span class="nav-number">3.</span> <span class="nav-text">从概率角度看回归和分类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#introduction-1"><span class="nav-number">3.1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9E%E5%BD%92%E4%B8%8A%E7%9A%84%E6%95%B0%E5%AD%A6%E6%A6%82%E7%8E%87"><span class="nav-number">3.2.</span> <span class="nav-text">回归上的数学概率</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E7%B1%BB%E4%B8%8A%E7%9A%84%E6%95%B0%E5%AD%A6%E6%A6%82%E7%8E%87"><span class="nav-number">3.3.</span> <span class="nav-text">分类上的数学概率</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E5%88%86%E7%B1%BB%E9%97%AE%E9%A2%98"><span class="nav-number">3.4.</span> <span class="nav-text">多分类问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E7%B1%BB%E5%88%86%E5%B8%83"><span class="nav-number">3.4.1.</span> <span class="nav-text">分类分布</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%A5%E5%88%86%E5%B8%83%E5%8F%AF%E4%BB%A5%E7%AD%89%E6%95%88%E5%9C%B0%E5%86%99%E4%B8%BA"><span class="nav-number">3.4.2.</span> <span class="nav-text">该分布可以等效地写为</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%9D%9E%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B-%E8%BF%87%E6%8B%9F%E5%90%88-%E6%AD%A3%E5%88%99%E5%8C%96"><span class="nav-number">4.</span> <span class="nav-text">非线性模型 &amp; 过拟合 &amp;
-正则化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%9E%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B"><span class="nav-number">4.1.</span> <span class="nav-text">非线性模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%87%E6%8B%9F%E5%90%88"><span class="nav-number">4.2.</span> <span class="nav-text">过拟合</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA"><span class="nav-number">5.</span> <span class="nav-text">支持向量机</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB%E5%99%A8%E7%9A%84%E5%86%B3%E7%AD%96%E8%BE%B9%E7%95%8C"><span class="nav-number">5.1.</span> <span class="nav-text">线性分类器的决策边界</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E6%9C%80%E5%A4%A7%E5%8C%96%E8%BE%B9%E7%95%8C%E5%88%86%E7%B1%BB%E5%99%A8"><span class="nav-number">5.2.</span> <span class="nav-text">线性最大化边界分类器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%8E%E4%B9%88%E8%A1%A8%E7%A4%BA%E8%BE%B9%E7%95%8C"><span class="nav-number">5.2.1.</span> <span class="nav-text">怎么表示边界？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BD%AC%E6%8D%A2%E5%90%8E%E7%9A%84%E7%9B%AE%E6%A0%87%E5%87%BD%E6%95%B0"><span class="nav-number">5.2.2.</span> <span class="nav-text">转换后的目标函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AD%89%E6%95%88%E7%9A%84%E5%AF%B9%E5%81%B6%E5%85%AC%E5%BC%8F"><span class="nav-number">5.2.3.</span> <span class="nav-text">等效的对偶公式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#an%E7%9A%84%E7%A8%80%E7%96%8F%E6%80%A7"><span class="nav-number">5.2.4.</span> <span class="nav-text">an的稀疏性</span></a></li></ol></li></ol></li></ol></div>
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="doovvv"
-      src="https://cdn.z.wiki/autoupload/20241024/zc0p/940X940/avatar.gif">
-  <p class="site-author-name" itemprop="name">doovvv</p>
-  <div class="site-description" itemprop="description">一切都没有意外，只是多了些波折</div>
-</div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">20</span>
-          <span class="site-state-item-name">posts</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">6</span>
-        <span class="site-state-item-name">tags</span>
-      </div>
-  </nav>
-</div>
-  <div class="links-of-author motion-element">
-      <span class="links-of-author-item">
-        <a href="https://github.com/doovvv" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;doovvv" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="/zhangch523@mail2.sysu.edu.cn" title="E-Mail → zhangch523@mail2.sysu.edu.cn"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
-      </span>
-  </div>
-  <div class="cc-license motion-element" itemprop="license">
-    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
-  </div>
-
-
-
-      </div>
-
-    </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
-
-
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-        
-
-<div class="copyright">
-  
-  &copy; 
-  <span itemprop="copyrightYear">2025</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">doovvv</span>
-</div>
-  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
-  </div>
-
-        
-
-
-
-
-
-
-
-
-      </div>
-    </footer>
-  </div>
-
-  
-  <script src="/lib/anime.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
-
-<script src="/js/utils.js"></script>
-
-<script src="/js/motion.js"></script>
-
-
-<script src="/js/schemes/muse.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-  
-      
-
-<script>
-  if (typeof MathJax === 'undefined') {
-    window.MathJax = {
-      loader: {
-        source: {
-          '[tex]/amsCd': '[tex]/amscd',
-          '[tex]/AMScd': '[tex]/amscd'
-        }
-      },
-      tex: {
-        inlineMath: {'[+]': [['$', '$']]},
-        tags: 'ams'
-      },
-      options: {
-        renderActions: {
-          findScript: [10, doc => {
-            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
-              const display = !!node.type.match(/; *mode=display/);
-              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
-              const text = document.createTextNode('');
-              node.parentNode.replaceChild(text, node);
-              math.start = {node: text, delim: '', n: 0};
-              math.end = {node: text, delim: '', n: 0};
-              doc.math.push(math);
-            });
-          }, '', false],
-          insertedScript: [200, () => {
-            document.querySelectorAll('mjx-container').forEach(node => {
-              let target = node.parentNode;
-              if (target.nodeName.toLowerCase() === 'li') {
-                target.parentNode.classList.add('has-jax');
-              }
-            });
-          }, '', false]
-        }
-      }
-    };
-    (function () {
-      var script = document.createElement('script');
-      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
-      script.defer = true;
-      document.head.appendChild(script);
-    })();
-  } else {
-    MathJax.startup.document.state(0);
-    MathJax.texReset();
-    MathJax.typeset();
-  }
-</script>
-
-    
-
-  
-
-
-<script>
-NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
-  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
-    var GUEST = ['nick', 'mail', 'link'];
-    var guest = 'nick,mail,link';
-    guest = guest.split(',').filter(item => {
-      return GUEST.includes(item);
-    });
-    new Valine({
-      el         : '#valine-comments',
-      verify     : false,
-      notify     : false,
-      appId      : 'IeEMujBge2kAmKaLJDalYGMx-gzGzoHsz',
-      appKey     : 'ZJGbpaRGRbziJ12K4CO5IvuI',
-      placeholder: "Just go go",
-      avatar     : 'mm',
-      meta       : guest,
-      pageSize   : '10' || 10,
-      visitor    : false,
-      lang       : '' || 'zh-cn',
-      path       : location.pathname,
-      recordIP   : false,
-      serverURLs : 'https://ieemujbg.lc-cn-n1-shared.com'
-    });
-  }, window.Valine);
-});
-</script>
-
-</body>
-</html>
+</div><div class="article-end"><span>END OF NOTE</span><i></i><svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 7-5 5 5 5m8-10 5 5-5 5M14 4l-4 16"/></svg></div><div class="article-license"><span>最后更新 2025-01-05</span><span>本文内容采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-NC-SA 4.0</a> 许可</span></div><nav class="article-neighbors" aria-label="相邻文章"><a href="/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><span>上一篇</span><strong>Moe学习笔记</strong><svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a><span></span></nav><section class="comments-section" aria-labelledby="comments-heading"><div class="section-heading"><h2 id="comments-heading">交流与讨论<span class="heading-dot">.</span></h2></div><button class="button button-outline load-comments">展开评论 <svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></button><p class="comment-status" role="status"></p><div id="valine-comments"></div></section></article><aside class="reading-sidebar"><div class="toc-heading"><span>ON THIS PAGE</span><svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5c-3-2-7-2-10 0v15c3-2 7-2 10 0 3-2 7-2 10 0V5c-3-2-7-2-10 0Zm0 0v15"/></svg></div><div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#linear-regression"><span class="nav-number">1.</span> <span class="nav-text">Linear regression</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#introduction"><span class="nav-number">1.1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E7%9A%84%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95"><span class="nav-number">1.2.</span> <span class="nav-text">其他的优化方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#logistic-regression"><span class="nav-number">2.</span> <span class="nav-text">Logistic regression</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E5%88%86%E7%B1%BBcase"><span class="nav-number">2.1.</span> <span class="nav-text">多分类case</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%8E%E6%A6%82%E7%8E%87%E8%A7%92%E5%BA%A6%E7%9C%8B%E5%9B%9E%E5%BD%92%E5%92%8C%E5%88%86%E7%B1%BB"><span class="nav-number">3.</span> <span class="nav-text">从概率角度看回归和分类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#introduction-1"><span class="nav-number">3.1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9E%E5%BD%92%E4%B8%8A%E7%9A%84%E6%95%B0%E5%AD%A6%E6%A6%82%E7%8E%87"><span class="nav-number">3.2.</span> <span class="nav-text">回归上的数学概率</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E7%B1%BB%E4%B8%8A%E7%9A%84%E6%95%B0%E5%AD%A6%E6%A6%82%E7%8E%87"><span class="nav-number">3.3.</span> <span class="nav-text">分类上的数学概率</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E5%88%86%E7%B1%BB%E9%97%AE%E9%A2%98"><span class="nav-number">3.4.</span> <span class="nav-text">多分类问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E7%B1%BB%E5%88%86%E5%B8%83"><span class="nav-number">3.4.1.</span> <span class="nav-text">分类分布</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%A5%E5%88%86%E5%B8%83%E5%8F%AF%E4%BB%A5%E7%AD%89%E6%95%88%E5%9C%B0%E5%86%99%E4%B8%BA"><span class="nav-number">3.4.2.</span> <span class="nav-text">该分布可以等效地写为</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%9D%9E%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B-%E8%BF%87%E6%8B%9F%E5%90%88-%E6%AD%A3%E5%88%99%E5%8C%96"><span class="nav-number">4.</span> <span class="nav-text">非线性模型 &amp; 过拟合 &amp;
+正则化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%9E%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B"><span class="nav-number">4.1.</span> <span class="nav-text">非线性模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%87%E6%8B%9F%E5%90%88"><span class="nav-number">4.2.</span> <span class="nav-text">过拟合</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA"><span class="nav-number">5.</span> <span class="nav-text">支持向量机</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB%E5%99%A8%E7%9A%84%E5%86%B3%E7%AD%96%E8%BE%B9%E7%95%8C"><span class="nav-number">5.1.</span> <span class="nav-text">线性分类器的决策边界</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E6%9C%80%E5%A4%A7%E5%8C%96%E8%BE%B9%E7%95%8C%E5%88%86%E7%B1%BB%E5%99%A8"><span class="nav-number">5.2.</span> <span class="nav-text">线性最大化边界分类器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%8E%E4%B9%88%E8%A1%A8%E7%A4%BA%E8%BE%B9%E7%95%8C"><span class="nav-number">5.2.1.</span> <span class="nav-text">怎么表示边界？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BD%AC%E6%8D%A2%E5%90%8E%E7%9A%84%E7%9B%AE%E6%A0%87%E5%87%BD%E6%95%B0"><span class="nav-number">5.2.2.</span> <span class="nav-text">转换后的目标函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AD%89%E6%95%88%E7%9A%84%E5%AF%B9%E5%81%B6%E5%85%AC%E5%BC%8F"><span class="nav-number">5.2.3.</span> <span class="nav-text">等效的对偶公式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#an%E7%9A%84%E7%A8%80%E7%96%8F%E6%80%A7"><span class="nav-number">5.2.4.</span> <span class="nav-text">an的稀疏性</span></a></li></ol></li></ol></li></ol></div><div class="reading-progress"><div><span>阅读进度</span><span id="reading-percent">0%</span></div><div class="progress-track"><span id="reading-progress-bar"></span></div></div></aside></div></main><footer class="site-footer"><div class="footer-main"><a class="brand" href="/">doovvv<span class="brand-dot">.</span></a>
+    <p>记录思考，保持好奇。</p><a href="https://github.com/doovvv" target="_blank" rel="noopener noreferrer">在 GitHub 找到我 <svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg></a></div>
+    <div class="footer-bottom"><span>© 2026 doovvv · Personal notes & explorations</span><a href="#top">回到顶部 ↑</a></div></footer><dialog id="search-dialog" class="search-dialog" aria-labelledby="search-title"><div class="search-heading"><h2 id="search-title">搜索笔记</h2><button class="icon-button search-close" aria-label="关闭搜索"><svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 6 12 12M6 18 18 6"/></svg></button></div>
+    <form class="search-form" role="search"><label class="sr-only" for="search-input">搜索标题或正文</label><svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 4.5 4.5"/></svg><input id="search-input" type="search" placeholder="搜索标题、关键词或正文…" autocomplete="off"><kbd>ESC</kbd></form>
+    <div id="search-status" class="search-status" role="status" aria-live="polite">在 20 篇笔记中，寻找一个想法。</div><div id="search-results" class="search-results"></div></dialog><button class="back-top icon-button" aria-label="返回顶部"><svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></button></body></html>

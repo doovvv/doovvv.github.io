@@ -1,248 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 7.0.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/icons8-%E6%BA%90%E4%BB%A3%E7%A0%81-32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/icons8-%E6%BA%90%E4%BB%A3%E7%A0%81-16.png">
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
-
-<link rel="stylesheet" href="/css/main.css">
-
-
-<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
-  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
-  <script src="/lib/pace/pace.min.js"></script>
-
-<script id="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
-  </script>
-
-  <meta name="description" content="Moe learning notes">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Moe学习笔记">
-<meta property="og:url" content="http://example.com/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
-<meta property="og:site_name" content="doovvv">
-<meta property="og:description" content="Moe learning notes">
-<meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://pic3.zhimg.com/v2-0a586723aa7eb9e4cdbd38d564ef0320_r.jpg">
-<meta property="og:image" content="https://pic1.zhimg.com/v2-ec9107c17d7532b6a53be30fd84dbffc_r.jpg">
-<meta property="og:image" content="http://example.com/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241111174509779.png">
-<meta property="og:image" content="http://example.com/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241111181233743.png">
-<meta property="og:image" content="http://example.com/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241112151831454.png">
-<meta property="og:image" content="http://example.com/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241103190659629.png">
-<meta property="og:image" content="http://example.com/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241103191252385.png">
-<meta property="og:image" content="http://example.com/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241103192353986.png">
-<meta property="og:image" content="http://example.com/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241103192651213.png">
-<meta property="og:image" content="http://example.com/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241029130547599.png">
-<meta property="og:image" content="http://example.com/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241029153236841.png">
-<meta property="og:image" content="http://example.com/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241029154018575.png">
-<meta property="og:image" content="http://example.com/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241029155033543.png">
-<meta property="og:image" content="http://example.com/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241031002920772.png">
-<meta property="og:image" content="http://example.com/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241030202520650.png">
-<meta property="og:image" content="http://example.com/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241030203251366.png">
-<meta property="og:image" content="http://example.com/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241031143829214.png">
-<meta property="og:image" content="http://example.com/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241112173314358.png">
-<meta property="og:image" content="http://example.com/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241121165620816.png">
-<meta property="og:image" content="http://example.com/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241121170755511.png">
-<meta property="og:image" content="http://example.com/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241124193230757.png">
-<meta property="og:image" content="http://example.com/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241124201034907.png">
-<meta property="og:image" content="http://example.com/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241124202445804.png">
-<meta property="og:image" content="http://example.com/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241124203618732.png">
-<meta property="og:image" content="http://example.com/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241124205641419.png">
-<meta property="article:published_time" content="2024-10-29T04:25:49.000Z">
-<meta property="article:modified_time" content="2024-12-16T06:25:27.034Z">
-<meta property="article:author" content="doovvv">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://pic3.zhimg.com/v2-0a586723aa7eb9e4cdbd38d564ef0320_r.jpg">
-
-<link rel="canonical" href="http://example.com/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
-
-
-<script id="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome : false,
-    isPost : true,
-    lang   : 'en'
-  };
-</script>
-
-  <title>Moe学习笔记 | doovvv</title>
-  
-
-
-
-
-
-
-  <noscript>
-  <style>
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
-  </style>
-</noscript>
-
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
-
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="Toggle navigation bar">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
-    </div>
-  </div>
-
-  <div class="site-meta">
-
-    <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">doovvv</h1>
-      <span class="logo-line-after"><i></i></span>
-    </a>
-  </div>
-
-  <div class="site-nav-right">
-    <div class="toggle popup-trigger">
-    </div>
-  </div>
-</div>
-
-
-
-
-<nav class="site-nav">
-  <ul id="menu" class="main-menu menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
-
-  </li>
-        <li class="menu-item menu-item-tags">
-
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
-
-  </li>
-  </ul>
-</nav>
-
-
-
-
-</div>
-    </header>
-
-    
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
-  <div class="reading-progress-bar"></div>
-
-
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
-
-          <div class="content post posts-expand">
-            
-
-    
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://cdn.z.wiki/autoupload/20241024/zc0p/940X940/avatar.gif">
-      <meta itemprop="name" content="doovvv">
-      <meta itemprop="description" content="一切都没有意外，只是多了些波折">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="doovvv">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          Moe学习笔记
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2024-10-29 12:25:49" itemprop="dateCreated datePublished" datetime="2024-10-29T12:25:49+08:00">2024-10-29</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2024-12-16 14:25:27" itemprop="dateModified" datetime="2024-12-16T14:25:27+08:00">2024-12-16</time>
-              </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine: </span>
-    
-    <a title="valine" href="/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-        <p>Moe learning notes</p>
+<!doctype html>
+<html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="light dark"><meta name="theme-color" content="#ffffff">
+<title>Moe学习笔记 | doovvv</title><meta name="description" content="使用激活函数能够给神经元引入非线性因素，使得神经网络可以任意逼近任何非线性函数，使深层神经网络表达能力更加强大，这样神经网络就可以应用到众多的非线性模型中。"><link rel="canonical" href="https://doovvv.cn/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><meta property="og:title" content="Moe学习笔记"><meta property="og:description" content="使用激活函数能够给神经元引入非线性因素，使得神经网络可以任意逼近任何非线性函数，使深层神经网络表达能力更加强大，这样神经网络就可以应用到众多的非线性模型中。"><meta property="og:type" content="article"><meta property="og:url" content="https://doovvv.cn/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><meta property="og:image" content="https://doovvv.cn/assets/social-card.jpg"><meta property="og:image:type" content="image/jpeg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg"><link rel="preload" href="/assets/fonts/ibm-plex-mono-bold.ttf" as="font" type="font/ttf" crossorigin><script>try{const t=localStorage.getItem('doovvv-theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){}</script><link rel="stylesheet" href="/assets/site.css"><script src="/assets/site.js" defer></script><script>window.BLOG_IMAGE_ALIASES={"image-20240609212414729.png": "/assets/images/recovered-decision-tree-1.png", "image-20240609213812491.png": "/assets/images/recovered-decision-tree-2.png", "https://pic3.zhimg.com/v2-0a586723aa7eb9e4cdbd38d564ef0320_r.jpg": "/assets/images/article-reference-1.jpg", "https://pic1.zhimg.com/v2-ec9107c17d7532b6a53be30fd84dbffc_r.jpg": "/assets/images/article-reference-2.jpg"};</script><script>window.BLOG_COMMENTS={"appId": "IeEMujBge2kAmKaLJDalYGMx-gzGzoHsz", "appKey": "ZJGbpaRGRbziJ12K4CO5IvuI", "serverURLs": "https://ieemujbg.lc-cn-n1-shared.com"};</script></head>
+<body class="page-post" id="top"><a class="skip-link" href="#main-content">跳到主要内容</a>
+    <header class="site-header"><div class="header-inner">
+    <a class="brand" href="/" aria-label="doovvv 首页"><span class="brand-symbol" aria-hidden="true">&lt;/&gt;</span><span>doovvv<span class="brand-dot">_</span></span></a>
+    <nav id="site-nav" class="site-nav" aria-label="主导航"><a href="/" class="nav-link">首页</a><a href="/archives/" class="nav-link">归档</a><a href="/tags/" class="nav-link">标签</a><a href="/2023/12/05/%E8%B5%84%E6%BA%90%E9%93%BE%E6%8E%A5/" class="nav-link">资源</a><a href="/about/" class="nav-link">关于</a></nav>
+    <div class="header-actions"><button class="icon-button search-toggle" aria-label="搜索文章" title="搜索文章（Ctrl K）"><svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 4.5 4.5"/></svg></button>
+    <span class="header-divider"></span><button class="icon-button theme-toggle" aria-label="切换为浅色模式" title="切换主题"><svg class="icon sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg><svg class="icon moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.2 14A8.5 8.5 0 0 1 10 3.8 8.5 8.5 0 1 0 20.2 14Z"/></svg></button>
+    <a class="github-link icon-button" href="https://github.com/doovvv" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-4.3 1.3-4.3-2.3-6-2.8M15 22v-3.5c0-1 .1-1.5-.5-2 3.3-.4 6.7-1.6 6.7-7.4a5.6 5.6 0 0 0-1.5-3.9A5.3 5.3 0 0 0 19.5 1S18.3.6 15 2.5a13.4 13.4 0 0 0-6 0C5.7.6 4.5 1 4.5 1a5.3 5.3 0 0 0-.2 4.2 5.6 5.6 0 0 0-1.5 3.9c0 5.8 3.4 7 6.7 7.4-.5.5-.6 1.2-.5 2V22"/></svg></a>
+    <button class="icon-button menu-toggle" aria-label="打开导航菜单" aria-expanded="false" aria-controls="site-nav"><svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button></div></div></header><main id="main-content"><section class="article-heading page-container"><a class="back-link" href="/archives/">← 返回笔记</a><div class="eyebrow">人工智能 / NOTEBOOK</div><h1>Moe学习笔记</h1><div class="article-meta"><a href="/about/" class="author-meta"><span class="author-initial">d.</span>doovvv</a><span class="meta-divider"></span><time datetime="2024-10-29">2024.10.29</time><span><svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3.5 2"/></svg>17 分钟阅读</span></div><div class="article-tags"></div></section>
+    <div class="reading-layout page-container"><article class="reading-article" aria-label="文章正文"><div class="post-body" itemprop="articleBody">
+<p>Moe learning notes</p>
 <span id="more"></span>
 <h1 id="前置知识">前置知识</h1>
 <h2 id="激活函数">激活函数</h2>
@@ -264,14 +33,14 @@ attention）</strong>：这种方法是根据输入内容的特征来确定哪�
 </ul>
 <h4 id="基于位置的稀疏注意力">基于位置的稀疏注意力</h4>
 <figure>
-<img src="https://pic3.zhimg.com/v2-0a586723aa7eb9e4cdbd38d564ef0320_r.jpg" alt="img">
+<img alt="img" src="https://pic3.zhimg.com/v2-0a586723aa7eb9e4cdbd38d564ef0320_r.jpg"/>
 <figcaption aria-hidden="true">img</figcaption>
 </figure>
-<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/691296437">参考链接</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/691296437" rel="noopener" target="_blank">参考链接</a></p>
 <h2 id="知识蒸馏kd">知识蒸馏KD</h2>
 <p>知识蒸馏就是把一个大的教师模型的知识萃取出来，把他浓缩到一个小的学生模型</p>
 <figure>
-<img src="https://pic1.zhimg.com/v2-ec9107c17d7532b6a53be30fd84dbffc_r.jpg" alt="img">
+<img alt="img" src="https://pic1.zhimg.com/v2-ec9107c17d7532b6a53be30fd84dbffc_r.jpg"/>
 <figcaption aria-hidden="true">img</figcaption>
 </figure>
 <h3 id="离线蒸馏">离线蒸馏</h3>
@@ -301,7 +70,7 @@ loss计算teacher和student之前输出预测值的差别，和student的loss加
 <p>为了提高训练的稳定性，对每个transformer层的输入进行归一化，而不是输出进行归一化。</p>
 <p>使用RMS norm归一化函数，公式如下：</p>
 <figure>
-<img src="/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241111174509779.png" alt="image-20241111174509779">
+<img alt="image-20241111174509779" src="/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241111174509779.png"/>
 <figcaption aria-hidden="true">image-20241111174509779</figcaption>
 </figure>
 <p>RMS Norm 的作者认为这种模式在简化了Layer Norm
@@ -309,13 +78,13 @@ loss计算teacher和student之前输出预测值的差别，和student的loss加
 的计算时间</p>
 <h3 id="silu激活函数">Silu激活函数</h3>
 <figure>
-<img src="/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241111181233743.png" alt="image-20241111181233743">
+<img alt="image-20241111181233743" src="/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241111181233743.png"/>
 <figcaption aria-hidden="true">image-20241111181233743</figcaption>
 </figure>
 <h3 id="旋转编码">旋转编码</h3>
 <p>外推性：RoPE的旋转编码方式没有明确的最大长度限制，因此可以在推理阶段支持更长的输入文本。相比之下，传统的正弦位置编码通常需要在训练时设置最大长度，超出这一长度的输入就可能无法编码。</p>
 <figure>
-<img src="/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241112151831454.png" alt="image-20241112151831454">
+<img alt="image-20241112151831454" src="/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241112151831454.png"/>
 <figcaption aria-hidden="true">image-20241112151831454</figcaption>
 </figure>
 <h2 id="llama2">llama2</h2>
@@ -324,7 +93,7 @@ loss计算teacher和student之前输出预测值的差别，和student的loss加
 <ol type="1">
 <li><p>该模型采用了分组查询注意力(GQA)，GQA显著加快了推理速度，还减少了解码期间的内存需求，允许更高的批处理大小，从而提高吞吐量</p>
 <figure>
-<img src="/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241103190659629.png" alt="image-20241103190659629">
+<img alt="image-20241103190659629" src="/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241103190659629.png"/>
 <figcaption aria-hidden="true">image-20241103190659629</figcaption>
 </figure>
 <ul>
@@ -336,7 +105,7 @@ loss计算teacher和student之前输出预测值的差别，和student的loss加
 <li><p>滑动窗口注意力：原始attention的操作次数与序列长度成平方关系。于是采用滑动窗口注意力，每个token只计算它前面的window
 size个token。如下图所示</p>
 <figure>
-<img src="/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241103191252385.png" alt="image-20241103191252385">
+<img alt="image-20241103191252385" src="/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241103191252385.png"/>
 <figcaption aria-hidden="true">image-20241103191252385</figcaption>
 </figure>
 <ul>
@@ -355,7 +124,7 @@ W中。因此，当位置i大于W时，缓存中过去的值就会被覆盖，�
 </ul>
 <ol type="1">
 <li><figure>
-<img src="/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241103192353986.png" alt="image-20241103192353986">
+<img alt="image-20241103192353986" src="/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241103192353986.png"/>
 <figcaption aria-hidden="true">image-20241103192353986</figcaption>
 </figure></li>
 </ol></li>
@@ -364,7 +133,7 @@ W中。因此，当位置i大于W时，缓存中过去的值就会被覆盖，�
 <p>decoder only的moe模型</p>
 <p>每层结构如下：</p>
 <figure>
-<img src="/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241103192651213.png" alt="image-20241103192651213">
+<img alt="image-20241103192651213" src="/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241103192651213.png"/>
 <figcaption aria-hidden="true">image-20241103192651213</figcaption>
 </figure>
 <h1 id="论文">论文</h1>
@@ -373,38 +142,38 @@ W中。因此，当位置i大于W时，缓存中过去的值就会被覆盖，�
 <p>如下图transformer中的moe架构，在推理中每个moe
 layer只有一小部分专家被激活。但是却占用了大量的gpu memory</p>
 <figure>
-<img src="/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241029130547599.png" alt="image-20241029130547599">
+<img alt="image-20241029130547599" src="/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241029130547599.png"/>
 <figcaption aria-hidden="true">image-20241029130547599</figcaption>
 </figure>
 <p>data-awareness：根据传入数据来确定技术或策略的设计</p>
 <h3 id="背景和动机">背景和动机</h3>
 <p>由下图看出大模型（switch-base-256）最低的时候有效GPU-mem利用率只有百分之5</p>
 <figure>
-<img src="/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241029153236841.png" alt="image-20241029153236841">
+<img alt="image-20241029153236841" src="/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241029153236841.png"/>
 <figcaption aria-hidden="true">image-20241029153236841</figcaption>
 </figure>
 <p>选择专家的开销非常大，并且随着模型规模的扩大选择专家的开销也在扩大，不过为什么会这么大？</p>
 <figure>
-<img src="/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241029154018575.png" alt="image-20241029154018575">
+<img alt="image-20241029154018575" src="/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241029154018575.png"/>
 <figcaption aria-hidden="true">image-20241029154018575</figcaption>
 </figure>
 <p>sentence level的专家激活任然具有稀疏性</p>
 <figure>
-<img src="/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241029155033543.png" alt="image-20241029155033543">
+<img alt="image-20241029155033543" src="/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241029155033543.png"/>
 <figcaption aria-hidden="true">image-20241029155033543</figcaption>
 </figure>
 <h3 id="sida-1">SIDA</h3>
 <p>由interfence thread和hash build
 thread（预测句子需要卸载的expert）组成，并行进行，并且预测比推理要快，所以不会带来延迟。</p>
 <figure>
-<img src="/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241031002920772.png" alt="image-20241031002920772">
+<img alt="image-20241031002920772" src="/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241031002920772.png"/>
 <figcaption aria-hidden="true">image-20241031002920772</figcaption>
 </figure>
 <h3 id="lstm-with-sparse-attention">LSTM with sparse attention</h3>
 <p>这一节在证明对于每个token的专家激活存在稀疏的交叉依赖关系。由于自注意力机制和position
 embedding的存在，每个token的专家的激活不仅与当前token有关系，而且与其他token以及其他token的位置有关系。但是作者证明了每个token的专家激活只与少数的其他token有关系。</p>
 <figure>
-<img src="/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241030202520650.png" alt="image-20241030202520650">
+<img alt="image-20241030202520650" src="/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241030202520650.png"/>
 <figcaption aria-hidden="true">image-20241030202520650</figcaption>
 </figure>
 <p>上面这个公式表示的是，从sequence选择出来的一部分token，不包含关键token（与i个token存在依赖的token）的概率。其中<span class="math inline">\(C_i\)</span>表示第i个token的关键token的数量。</p>
@@ -415,7 +184,7 @@ embedding的存在，每个token的专家的激活不仅与当前token有关系�
 <li>对于位置之间的依赖关系：同理，只不过把改变token变成交换token的位置。</li>
 </ul>
 <figure>
-<img src="/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241030203251366.png" alt="image-20241030203251366">
+<img alt="image-20241030203251366" src="/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241030203251366.png"/>
 <figcaption aria-hidden="true">image-20241030203251366</figcaption>
 </figure>
 <p>由上图看出，只有c在1-4之间的时候才比较符合概率随p的增长。这证明了稀疏性。</p>
@@ -427,7 +196,7 @@ Encoder-Decoder?</h2>
 <h3 id="introduction">introduction</h3>
 <p>下图展示了decoder-only与encoder-decoder架构的区别</p>
 <figure>
-<img src="/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241031143829214.png" alt="image-20241031143829214">
+<img alt="image-20241031143829214" src="/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241031143829214.png"/>
 <figcaption aria-hidden="true">image-20241031143829214</figcaption>
 </figure>
 <p><strong>decoder-only Language Model (LM)</strong>: GPT2 ( Radford et
@@ -451,7 +220,7 @@ cache，从而减少长文本的prefill阶段的网络延迟。</p>
 <li>是什么：在同一层，相邻的符元具有更相似的 K/V
 张量值，而相距较远的符元则具有更不相同的 K/V 张量值。</li>
 <li>验证：从下图可以看出来每一对连续token的同一层的KV
-tensor的差值(delta)是更集中在0部分。说明连续token的K/V值相近。<img src="/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241112173314358.png" alt="image-20241112173314358"></li>
+tensor的差值(delta)是更集中在0部分。说明连续token的K/V值相近。<img alt="image-20241112173314358" src="/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241112173314358.png"/></li>
 <li>解释：作者的解释是说Transformer的子注意力机制使得每一个token的KV
 tensor基于先前token的KV
 tensor(感觉缺乏说服力，self-attention没有体现出连续性)</li>
@@ -473,13 +242,13 @@ cache的管理不够有效：LFU，LRU虽然高于随机替换策略，但是未
 <h3 id="motivation">motivation</h3>
 <ul>
 <li><p><strong>Expert loading dominates inference
-cost</strong>：专家加载的延迟占了推理过程中的大部分延迟，如下图。<img src="/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241121165620816.png" alt="image-20241121165620816"></p></li>
+cost</strong>：专家加载的延迟占了推理过程中的大部分延迟，如下图。<img alt="image-20241121165620816" src="/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241121165620816.png"/></p></li>
 <li><p><strong>Mixed precision expert preserves model
 accuracy.</strong>：采用动态门控的expert
 skip方式会导致模型性能的明显下降，但是对一些不太重要的expert进行低精度替换，模型的性能下降很少，但是可以大大加快推理速度。例如，用
 int4 版本替换 float16 专家可以在加载过程中实现高达 4 倍的速度提升。</p>
 <figure>
-<img src="/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241121170755511.png" alt="image-20241121170755511">
+<img alt="image-20241121170755511" src="/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241121170755511.png"/>
 <figcaption aria-hidden="true">image-20241121170755511</figcaption>
 </figure></li>
 </ul>
@@ -490,7 +259,7 @@ Expert Loading</strong>：</h4>
 <p><strong>Expert loader design.</strong>：</p>
 <p>作者用下面这个公式计算得分，得分越高则重要性越低：</p>
 <figure>
-<img src="/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241124193230757.png" alt="image-20241124193230757">
+<img alt="image-20241124193230757" src="/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241124193230757.png"/>
 <figcaption aria-hidden="true">image-20241124193230757</figcaption>
 </figure>
 <p>作者设置了两个阈值T1，T2，若得分小于T1，则取高精度expert，若得分小于T2，大于T1则取低精度expert，否则跳过。</p>
@@ -502,7 +271,7 @@ Expert Prefetching</h4>
 <p>prefetch不同精度的expert，这可以减少由cache
 miss带来的损失，如下图：</p>
 <figure>
-<img src="/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241124201034907.png" alt="image-20241124201034907">
+<img alt="image-20241124201034907" src="/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241124201034907.png"/>
 <figcaption aria-hidden="true">image-20241124201034907</figcaption>
 </figure>
 <h4 id="sequence-level-multidimensional-expert-caching">Sequence-level
@@ -517,13 +286,13 @@ C，而低精度版本的成本为 Bl/Bh*⁢C，其中 Bl 和 Bh
 <p>利用上述四种策略的优势，我们通过为每种策略分配权重并将其相加来确定每个专家的最终优先级。
 如下：</p>
 <figure>
-<img src="/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241124202445804.png" alt="image-20241124202445804">
+<img alt="image-20241124202445804" src="/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241124202445804.png"/>
 <figcaption aria-hidden="true">image-20241124202445804</figcaption>
 </figure>
 <p>四个权重是用户设置的超参数，通过最小化校准数据集上的混合精度专家缓存未命中惩罚来确定合适的数值。</p>
 <p>缓存管理器为高精度专家和低精度专家维护单独的缓存，如下图所示：</p>
 <figure>
-<img src="/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241124203618732.png" alt="image-20241124203618732">
+<img alt="image-20241124203618732" src="/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241124203618732.png"/>
 <figcaption aria-hidden="true">image-20241124203618732</figcaption>
 </figure>
 <h3 id="system-implementation">System Implementation</h3>
@@ -536,7 +305,7 @@ thread去CPU中复制专家权重</p></li>
 <p>如下图：</p></li>
 </ul>
 <figure>
-<img src="/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241124205641419.png" alt="image-20241124205641419">
+<img alt="image-20241124205641419" src="/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20241124205641419.png"/>
 <figcaption aria-hidden="true">image-20241124205641419</figcaption>
 </figure>
 <h2 id="hexa-moe">HEXA-moe</h2>
@@ -554,310 +323,12 @@ thread去CPU中复制专家权重</p></li>
 <li>专家并行主要部署在同构设备上，成本较高。然而由于moe层的动态负载，要实现异构设备的部署也很难。</li>
 </ul>
 <h1 id="specinfer">SpecInfer</h1>
-
-    </div>
-
-    
-    
-    
-        
-
-<div>
-<ul class="post-copyright">
-  <li class="post-copyright-author">
-    <strong>Post author:  </strong>doovvv
-  </li>
-  <li class="post-copyright-link">
-    <strong>Post link: </strong>
-    <a href="http://example.com/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="Moe学习笔记">http://example.com/2024/10/29/Moe学习笔记/</a>
-  </li>
-  <li class="post-copyright-license">
-    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
-  </li>
-</ul>
-</div>
-
-
-      <footer class="post-footer">
-
-        
-
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/2024/09/26/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/" rel="prev" title="算法设计与分析">
-      <i class="fa fa-chevron-left"></i> 算法设计与分析
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/2025/01/02/machine-learning-review/" rel="next" title="machine learning review">
-      machine learning review <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
-      </footer>
-    
-  </article>
-  
-  
-  
-
-
-
-          </div>
-          
-    <div class="comments" id="valine-comments"></div>
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
-</script>
-
-        </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          Table of Contents
-        </li>
-        <li class="sidebar-nav-overview">
-          Overview
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86"><span class="nav-number">1.</span> <span class="nav-text">前置知识</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0"><span class="nav-number">1.1.</span> <span class="nav-text">激活函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#normalization"><span class="nav-number">1.2.</span> <span class="nav-text">Normalization</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#bn-vs-ln"><span class="nav-number">1.2.1.</span> <span class="nav-text">BN vs LN</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sparse-attention"><span class="nav-number">1.3.</span> <span class="nav-text">Sparse Attention</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A8%80%E7%96%8F%E6%B3%A8%E6%84%8F%E5%8A%9B%E7%9A%84%E5%88%86%E7%B1%BB"><span class="nav-number">1.3.1.</span> <span class="nav-text">稀疏注意力的分类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E4%BD%8D%E7%BD%AE%E7%9A%84%E7%A8%80%E7%96%8F%E6%B3%A8%E6%84%8F%E5%8A%9B"><span class="nav-number">1.3.1.1.</span> <span class="nav-text">基于位置的稀疏注意力</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9F%A5%E8%AF%86%E8%92%B8%E9%A6%8Fkd"><span class="nav-number">1.4.</span> <span class="nav-text">知识蒸馏KD</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A6%BB%E7%BA%BF%E8%92%B8%E9%A6%8F"><span class="nav-number">1.4.1.</span> <span class="nav-text">离线蒸馏</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%8A%E7%9B%91%E7%9D%A3%E8%92%B8%E9%A6%8F"><span class="nav-number">1.4.2.</span> <span class="nav-text">半监督蒸馏</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E7%9B%91%E7%9D%A3%E8%92%B8%E9%A6%8F"><span class="nav-number">1.4.3.</span> <span class="nav-text">自监督蒸馏</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#speculative-decoding"><span class="nav-number">1.5.</span> <span class="nav-text">Speculative Decoding</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8A%A8%E6%9C%BA"><span class="nav-number">1.5.0.1.</span> <span class="nav-text">动机</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%87%E7%A8%8B"><span class="nav-number">1.5.0.2.</span> <span class="nav-text">过程</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B"><span class="nav-number">2.</span> <span class="nav-text">模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#llama1"><span class="nav-number">2.1.</span> <span class="nav-text">llama1</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#pre-normalization"><span class="nav-number">2.1.1.</span> <span class="nav-text">Pre-normalization</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#silu%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0"><span class="nav-number">2.1.2.</span> <span class="nav-text">Silu激活函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%8B%E8%BD%AC%E7%BC%96%E7%A0%81"><span class="nav-number">2.1.3.</span> <span class="nav-text">旋转编码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#llama2"><span class="nav-number">2.2.</span> <span class="nav-text">llama2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mistral"><span class="nav-number">2.3.</span> <span class="nav-text">mistral</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mixtral-8x7b"><span class="nav-number">2.4.</span> <span class="nav-text">mixtral 8x7B</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%BA%E6%96%87"><span class="nav-number">3.</span> <span class="nav-text">论文</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#sida"><span class="nav-number">3.1.</span> <span class="nav-text">SIDA</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%8B%E7%BB%8D"><span class="nav-number">3.1.1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%83%8C%E6%99%AF%E5%92%8C%E5%8A%A8%E6%9C%BA"><span class="nav-number">3.1.2.</span> <span class="nav-text">背景和动机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sida-1"><span class="nav-number">3.1.3.</span> <span class="nav-text">SIDA</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lstm-with-sparse-attention"><span class="nav-number">3.1.4.</span> <span class="nav-text">LSTM with sparse attention</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#design-of-the-hash-function"><span class="nav-number">3.1.5.</span> <span class="nav-text">Design of the hash function</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#decoder-only-or-encoder-decoder"><span class="nav-number">3.2.</span> <span class="nav-text">Decoder-Only or
+</div><div class="article-end"><span>END OF NOTE</span><i></i><svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 7-5 5 5 5m8-10 5 5-5 5M14 4l-4 16"/></svg></div><div class="article-license"><span>最后更新 2024-12-16</span><span>本文内容采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-NC-SA 4.0</a> 许可</span></div><nav class="article-neighbors" aria-label="相邻文章"><a href="/2024/09/26/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/"><span>上一篇</span><strong>算法设计与分析</strong><svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a><a href="/2025/01/02/machine-learning-review/"><span>下一篇</span><strong>machine learning review</strong><svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a></nav><section class="comments-section" aria-labelledby="comments-heading"><div class="section-heading"><h2 id="comments-heading">交流与讨论<span class="heading-dot">.</span></h2></div><button class="button button-outline load-comments">展开评论 <svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></button><p class="comment-status" role="status"></p><div id="valine-comments"></div></section></article><aside class="reading-sidebar"><div class="toc-heading"><span>ON THIS PAGE</span><svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5c-3-2-7-2-10 0v15c3-2 7-2 10 0 3-2 7-2 10 0V5c-3-2-7-2-10 0Zm0 0v15"/></svg></div><div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86"><span class="nav-number">1.</span> <span class="nav-text">前置知识</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0"><span class="nav-number">1.1.</span> <span class="nav-text">激活函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#normalization"><span class="nav-number">1.2.</span> <span class="nav-text">Normalization</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#bn-vs-ln"><span class="nav-number">1.2.1.</span> <span class="nav-text">BN vs LN</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sparse-attention"><span class="nav-number">1.3.</span> <span class="nav-text">Sparse Attention</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A8%80%E7%96%8F%E6%B3%A8%E6%84%8F%E5%8A%9B%E7%9A%84%E5%88%86%E7%B1%BB"><span class="nav-number">1.3.1.</span> <span class="nav-text">稀疏注意力的分类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E4%BD%8D%E7%BD%AE%E7%9A%84%E7%A8%80%E7%96%8F%E6%B3%A8%E6%84%8F%E5%8A%9B"><span class="nav-number">1.3.1.1.</span> <span class="nav-text">基于位置的稀疏注意力</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9F%A5%E8%AF%86%E8%92%B8%E9%A6%8Fkd"><span class="nav-number">1.4.</span> <span class="nav-text">知识蒸馏KD</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A6%BB%E7%BA%BF%E8%92%B8%E9%A6%8F"><span class="nav-number">1.4.1.</span> <span class="nav-text">离线蒸馏</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%8A%E7%9B%91%E7%9D%A3%E8%92%B8%E9%A6%8F"><span class="nav-number">1.4.2.</span> <span class="nav-text">半监督蒸馏</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E7%9B%91%E7%9D%A3%E8%92%B8%E9%A6%8F"><span class="nav-number">1.4.3.</span> <span class="nav-text">自监督蒸馏</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#speculative-decoding"><span class="nav-number">1.5.</span> <span class="nav-text">Speculative Decoding</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8A%A8%E6%9C%BA"><span class="nav-number">1.5.0.1.</span> <span class="nav-text">动机</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%87%E7%A8%8B"><span class="nav-number">1.5.0.2.</span> <span class="nav-text">过程</span></a></li></ol></li></ol></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B"><span class="nav-number">2.</span> <span class="nav-text">模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#llama1"><span class="nav-number">2.1.</span> <span class="nav-text">llama1</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#pre-normalization"><span class="nav-number">2.1.1.</span> <span class="nav-text">Pre-normalization</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#silu%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0"><span class="nav-number">2.1.2.</span> <span class="nav-text">Silu激活函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%8B%E8%BD%AC%E7%BC%96%E7%A0%81"><span class="nav-number">2.1.3.</span> <span class="nav-text">旋转编码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#llama2"><span class="nav-number">2.2.</span> <span class="nav-text">llama2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mistral"><span class="nav-number">2.3.</span> <span class="nav-text">mistral</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mixtral-8x7b"><span class="nav-number">2.4.</span> <span class="nav-text">mixtral 8x7B</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%BA%E6%96%87"><span class="nav-number">3.</span> <span class="nav-text">论文</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#sida"><span class="nav-number">3.1.</span> <span class="nav-text">SIDA</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%8B%E7%BB%8D"><span class="nav-number">3.1.1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%83%8C%E6%99%AF%E5%92%8C%E5%8A%A8%E6%9C%BA"><span class="nav-number">3.1.2.</span> <span class="nav-text">背景和动机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sida-1"><span class="nav-number">3.1.3.</span> <span class="nav-text">SIDA</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lstm-with-sparse-attention"><span class="nav-number">3.1.4.</span> <span class="nav-text">LSTM with sparse attention</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#design-of-the-hash-function"><span class="nav-number">3.1.5.</span> <span class="nav-text">Design of the hash function</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#decoder-only-or-encoder-decoder"><span class="nav-number">3.2.</span> <span class="nav-text">Decoder-Only or
 Encoder-Decoder?</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#introduction"><span class="nav-number">3.2.1.</span> <span class="nav-text">introduction</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cachegen"><span class="nav-number">3.3.</span> <span class="nav-text">cachegen</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hobbit"><span class="nav-number">3.4.</span> <span class="nav-text">Hobbit</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#introduction-1"><span class="nav-number">3.4.1.</span> <span class="nav-text">introduction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#motivation"><span class="nav-number">3.4.2.</span> <span class="nav-text">motivation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hobbit-system"><span class="nav-number">3.4.3.</span> <span class="nav-text">HOBBIT System</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#token-level-dynamic-expert-loading"><span class="nav-number">3.4.3.1.</span> <span class="nav-text">Token-level Dynamic
 Expert Loading：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#layer-level-adaptive-expert-prefetching"><span class="nav-number">3.4.3.2.</span> <span class="nav-text">Layer-level Adaptive
 Expert Prefetching</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#sequence-level-multidimensional-expert-caching"><span class="nav-number">3.4.3.3.</span> <span class="nav-text">Sequence-level
-Multidimensional Expert Caching</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#system-implementation"><span class="nav-number">3.4.4.</span> <span class="nav-text">System Implementation</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hexa-moe"><span class="nav-number">3.5.</span> <span class="nav-text">HEXA-moe</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#introduction-2"><span class="nav-number">3.5.1.</span> <span class="nav-text">introduction</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#specinfer"><span class="nav-number">4.</span> <span class="nav-text">SpecInfer</span></a></li></ol></div>
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="doovvv"
-      src="https://cdn.z.wiki/autoupload/20241024/zc0p/940X940/avatar.gif">
-  <p class="site-author-name" itemprop="name">doovvv</p>
-  <div class="site-description" itemprop="description">一切都没有意外，只是多了些波折</div>
-</div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">20</span>
-          <span class="site-state-item-name">posts</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">6</span>
-        <span class="site-state-item-name">tags</span>
-      </div>
-  </nav>
-</div>
-  <div class="links-of-author motion-element">
-      <span class="links-of-author-item">
-        <a href="https://github.com/doovvv" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;doovvv" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="/zhangch523@mail2.sysu.edu.cn" title="E-Mail → zhangch523@mail2.sysu.edu.cn"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
-      </span>
-  </div>
-  <div class="cc-license motion-element" itemprop="license">
-    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
-  </div>
-
-
-
-      </div>
-
-    </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
-
-
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-        
-
-<div class="copyright">
-  
-  &copy; 
-  <span itemprop="copyrightYear">2025</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">doovvv</span>
-</div>
-  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
-  </div>
-
-        
-
-
-
-
-
-
-
-
-      </div>
-    </footer>
-  </div>
-
-  
-  <script src="/lib/anime.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
-
-<script src="/js/utils.js"></script>
-
-<script src="/js/motion.js"></script>
-
-
-<script src="/js/schemes/muse.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-  
-      
-
-<script>
-  if (typeof MathJax === 'undefined') {
-    window.MathJax = {
-      loader: {
-        source: {
-          '[tex]/amsCd': '[tex]/amscd',
-          '[tex]/AMScd': '[tex]/amscd'
-        }
-      },
-      tex: {
-        inlineMath: {'[+]': [['$', '$']]},
-        tags: 'ams'
-      },
-      options: {
-        renderActions: {
-          findScript: [10, doc => {
-            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
-              const display = !!node.type.match(/; *mode=display/);
-              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
-              const text = document.createTextNode('');
-              node.parentNode.replaceChild(text, node);
-              math.start = {node: text, delim: '', n: 0};
-              math.end = {node: text, delim: '', n: 0};
-              doc.math.push(math);
-            });
-          }, '', false],
-          insertedScript: [200, () => {
-            document.querySelectorAll('mjx-container').forEach(node => {
-              let target = node.parentNode;
-              if (target.nodeName.toLowerCase() === 'li') {
-                target.parentNode.classList.add('has-jax');
-              }
-            });
-          }, '', false]
-        }
-      }
-    };
-    (function () {
-      var script = document.createElement('script');
-      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
-      script.defer = true;
-      document.head.appendChild(script);
-    })();
-  } else {
-    MathJax.startup.document.state(0);
-    MathJax.texReset();
-    MathJax.typeset();
-  }
-</script>
-
-    
-
-  
-
-
-<script>
-NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
-  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
-    var GUEST = ['nick', 'mail', 'link'];
-    var guest = 'nick,mail,link';
-    guest = guest.split(',').filter(item => {
-      return GUEST.includes(item);
-    });
-    new Valine({
-      el         : '#valine-comments',
-      verify     : false,
-      notify     : false,
-      appId      : 'IeEMujBge2kAmKaLJDalYGMx-gzGzoHsz',
-      appKey     : 'ZJGbpaRGRbziJ12K4CO5IvuI',
-      placeholder: "Just go go",
-      avatar     : 'mm',
-      meta       : guest,
-      pageSize   : '10' || 10,
-      visitor    : false,
-      lang       : '' || 'zh-cn',
-      path       : location.pathname,
-      recordIP   : false,
-      serverURLs : 'https://ieemujbg.lc-cn-n1-shared.com'
-    });
-  }, window.Valine);
-});
-</script>
-
-</body>
-</html>
+Multidimensional Expert Caching</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#system-implementation"><span class="nav-number">3.4.4.</span> <span class="nav-text">System Implementation</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hexa-moe"><span class="nav-number">3.5.</span> <span class="nav-text">HEXA-moe</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#introduction-2"><span class="nav-number">3.5.1.</span> <span class="nav-text">introduction</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#specinfer"><span class="nav-number">4.</span> <span class="nav-text">SpecInfer</span></a></li></div><div class="reading-progress"><div><span>阅读进度</span><span id="reading-percent">0%</span></div><div class="progress-track"><span id="reading-progress-bar"></span></div></div></aside></div></main><footer class="site-footer"><div class="footer-main"><a class="brand" href="/">doovvv<span class="brand-dot">.</span></a>
+    <p>记录思考，保持好奇。</p><a href="https://github.com/doovvv" target="_blank" rel="noopener noreferrer">在 GitHub 找到我 <svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg></a></div>
+    <div class="footer-bottom"><span>© 2026 doovvv · Personal notes & explorations</span><a href="#top">回到顶部 ↑</a></div></footer><dialog id="search-dialog" class="search-dialog" aria-labelledby="search-title"><div class="search-heading"><h2 id="search-title">搜索笔记</h2><button class="icon-button search-close" aria-label="关闭搜索"><svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 6 12 12M6 18 18 6"/></svg></button></div>
+    <form class="search-form" role="search"><label class="sr-only" for="search-input">搜索标题或正文</label><svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 4.5 4.5"/></svg><input id="search-input" type="search" placeholder="搜索标题、关键词或正文…" autocomplete="off"><kbd>ESC</kbd></form>
+    <div id="search-status" class="search-status" role="status" aria-live="polite">在 20 篇笔记中，寻找一个想法。</div><div id="search-results" class="search-results"></div></dialog><button class="back-top icon-button" aria-label="返回顶部"><svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></button></body></html>
