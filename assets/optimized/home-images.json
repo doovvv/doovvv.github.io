@@ -1,0 +1,43 @@
+{
+  "avatar": {
+    "height": 940,
+    "recipe": "webp-q82-v2",
+    "source_hash": "772ea7ff63ee40628b30e3f258ae70da51ec6b8eacac5d1a49ed9633e187035e",
+    "variants": [
+      {
+        "height": 340,
+        "path": "/assets/optimized/avatar-772ea7ff63ee-webp-q82-v2-340.webp",
+        "width": 340
+      },
+      {
+        "height": 680,
+        "path": "/assets/optimized/avatar-772ea7ff63ee-webp-q82-v2-680.webp",
+        "width": 680
+      }
+    ],
+    "width": 940
+  },
+  "hero": {
+    "height": 1928,
+    "recipe": "webp-q82-v2",
+    "source_hash": "747bbdbafa071056210797e6fbb06c34979cac6d578dc64d5e853688c95f0a36",
+    "variants": [
+      {
+        "height": 720,
+        "path": "/assets/optimized/hero-747bbdbafa07-webp-q82-v2-960.webp",
+        "width": 960
+      },
+      {
+        "height": 1199,
+        "path": "/assets/optimized/hero-747bbdbafa07-webp-q82-v2-1600.webp",
+        "width": 1600
+      },
+      {
+        "height": 1919,
+        "path": "/assets/optimized/hero-747bbdbafa07-webp-q82-v2-2560.webp",
+        "width": 2560
+      }
+    ],
+    "width": 2572
+  }
+}

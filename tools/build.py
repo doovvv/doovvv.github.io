@@ -1,4 +1,4 @@
-"""Build the blog's static pages using only the Python standard library."""
+"""Build static blog pages with optional image optimization."""
 from __future__ import annotations
 
 from collections import defaultdict
@@ -14,9 +14,11 @@ from urllib.parse import quote, unquote, urljoin, urlsplit, urlunsplit
 
 try:
     from .content import load_site
+    from .images import image_variants, optimize_home_images
     from .locking import workflow_lock
 except ImportError:
     from content import load_site
+    from images import image_variants, optimize_home_images
     from locking import workflow_lock
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -151,6 +153,34 @@ def search_dialog():
     <div id="search-status" class="search-status" role="status" aria-live="polite" data-i18n="search.initial" data-i18n-params='{{"count":{len(SITE['posts'])}}}'>{message('search.initial', count=len(SITE['posts']))}</div><div id="search-results" class="search-results"></div></dialog>'''
 
 
+def optimized_options(kind, sizes=None):
+    entry = image_variants(ROOT, kind)
+    if not entry:
+        return None
+    srcset = ', '.join(f'{item["path"]} {item["width"]}w' for item in entry['variants'])
+    if sizes is None:
+        ratio = entry['width'] / entry['height']
+        sizes = f'max(100vw, {650 * ratio:.2f}px, {100 * ratio:.2f}vh)'
+    return srcset, sizes
+
+
+def optimized_source(kind, sizes=None):
+    options = optimized_options(kind, sizes)
+    if not options:
+        return ''
+    srcset, sizes = options
+    return f'<source type="image/webp" srcset="{escape(srcset, quote=True)}" sizes="{escape(sizes, quote=True)}">'
+
+
+def hero_preload():
+    options = optimized_options('hero')
+    if not options:
+        return ''
+    srcset, sizes = options
+    first = image_variants(ROOT, 'hero')['variants'][0]['path']
+    return f'<link rel="preload" as="image" type="image/webp" href="{first}" imagesrcset="{escape(srcset, quote=True)}" imagesizes="{escape(sizes, quote=True)}" fetchpriority="high">'
+
+
 def layout(title, description, url, content, active='home', kind='page', extra=''):
     canonical = SITE['url'] + quote(unquote(url), safe='/')
     extra = '<script>window.BLOG_IMAGE_ALIASES=' + json.dumps(SITE.get('image_aliases', {}), ensure_ascii=True) + ';</script>' + extra
@@ -165,7 +195,7 @@ def layout(title, description, url, content, active='home', kind='page', extra='
     return f'''<!doctype html>
 <html lang="en" data-language="en" data-theme="light"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="light dark"><meta name="theme-color" content="#ffffff">
 <title{title_marker}>{escape(title_text)}</title><meta name="description" content="{escape(description_text, quote=True)}"{description_marker}><link rel="canonical" href="{canonical}"><meta property="og:title" content="{escape(title_text, quote=True)}"{f' data-i18n-content="{title_key}"' if title_key else ''}><meta property="og:description" content="{escape(description_text, quote=True)}"{description_marker}><meta property="og:type" content="{'article' if kind == 'post' else 'website'}"><meta property="og:url" content="{canonical}"><meta property="og:image" content="{SITE['url']}/assets/social-card.jpg"><meta property="og:image:type" content="image/jpeg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
-<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg"><link rel="preload" href="/assets/fonts/ibm-plex-mono-bold.ttf" as="font" type="font/ttf" crossorigin><script>try{{const t=localStorage.getItem('doovvv-theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t;const l=localStorage.getItem('doovvv-language');if(l==='en'||l==='zh-CN'){{document.documentElement.lang=l;document.documentElement.dataset.language=l}}}}catch(e){{}}</script><link rel="stylesheet" href="/assets/site.css"><script src="/assets/ui-messages.js" defer></script><script src="/assets/i18n.js" defer></script><script src="/assets/site.js" defer></script>{extra}</head>
+{hero_preload() if kind == 'home' and url == '/' else ''}<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg"><link rel="preload" href="/assets/fonts/ibm-plex-mono-bold.ttf" as="font" type="font/ttf" crossorigin><script>try{{const t=localStorage.getItem('doovvv-theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t;const l=localStorage.getItem('doovvv-language');if(l==='en'||l==='zh-CN'){{document.documentElement.lang=l;document.documentElement.dataset.language=l}}}}catch(e){{}}</script><link rel="stylesheet" href="/assets/site.css"><script src="/assets/ui-messages.js" defer></script><script src="/assets/i18n.js" defer></script><script src="/assets/site.js" defer></script>{extra}</head>
 <body class="page-{kind}" id="top">{navigation(active)}<main id="main-content">{content}</main>{footer()}{search_dialog()}<button class="back-top icon-button" {ui_attr('aria-label', 'back.top')}>{icon('arrow')}</button></body></html>'''
 
 
@@ -198,10 +228,10 @@ def pagination(page):
 def hero():
     background = ROOT / 'assets/images/mountain-day.jpg'
     version = '?v=' + hashlib.sha256(background.read_bytes()).hexdigest()[:12] if background.is_file() else ''
-    return f'''<section class="hero" aria-labelledby="hero-title"><img class="hero-background" src="/assets/images/mountain-day.jpg{version}" alt="" width="2200" height="1468" fetchpriority="high">
+    return f'''<section class="hero" aria-labelledby="hero-title"><picture class="hero-backdrop">{optimized_source('hero')}<img class="hero-background" src="/assets/images/mountain-day.jpg{version}" alt="" width="2200" height="1468" fetchpriority="high" decoding="async"></picture>
     <div class="hero-inner"><div class="hero-intro"><p class="hero-greeting">{ui('hero.greeting')}</p><h1 id="hero-title">{ui('hero.im')} <strong class="hero-name">doovvv</strong></h1><p class="hero-subtitle">{ui('hero.subtitle')}</p>
     <div class="hero-socials"><a href="https://github.com/doovvv" target="_blank" rel="noopener noreferrer" {ui_attr('aria-label', 'social.github')}>{icon('github')}</a><a href="/archives/" {ui_attr('aria-label', 'social.notes')}>{icon('book')}</a><a href="/about/" {ui_attr('aria-label', 'social.about')}>{icon('code')}</a></div></div>
-    <a class="hero-portrait" href="/about/" {ui_attr('aria-label', 'social.about')}><img src="/assets/images/avatar.gif" {ui_attr('alt', 'hero.avatar')} width="940" height="940"></a></div>
+    <a class="hero-portrait" href="/about/" {ui_attr('aria-label', 'social.about')}><picture>{optimized_source('avatar', '(max-width:600px) 160px, (max-width:800px) 220px, (max-width:1100px) 280px, 340px')}<img src="/assets/images/avatar.gif" {ui_attr('alt', 'hero.avatar')} width="940" height="940" decoding="async"></picture></a></div>
     <a class="hero-bottom" href="#notes" {ui_attr('aria-label', 'hero.scroll')}>{ui('hero.caption')}{icon('chevrons-down')}</a></section>'''
 
 
@@ -283,7 +313,7 @@ def about():
     sections = [('overview', '01'), ('experience', '02'), ('education', '03'), ('skills', '04'), ('writing', '05')]
     menu = ''.join(f'<a href="#{name}" class="profile-nav-link{" is-active" if i == 0 else ""}"{" aria-current=location" if i == 0 else ""}><span class="profile-nav-number" aria-hidden="true">{number}</span>{ui("profile.nav." + name)}</a>' for i, (name, number) in enumerate(sections))
     result = f'''<div class="profile-shell"><aside class="profile-rail"><a class="profile-identity" href="#overview"><span class="profile-monogram" aria-hidden="true">d.</span><span><strong>doovvv</strong><small>{ui('profile.rail.label')}</small></span></a><nav class="profile-nav" {ui_attr('aria-label', 'profile.nav.label')}>{menu}</nav><a class="profile-rail-link" href="https://github.com/doovvv" target="_blank" rel="noopener noreferrer">{icon('github')} GitHub {icon('up-right')}</a></aside>
-    <div class="profile-main"><section class="profile-section profile-overview" id="overview" aria-labelledby="profile-name"><div class="profile-hero"><div class="profile-intro"><p class="eyebrow">{ui('profile.eyebrow')}</p><h1 id="profile-name">{ui('profile.name.first')}<strong>{ui('profile.name.last')}</strong></h1><div class="profile-name-note">{ui('profile.name.note')}</div><p class="profile-role">{ui('profile.role')}</p><p class="profile-bio">{ui('profile.bio')}</p><div class="profile-actions"><a class="button button-primary" href="#experience">{ui('profile.explore')} {icon('down')}</a><a class="profile-social" href="https://github.com/doovvv" target="_blank" rel="noopener noreferrer">{icon('github')} GitHub {icon('up-right')}</a></div></div><div class="profile-portrait"><img src="/assets/images/avatar.gif" {ui_attr('alt','hero.avatar')} width="940" height="940"><span class="profile-portrait-caption">doovvv / {ui('profile.portrait')}</span></div></div>
+    <div class="profile-main"><section class="profile-section profile-overview" id="overview" aria-labelledby="profile-name"><div class="profile-hero"><div class="profile-intro"><p class="eyebrow">{ui('profile.eyebrow')}</p><h1 id="profile-name">{ui('profile.name.first')}<strong>{ui('profile.name.last')}</strong></h1><div class="profile-name-note">{ui('profile.name.note')}</div><p class="profile-role">{ui('profile.role')}</p><p class="profile-bio">{ui('profile.bio')}</p><div class="profile-actions"><a class="button button-primary" href="#experience">{ui('profile.explore')} {icon('down')}</a><a class="profile-social" href="https://github.com/doovvv" target="_blank" rel="noopener noreferrer">{icon('github')} GitHub {icon('up-right')}</a></div></div><div class="profile-portrait"><picture>{optimized_source('avatar', '(max-width:600px) 64px, (max-width:1100px) 160px, 220px')}<img src="/assets/images/avatar.gif" {ui_attr('alt','hero.avatar')} width="940" height="940" decoding="async"></picture><span class="profile-portrait-caption">doovvv / {ui('profile.portrait')}</span></div></div>
     </section>'''
 
     def heading(number, name, description):
@@ -395,6 +425,7 @@ def _build_site(root=ROOT, include_drafts=False):
         # An image generated for A may still be explicitly used by public B
         # after A is withdrawn. Retain ownership until the final reference ends.
         files |= set(SITE['_public_assets']) & old_files
+        files |= optimize_home_images(ROOT)
         def output_path(name):
             target = (ROOT / name).resolve()
             if not target.is_relative_to(ROOT) or target == ROOT or Path(name).parts[0] in ('content', 'tools', 'tests', '.git'):

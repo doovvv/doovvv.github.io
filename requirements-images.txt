@@ -1,0 +1,2 @@
+# Optional for building new optimized images; existing WebP assets work without it.
+Pillow>=10.4,<14

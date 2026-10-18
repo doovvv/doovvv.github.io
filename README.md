@@ -33,8 +33,11 @@ python tools/blog.py preview
 - `assets/fonts/`：本地 IBM Plex Mono 字体和 SIL Open Font License。
 - `assets/site.js`：主题记忆、全文搜索、精选切换、手机菜单、阅读目录、代码复制和评论加载。
 - `assets/images/`：本地摄影、文章配图和历史中找回的图片。
+- `assets/optimized/`：首页背景与头像的多尺寸 WebP，由构建自动生成；原图继续保留作为兼容回退。修改原图后重新发布即可更新，浏览器会按屏幕大小选择文件。
 - `assets/vendor/`：本地 MathJax、Valine 及各自许可证。
 - `assets/social-card.jpg`：1200 × 630 的分享预览图，渲染源保存在 `tools/social-card.html`。
+
+图片自动压缩使用 Pillow，本机已安装；在新电脑首次生成新图片时可运行 `python -m pip install -r requirements-images.txt`。未安装时仍可使用已生成且匹配原图的 WebP；替换原图后会退回新原图并提示安装，不会继续使用旧的压缩图片。图片压缩只调整尺寸与编码，不添加颜色蒙层或滤镜。
 
 修改内容或模板后运行：
 
