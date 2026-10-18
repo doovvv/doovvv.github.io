@@ -45,28 +45,6 @@
         "url": "/2023/12/03/0-1%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/"
       },
       "next": {
-        "title": "资源链接",
-        "url": "/2023/12/05/%E8%B5%84%E6%BA%90%E9%93%BE%E6%8E%A5/"
-      }
-    },
-    {
-      "url": "/2023/12/05/资源链接/",
-      "file": "2023/12/05/资源链接/index.html",
-      "slug": "资源链接",
-      "title": "资源链接",
-      "date": "2023-12-05T00:26:23+08:00",
-      "updated": "2024-02-05T15:58:20+08:00",
-      "tags": [],
-      "excerpt": "常用技术文档、在线工具与学习资源，给探索过程留一份随手可查的索引。",
-      "text": "Markdown语法 git命令 Latex语法 zlibrary Linux\nCommand CS diy",
-      "body": "<div class=\"post-body\" itemprop=\"articleBody\">\n<ul>\n<li><a href=\"https://markdown.com.cn/basic-syntax/\" rel=\"noopener\" target=\"_blank\">Markdown语法</a></li>\n<li><a href=\"https://www.runoob.com/note/56524\" rel=\"noopener\" target=\"_blank\">git命令</a></li>\n<li><a href=\"https://www.cnblogs.com/1024th/p/11623258.html\" rel=\"noopener\" target=\"_blank\">Latex语法</a></li>\n<li><a href=\"https://zh.z-library.se/?ts=0413\" rel=\"noopener\" target=\"_blank\">zlibrary</a><br/>\n</li>\n<li><a href=\"https://wangchujiang.com/linux-command/\" rel=\"noopener\" target=\"_blank\">Linux\nCommand</a></li>\n<li><a href=\"https://csdiy.wiki/\" rel=\"noopener\" target=\"_blank\">CS diy</a></li>\n</ul>\n</div>",
-      "toc": "",
-      "minutes": 1,
-      "prev": {
-        "title": "最短路径问题",
-        "url": "/2023/12/05/%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%E9%97%AE%E9%A2%98/"
-      },
-      "next": {
         "title": "单调栈",
         "url": "/2023/12/21/%E5%8D%95%E8%B0%83%E6%A0%88/"
       }
@@ -90,8 +68,8 @@
       "toc": "<div class=\"post-toc motion-element\"><ol class=\"nav\"><li class=\"nav-item nav-level-1\"><a class=\"nav-link\" href=\"#Monotonic-stack\"><span class=\"nav-number\">1.</span> <span class=\"nav-text\">Monotonic stack</span></a><ol class=\"nav-child\"><li class=\"nav-item nav-level-2\"><a class=\"nav-link\" href=\"#Definition\"><span class=\"nav-number\">1.1.</span> <span class=\"nav-text\">Definition</span></a></li><li class=\"nav-item nav-level-2\"><a class=\"nav-link\" href=\"#Establishing-process\"><span class=\"nav-number\">1.2.</span> <span class=\"nav-text\">Establishing process</span></a></li><li class=\"nav-item nav-level-2\"><a class=\"nav-link\" href=\"#Application\"><span class=\"nav-number\">1.3.</span> <span class=\"nav-text\">Application</span></a></li></ol></li></ol></div>",
       "minutes": 3,
       "prev": {
-        "title": "资源链接",
-        "url": "/2023/12/05/%E8%B5%84%E6%BA%90%E9%93%BE%E6%8E%A5/"
+        "title": "最短路径问题",
+        "url": "/2023/12/05/%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%E9%97%AE%E9%A2%98/"
       },
       "next": {
         "title": "二叉平衡树",
@@ -501,14 +479,6 @@
       ]
     },
     {
-      "file": "2023/12/05/资源链接/index.html",
-      "url": "/2023/12/05/资源链接/",
-      "kind": "post",
-      "posts": [
-        "/2023/12/05/资源链接/"
-      ]
-    },
-    {
       "file": "2023/12/21/单调栈/index.html",
       "url": "/2023/12/21/单调栈/",
       "kind": "post",
@@ -651,7 +621,6 @@
       "posts": [
         "/2023/12/22/%E4%BA%8C%E5%8F%89%E5%B9%B3%E8%A1%A1%E6%A0%91/",
         "/2023/12/21/%E5%8D%95%E8%B0%83%E6%A0%88/",
-        "/2023/12/05/%E8%B5%84%E6%BA%90%E9%93%BE%E6%8E%A5/",
         "/2023/12/05/%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%E9%97%AE%E9%A2%98/",
         "/2023/12/03/0-1%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/"
       ],
@@ -665,7 +634,6 @@
       "posts": [
         "/2023/12/22/%E4%BA%8C%E5%8F%89%E5%B9%B3%E8%A1%A1%E6%A0%91/",
         "/2023/12/21/%E5%8D%95%E8%B0%83%E6%A0%88/",
-        "/2023/12/05/%E8%B5%84%E6%BA%90%E9%93%BE%E6%8E%A5/",
         "/2023/12/05/%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%E9%97%AE%E9%A2%98/",
         "/2023/12/03/0-1%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/"
       ],
@@ -889,7 +857,6 @@
         "/2024/01/07/%E4%BA%8C%E5%8F%89%E6%A0%91%E9%81%8D%E5%8E%86%E9%97%AE%E9%A2%98/",
         "/2023/12/22/%E4%BA%8C%E5%8F%89%E5%B9%B3%E8%A1%A1%E6%A0%91/",
         "/2023/12/21/%E5%8D%95%E8%B0%83%E6%A0%88/",
-        "/2023/12/05/%E8%B5%84%E6%BA%90%E9%93%BE%E6%8E%A5/",
         "/2023/12/05/%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%E9%97%AE%E9%A2%98/",
         "/2023/12/03/0-1%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/"
       ],
@@ -917,7 +884,6 @@
       "url": "/",
       "kind": "home",
       "posts": [
-        "/2023/12/05/%E8%B5%84%E6%BA%90%E9%93%BE%E6%8E%A5/",
         "/2025/01/02/machine-learning-review/",
         "/2024/10/29/Moe%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/",
         "/2024/09/26/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/",
@@ -981,15 +947,6 @@
         }
       ],
       "title": "doovvv"
-    },
-    {
-      "file": "resource/index.html",
-      "url": "/resource/",
-      "kind": "resource",
-      "posts": [],
-      "pagination": [],
-      "title": "resource | doovvv",
-      "body": "<div class=\"post-body\">\n</div>"
     },
     {
       "file": "tags/408/index.html",

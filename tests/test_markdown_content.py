@@ -25,6 +25,7 @@ class MarkdownContentTests(unittest.TestCase):
         (self.root / 'content/posts').mkdir(parents=True)
         for name in ['site.json', 'ui.json']:
             shutil.copyfile(ROOT / 'content' / name, self.root / 'content' / name)
+        self.legacy_count = len(json.loads((self.root / 'content/site.json').read_text(encoding='utf8'))['posts'])
 
     def article(self, folder='test-note', metadata='', text=None):
         directory = self.root / 'content/posts' / folder
@@ -53,7 +54,7 @@ class MarkdownContentTests(unittest.TestCase):
     def test_new_article_automatically_enters_all_indexes_and_neighbors(self):
         self.article()
         site = content.load_site(self.root)
-        self.assertEqual(len(site['posts']), 21)
+        self.assertEqual(len(site['posts']), self.legacy_count + 1)
         by_url = {p['url']: p for p in site['pages']}
         url = '/2026/10/17/test-note/'
         for route in ['/', '/archives/', '/archives/2026/', '/archives/2026/10/', '/tags/ai/', '/tags/新标签/']:
@@ -65,13 +66,13 @@ class MarkdownContentTests(unittest.TestCase):
     def test_drafts_are_previewable_and_absent_from_publish_data(self):
         path = self.article()
         path.write_text(path.read_text(encoding='utf8').replace('draft: false', 'draft: true'), encoding='utf8')
-        self.assertEqual(len(content.load_site(self.root)['posts']), 20)
-        self.assertEqual(len(content.load_site(self.root, include_drafts=True)['posts']), 21)
+        self.assertEqual(len(content.load_site(self.root)['posts']), self.legacy_count)
+        self.assertEqual(len(content.load_site(self.root, include_drafts=True)['posts']), self.legacy_count + 1)
 
     def test_unfinished_draft_image_does_not_block_other_articles(self):
         path = self.article(text='![Not uploaded yet](images/later.png)')
         path.write_text(path.read_text(encoding='utf8').replace('draft: false', 'draft: true'), encoding='utf8')
-        self.assertEqual(len(content.load_site(self.root)['posts']), 20)
+        self.assertEqual(len(content.load_site(self.root)['posts']), self.legacy_count)
 
     def test_root_image_is_included_in_the_public_asset_list(self):
         image = self.root / 'assets/uploads/photo.png'
@@ -118,12 +119,12 @@ class MarkdownContentTests(unittest.TestCase):
     def test_explicit_legacy_override_retains_the_old_route(self):
         self.article(metadata='legacy_url: /2025/01/02/machine-learning-review/\n')
         site = content.load_site(self.root)
-        self.assertEqual(len(site['posts']), 20)
+        self.assertEqual(len(site['posts']), self.legacy_count)
         post = next(p for p in site['posts'] if p['url'] == '/2025/01/02/machine-learning-review/')
         self.assertEqual(post['title'], '新文章')
 
     def test_pagination_grows_without_manual_lists(self):
-        for i in range(11):
+        for i in range(31 - self.legacy_count):
             self.article('note-' + str(i))
         site = content.load_site(self.root)
         pages = {p['url']: p for p in site['pages']}
@@ -141,9 +142,9 @@ class MarkdownContentTests(unittest.TestCase):
         self.assertTrue(image.is_file())
         home = (self.root / 'index.html').read_text(encoding='utf8')
         self.assertIn('first.png', home)
-        self.assertIn('21', home)
-        self.assertEqual(len(json.loads((self.root / 'assets/search.json').read_text(encoding='utf8'))), 21)
-        self.assertEqual(len(site['posts']), 21)
+        self.assertIn(str(self.legacy_count + 1), home)
+        self.assertEqual(len(json.loads((self.root / 'assets/search.json').read_text(encoding='utf8'))), self.legacy_count + 1)
+        self.assertEqual(len(site['posts']), self.legacy_count + 1)
 
     def test_draft_or_deleted_article_removes_only_its_generated_files(self):
         path = self.article()

@@ -46,7 +46,7 @@ class InterfaceLanguageTests(unittest.TestCase):
     def test_first_visit_has_english_navigation(self):
         interface = self.parse('index.html')
         self.assertEqual(interface.language, 'en')
-        self.assertEqual(interface.navigation, ['Home', 'Archive', 'Tags', 'Resources', 'About'])
+        self.assertEqual(interface.navigation, ['Home', 'Archive', 'Tags', 'About'])
 
     def test_language_switch_is_available_on_every_public_page(self):
         for filename in [p['file'] for p in SITE['pages']] + ['about/index.html']:

@@ -11,10 +11,6 @@
     "en": "Tags",
     "zh-CN": "标签"
   },
-  "nav.resources": {
-    "en": "Resources",
-    "zh-CN": "资源"
-  },
   "nav.about": {
     "en": "About",
     "zh-CN": "关于"
@@ -495,18 +491,6 @@
     "en": "Leave your thoughts…",
     "zh-CN": "留下你的想法…"
   },
-  "resources.eyebrow": {
-    "en": "RESOURCES",
-    "zh-CN": "资源与链接"
-  },
-  "resources.title": {
-    "en": "Resources & links",
-    "zh-CN": "资源与链接"
-  },
-  "resources.description": {
-    "en": "Useful tools, documentation, and references.",
-    "zh-CN": "常用工具与参考资料。"
-  },
   "page.home": {
     "en": "Stay curious, keep a record | doovvv",
     "zh-CN": "保持好奇，认真记录 | doovvv"
@@ -522,10 +506,6 @@
   "page.about": {
     "en": "About | doovvv",
     "zh-CN": "关于我 | doovvv"
-  },
-  "page.resources": {
-    "en": "Resources | doovvv",
-    "zh-CN": "资源与链接 | doovvv"
   },
   "page.description": {
     "en": "Notes on code, systems, and ideas. Stay curious, keep a record.",

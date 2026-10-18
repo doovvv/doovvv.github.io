@@ -22,7 +22,7 @@ python tools/blog.py preview
 
 ## 内容与构建
 
-- `content/site.json`：20 篇已恢复文章的正文、标题、标签、日期，以及旧站页面路径。正文是发布后 HTML 的原样快照。
+- `content/site.json`：19 篇已恢复文章的正文、标题、标签、日期，以及旧站页面路径。正文是发布后 HTML 的原样快照。
 - `content/posts/*/index.md`：新文章的 Markdown 源文件，归档、标签、分页与搜索由构建自动维护。
 - `content/generated-files.json`：生成文件清单，用于清理已删除或改回草稿的文章页面和附件。
 - `content/ui.json`：英文和中文界面文案；新增界面文字应同时补齐两种语言。

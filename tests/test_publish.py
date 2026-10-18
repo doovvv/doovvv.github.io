@@ -57,7 +57,8 @@ class PublishTests(unittest.TestCase):
         self.assertEqual(self.git('show', 'HEAD:CNAME'), 'doovvv.cn')
         self.assertIn('A new note', self.git('show', 'HEAD:content/posts/new-note/index.md'))
         self.assertIn('New content.', self.git('show', 'HEAD:2026/10/17/new-note/index.html'))
-        self.assertEqual(len(json.loads(self.git('show', 'HEAD:assets/search.json'))), 21)
+        legacy_count = len(json.loads((self.root / 'content/site.json').read_text(encoding='utf8'))['posts'])
+        self.assertEqual(len(json.loads(self.git('show', 'HEAD:assets/search.json'))), legacy_count + 1)
         self.assertTrue(list((self.root / '.backups').glob('*.zip')))
 
     def test_drafts_are_not_in_the_remote_tree_even_after_preview(self):

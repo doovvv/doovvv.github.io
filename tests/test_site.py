@@ -60,7 +60,7 @@ class SiteTests(unittest.TestCase):
                 self.assertIn('id="site-nav"', output)
 
     def test_every_article_preserves_its_complete_published_body(self):
-        self.assertEqual(len(LEGACY['posts']), 20)
+        self.assertEqual(len(LEGACY['posts']), 19)
         for post in LEGACY['posts']:
             with self.subTest(article=post['title']):
                 self.assertIn(post['body'], (ROOT / post['file']).read_text(encoding='utf8'))

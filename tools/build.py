@@ -128,7 +128,7 @@ def article_cover(post):
 
 
 def navigation(active):
-    links = [('/', 'nav.home', 'home'), ('/archives/', 'nav.archive', 'archive'), ('/tags/', 'nav.tags', 'tags'), ('/2023/12/05/%E8%B5%84%E6%BA%90%E9%93%BE%E6%8E%A5/', 'nav.resources', 'resource'), ('/about/', 'nav.about', 'about')]
+    links = [('/', 'nav.home', 'home'), ('/archives/', 'nav.archive', 'archive'), ('/tags/', 'nav.tags', 'tags'), ('/about/', 'nav.about', 'about')]
     nav = ''.join(f'<a href="{url}" class="nav-link{" is-active" if key == active else ""}"{chr(32) + "aria-current=page" if key == active else ""}>{ui(label)}</a>' for url, label, key in links)
     return f'''<a class="skip-link" href="#main-content">{ui('nav.skip')}</a>
     <header class="site-header"><div class="header-inner">
@@ -186,7 +186,7 @@ def layout(title, description, url, content, active='home', kind='page', extra='
     favicon = favicon_url(ROOT)
     favicon_type = ' type="image/png" sizes="64x64"' if favicon.endswith('.png') else ''
     extra = '<script>window.BLOG_IMAGE_ALIASES=' + json.dumps(SITE.get('image_aliases', {}), ensure_ascii=True) + ';</script>' + extra
-    title_key = {'home':'page.home', 'archive':'page.archive', 'tags':'page.tags', 'about':'page.about', 'resource':'page.resources'}.get(kind)
+    title_key = {'home':'page.home', 'archive':'page.archive', 'tags':'page.tags', 'about':'page.about'}.get(kind)
     if kind == 'tag' and '选修' in unquote(url):
         title_key = 'page.electives'
     title_text = message(title_key) if title_key else title + ' | doovvv'
@@ -393,8 +393,7 @@ def _write_site():
         elif kind in ['tag', 'tags']:
             body, title, description = tag_page(page), '标签索引' if kind == 'tags' else SITE['tag_names'].get(unquote(page['url']), '标签'), '按主题探索 doovvv 的笔记'
         else:
-            body = page_heading('resources.eyebrow', 'resources.title', 'resources.description') + '<div class="page-container reading-article">' + page.get('body', '') + '</div>'
-            title, description = '资源与链接', SITE['description']
+            raise ValueError('Unsupported page kind: ' + kind)
         active = 'tags' if kind == 'tag' else kind
         output = ROOT / page['file']
         output.parent.mkdir(parents=True, exist_ok=True)

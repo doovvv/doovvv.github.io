@@ -258,7 +258,7 @@ def load_site(root, include_drafts=False):
         page(post['url'], 'post', [post])
     original_home = next((p for p in original_pages if p['url'] == '/'), {})
     pinned = [p for p in sorted_posts if p.get('_pinned')]
-    # The recovered homepage pins its resource index; preserve that existing choice.
+    # Preserve any pinned entry from the recovered homepage.
     if original_home.get('posts') and original_home['posts'][0] != sorted_posts[0]['url']:
         first = posts.get(unquote(original_home['posts'][0]))
         if first and not first.get('_sources') and first not in pinned:
