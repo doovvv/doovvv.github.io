@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en" data-language="en" data-theme="light"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="light dark"><meta name="theme-color" content="#ffffff">
+<title>Go Map 实现详解 | doovvv</title><meta name="description" content="旧 Go Map 实现 在 Go 代码中使用的 map 数据结构实际会被编译为 runtime/map.go 中的 hmap 结构体。在 1.24.0 版本之前， hmap 结构体为： type hmap struct { count int // map 中元素的个数 flags uint8 //…"><link rel="canonical" href="https://doovvv.cn/2026/10/18/go-map/"><meta property="og:title" content="Go Map 实现详解 | doovvv"><meta property="og:description" content="旧 Go Map 实现 在 Go 代码中使用的 map 数据结构实际会被编译为 runtime/map.go 中的 hmap 结构体。在 1.24.0 版本之前， hmap 结构体为： type hmap struct { count int // map 中元素的个数 flags uint8 //…"><meta property="og:type" content="article"><meta property="og:url" content="https://doovvv.cn/2026/10/18/go-map/"><meta property="og:image" content="https://doovvv.cn/assets/social-card.jpg"><meta property="og:image:type" content="image/jpeg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<link rel="icon" type="image/png" sizes="64x64" href="/assets/optimized/avatar-772ea7ff63ee-icon-64.png"><link rel="preload" href="/assets/fonts/ibm-plex-mono-bold.ttf" as="font" type="font/ttf" crossorigin><script>try{const t=localStorage.getItem('doovvv-theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t;const l=localStorage.getItem('doovvv-language');if(l==='en'||l==='zh-CN'){document.documentElement.lang=l;document.documentElement.dataset.language=l}}catch(e){}</script><link rel="stylesheet" href="/assets/site.css"><script src="/assets/ui-messages.js" defer></script><script src="/assets/i18n.js" defer></script><script src="/assets/site.js" defer></script><script>window.BLOG_IMAGE_ALIASES={"image-20240609212414729.png": "/assets/images/recovered-decision-tree-1.png", "image-20240609213812491.png": "/assets/images/recovered-decision-tree-2.png", "https://pic3.zhimg.com/v2-0a586723aa7eb9e4cdbd38d564ef0320_r.jpg": "/assets/images/article-reference-1.jpg", "https://pic1.zhimg.com/v2-ec9107c17d7532b6a53be30fd84dbffc_r.jpg": "/assets/images/article-reference-2.jpg"};</script><script>window.BLOG_COMMENTS={"appId": "IeEMujBge2kAmKaLJDalYGMx-gzGzoHsz", "appKey": "ZJGbpaRGRbziJ12K4CO5IvuI", "serverURLs": "https://ieemujbg.lc-cn-n1-shared.com"};</script></head>
+<body class="page-post" id="top"><a class="skip-link" href="#main-content"><span data-i18n="nav.skip" data-i18n-params="{}">Skip to main content</span></a>
+    <header class="site-header"><div class="header-inner">
+    <a class="brand" href="/" aria-label="doovvv home" data-i18n-aria-label="nav.brand" data-i18n-aria-label-params="{}"><span class="brand-symbol" aria-hidden="true">&lt;/&gt;</span><span>doovvv<span class="brand-dot">_</span></span></a>
+    <nav id="site-nav" class="site-nav" aria-label="Main navigation" data-i18n-aria-label="nav.label" data-i18n-aria-label-params="{}"><a href="/" class="nav-link"><span data-i18n="nav.home" data-i18n-params="{}">Home</span></a><a href="/archives/" class="nav-link"><span data-i18n="nav.archive" data-i18n-params="{}">Archive</span></a><a href="/tags/" class="nav-link"><span data-i18n="nav.tags" data-i18n-params="{}">Tags</span></a><a href="/about/" class="nav-link"><span data-i18n="nav.about" data-i18n-params="{}">About</span></a></nav>
+    <div class="header-actions"><button class="icon-button search-toggle" aria-label="Search notes" data-i18n-aria-label="search.open" data-i18n-aria-label-params="{}" title="Search notes (Ctrl K)" data-i18n-title="search.hint" data-i18n-title-params="{}"><svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 4.5 4.5"/></svg></button>
+    <button class="language-toggle" type="button" aria-label="Switch to Chinese" title="Switch to Chinese">中文</button>
+    <span class="header-divider"></span><button class="icon-button theme-toggle" aria-label="Switch to dark mode" data-i18n-aria-label="theme.dark" data-i18n-aria-label-params="{}" title="Switch to dark mode" data-i18n-title="theme.dark" data-i18n-title-params="{}"><svg class="icon sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg><svg class="icon moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.2 14A8.5 8.5 0 0 1 10 3.8 8.5 8.5 0 1 0 20.2 14Z"/></svg></button>
+    <a class="github-link icon-button" href="https://github.com/doovvv" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-4.3 1.3-4.3-2.3-6-2.8M15 22v-3.5c0-1 .1-1.5-.5-2 3.3-.4 6.7-1.6 6.7-7.4a5.6 5.6 0 0 0-1.5-3.9A5.3 5.3 0 0 0 19.5 1S18.3.6 15 2.5a13.4 13.4 0 0 0-6 0C5.7.6 4.5 1 4.5 1a5.3 5.3 0 0 0-.2 4.2 5.6 5.6 0 0 0-1.5 3.9c0 5.8 3.4 7 6.7 7.4-.5.5-.6 1.2-.5 2V22"/></svg></a>
+    <button class="icon-button menu-toggle" aria-label="Open navigation menu" data-i18n-aria-label="menu.open" data-i18n-aria-label-params="{}" aria-expanded="false" aria-controls="site-nav"><svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button></div></div></header><main id="main-content"><section class="article-heading page-container"><a class="back-link" href="/archives/"><span data-i18n="article.back" data-i18n-params="{}">← Back to notes</span></a><div class="eyebrow"><span data-i18n="topic.notes" data-i18n-params="{}">Reading &amp; reflections</span> / <span data-i18n="notes.notebook" data-i18n-params="{}">THE NOTEBOOK</span></div><h1 lang="zh-CN">Go Map 实现详解</h1><div class="article-meta"><a href="/about/" class="author-meta"><span class="author-initial">d.</span>doovvv</a><span class="meta-divider"></span><time datetime="2026-10-18">2026.10.18</time><span><svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3.5 2"/></svg><span data-i18n="note.minutes" data-i18n-params="{&quot;count&quot;: 11}">11 min read</span></span></div><div class="article-tags"></div></section>
+    <div class="reading-layout page-container"><article class="reading-article" aria-label="Article content" data-i18n-aria-label="article.body" data-i18n-aria-label-params="{}"><div class="article-original" lang="zh-CN"><div class="post-body markdown-body"><h2 id="旧-go-map-实现">旧 Go Map 实现</h2>
+<p>在 Go 代码中使用的 map 数据结构实际会被编译为 <code>runtime/map.go</code> 中的 <code>hmap</code> 结构体。在 1.24.0 版本之前，<code>hmap</code> 结构体为：</p>
+<pre><code class="language-go">type hmap struct {
+    count     int            // map 中元素的个数
+    flags     uint8          // 状态标志位（iterator、hashWriting、sameSizeGrow 等）
+    B         uint8          // bucket 数量的对数，bucket 数量 = 2^B
+    noverflow uint16         // overflow bucket 的近似数量
+    hash0     uint32         // hash 种子，用于防止哈希攻击
+
+    buckets    unsafe.Pointer // bucket 数组指针
+    oldbuckets unsafe.Pointer // 扩容时旧的 bucket 数组
+    nevacuate  uintptr        // 搬迁进度，小于这个值的 bucket 已搬迁完成
+
+    extra *mapextra          // 可选字段
+}
+</code></pre>
+<h3 id="内存布局">内存布局</h3>
+<p>从上面这个结构体可以看出来 Go map 的大致结构，本质来讲就是一个数组，只不过这个数组由哈希桶（bucket）来组成。将计算出的 hash 值取低 B 位即可从数组中索引到具体的 bucket。bucket 中存储了 8 个 key-value 对。除了 kv 对之外，每个 bucket 还存储了 tophash，即每个 key 的 hash 值的高 8 位。并且在 bucket 内，并不是按照 kv 对的顺序来存储，而是所有 tophash 存在一起，所有 key 存在一起，所有 value 存在一起。大概的内存布局如下：</p>
+<pre><code>内存地址
+  +------------------+
+  |  buckets 指针    |  --&gt; h.buckets
+  +------------------+
+  |   bucket[0]      |
+  |   tophash[8]     |
+  |   keys[8]        |
+  |   values[8]      |
+  |   overflow *     |
+  +------------------+
+  |   bucket[1]      |
+  |   tophash[8]     |
+  |   keys[8]        |
+  |   values[8]      |
+  |   overflow *     |
+  +------------------+
+  |   ...            |
+  +------------------+
+  |   bucket[2^B-1]  |
+  +------------------+
+  |   预分配的       |
+  |   overflow       |
+  |   buckets        |
+  +------------------+
+</code></pre>
+<p>这里可能会有两个疑惑：</p>
+<ul>
+<li>
+<p>为什么需要 tophash？</p>
+</li>
+<li>
+<p>为什么 tophash 全放一起，key 全放一起，value 全放一起？</p>
+</li>
+</ul>
+<p><strong>为什么需要 tophash</strong>：tophash 的主要作用是可以进行快速过滤，tophash 只是一个 <code>uint8</code>，相较于复杂的 key 值来说会小很多。大部分情况下只需要比对 tophash，如果不相同则直接跳过，只有少部分情况下 tophash 相同，那还需要比对 key 值。</p>
+<p><strong>为什么 tophash 全放一起，key 全放一起，value 全放一起</strong>：主要是为了减少 padding，例如 <code>map[int64]int8</code> 就不需要额外填充。</p>
+<h3 id="hash-碰撞">Hash 碰撞</h3>
+<p>当不同的 key 经过哈希函数的计算得到相同的 hash 值时就会产生哈希碰撞，旧版的 Go map 使用链式地址法处理哈希碰撞。当 hash 值的低 B 位相同时，会落到同一个 bucket，如果 bucket 满了（超过 8 个 kv 对），这时候会创建 overflow bucket（溢出桶），然后将上一个桶 overflow 指针指向溢出桶即可（链表）。大致结构如下：</p>
+<pre><code>bucket[0] -&gt; overflow1 -&gt; overflow2 -&gt; overflow3 -&gt; ...
+</code></pre>
+<h3 id="扩容机制">扩容机制</h3>
+<p>Go map 扩容的触发条件为平均每个 bucket 中的 key-value 对超过 6.5 个时触发扩容（负载因子 = 元素总数 / bucket 数量 &gt; 6.5）。每次扩容会增加一倍的 bucket，即创建一个新的 bucket 数组且 B++（bucket 的数量为 2^B）。创建之后，Go map 并不是一次性将旧的 bucket 数组中的 key-value 对搬迁到新 bucket 数组，而是采用渐进式搬迁。将搬迁工作均匀到后续的每次访问、插入、删除元素中，每次操作只搬迁 1~2 个 bucket，从而避免单次操作卡顿。</p>
+<h3 id="旧-go-map-的痛点">旧 Go Map 的痛点</h3>
+<p>主要痛点有：</p>
+<ul>
+<li>溢出桶链表导致性能退化</li>
+<li>查询效率低，需要逐个比较 tophash</li>
+</ul>
+<h2 id="新-go-map-实现">新 Go Map 实现</h2>
+<h3 id="内存布局_1">内存布局</h3>
+<p>新 Go map 主要使用了 Swiss Table。Swiss Table 由多个 group 组成（类似于旧版中的 bucket），每个 group 中由一个 ctrlGroup 和 8 个 slot 组成。metadata 共有 8 个字节，称为控制字节（ctrl byte），与每个 slot 对应。每个 slot 存储具体的 key-value 对。如下图所示：</p>
+<p><img alt="d37bca83f8c47286b5f042eb3e9acec7" src="https://cdn.jsdmirror.com/gh/doovvv/MyObsidian@main/img/202601161018279.jpg" /></p>
+<p>当向 Swiss Table 插入或者查询一个 key-value 对时，首先通过哈希函数对 key 求值得到一个 64 位的哈希值，在 Go Swiss Table 中，这个哈希值被分为了两部分：</p>
+<ul>
+<li><strong>H1</strong>：高 57 位</li>
+<li><strong>H2</strong>：低 7 位</li>
+</ul>
+<p>H2 被存在控制字节的低 7 位中，类似旧版中的 tophash，即插入或查询元素时首先匹配 H2，如果匹配成功再去匹配完整的 key。注意 H2 实际只有 7 位，因此控制字节还有最高位可以用来表示其他状态，只有当最高位为 0 时才代表当前 slot 被使用了，如下：</p>
+<ul>
+<li><strong>empty</strong>: <code>1000 0000 (0x80)</code>，表示 slot 未被使用</li>
+<li><strong>deleted</strong>: <code>1111 1110 (0xFE)</code>，表示 slot 的元素已经被删除</li>
+<li><strong>full</strong>: <code>0hhh hhhh</code> (h 是 7 位 H2 哈希位)，表示该 slot 正在被使用</li>
+</ul>
+<h3 id="快速匹配">快速匹配</h3>
+<p>ctrlGroup 由 8 个控制字节组成，可以用 <code>uint64</code> 表示，因此在查找对应元素的时候可以使用位运算加快效率，一次性完成 8 个元素的对比。这就是性能提升的主要改进。除此之外，使用 SIMD 指令还可以一次性对比更多的元素。感兴趣的可以了解一下这里位运算的计算细节，源码如下：</p>
+<pre><code class="language-go">bitsetLSB     = 0x0101010101010101
+bitsetMSB     = 0x8080808080808080
+
+func ctrlGroupMatchH2(g ctrlGroup, h uintptr) bitset {
+    // NB: This generic matching routine produces false positive matches when
+    // h is 2^N and the control bytes have a seq of 2^N followed by 2^N+1. For
+    // example: if ctrls==0x0302 and h=02, we'll compute v as 0x0100. When we
+    // subtract off 0x0101 the first 2 bytes we'll become 0xffff and both be
+    // considered matches of h. The false positive matches are not a problem,
+    // just a rare inefficiency. Note that they only occur if there is a real
+    // match and never occur on ctrlEmpty, or ctrlDeleted. The subsequent key
+    // comparisons ensure that there is no correctness issue.
+    v := uint64(g) ^ (bitsetLSB * uint64(h))
+    return bitset(((v - bitsetLSB) &amp;^ v) &amp; bitsetMSB)
+}
+</code></pre>
+<h3 id="hash-碰撞_1">Hash 碰撞</h3>
+<p>新版 Go Map 使用开放寻址法中的平方探测法处理哈希碰撞。平方探测的探测序列为：<code>h(k, i) = (h(k) + i²) mod m</code>，其中 i 为探测次数。具体来说，如果当前 group 未命中时，使用平方探测法寻找下一个 group，直到探测到一个空的 slot。如果是访问元素，那么当访问到空 slot 时则可以返回未匹配了，如果是插入元素，则就将新元素插入到该 slot。</p>
+<p>这样的设计也使得删除元素时不能直接删除，而是通过控制字节将该 slot 标记为删除。具体原因可以看下面这个例子：</p>
+<p>假设探测的顺序是 <code>group1 -&gt; group2 -&gt; group3</code>，元素 X、Y 的 hash 值相同，X 在 group2 中，Y 在 group3 中，产生了以下操作：</p>
+<ol>
+<li>删除 X，group2 中 X 的 slot 被标记为空</li>
+<li>查询 Y，遍历到 group2 时就发现了空 slot，则返回认为 Y 不存在</li>
+</ol>
+<p>通过上面这个例子可以看出删除元素时不能直接标记 slot 为空。</p>
+<h3 id="扩容机制_1">扩容机制</h3>
+<p>在扩容时如果直接对 group 数组进行翻倍，那么所有元素都需要进行 rehash，对于大型 map 来说会带来明显的延迟。因此新版 Go map 在 map 和 swiss table 之间新加了一层 directory，一个 directory 是一个 table 的数组，管理多个 table，整体结构如下：</p>
+<pre><code>Map (顶层)
+ └── Directory (目录，可扩展哈希)
+      └── Table (表，Swiss Table 实现)
+           └── Groups (组，每组 8 个槽位)
+                └── Slots (槽位，存储 key/value)
+</code></pre>
+<p>directory 采用可扩展哈希的设计，具体来说，directory 总共含有 <code>2^globalDepth</code> 个 table，根据 hash 值的前 globalDepth 个 bit 位来映射到具体 table，当某个 table 需要扩容时，会将该 table 分裂成两个 table，然后 globalDepth+1。</p>
+<p>举个例子：</p>
+<p>初始时 <code>globalDepth = 1</code>：</p>
+<pre><code>Directory (globalDepth=1)
++----+
+| 0  | ------&gt; table1 (localDepth=1)
++----+    
+| 1  | ------&gt; table2 (localDepth=1)
++----+
+</code></pre>
+<p>后面由于 table2 满了发生了分裂，则 <code>globalDepth+1</code>：</p>
+<pre><code>Directory (globalDepth=2)
++----+
+| 00 | --\
++----+    +--&gt; table1 (localDepth=1)
+| 01 | --/
++----+
+| 10 | ------&gt; table2 (localDepth=2)
++----+
+| 11 | ------&gt; table3 (localDepth=2)
++----+
+</code></pre>
+<p>这样设计的优点：</p>
+<ul>
+<li><strong>增量扩容</strong>：通过每次只扩容一个 table，避免大 map 的长时间停顿</li>
+<li><strong>灵活性</strong>：不同 table 可以有不同的负载因子，独立增长</li>
+</ul>
+<h3 id="性能">性能</h3>
+<p>根据测试，<a href="https://go.dev/blog/swisstable">Go 官方团队</a>宣称查询（对于 Key 较多的情况）、增加与遍历性能都有 10~60% 的提升，用于测试的应用程序整体运行性能有 1.5% 的提升。</p>
+<h2 id="新旧实现对比">新旧实现对比</h2>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>旧实现（链式哈希）</th>
+<th>新实现（Swiss Table）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>碰撞处理</strong></td>
+<td>链式地址法（overflow bucket）</td>
+<td>开放寻址法（平方探测）</td>
+</tr>
+<tr>
+<td><strong>元数据存储</strong></td>
+<td>tophash (8 bit)</td>
+<td>控制字节 (8 bit，含状态位)</td>
+</tr>
+<tr>
+<td><strong>查找效率</strong></td>
+<td>逐个比较，O(n) 最坏情况</td>
+<td>位运算并行比较 8 个元素</td>
+</tr>
+<tr>
+<td><strong>SIMD 支持</strong></td>
+<td>无</td>
+<td>支持，可进一步加速</td>
+</tr>
+<tr>
+<td><strong>扩容策略</strong></td>
+<td>整体翻倍 + 渐进式搬迁</td>
+<td>Directory 分层 + 增量扩容</td>
+</tr>
+<tr>
+<td><strong>内存局部性</strong></td>
+<td>较差（链表跳转）</td>
+<td>较好（连续内存）</td>
+</tr>
+<tr>
+<td><strong>性能提升</strong></td>
+<td>-</td>
+<td>查询/插入/遍历 10~60%</td>
+</tr>
+</tbody>
+</table>
+<h2 id="总结">总结</h2>
+<p>Go 1.24 引入的 Swiss Table 实现是对 map 性能的重大改进。通过以下几个关键技术：</p>
+<ol>
+<li><strong>位运算并行匹配</strong>：利用控制字节和位运算，一次性比较 8 个元素</li>
+<li><strong>开放寻址</strong>：提高内存局部性，减少指针跳转</li>
+<li><strong>分层扩容</strong>：通过 Directory 层实现增量扩容，避免大 map 的长时间停顿</li>
+<li><strong>SIMD 优化</strong>：在支持的平台上可以进一步提升性能</li>
+</ol>
+<p>这些改进使得 Go map 在保持简洁 API 的同时，获得了显著的性能提升，特别是在大规模数据场景下表现更加出色。</p></div></div><div class="article-end"><span data-i18n="article.end" data-i18n-params="{}">END OF NOTE</span><i></i><svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 7-5 5 5 5m8-10 5 5-5 5M14 4l-4 16"/></svg></div><div class="article-license"><span data-i18n="article.updated" data-i18n-params="{&quot;date&quot;: &quot;2026-10-18&quot;}">Last updated 2026-10-18</span><span><span data-i18n="article.licenseBefore" data-i18n-params="{}">Content licensed under</span> <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-NC-SA 4.0</a> <span data-i18n="article.licenseAfter" data-i18n-params="{}"></span></span></div><nav class="article-neighbors" aria-label="Adjacent notes" data-i18n-aria-label="article.neighbors" data-i18n-aria-label-params="{}"><a href="/2026/10/18/rag/"><span data-i18n="article.previous" data-i18n-params="{}">Previous note</span><strong>RAG</strong><svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a><span></span></nav><section class="comments-section" aria-labelledby="comments-heading"><div class="section-heading"><h2 id="comments-heading"><span data-i18n="article.comments" data-i18n-params="{}">Discussion</span><span class="heading-dot">.</span></h2></div><button class="button button-outline load-comments"><span data-i18n="article.loadComments" data-i18n-params="{}">Load comments</span> <svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></button><p class="comment-status" role="status"></p><div id="valine-comments"></div></section></article><aside class="reading-sidebar"><div class="toc-heading"><span data-i18n="article.toc" data-i18n-params="{}">ON THIS PAGE</span><svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5c-3-2-7-2-10 0v15c3-2 7-2 10 0 3-2 7-2 10 0V5c-3-2-7-2-10 0Zm0 0v15"/></svg></div><div lang="zh-CN"><div class="post-toc">
+<ul>
+<li><a href="#旧-go-map-实现">旧 Go Map 实现</a><ul>
+<li><a href="#内存布局">内存布局</a></li>
+<li><a href="#hash-碰撞">Hash 碰撞</a></li>
+<li><a href="#扩容机制">扩容机制</a></li>
+<li><a href="#旧-go-map-的痛点">旧 Go Map 的痛点</a></li>
+</ul>
+</li>
+<li><a href="#新-go-map-实现">新 Go Map 实现</a><ul>
+<li><a href="#内存布局_1">内存布局</a></li>
+<li><a href="#快速匹配">快速匹配</a></li>
+<li><a href="#hash-碰撞_1">Hash 碰撞</a></li>
+<li><a href="#扩容机制_1">扩容机制</a></li>
+<li><a href="#性能">性能</a></li>
+</ul>
+</li>
+<li><a href="#新旧实现对比">新旧实现对比</a></li>
+<li><a href="#总结">总结</a></li>
+</ul>
+</div>
+</div><div class="reading-progress"><div><span data-i18n="article.progress" data-i18n-params="{}">Reading progress</span><span id="reading-percent">0%</span></div><div class="progress-track"><span id="reading-progress-bar"></span></div></div></aside></div></main><footer class="site-footer"><div class="footer-main"><a class="brand" href="/">doovvv<span class="brand-dot">.</span></a>
+    <p><span data-i18n="footer.tagline" data-i18n-params="{}">Stay curious. Leave a trace.</span></p><a href="https://github.com/doovvv" target="_blank" rel="noopener noreferrer"><span data-i18n="footer.github" data-i18n-params="{}">Find me on GitHub</span> <svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg></a></div>
+    <div class="footer-bottom"><span data-i18n="footer.copyright" data-i18n-params="{&quot;year&quot;: 2026}">© 2026 doovvv · Personal notes &amp; explorations</span><a href="#top"><span data-i18n="footer.top" data-i18n-params="{}">Back to top ↑</span></a></div></footer><dialog id="search-dialog" class="search-dialog" aria-labelledby="search-title"><div class="search-heading"><h2 id="search-title"><span data-i18n="search.title" data-i18n-params="{}">Search the notebook</span></h2><button class="icon-button search-close" aria-label="Close search" data-i18n-aria-label="search.close" data-i18n-aria-label-params="{}"><svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 6 12 12M6 18 18 6"/></svg></button></div>
+    <form class="search-form" role="search"><label class="sr-only" for="search-input"><span data-i18n="search.label" data-i18n-params="{}">Search titles or article text</span></label><svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 4.5 4.5"/></svg><input id="search-input" type="search" placeholder="Search titles, keywords, or article text…" data-i18n-placeholder="search.placeholder" data-i18n-placeholder-params="{}" autocomplete="off"><kbd>ESC</kbd></form>
+    <div id="search-status" class="search-status" role="status" aria-live="polite" data-i18n="search.initial" data-i18n-params='{"count":21}'>Find an idea in 21 notes.</div><div id="search-results" class="search-results"></div></dialog><button class="back-top icon-button" aria-label="Back to top" data-i18n-aria-label="back.top" data-i18n-aria-label-params="{}"><svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></button></body></html>
