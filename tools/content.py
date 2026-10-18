@@ -121,15 +121,40 @@ class ArticleAssets(HTMLParser):
     def handle_comment(self, text): self.output.append('<!--' + text + '-->')
 
 
-def read_article(path, root, include_drafts=False):
-    try:
-        raw = path.read_text(encoding='utf-8-sig').replace('\r\n', '\n')
-        match = re.match(r'\A---\n(.*?)\n---[ \t]*(?:\n|$)(.*)\Z', raw, re.S)
-        if not match:
-            raise ValueError('Start the article with --- metadata ---')
+def leading_heading(body):
+    return re.match(r'\A\s*#[ \t]+(.+?)(?:[ \t]+#+)?[ \t]*(?:\n|$)', body)
+
+
+def read_document(path, root):
+    """Default metadata only for loose notes; folder posts retain strict validation."""
+    raw = path.read_text(encoding='utf-8-sig').replace('\r\n', '\n')
+    simple = path.parent == root / 'content/posts'
+    match = re.match(r'\A---\n(.*?)\n---[ \t]*(?:\n|$)(.*)\Z', raw, re.S)
+    if match:
         meta = yaml.load(match[1], Loader=UniqueLoader)
         if not isinstance(meta, dict):
             raise ValueError('Article metadata must contain title and date')
+        body = match[2]
+    elif simple and not re.match(r'\A---[ \t]*(?:\n|$)', raw):
+        meta, body = {}, raw
+    else:
+        raise ValueError('Start the article with --- metadata --- (include the closing ---)')
+    missing = False
+    if simple:
+        heading = leading_heading(body)
+        slug = re.sub(r'[^\w-]+', '-', path.stem.lower()).strip('-')
+        defaults = {'title': plain_text(markdown.markdown(heading[1])) if heading else path.stem,
+            'date': datetime.now(ZONE).date().isoformat(), 'slug': slug, 'tags': [], 'draft': False}
+        for key, value in defaults.items():
+            if key not in meta:
+                meta[key] = value
+                missing = True
+    return meta, body, missing
+
+
+def read_article(path, root, include_drafts=False):
+    try:
+        meta, body, _ = read_document(path, root)
         allowed = {'title', 'date', 'updated', 'tags', 'draft', 'slug', 'excerpt', 'pinned', 'legacy_url'}
         unknown = set(meta) - allowed
         if unknown:
@@ -156,7 +181,8 @@ def read_article(path, root, include_drafts=False):
             return {'url': url, '_draft': True, '_legacy_url': meta.get('legacy_url')}
         renderer = markdown.Markdown(extensions=['markdown.extensions.extra', 'markdown.extensions.toc', 'pymdownx.arithmatex'],
             extension_configs={'markdown.extensions.toc': {'slugify': slugify_unicode}, 'pymdownx.arithmatex': {'generic': True}})
-        html = renderer.convert(match[2])
+        heading = leading_heading(body) if path.parent == root / 'content/posts' else None
+        html = renderer.convert(body[heading.end():] if heading else body)
         assets = ArticleAssets(root, path.parent, url)
         assets.feed(html)
         html = ''.join(assets.output)
@@ -200,19 +226,20 @@ def load_site(root, include_drafts=False):
     original_pages = site['pages']
     posts = {unquote(p['url']): deepcopy(p) for p in site['posts']}
     legacy_urls = set(posts)
+    legacy_output_urls = {url.casefold() for url in legacy_urls}
     source_urls = set()
     public_sources, public_assets, assets = set(), set(), {}
     source_root = root / 'content/posts'
-    for path in sorted(source_root.glob('*/index.md')):
+    for path in sorted([*source_root.glob('*.md'), *source_root.glob('*/index.md')]):
         if not path.resolve().is_relative_to(source_root.resolve()):
             raise ValueError(f'Article source leaves content/posts: {path}')
         article = read_article(path, root, include_drafts=include_drafts)
         key = unquote(article['url'])
-        if key in source_urls or (key in legacy_urls and not article['_legacy_url']):
+        if key.casefold() in source_urls or (key.casefold() in legacy_output_urls and not article['_legacy_url']):
             raise ValueError(f'{path}: duplicate article URL {key}; use legacy_url only for a deliberate migration')
         if article['_legacy_url'] and key not in legacy_urls:
             raise ValueError(f'{path}: legacy_url does not match a recovered article')
-        source_urls.add(key)
+        source_urls.add(key.casefold())
         if article['_draft'] and not include_drafts:
             continue
         assets.update(article['_assets'])
@@ -258,8 +285,9 @@ def load_site(root, include_drafts=False):
         page(post['url'], 'post', [post])
     original_home = next((p for p in original_pages if p['url'] == '/'), {})
     pinned = [p for p in sorted_posts if p.get('_pinned')]
-    # Preserve any pinned entry from the recovered homepage.
-    if original_home.get('posts') and original_home['posts'][0] != sorted_posts[0]['url']:
+    # Only a deliberate legacy pin outranks new notes, not yesterday's latest post.
+    legacy_latest = max(site['posts'], key=lambda p: timestamp(p['date'], 'date'), default=None)
+    if original_home.get('posts') and legacy_latest and unquote(original_home['posts'][0]) != unquote(legacy_latest['url']):
         first = posts.get(unquote(original_home['posts'][0]))
         if first and not first.get('_sources') and first not in pinned:
             pinned.append(first)

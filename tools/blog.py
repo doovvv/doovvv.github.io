@@ -12,6 +12,7 @@ import re
 import shutil
 import subprocess
 import sys
+import tempfile
 import threading
 import time
 import webbrowser
@@ -19,11 +20,11 @@ import zipfile
 
 try:
     from .build import build_site
-    from .content import load_site, yaml
+    from .content import load_site, read_document, yaml
     from .locking import workflow_lock
 except ImportError:
     from build import build_site
-    from content import load_site, yaml
+    from content import load_site, read_document, yaml
     from locking import workflow_lock
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -82,6 +83,26 @@ def validate_output(root, site):
         raise ValueError('CNAME 应保留 doovvv.cn，发布已停止。')
 
 
+def prepare_simple_posts(root):
+    """Save inferred dates and slugs once so edits keep the original public URL."""
+    for path in sorted((root / 'content/posts').glob('*.md')):
+        meta, body, missing = read_document(path, root)
+        if meta.get('draft') or not missing:
+            continue
+        source = '---\n' + yaml.safe_dump(meta, allow_unicode=True, sort_keys=False) + '---\n' + body
+        temporary = None
+        try:
+            with tempfile.NamedTemporaryFile(mode='w', encoding='utf8', newline='\n',
+                    dir=path.parent, prefix='.blog-', suffix='.tmp', delete=False) as handle:
+                temporary = Path(handle.name)
+                handle.write(source)
+            os.replace(temporary, path)
+        finally:
+            if temporary and temporary.exists():
+                temporary.unlink()
+        print('已自动补齐文章信息：' + path.name, flush=True)
+
+
 def _publish(root=ROOT):
     root = Path(root).resolve()
     if not shutil.which('git'):
@@ -97,6 +118,7 @@ def _publish(root=ROOT):
     if git(root, 'merge-base', '--is-ancestor', 'origin/main', 'HEAD', check=False).returncode:
         raise ValueError('远端有尚未同步的提交，请先同步远端改动后再发布；本地内容未被覆盖。')
     backup = backup_sources(root)
+    prepare_simple_posts(root)
     site = build_site(root, include_drafts=False)
     validate_output(root, site)
     public_sources = set(site['_public_sources'])

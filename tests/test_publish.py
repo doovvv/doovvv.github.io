@@ -1,10 +1,13 @@
 """Use a local bare remote: these tests never publish to the real website."""
 import json
+from datetime import datetime
 from pathlib import Path
 import shutil
 import subprocess
 import tempfile
 import unittest
+import zipfile
+from unittest.mock import patch
 
 try:
     from tools import blog
@@ -141,6 +144,52 @@ class PublishTests(unittest.TestCase):
         tracked = self.git('ls-tree', '-r', '--name-only', 'HEAD')
         self.assertIn('content/posts/new-note/images/[draft].png', tracked)
         self.assertNotIn('content/posts/new-note/images/d.png', tracked)
+
+    def test_loose_markdown_publishes_directly_and_repeated_edits_keep_the_original_url(self):
+        path = self.root / 'content/posts/go map.md'
+        original = '# Go Map 实现详解\n\nA map implementation note.\n'
+        path.write_text(original, encoding='utf8')
+        original_bytes = path.read_bytes()
+        draft = self.root / 'content/posts/private.md'
+        draft.write_text('---\ndraft: true\n---\n\nPrivate idea.', encoding='utf8')
+        blog.publish(self.root)
+        search = json.loads(self.git('show', 'HEAD:assets/search.json'))
+        note = [p for p in search if p['title'] == 'Go Map 实现详解']
+        self.assertEqual(len(note), 1, 'Publishing must include a loose Markdown note')
+        url = note[0]['url']
+        self.assertTrue(url.endswith('/go-map/'))
+        source = path.read_text(encoding='utf8')
+        self.assertIn('slug: go-map', source)
+        self.assertIn('date:', source)
+        self.assertTrue(source.endswith(original))
+        self.assertEqual(self.git('show', 'HEAD:content/posts/go map.md'), source.strip())
+        self.assertNotIn('content/posts/private.md', self.git('ls-tree', '-r', '--name-only', 'HEAD'))
+        self.assertEqual(self.git('rev-parse', 'HEAD'), self.git('rev-parse', 'origin/main'))
+        with zipfile.ZipFile(next((self.root / '.backups').glob('*.zip'))) as backup:
+            self.assertEqual(backup.read('content/posts/go map.md'), original_bytes)
+        path.write_text(source + '\nEdited after publication.\n', encoding='utf8')
+        class LaterDateTime(datetime):
+            @classmethod
+            def now(cls, tz=None):
+                return cls(2030, 4, 5, tzinfo=tz)
+        with patch('tools.content.datetime', LaterDateTime):
+            blog.publish(self.root)
+        second_search = json.loads(self.git('show', 'HEAD:assets/search.json'))
+        note = next(p for p in second_search if p['title'] == 'Go Map 实现详解')
+        self.assertEqual(note['url'], url)
+        self.assertIn('Edited after publication.', self.git('show', 'HEAD:' + url.lstrip('/') + 'index.html'))
+        self.assertEqual(self.git('show', 'HEAD:content/posts/go map.md').split('---', 2)[1], source.split('---', 2)[1])
+
+    def test_broken_loose_article_does_not_rewrite_sources_or_create_a_commit(self):
+        path = self.root / 'content/posts/go map.md'
+        original = '# Go Map\n\n![Missing](images/not-uploaded.png)'
+        path.write_text(original, encoding='utf8')
+        before = self.git('rev-parse', 'HEAD')
+        with self.assertRaisesRegex(ValueError, 'not-uploaded.png'):
+            blog.publish(self.root)
+        self.assertEqual(path.read_text(encoding='utf8'), original)
+        self.assertEqual(before, self.git('rev-parse', 'HEAD'))
+        self.assertEqual(before, self.git('rev-parse', 'origin/main'))
 
 
 if __name__ == '__main__':

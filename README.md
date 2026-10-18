@@ -6,7 +6,11 @@
 
 ## 日常写作
 
-依次双击 **新建文章.cmd → 预览博客.cmd → 发布博客.cmd**。用 Typora 或 VS Code 编辑 `content/posts/文章文件夹/index.md`，图片放在旁边的 `images` 文件夹。草稿保留 `draft: true`，准备发布时改为 `draft: false`。
+最简单的方式：直接在 `content/posts` 中保存 Markdown 文件，例如 `go map.md`，然后双击 **发布博客.cmd**。不需要新建文章文件夹、改名或手动填写文章信息。需要先看效果时，双击 **预览博客.cmd**。
+
+标题优先读取正文开头的一级标题，没有则使用文件名；日期使用首次发布当天，网址由文件名生成。首次发布时工具会把这些信息自动保存到文件开头，以后修改正文并再次发布会沿用原日期和网址。正文第一张图片自动作为封面；Typora 的 `go map.assets/图片.png` 等相对图片路径可以直接使用。
+
+`content/posts` 中的独立 `.md` 默认准备发布。需要保留草稿时，在开头填写 `draft: true`。原来的 **新建文章.cmd** 及 `content/posts/文章文件夹/index.md` 写法继续支持，原有草稿不会自动转成正式文章。
 
 详细示例、图片用法、撤回文章和故障处理见 [写作与发布指南](写作与发布指南.md)。正式文章源码随发布保存到 GitHub；本地全部文章（含草稿）在每次发布前备份到 `.backups`，草稿不上传。
 
@@ -23,7 +27,7 @@ python tools/blog.py preview
 ## 内容与构建
 
 - `content/site.json`：19 篇已恢复文章的正文、标题、标签、日期，以及旧站页面路径。正文是发布后 HTML 的原样快照。
-- `content/posts/*/index.md`：新文章的 Markdown 源文件，归档、标签、分页与搜索由构建自动维护。
+- `content/posts/*.md` 或 `content/posts/*/index.md`：新文章的 Markdown 源文件，归档、标签、分页与搜索由构建自动维护。
 - `content/generated-files.json`：生成文件清单，用于清理已删除或改回草稿的文章页面和附件。
 - `content/ui.json`：英文和中文界面文案；新增界面文字应同时补齐两种语言。
 - `assets/i18n.js`：界面翻译、语言记忆与评论表单语言同步；`assets/ui-messages.js` 由构建生成。
@@ -50,7 +54,7 @@ node --check assets/site.js
 node --check assets/i18n.js
 ```
 
-构建保留原有 46 条公开页面路径及“关于”，根据新文章自动生成额外页面。`lib/pace/README.html` 是旧依赖中的说明文件，保持原样。已有文章的图片和 PDF 路径继续使用。
+构建保留现有 45 条公开页面路径，根据新文章自动生成额外页面。`lib/pace/README.html` 是旧依赖中的说明文件，保持原样。已有文章的图片和 PDF 路径继续使用。
 
 ### 自动文章封面
 
