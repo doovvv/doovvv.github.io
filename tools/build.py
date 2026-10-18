@@ -14,11 +14,11 @@ from urllib.parse import quote, unquote, urljoin, urlsplit, urlunsplit
 
 try:
     from .content import load_site
-    from .images import image_variants, optimize_home_images
+    from .images import favicon_url, image_variants, optimize_favicon, optimize_home_images
     from .locking import workflow_lock
 except ImportError:
     from content import load_site
-    from images import image_variants, optimize_home_images
+    from images import favicon_url, image_variants, optimize_favicon, optimize_home_images
     from locking import workflow_lock
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -183,6 +183,8 @@ def hero_preload():
 
 def layout(title, description, url, content, active='home', kind='page', extra=''):
     canonical = SITE['url'] + quote(unquote(url), safe='/')
+    favicon = favicon_url(ROOT)
+    favicon_type = ' type="image/png" sizes="64x64"' if favicon.endswith('.png') else ''
     extra = '<script>window.BLOG_IMAGE_ALIASES=' + json.dumps(SITE.get('image_aliases', {}), ensure_ascii=True) + ';</script>' + extra
     title_key = {'home':'page.home', 'archive':'page.archive', 'tags':'page.tags', 'about':'page.about', 'resource':'page.resources'}.get(kind)
     if kind == 'tag' and '选修' in unquote(url):
@@ -195,7 +197,7 @@ def layout(title, description, url, content, active='home', kind='page', extra='
     return f'''<!doctype html>
 <html lang="en" data-language="en" data-theme="light"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="light dark"><meta name="theme-color" content="#ffffff">
 <title{title_marker}>{escape(title_text)}</title><meta name="description" content="{escape(description_text, quote=True)}"{description_marker}><link rel="canonical" href="{canonical}"><meta property="og:title" content="{escape(title_text, quote=True)}"{f' data-i18n-content="{title_key}"' if title_key else ''}><meta property="og:description" content="{escape(description_text, quote=True)}"{description_marker}><meta property="og:type" content="{'article' if kind == 'post' else 'website'}"><meta property="og:url" content="{canonical}"><meta property="og:image" content="{SITE['url']}/assets/social-card.jpg"><meta property="og:image:type" content="image/jpeg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
-{hero_preload() if kind == 'home' and url == '/' else ''}<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg"><link rel="preload" href="/assets/fonts/ibm-plex-mono-bold.ttf" as="font" type="font/ttf" crossorigin><script>try{{const t=localStorage.getItem('doovvv-theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t;const l=localStorage.getItem('doovvv-language');if(l==='en'||l==='zh-CN'){{document.documentElement.lang=l;document.documentElement.dataset.language=l}}}}catch(e){{}}</script><link rel="stylesheet" href="/assets/site.css"><script src="/assets/ui-messages.js" defer></script><script src="/assets/i18n.js" defer></script><script src="/assets/site.js" defer></script>{extra}</head>
+{hero_preload() if kind == 'home' and url == '/' else ''}<link rel="icon"{favicon_type} href="{escape(favicon, quote=True)}"><link rel="preload" href="/assets/fonts/ibm-plex-mono-bold.ttf" as="font" type="font/ttf" crossorigin><script>try{{const t=localStorage.getItem('doovvv-theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t;const l=localStorage.getItem('doovvv-language');if(l==='en'||l==='zh-CN'){{document.documentElement.lang=l;document.documentElement.dataset.language=l}}}}catch(e){{}}</script><link rel="stylesheet" href="/assets/site.css"><script src="/assets/ui-messages.js" defer></script><script src="/assets/i18n.js" defer></script><script src="/assets/site.js" defer></script>{extra}</head>
 <body class="page-{kind}" id="top">{navigation(active)}<main id="main-content">{content}</main>{footer()}{search_dialog()}<button class="back-top icon-button" {ui_attr('aria-label', 'back.top')}>{icon('arrow')}</button></body></html>'''
 
 
@@ -312,7 +314,7 @@ def post_page(post):
 def about():
     sections = [('overview', '01'), ('experience', '02'), ('education', '03'), ('skills', '04'), ('writing', '05')]
     menu = ''.join(f'<a href="#{name}" class="profile-nav-link{" is-active" if i == 0 else ""}"{" aria-current=location" if i == 0 else ""}><span class="profile-nav-number" aria-hidden="true">{number}</span>{ui("profile.nav." + name)}</a>' for i, (name, number) in enumerate(sections))
-    result = f'''<div class="profile-shell"><aside class="profile-rail"><a class="profile-identity" href="#overview"><span class="profile-monogram" aria-hidden="true">d.</span><span><strong>doovvv</strong><small>{ui('profile.rail.label')}</small></span></a><nav class="profile-nav" {ui_attr('aria-label', 'profile.nav.label')}>{menu}</nav><a class="profile-rail-link" href="https://github.com/doovvv" target="_blank" rel="noopener noreferrer">{icon('github')} GitHub {icon('up-right')}</a></aside>
+    result = f'''<div class="profile-shell"><aside class="profile-rail"><a class="profile-identity" href="#overview"><img class="profile-identity-avatar" src="{escape(favicon_url(ROOT), quote=True)}" alt="" aria-hidden="true" width="43" height="43" decoding="async"><span><strong>doovvv</strong><small>{ui('profile.rail.label')}</small></span></a><nav class="profile-nav" {ui_attr('aria-label', 'profile.nav.label')}>{menu}</nav><a class="profile-rail-link" href="https://github.com/doovvv" target="_blank" rel="noopener noreferrer">{icon('github')} GitHub {icon('up-right')}</a></aside>
     <div class="profile-main"><section class="profile-section profile-overview" id="overview" aria-labelledby="profile-name"><div class="profile-hero"><div class="profile-intro"><p class="eyebrow">{ui('profile.eyebrow')}</p><h1 id="profile-name">{ui('profile.name.first')}<strong>{ui('profile.name.last')}</strong></h1><div class="profile-name-note">{ui('profile.name.note')}</div><p class="profile-role">{ui('profile.role')}</p><p class="profile-bio">{ui('profile.bio')}</p><div class="profile-actions"><a class="button button-primary" href="#experience">{ui('profile.explore')} {icon('down')}</a><a class="profile-social" href="https://github.com/doovvv" target="_blank" rel="noopener noreferrer">{icon('github')} GitHub {icon('up-right')}</a></div></div><div class="profile-portrait"><picture>{optimized_source('avatar', '(max-width:600px) 64px, (max-width:1100px) 160px, 220px')}<img src="/assets/images/avatar.gif" {ui_attr('alt','hero.avatar')} width="940" height="940" decoding="async"></picture><span class="profile-portrait-caption">doovvv / {ui('profile.portrait')}</span></div></div>
     </section>'''
 
@@ -402,7 +404,6 @@ def _write_site():
     (about_dir / 'index.html').write_text(layout('关于我', SITE['description'], '/about/', about(), 'about', 'about'), encoding='utf8')
     search = [{k: p[k] for k in ['url', 'title', 'excerpt', 'text', 'date']} for p in SITE['posts']]
     (ROOT / 'assets/search.json').write_text(json.dumps(search, ensure_ascii=False, separators=(',', ':')), encoding='utf8')
-    (ROOT / 'assets/favicon.svg').write_text('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="12" fill="#1d4ed8"/><text x="13" y="47" fill="#f1f4f6" font-size="46" font-family="Arial" font-weight="bold">d<tspan fill="#bfdbfe">.</tspan></text></svg>', encoding='utf8')
     write_covers()
     (ROOT / 'assets/ui-messages.js').write_text('window.BLOG_UI_MESSAGES=' + json.dumps(MESSAGES, ensure_ascii=False, separators=(',', ':')) + ';\n', encoding='utf8')
     (ROOT / '.nojekyll').touch()
@@ -419,13 +420,14 @@ def _build_site(root=ROOT, include_drafts=False):
         MESSAGES = json.loads((ROOT / 'content/ui.json').read_text(encoding='utf8'))
         manifest = ROOT / 'content/generated-files.json'
         old_files = set(json.loads(manifest.read_text(encoding='utf8'))) if manifest.exists() else set()
-        files = {p['file'] for p in SITE['pages']} | {'about/index.html', 'assets/search.json', 'assets/ui-messages.js', 'assets/favicon.svg', '.nojekyll'}
+        files = {p['file'] for p in SITE['pages']} | {'about/index.html', 'assets/search.json', 'assets/ui-messages.js', '.nojekyll'}
         files |= {'assets/covers/' + name + '.svg' for name in ['intelligence', 'systems', 'algorithms', 'graphics', 'code', 'security', 'notes']}
         files |= set(SITE['_assets'])
         # An image generated for A may still be explicitly used by public B
         # after A is withdrawn. Retain ownership until the final reference ends.
         files |= set(SITE['_public_assets']) & old_files
         files |= optimize_home_images(ROOT)
+        files |= optimize_favicon(ROOT)
         def output_path(name):
             target = (ROOT / name).resolve()
             if not target.is_relative_to(ROOT) or target == ROOT or Path(name).parts[0] in ('content', 'tools', 'tests', '.git'):

@@ -5,7 +5,7 @@
 .profile-shell { --profile-body:"Profile Open Sans","PingFang SC","Microsoft YaHei",sans-serif;--profile-heading:"Profile Saira","PingFang SC","Microsoft YaHei",sans-serif;font-family:var(--profile-body);width:calc(100% - 64px);max-width:1360px;margin:52px auto 100px;display:grid;grid-template-columns:200px minmax(0,1fr);gap:64px;align-items:start; }
 .profile-rail { position:sticky;top:116px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:24px 14px 18px; }
 .profile-identity { display:flex;gap:12px;align-items:center;padding:0 9px 27px; }
-.profile-monogram { width:43px;height:43px;border-radius:12px;display:grid;place-items:center;font-family:var(--profile-heading);font-size:32px;line-height:1;color:var(--accent);background:var(--accent-dim);font-weight:700; }
+.profile-identity-avatar { display:block;width:43px;height:43px;flex-shrink:0;border-radius:50%;object-fit:cover; }
 .profile-identity strong { display:block;font-family:var(--mono);font-size:16px;letter-spacing:-.6px; }
 .profile-identity small { display:block;color:var(--muted);font-size:9px;letter-spacing:.3px;margin-top:2px; }
 .profile-nav { display:flex;flex-direction:column;gap:6px; }

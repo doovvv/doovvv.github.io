@@ -55,6 +55,43 @@ def image_variants(root, kind):
     return _current_entry(root, kind, _manifest(root))
 
 
+def favicon_url(root):
+    root = Path(root)
+    source = root / SOURCES['avatar']
+    if not source.is_file():
+        return '/' + SOURCES['avatar']
+    digest = hashlib.sha256(source.read_bytes()).hexdigest()[:12]
+    relative = f'assets/optimized/avatar-{digest}-icon-64.png'
+    if (root / relative).is_file():
+        return '/' + relative
+    return '/' + SOURCES['avatar'] + '?v=' + digest
+
+
+def optimize_favicon(root):
+    root = Path(root)
+    source = root / SOURCES['avatar']
+    if not source.is_file():
+        return set()
+    digest = hashlib.sha256(source.read_bytes()).hexdigest()[:12]
+    relative = f'assets/optimized/avatar-{digest}-icon-64.png'
+    target = root / relative
+    if not target.is_file():
+        try:
+            from PIL import Image, ImageChops, ImageDraw, ImageOps
+        except ImportError:
+            return set()
+        with Image.open(source) as opened:
+            image = ImageOps.fit(ImageOps.exif_transpose(opened).convert('RGBA'), (256, 256))
+        mask = Image.new('L', image.size, 0)
+        ImageDraw.Draw(mask).ellipse((0, 0, 255, 255), fill=255)
+        image.putalpha(ImageChops.multiply(image.getchannel('A'), mask))
+        target.parent.mkdir(parents=True, exist_ok=True)
+        temporary = target.with_suffix('.tmp')
+        image.resize((64, 64), Image.Resampling.LANCZOS).save(temporary, format='PNG', optimize=True)
+        temporary.replace(target)
+    return {relative}
+
+
 def optimize_home_images(root):
     root = Path(root)
     if not any((root / source).is_file() for source in SOURCES.values()):
