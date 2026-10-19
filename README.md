@@ -1,6 +1,6 @@
 # doovvv · Personal Notes
 
-首页参考 [Memory-Blog](https://github.com/LinMoQC/Memory-Blog) 的全屏背景、左侧自我介绍、右侧圆形头像布局，搭配已有山景照片和博客头像。顶部导航保持现有外观；文章列表沿用白底、皇家蓝与等宽字体。默认英文、浅色，可切换中文或深色模式。
+首页参考 [Memory-Blog](https://github.com/LinMoQC/Memory-Blog) 的全屏背景、左侧自我介绍、右侧圆形头像布局，搭配已有山景照片和博客头像。顶部导航保持现有外观；首页与 About 共用 Saira Extra Condensed 标题字体和 Open Sans 正文字体，文章卡片标题使用 Open Sans，中文回退到苹方或微软雅黑。默认英文、浅色，可切换中文或深色模式。
 
 中英切换覆盖导航、页面说明、分类、搜索、阅读控件和评论界面，浏览器会记住语言选择。文章标题、摘要、正文和目录保留原文。
 
@@ -34,7 +34,7 @@ python tools/blog.py preview
 - `tools/build.py`：生成页面、搜索索引与文章封面。`tools/content.py` 读取 Markdown；`tools/blog.py` 提供新建、预览和发布。
 - `tools/_vendor/`：固定版本的 Markdown、PyYAML 和公式扩展，附许可证；Python 3.10+ 即可离线生成，无需额外安装依赖。
 - `assets/site.css`：视觉样式与手机适配；颜色集中在文件开头的 CSS 变量中。
-- `assets/fonts/`：本地 IBM Plex Mono 字体和 SIL Open Font License。
+- `assets/fonts/`：本地 Saira Extra Condensed、Open Sans、IBM Plex Mono 字体及各自的 SIL Open Font License。
 - `assets/site.js`：主题记忆、全文搜索、精选切换、手机菜单、阅读目录、代码复制和评论加载。
 - `assets/images/`：本地摄影、文章配图和历史中找回的图片。
 - `assets/optimized/`：首页背景与头像的多尺寸 WebP，由构建自动生成；原图继续保留作为兼容回退。修改原图后重新发布即可更新，浏览器会按屏幕大小选择文件。
