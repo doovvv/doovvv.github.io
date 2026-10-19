@@ -183,6 +183,8 @@ def hero_preload():
 
 def layout(title, description, url, content, active='home', kind='page', extra=''):
     canonical = SITE['url'] + quote(unquote(url), safe='/')
+    stylesheet = ROOT / 'assets/site.css'
+    stylesheet_version = '?v=' + hashlib.sha256(stylesheet.read_bytes()).hexdigest()[:12] if kind == 'home' and stylesheet.is_file() else ''
     favicon = favicon_url(ROOT)
     favicon_type = ' type="image/png" sizes="64x64"' if favicon.endswith('.png') else ''
     extra = '<script>window.BLOG_IMAGE_ALIASES=' + json.dumps(SITE.get('image_aliases', {}), ensure_ascii=True) + ';</script>' + extra
@@ -197,7 +199,7 @@ def layout(title, description, url, content, active='home', kind='page', extra='
     return f'''<!doctype html>
 <html lang="en" data-language="en" data-theme="light"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="light dark"><meta name="theme-color" content="#ffffff">
 <title{title_marker}>{escape(title_text)}</title><meta name="description" content="{escape(description_text, quote=True)}"{description_marker}><link rel="canonical" href="{canonical}"><meta property="og:title" content="{escape(title_text, quote=True)}"{f' data-i18n-content="{title_key}"' if title_key else ''}><meta property="og:description" content="{escape(description_text, quote=True)}"{description_marker}><meta property="og:type" content="{'article' if kind == 'post' else 'website'}"><meta property="og:url" content="{canonical}"><meta property="og:image" content="{SITE['url']}/assets/social-card.jpg"><meta property="og:image:type" content="image/jpeg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
-{hero_preload() if kind == 'home' and url == '/' else ''}<link rel="icon"{favicon_type} href="{escape(favicon, quote=True)}"><link rel="preload" href="/assets/fonts/ibm-plex-mono-bold.ttf" as="font" type="font/ttf" crossorigin><script>try{{const t=localStorage.getItem('doovvv-theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t;const l=localStorage.getItem('doovvv-language');if(l==='en'||l==='zh-CN'){{document.documentElement.lang=l;document.documentElement.dataset.language=l}}}}catch(e){{}}</script><link rel="stylesheet" href="/assets/site.css"><script src="/assets/ui-messages.js" defer></script><script src="/assets/i18n.js" defer></script><script src="/assets/site.js" defer></script>{extra}</head>
+{hero_preload() if kind == 'home' and url == '/' else ''}<link rel="icon"{favicon_type} href="{escape(favicon, quote=True)}"><link rel="preload" href="/assets/fonts/ibm-plex-mono-bold.ttf" as="font" type="font/ttf" crossorigin><script>try{{const t=localStorage.getItem('doovvv-theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t;const l=localStorage.getItem('doovvv-language');if(l==='en'||l==='zh-CN'){{document.documentElement.lang=l;document.documentElement.dataset.language=l}}}}catch(e){{}}</script><link rel="stylesheet" href="/assets/site.css{stylesheet_version}"><script src="/assets/ui-messages.js" defer></script><script src="/assets/i18n.js" defer></script><script src="/assets/site.js" defer></script>{extra}</head>
 <body class="page-{kind}" id="top">{navigation(active)}<main id="main-content">{content}</main>{footer()}{search_dialog()}<button class="back-top icon-button" {ui_attr('aria-label', 'back.top')}>{icon('arrow')}</button></body></html>'''
 
 
